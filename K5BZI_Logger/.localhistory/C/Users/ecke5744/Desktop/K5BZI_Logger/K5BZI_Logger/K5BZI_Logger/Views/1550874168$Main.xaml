@@ -1,0 +1,130 @@
+﻿<controls:MetroWindow
+    x:Class="K5BZI_Logger.Views.Main"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:forms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+        mc:Ignorable="d"
+        Title="K5BZI Logger"
+        Height="770" Width="900"
+        BorderThickness="0" 
+        GlowBrush="Black"
+        ResizeMode="NoResize"
+        WindowTransitionsEnabled="False"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="130*" />
+            <RowDefinition Height="510" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="450" />
+            <ColumnDefinition Width="450" />
+        </Grid.ColumnDefinitions>
+        <Border Grid.Row="0" 
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                BorderBrush="Navy" 
+                BorderThickness="1" Padding="2" >
+            <Grid Margin="0,0,0,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="130" />
+                    <ColumnDefinition Width="620" />
+                    <ColumnDefinition Width="130" />
+                </Grid.ColumnDefinitions>
+                <Canvas Grid.Row="1" Grid.RowSpan="2" Grid.Column="2" Height="110px" Width="120px" HorizontalAlignment="Left" Margin="0,-15,0,0">
+                    <Canvas.Background>
+                        <ImageBrush ImageSource="../Images/TxMutual.jpeg" Stretch="Fill"/>
+                    </Canvas.Background>
+                </Canvas>
+                <TextBlock 
+                        Grid.Row="0"
+                        Grid.Column="0" 
+                        Grid.ColumnSpan="3"
+                        Text="Process Invitations"
+                        TextAlignment="Center"
+                        VerticalAlignment="Top"
+                    FontSize="18"/>
+                <Label 
+                        Grid.Row="1"
+                        Grid.Column="0" 
+                        Margin="10,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Display Name"/>
+                <Border Grid.Row="1" Grid.Column="1"
+                        Height="30"
+                        Width="600" 
+                        BorderBrush="Navy" 
+                        BorderThickness=".5" 
+                        Padding="2"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top">
+                    <TextBox
+                            x:Name="lblFileName"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Height="29"
+                            Width="600"
+                            BorderThickness="0"/>
+                </Border>
+                <Button 
+                        Grid.Row="2"
+                        Grid.Column="0" 
+                        Margin="10,0,0,10"
+                        Content="Choose File"
+                        Width="100"
+                        Height="30"
+                        Foreground="Navy"
+                        FontWeight="Bold"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        Click="ButtonFileOpenClick"/>
+                <Border Grid.Row="2" Grid.Column="1"
+                        Height="30"
+                        Width="600"
+                        BorderBrush="Navy" 
+                        BorderThickness=".5" 
+                        Padding="2"
+                        HorizontalAlignment="Left"
+                            Margin="0,0,0,10">
+                    <Label
+                            x:Name="lblFilePath"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"/>
+                </Border>
+            </Grid>
+        </Border>
+        <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+            <WindowsFormsHost>
+                <forms:DataGridView x:Name="DataGridView1" Width="900"/>
+            </WindowsFormsHost>
+        </Border>
+        <controls1:DateRangePicker 
+                Grid.Row="2" 
+                Grid.Column="0"
+                x:Name="DateRangePicker"
+                Margin="20,5,5,5"
+                ToolTip="Date Range"
+            />
+        <Button Grid.Row="2"
+                Grid.Column="1"
+                HorizontalAlignment="Center"
+                Margin="0,10,0,10"
+                Content="Process"
+                Width="100"
+                Height="30"
+                Foreground="Navy"
+                FontWeight="Bold"
+                Click="ButtonBaseOnClick"/>
+    </Grid>
+    </controls:MetroWindow>
