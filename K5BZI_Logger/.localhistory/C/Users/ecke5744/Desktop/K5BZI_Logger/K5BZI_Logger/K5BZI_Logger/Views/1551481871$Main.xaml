@@ -46,7 +46,7 @@
                     ToolTip="Date Range"
                     DateFrom="{Binding MinDateTime, Mode=TwoWay}"
                     DateTo="{Binding MaxDateTime, Mode=TwoWay}"/>
-                <Canvas Grid.Column="1" Height="110px" Width="120px" HorizontalAlignment="Right" Margin="0,0,0,0">
+                <Canvas Grid.Column="1" Height="110px" Width="120px" HorizontalAlignment="Right" Margin="0,-15,0,0">
                     <Canvas.Background>
                         <ImageBrush ImageSource="../Images/HRWoodcut.jpg" Stretch="Fill"/>
                     </Canvas.Background>
