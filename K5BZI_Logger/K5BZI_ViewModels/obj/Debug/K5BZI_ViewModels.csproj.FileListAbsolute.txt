@@ -9,4 +9,3 @@ C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_ViewModels\obj\Debug\K
 C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_ViewModels\obj\Debug\K5BZI_ViewModels.csproj.CopyComplete
 C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_ViewModels\obj\Debug\K5BZI_ViewModels.dll
 C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_ViewModels\obj\Debug\K5BZI_ViewModels.pdb
-C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_ViewModels\obj\Debug\K5BZI_ViewModels.csprojAssemblyReference.cache

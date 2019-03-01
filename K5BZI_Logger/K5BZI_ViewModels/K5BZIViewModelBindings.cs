@@ -1,4 +1,5 @@
-﻿using Ninject.Modules;
+﻿using K5BZI_ViewModels.Interfaces;
+using Ninject.Modules;
 
 namespace K5BZI_ViewModels
 {
@@ -6,7 +7,7 @@ namespace K5BZI_ViewModels
     {
         public override void Load()
         {
-            //Bind<IMainViewModel>().To<MainViewModel>();
+            Bind<IMainLoggerViewModel>().To<MainLoggerViewModel>();
         }
     }
 }

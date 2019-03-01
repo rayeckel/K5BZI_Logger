@@ -47,7 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IMainLoggerViewModel.cs" />
     <Compile Include="K5BZIViewModelBindings.cs" />
+    <Compile Include="MainLoggerViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
