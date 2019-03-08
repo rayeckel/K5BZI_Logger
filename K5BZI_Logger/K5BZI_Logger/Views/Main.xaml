@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:controls1="clr-namespace:K5BZI_Logger.Controls"
-        xmlns:dgControls="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
+        xmlns:dgControls="http://schemas.microsoft.com/netfx/2009/xaml/presentation" 
         mc:Ignorable="d"
         Title="K5BZI Logger"
         Height="770" Width="900"
@@ -46,6 +46,10 @@
                     ToolTip="Date Range"
                     DateFrom="{Binding MinDateTime, Mode=TwoWay}"
                     DateTo="{Binding MaxDateTime, Mode=TwoWay}"/>
+                <Frame 
+                    Grid.Column="1"
+                    HorizontalAlignment="Left"
+                    Source="../Controls/AllXamlClock.xaml"/>
                 <Canvas Grid.Column="1" Height="110px" Width="120px" HorizontalAlignment="Right" Margin="0,0,0,0">
                     <Canvas.Background>
                         <ImageBrush ImageSource="../Images/HRWoodcut.jpg" Stretch="Fill"/>
@@ -67,7 +71,7 @@
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="70" />
-                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="130" />
                     <ColumnDefinition Width="70" />
                     <ColumnDefinition Width="70" />
                     <ColumnDefinition Width="70" />
@@ -97,7 +101,7 @@
                 <Border Grid.Row="1" 
                         Grid.Column="1"
                         Height="30"
-                        Width="200" 
+                        Width="130" 
                         BorderBrush="Navy" 
                         BorderThickness=".5" 
                         Padding="2"
@@ -108,7 +112,7 @@
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             Height="29"
-                            Width="200"
+                            Width="130"
                             BorderThickness="0"
                             Text="{Binding LogEntry.ContactTime, Mode=TwoWay}"/>
                 </Border>
@@ -258,7 +262,7 @@
                 <dgControls:DataGrid.Columns>
                     <dgControls:DataGridTextColumn 
                             Header="Time" 
-                            Width="150"
+                            Width="200"
                             Binding="{Binding ContactTime}" 
                             FontSize="20" />
                     <dgControls:DataGridTextColumn 
@@ -279,12 +283,20 @@
                     </dgControls:DataGridTextColumn>
                     <dgControls:DataGridTextColumn 
                             Header="Band"
-                            Width="150"
+                            Width="100"
                             Binding="{Binding Signal.Band}" />
-                    <dgControls:DataGridCheckBoxColumn 
+                    <dgControls:DataGridTextColumn
                             Header="Frequency" 
-                            Width="150"
-                            Binding="{Binding Signal.Frequency}" />
+                            Width="100"
+                            Binding="{Binding Signal.Frequency}"/>
+                    <dgControls:DataGridTextColumn
+                            Header="Sent" 
+                            Width="100"
+                            Binding="{Binding SignalReport.Sent}"/>
+                    <dgControls:DataGridTextColumn
+                            Header="Recvd" 
+                            Width="100"
+                            Binding="{Binding SignalReport.Received}"/>
                 </dgControls:DataGrid.Columns>
             </dgControls:DataGrid>
         </Border>

@@ -34,3 +34,5 @@ C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Logger\obj\Debug\K5BZI
 C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Logger\obj\Debug\K5BZI_Logger.csproj.CopyComplete
 C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Logger\obj\Debug\K5BZI_Logger.exe
 C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Logger\obj\Debug\K5BZI_Logger.pdb
+C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Logger\obj\Debug\Controls\AllXamlClock.baml
+C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Logger\obj\Debug\Controls\AllXamlClock.g.cs
