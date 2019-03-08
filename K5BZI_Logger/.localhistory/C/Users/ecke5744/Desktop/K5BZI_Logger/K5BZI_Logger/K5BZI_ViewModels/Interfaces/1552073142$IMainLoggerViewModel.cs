@@ -1,10 +1,13 @@
-﻿using K5BZI_Models.Main;
+﻿using K5BZI_Models;
+using System.Collections.ObjectModel;
 
 namespace K5BZI_ViewModels.Interfaces
 {
     public interface IMainLoggerViewModel
     {
-        MainModel Model { get; }
+        LogEntry LogEntry { get; }
+
+        ObservableCollection<LogEntry> LogEntries { get; }
 
         void CreateMockLogEntry();
 

@@ -9,15 +9,11 @@ namespace K5BZI_ViewModels
     [AddINotifyPropertyChangedInterface]
     public class MainLoggerViewModel : IMainLoggerViewModel
     {
-        public MainModel Model { get; private set; }
+        public IMainModel Model { get; private set; }
 
         public MainLoggerViewModel()
         {
             Model = new MainModel();
-            Model.CreateNewEntryAction = () => CreateMockLogEntry();
-            Model.LogItAction = () => SaveLogEntry();
-
-            CreateMockLogEntry();
         }
 
         public void SaveLogEntry()

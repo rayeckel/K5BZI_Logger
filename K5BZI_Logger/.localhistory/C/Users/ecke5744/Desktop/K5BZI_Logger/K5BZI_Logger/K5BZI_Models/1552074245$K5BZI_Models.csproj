@@ -52,6 +52,7 @@
     <Compile Include="Base\IBaseModel.cs" />
     <Compile Include="ContactDate.cs" />
     <Compile Include="Extensions\LogEntryExtensions.cs" />
+    <Compile Include="Main\IMainModel.cs" />
     <Compile Include="Main\MainModel.cs" />
     <Compile Include="Signal.cs" />
     <Compile Include="LogEntry.cs" />

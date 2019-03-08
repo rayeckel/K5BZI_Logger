@@ -244,7 +244,7 @@
                         FontWeight="Bold"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Bottom"
-                        Command="{Binding LogItCommand}"/>
+                        Click="ButtonBaseOnClick"/>
                 <Canvas Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" x:Name="ProgressBar" Visibility="Collapsed" HorizontalAlignment="Center" Width="300px" >
                     <controls:MetroProgressBar Width="300px" IsIndeterminate="True" Foreground="{DynamicResource AccentColorBrush}" />
                 </Canvas>
