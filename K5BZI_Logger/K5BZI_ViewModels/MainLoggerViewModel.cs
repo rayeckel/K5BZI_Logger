@@ -20,14 +20,14 @@ namespace K5BZI_ViewModels
             CreateMockLogEntry();
         }
 
-        public void SaveLogEntry()
+        private void SaveLogEntry()
         {
             Model.LogEntries.Add(Model.LogEntry.Clone());
 
             CreateNewLogEntry();
         }
 
-        public void CreateMockLogEntry()
+        private void CreateMockLogEntry()
         {
             CreateNewLogEntry();
             Model.LogEntry.CallSign = "KC5IHO";
