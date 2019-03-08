@@ -1,3 +1,10 @@
+C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Logger\obj\Debug\K5BZI_Logger.csprojAssemblyReference.cache
+C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Logger\obj\Debug\Controls\DateRangePicker.g.cs
+C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Logger\obj\Debug\Views\Main.g.cs
+C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Logger\obj\Debug\App.g.cs
+C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Logger\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Logger\obj\Debug\K5BZI_Logger_MarkupCompile.cache
+C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Logger\obj\Debug\K5BZI_Logger_MarkupCompile.lref
 C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Logger\bin\Debug\K5BZI_Logger.exe.config
 C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Logger\bin\Debug\K5BZI_Logger.exe
 C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Logger\bin\Debug\K5BZI_Logger.pdb
@@ -18,13 +25,6 @@ C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Logger\bin\Debug\MahAp
 C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Logger\bin\Debug\MahApps.Metro.IconPacks.FontAwesome.pdb
 C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Logger\bin\Debug\MahApps.Metro.IconPacks.FontAwesome.xml
 C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Logger\bin\Debug\Ninject.xml
-C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Logger\obj\Debug\K5BZI_Logger.csprojAssemblyReference.cache
-C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Logger\obj\Debug\Controls\DateRangePicker.g.cs
-C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Logger\obj\Debug\Views\Main.g.cs
-C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Logger\obj\Debug\App.g.cs
-C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Logger\obj\Debug\GeneratedInternalTypeHelper.g.cs
-C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Logger\obj\Debug\K5BZI_Logger_MarkupCompile.cache
-C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Logger\obj\Debug\K5BZI_Logger_MarkupCompile.lref
 C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Logger\obj\Debug\Controls\DateRangePicker.baml
 C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Logger\obj\Debug\Views\Main.baml
 C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Logger\obj\Debug\K5BZI_Logger.g.resources

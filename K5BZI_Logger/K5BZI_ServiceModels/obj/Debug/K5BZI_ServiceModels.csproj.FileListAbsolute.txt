@@ -5,6 +5,7 @@ C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_ServiceModels\bin\Debu
 C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_ServiceModels\bin\Debug\Newtonsoft.Json.pdb
 C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_ServiceModels\bin\Debug\Newtonsoft.Json.xml
 C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_ServiceModels\bin\Debug\Ninject.xml
+C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_ServiceModels\obj\Debug\K5BZI_ServiceModels.csprojAssemblyReference.cache
 C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_ServiceModels\obj\Debug\K5BZI_ServiceModels.csproj.CoreCompileInputs.cache
 C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_ServiceModels\obj\Debug\K5BZI_ServiceModels.csproj.CopyComplete
 C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_ServiceModels\obj\Debug\K5BZI_ServiceModels.dll

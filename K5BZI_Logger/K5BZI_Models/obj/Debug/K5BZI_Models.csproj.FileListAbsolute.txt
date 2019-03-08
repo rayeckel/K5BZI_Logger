@@ -1,5 +1,6 @@
+C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Models\obj\Debug\K5BZI_Models.csproj.CoreCompileInputs.cache
 C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Models\bin\Debug\K5BZI_Models.dll
 C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Models\bin\Debug\K5BZI_Models.pdb
-C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Models\obj\Debug\K5BZI_Models.csproj.CoreCompileInputs.cache
+C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Models\obj\Debug\K5BZI_Models.csprojAssemblyReference.cache
 C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Models\obj\Debug\K5BZI_Models.dll
 C:\Users\ecke5744\Desktop\K5BZI_Logger\K5BZI_Logger\K5BZI_Models\obj\Debug\K5BZI_Models.pdb
