@@ -1,4 +1,5 @@
-﻿using Ninject.Modules;
+﻿using K5BZI_Services.Interfaces;
+using Ninject.Modules;
 
 namespace K5BZI_Services
 {
@@ -6,7 +7,7 @@ namespace K5BZI_Services
     {
         public override void Load()
         {
-            //Bind<IMainViewModel>().To<MainViewModel>();
+            Bind<IFileStoreService>().To<FileStoreService>();
         }
     }
 }

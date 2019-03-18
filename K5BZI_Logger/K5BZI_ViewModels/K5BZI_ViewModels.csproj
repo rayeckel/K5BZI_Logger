@@ -66,6 +66,10 @@
       <Project>{EA0EF54B-D709-45CF-9F8D-0F81232D1610}</Project>
       <Name>K5BZI_Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\K5BZI_Services\K5BZI_Services.csproj">
+      <Project>{DDF31347-D2E9-4764-ACC5-AFCA5DB6CB56}</Project>
+      <Name>K5BZI_Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.4.0.2\build\Fody.targets" Condition="Exists('..\packages\Fody.4.0.2\build\Fody.targets')" />

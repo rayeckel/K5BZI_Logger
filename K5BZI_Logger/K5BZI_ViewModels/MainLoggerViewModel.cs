@@ -1,5 +1,6 @@
 ﻿using K5BZI_Models.Extensions;
 using K5BZI_Models.Main;
+using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels.Interfaces;
 using PropertyChanged;
 using System;
@@ -11,8 +12,12 @@ namespace K5BZI_ViewModels
     {
         public MainModel Model { get; private set; }
 
-        public MainLoggerViewModel()
+        private readonly IFileStoreService _fileStoreService;
+
+        public MainLoggerViewModel(IFileStoreService fileStoreService)
         {
+            _fileStoreService = fileStoreService;
+
             Model = new MainModel();
             Model.CreateNewEntryAction = () => CreateMockLogEntry();
             Model.LogItAction = () => SaveLogEntry();
@@ -23,6 +28,8 @@ namespace K5BZI_ViewModels
         private void SaveLogEntry()
         {
             Model.LogEntries.Add(Model.LogEntry.Clone());
+
+            _fileStoreService.WriteToFile(Model.LogEntries);
 
             CreateNewLogEntry();
         }
