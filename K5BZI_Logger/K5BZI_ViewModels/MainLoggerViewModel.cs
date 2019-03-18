@@ -2,12 +2,11 @@
 using K5BZI_Models.Main;
 using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels.Interfaces;
-using PropertyChanged;
 using System;
+using System.Windows;
 
 namespace K5BZI_ViewModels
 {
-    [AddINotifyPropertyChangedInterface]
     public class MainLoggerViewModel : IMainLoggerViewModel
     {
         public MainModel Model { get; private set; }
@@ -18,9 +17,17 @@ namespace K5BZI_ViewModels
         {
             _fileStoreService = fileStoreService;
 
-            Model = new MainModel();
-            Model.CreateNewEntryAction = () => CreateMockLogEntry();
-            Model.LogItAction = () => SaveLogEntry();
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            Model = new MainModel
+            {
+                CreateNewEntryAction = () => CreateMockLogEntry(),
+                LogItAction = () => SaveLogEntry(),
+                SelectEventAction = () => SelectEvent()
+            };
 
             CreateMockLogEntry();
         }
@@ -52,6 +59,11 @@ namespace K5BZI_ViewModels
         private void CreateNewLogEntry()
         {
             Model.LogEntry.ClearProperties();
+        }
+
+        private void SelectEvent()
+        {
+            Model.MainVisibility = Visibility.Visible;
         }
     }
 }

@@ -1,10 +1,13 @@
 ﻿using K5BZI_Models.Base;
+using PropertyChanged;
 using System;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 
 namespace K5BZI_Models.Main
 {
+    [AddINotifyPropertyChangedInterface]
     public class MainModel : BaseModel
     {
         public MainModel()
@@ -14,10 +17,14 @@ namespace K5BZI_Models.Main
 
             LogEntry = new LogEntry();
             LogEntries = new ObservableCollection<LogEntry>();
+
+            MainVisibility = Visibility.Hidden;
         }
 
         public LogEntry LogEntry { get; private set; }
         public ObservableCollection<LogEntry> LogEntries { get; private set; }
+
+        public Visibility MainVisibility { get; set; }
 
         private bool _logItCommandCanExecute;
         private ICommand _logItCommand;
@@ -45,5 +52,18 @@ namespace K5BZI_Models.Main
         }
 
         public Action CreateNewEntryAction { get; set; }
+
+        private ICommand _selectEventCommand;
+
+        public ICommand SelectEventCommand
+        {
+            get
+            {
+                return _selectEventCommand ??
+                    (_selectEventCommand = new CommandHandler(SelectEventAction, true));
+            }
+        }
+
+        public Action SelectEventAction { get; set; }
     }
 }
