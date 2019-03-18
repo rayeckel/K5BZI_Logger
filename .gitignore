@@ -11,8 +11,9 @@
 /K5BZI_Logger/K5BZI_Services/obj/*
 /K5BZI_Logger/K5BZI_ViewModels/obj/*
 /K5BZI_Logger/K5BZI_ServiceModels/obj/*
-/K5BZI_Logger/.vs/K5BZI_Logger/*
 /K5BZI_Logger/K5BZI_Models/bin/*
 /K5BZI_Logger/K5BZI_Models/obj/*
 /K5BZI_Logger/K5BZI_Services.Test/bin/*
 /K5BZI_Logger/K5BZI_Services.Test/obj/*
+
+/K5BZI_Logger/.vs/K5BZI_Logger/*
