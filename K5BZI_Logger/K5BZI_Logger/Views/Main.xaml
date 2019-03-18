@@ -35,9 +35,10 @@
                     <RowDefinition Height="100" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="500" />
-                    <ColumnDefinition Width="380" />
+                    <ColumnDefinition Width="400" />
+                    <ColumnDefinition Width="480" />
                 </Grid.ColumnDefinitions>
+                <!--
                 <controls1:DateRangePicker
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
@@ -46,6 +47,39 @@
                     ToolTip="Date Range"
                     DateFrom="{Binding MinDateTime, Mode=TwoWay}"
                     DateTo="{Binding MaxDateTime, Mode=TwoWay}"/>
+                -->
+                <Grid Margin="0,0,0,10"
+                      Grid.Row="0"
+                      Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label 
+                        Grid.Row="0"
+                        Margin="0,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontWeight="Bold"
+                        Content="Event"/>
+                    <Border Grid.Row="1"
+                        Height="30"
+                        Width="200" 
+                        BorderBrush="Navy" 
+                        BorderThickness=".5" 
+                        Padding="2"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top">
+                        <TextBox
+                            x:Name="lblEvent"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Height="29"
+                            Width="200"
+                            BorderThickness="0"
+                            Text="{Binding LogEntry.Event.EventName, Mode=TwoWay}"/>
+                    </Border>
+                </Grid>
                 <Frame 
                     Grid.Column="1"
                     HorizontalAlignment="Left"
