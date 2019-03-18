@@ -29,7 +29,10 @@ namespace K5BZI_ViewModels
         {
             Model.LogEntries.Add(Model.LogEntry.Clone());
 
-            _fileStoreService.WriteToFile(Model.LogEntries);
+            var eventName = Model.LogEntry.Event.EventName.Replace(" ", "_");
+            var fileName = String.Format("{0}_{1}", eventName, DateTime.UtcNow.ToString("yyyy'-'MM'-'dd"));
+
+            _fileStoreService.WriteToFile(Model.LogEntries, fileName);
 
             CreateNewLogEntry();
         }

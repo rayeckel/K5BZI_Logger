@@ -5,6 +5,6 @@ namespace K5BZI_Services.Interfaces
 {
     public interface IFileStoreService
     {
-        void WriteToFile(ICollection<LogEntry> LogEntries);
+        void WriteToFile(ICollection<LogEntry> LogEntries, string logFileName);
     }
 }
