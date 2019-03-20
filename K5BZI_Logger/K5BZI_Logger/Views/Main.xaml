@@ -43,11 +43,6 @@
             Grid.ColumnSpan="2"
             HorizontalAlignment="Center"
             Source="SelectEvent.xaml">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="MouseDoubleClick">
-                    <i:InvokeCommandAction Command="{Binding SelectEventCommand}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
         </Frame>
         <Grid Background="AliceBlue" 
                 Opacity=".4">

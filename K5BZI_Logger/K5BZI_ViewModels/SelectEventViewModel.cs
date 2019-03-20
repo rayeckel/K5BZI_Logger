@@ -1,5 +1,4 @@
-﻿using System;
-using K5BZI_Models.ViewModelModels;
+﻿using K5BZI_Models.ViewModelModels;
 using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels.Interfaces;
 
@@ -32,9 +31,9 @@ namespace K5BZI_ViewModels
         {
             _fileStoreService
                 .GetLogListing()
-                .ForEach(_ =>
+                .ForEach(log =>
             {
-                //Model.ExistingLogs.Add();
+                Model.ExistingLogs.Add(log);
             });
         }
 

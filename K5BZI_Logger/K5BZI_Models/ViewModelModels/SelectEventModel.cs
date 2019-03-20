@@ -6,15 +6,15 @@ using System.Windows.Input;
 
 namespace K5BZI_Models.ViewModelModels
 {
-    [AddINotifyPropertyChangedInterface]
     public class SelectEventModel : BaseModel
     {
         public SelectEventModel()
         {
-            ExistingLogs = new ObservableCollection<string>();
+            ExistingLogs = new ObservableCollection<LogListing>();
         }
 
-        public ObservableCollection<string> ExistingLogs { get; private set; }
+        public LogListing SelectedItem { get; set; }
+        public ObservableCollection<LogListing> ExistingLogs { get; private set; }
 
         private ICommand _selectLogCommand;
         public ICommand SelectLogCommand

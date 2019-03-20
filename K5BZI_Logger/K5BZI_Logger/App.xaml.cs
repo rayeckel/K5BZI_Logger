@@ -19,7 +19,7 @@ namespace K5BZI_Logger
 
             Kernel = new StandardKernel(new K5BZIViewModelBindings(), new K5BZIServiceModelBindings()); ;
 
-            Current.MainWindow = Kernel.Get<Main>();
+            Current.MainWindow = Kernel.Get<SelectEvent>();
 
             Current.MainWindow.Show();
         }

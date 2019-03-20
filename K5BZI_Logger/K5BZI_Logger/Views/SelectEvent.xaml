@@ -1,4 +1,5 @@
-﻿<UserControl x:Class="K5BZI_Logger.Views.SelectEvent"
+﻿<controls:MetroWindow x:Class="K5BZI_Logger.Views.SelectEvent"
+    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls" 
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -40,14 +41,21 @@
                         Padding="2"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top">
-                    <TextBox
-                            x:Name="lblEvent"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Height="29"
-                            Width="200"
-                            BorderThickness="0"
-                            Text="{Binding LogEntry.Event.EventName, Mode=TwoWay}"/>
+                    <ComboBox
+                            x:Name="existingLogsCombo"
+                            ItemsSource="{Binding ExistingLogs}"
+                            SelectedItem="{Binding SelectedLog, Mode=TwoWay}"
+                            IsSynchronizedWithCurrentItem="True">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding FileName}" />
+                                    <TextBlock Text="    " />
+                                    <TextBlock Text="{Binding CreatedDate, StringFormat=d}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
                 </Border>
                 <Button 
                         Grid.Row="1"
@@ -76,4 +84,4 @@
             </Grid>
         </Grid>
     </Grid>
-</UserControl>
+</controls:MetroWindow>

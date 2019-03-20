@@ -49,7 +49,9 @@
   <ItemGroup>
     <Compile Include="FileStoreService.cs" />
     <Compile Include="Interfaces\IFileStoreService.cs" />
+    <Compile Include="Interfaces\ILogListingService.cs" />
     <Compile Include="K5BZIServiceModelBindings.cs" />
+    <Compile Include="LogListingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

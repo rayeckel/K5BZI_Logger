@@ -10,17 +10,32 @@ namespace K5BZI_Services
 {
     public class FileStoreService : IFileStoreService
     {
-        private const string loggerDirectoryName = "K5BZI_Logger";
+        private const string _loggerDirectoryName = "K5BZI_Logger";
+        private readonly string _filePath;
+        private readonly ILogListingService _logListingService;
+
+        public FileStoreService(ILogListingService logListingService)
+        {
+            _filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), _loggerDirectoryName);
+            _logListingService = logListingService;
+        }
 
         public List<LogListing> GetLogListing()
         {
-            return new List<LogListing>();
+            var files = new DirectoryInfo(_filePath).GetFiles();
+            var listings = new List<LogListing>();
+
+            foreach (var file in files)
+            {
+                listings.Add(_logListingService.CreateNewLogListing(file));
+            }
+
+            return listings;
         }
 
         public async void WriteToFile(ICollection<LogEntry> LogEntries, string logFileName)
         {
-            var filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), loggerDirectoryName);
-            var fileName = Path.Combine(filePath, String.Concat(logFileName, ".json"));
+            var fileName = Path.Combine(_filePath, String.Concat(logFileName, ".json"));
 
             Directory.CreateDirectory(Path.GetDirectoryName(fileName));
 
