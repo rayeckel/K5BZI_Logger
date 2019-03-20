@@ -1,5 +1,4 @@
 ﻿using K5BZI_Models.Base;
-using PropertyChanged;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -7,7 +6,6 @@ using System.Windows.Input;
 
 namespace K5BZI_Models.Main
 {
-    [AddINotifyPropertyChangedInterface]
     public class MainModel : BaseModel
     {
         public MainModel()
@@ -28,7 +26,6 @@ namespace K5BZI_Models.Main
 
         private bool _logItCommandCanExecute;
         private ICommand _logItCommand;
-
         public ICommand LogItCommand
         {
             get
@@ -36,12 +33,11 @@ namespace K5BZI_Models.Main
                 return _logItCommand ?? (_logItCommand = new CommandHandler(LogItAction, _logItCommandCanExecute));
             }
         }
-
         public Action LogItAction { get; set; }
+
 
         private bool _createNewEntryCanExecute;
         private ICommand _createNewEntryCommand;
-
         public ICommand CreateNewEntryCommand
         {
             get
@@ -50,11 +46,9 @@ namespace K5BZI_Models.Main
                     (_createNewEntryCommand = new CommandHandler(CreateNewEntryAction, _createNewEntryCanExecute));
             }
         }
-
         public Action CreateNewEntryAction { get; set; }
 
         private ICommand _selectEventCommand;
-
         public ICommand SelectEventCommand
         {
             get
@@ -63,7 +57,6 @@ namespace K5BZI_Models.Main
                     (_selectEventCommand = new CommandHandler(SelectEventAction, true));
             }
         }
-
         public Action SelectEventAction { get; set; }
     }
 }

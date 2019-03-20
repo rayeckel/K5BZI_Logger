@@ -12,6 +12,11 @@ namespace K5BZI_Services
     {
         private const string loggerDirectoryName = "K5BZI_Logger";
 
+        public List<LogListing> GetLogListing()
+        {
+            return new List<LogListing>();
+        }
+
         public async void WriteToFile(ICollection<LogEntry> LogEntries, string logFileName)
         {
             var filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), loggerDirectoryName);
