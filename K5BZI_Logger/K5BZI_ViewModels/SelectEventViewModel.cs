@@ -10,6 +10,7 @@ namespace K5BZI_ViewModels
     {
         public SelectEventModel Model { get; private set; }
 
+        private IEventService _eventService;
         private readonly IFileStoreService _fileStoreService;
         private readonly IMainLoggerViewModel _mainLoggerViewModel;
 
@@ -44,6 +45,12 @@ namespace K5BZI_ViewModels
         private void CreateNewLog()
         {
             MessageBox.Show("Not implemented");
+            return;
+
+            _eventService = ServiceLocator.Current.GetInstance<IEventService>();
+
+            var newEvent = _eventService.CreateNewEvent("Foo");
+            _mainLoggerViewModel.CreateNewLog(newEvent);
         }
 
         private void SelectLog()

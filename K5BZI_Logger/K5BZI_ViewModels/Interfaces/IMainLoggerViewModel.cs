@@ -8,5 +8,7 @@ namespace K5BZI_ViewModels.Interfaces
         MainModel Model { get; }
 
         void SelectEvent(LogListing selectedLog);
+
+        void CreateNewLog(Event newEvent);
     }
 }

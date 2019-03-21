@@ -26,6 +26,13 @@ namespace K5BZI_ViewModels
             Model.MainVisibility = Visibility.Visible;
         }
 
+        public void CreateNewLog(Event newEvent)
+        {
+            CreateNewLogEntry();
+
+            Model.LogEntry.Event.EventName = newEvent.EventName;
+        }
+
         private void Initialize()
         {
             Model = new MainModel
