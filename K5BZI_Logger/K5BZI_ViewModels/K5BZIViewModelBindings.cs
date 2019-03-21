@@ -10,8 +10,7 @@ namespace K5BZI_ViewModels
         public override void Load()
         {
             Bind<IMainLoggerViewModel>().To<MainLoggerViewModel>();
-            Bind<ISelectEventViewModel>().To<SelectEventViewModel>()
-                .WithConstructorArgument("fileStoreService", c => c.Kernel.Get<IFileStoreService>());
+            Bind<ISelectEventViewModel>().To<SelectEventViewModel>();
         }
     }
 }

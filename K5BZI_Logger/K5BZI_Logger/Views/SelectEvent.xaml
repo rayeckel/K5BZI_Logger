@@ -75,7 +75,7 @@
                         FontWeight="Bold"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Bottom"
-                        Command="{Binding SelectLogCommand}"/>
+                        Command="{Binding Model.SelectLogCommand}"/>
                 <Button 
                         Grid.Row="2"
                         Grid.Column="1"
@@ -87,7 +87,7 @@
                         FontWeight="Bold"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Bottom"
-                        Command="{Binding CreateNewLogCommand}"/>
+                        Command="{Binding Model.CreateNewLogCommand}"/>
             </Grid>
         </Grid>
     </Grid>

@@ -42,7 +42,8 @@
             Grid.Column="0"
             Grid.ColumnSpan="2"
             HorizontalAlignment="Center"
-            Source="SelectEvent.xaml">
+            Source="SelectEvent.xaml"
+            Panel.ZIndex="99">
         </Frame>
         <Grid Background="AliceBlue" 
                 Opacity=".4">
