@@ -1,4 +1,5 @@
-﻿using K5BZI_Models.Extensions;
+﻿using K5BZI_Models;
+using K5BZI_Models.Extensions;
 using K5BZI_Models.Main;
 using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels.Interfaces;
@@ -20,13 +21,17 @@ namespace K5BZI_ViewModels
             Initialize();
         }
 
+        public void SelectEvent(LogListing selectedLog)
+        {
+            Model.MainVisibility = Visibility.Visible;
+        }
+
         private void Initialize()
         {
             Model = new MainModel
             {
                 CreateNewEntryAction = () => CreateMockLogEntry(),
-                LogItAction = () => SaveLogEntry(),
-                SelectEventAction = () => SelectEvent()
+                LogItAction = () => SaveLogEntry()
             };
 
             CreateMockLogEntry();
@@ -59,11 +64,6 @@ namespace K5BZI_ViewModels
         private void CreateNewLogEntry()
         {
             Model.LogEntry.ClearProperties();
-        }
-
-        private void SelectEvent()
-        {
-            Model.MainVisibility = Visibility.Visible;
         }
     }
 }

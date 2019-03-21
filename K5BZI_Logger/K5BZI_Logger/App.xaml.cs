@@ -19,7 +19,8 @@ namespace K5BZI_Logger
         {
             base.OnStartup(e);
 
-            Kernel = new StandardKernel(new K5BZIViewModelBindings(), new K5BZIServiceModelBindings()); ;
+            Kernel = new StandardKernel(new K5BZIViewModelBindings(), new K5BZIServiceModelBindings());
+
             ServiceLocator.SetLocatorProvider(() => new NinjectServiceLocator(Kernel));
 
             Current.MainWindow = Kernel.Get<Main>();

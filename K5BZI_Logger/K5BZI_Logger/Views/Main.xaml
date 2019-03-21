@@ -37,6 +37,7 @@
     </controls:MetroWindow.RightWindowCommands>
     <Grid>
         <Frame 
+            Visibility="{Binding SelectVisibility}"
             Grid.Row="0"
             Grid.RowSpan="3"
             Grid.Column="0"
@@ -45,8 +46,8 @@
             Source="SelectEvent.xaml"
             Panel.ZIndex="99">
         </Frame>
-        <Grid Background="AliceBlue" 
-                Opacity=".4">
+        <Grid Background="AliceBlue"
+              Visibility="{Binding MainVisibility}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="110" />
                 <RowDefinition Height="160" />

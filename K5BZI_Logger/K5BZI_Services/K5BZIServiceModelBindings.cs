@@ -7,7 +7,7 @@ namespace K5BZI_Services
     {
         public override void Load()
         {
-            Bind<IFileStoreService>().To<FileStoreService>();
+            Bind<IFileStoreService>().To<FileStoreService>().InSingletonScope();
             Bind<ILogListingService>().To<LogListingService>();
         }
     }

@@ -2,6 +2,7 @@
 using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels.Interfaces;
 using Microsoft.Practices.ServiceLocation;
+using System.Windows.Forms;
 
 namespace K5BZI_ViewModels
 {
@@ -10,10 +11,12 @@ namespace K5BZI_ViewModels
         public SelectEventModel Model { get; private set; }
 
         private readonly IFileStoreService _fileStoreService;
+        private readonly IMainLoggerViewModel _mainLoggerViewModel;
 
         public SelectEventViewModel()
         {
             _fileStoreService = ServiceLocator.Current.GetInstance<IFileStoreService>();
+            _mainLoggerViewModel = ServiceLocator.Current.GetInstance<IMainLoggerViewModel>();
 
             Initialize();
             GetExistingLogs();
@@ -40,12 +43,12 @@ namespace K5BZI_ViewModels
 
         private void CreateNewLog()
         {
-
+            MessageBox.Show("Not implemented");
         }
 
         private void SelectLog()
         {
-
+            _mainLoggerViewModel.SelectEvent(Model.SelectedLog);
         }
     }
 }

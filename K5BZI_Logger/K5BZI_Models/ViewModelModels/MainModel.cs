@@ -23,6 +23,13 @@ namespace K5BZI_Models.Main
         public ObservableCollection<LogEntry> LogEntries { get; private set; }
 
         public Visibility MainVisibility { get; set; }
+        public Visibility SelectVisibility
+        {
+            get
+            {
+                return MainVisibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
 
         private bool _logItCommandCanExecute;
         private ICommand _logItCommand;
