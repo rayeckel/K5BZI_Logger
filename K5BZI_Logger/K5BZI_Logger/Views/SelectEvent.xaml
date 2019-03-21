@@ -1,11 +1,18 @@
-﻿<controls:MetroWindow x:Class="K5BZI_Logger.Views.SelectEvent"
-    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls" 
+﻿<UserControl x:Class="K5BZI_Logger.Views.SelectEvent"
+             xmlns:local="clr-namespace:K5BZI_Logger.Views"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewmodel="clr-namespace:K5BZI_ViewModels;assembly=K5BZI_ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <viewmodel:SelectEventViewModel x:Key="SelectEventViewModel" />
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <Binding Source="{StaticResource SelectEventViewModel}" />
+    </UserControl.DataContext>
     <Grid Opacity="1">
         <Grid 
             HorizontalAlignment="Center" 
@@ -43,8 +50,8 @@
                         VerticalAlignment="Top">
                     <ComboBox
                             x:Name="existingLogsCombo"
-                            ItemsSource="{Binding ExistingLogs}"
-                            SelectedItem="{Binding SelectedLog, Mode=TwoWay}"
+                            ItemsSource="{Binding Model.ExistingLogs}"
+                            SelectedItem="{Binding Model.SelectedLog, Mode=TwoWay}"
                             IsSynchronizedWithCurrentItem="True">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
@@ -84,4 +91,4 @@
             </Grid>
         </Grid>
     </Grid>
-</controls:MetroWindow>
+</UserControl>

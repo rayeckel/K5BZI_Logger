@@ -13,7 +13,7 @@ namespace K5BZI_Models.ViewModelModels
             ExistingLogs = new ObservableCollection<LogListing>();
         }
 
-        public LogListing SelectedItem { get; set; }
+        public LogListing SelectedLog { get; set; }
         public ObservableCollection<LogListing> ExistingLogs { get; private set; }
 
         private ICommand _selectLogCommand;

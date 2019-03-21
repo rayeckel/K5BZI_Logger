@@ -1,6 +1,7 @@
 ﻿using K5BZI_Models.ViewModelModels;
 using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels.Interfaces;
+using Microsoft.Practices.ServiceLocation;
 
 namespace K5BZI_ViewModels
 {
@@ -10,9 +11,9 @@ namespace K5BZI_ViewModels
 
         private readonly IFileStoreService _fileStoreService;
 
-        public SelectEventViewModel(IFileStoreService fileStoreService)
+        public SelectEventViewModel()
         {
-            _fileStoreService = fileStoreService;
+            _fileStoreService = ServiceLocator.Current.GetInstance<IFileStoreService>();
 
             Initialize();
             GetExistingLogs();
