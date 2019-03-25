@@ -9,11 +9,16 @@ namespace K5BZI_ViewModels
 {
     public class SelectEventViewModel : ISelectEventViewModel
     {
-        public SelectEventModel Model { get; private set; }
+        #region Properties
 
+        public SelectEventModel Model { get; private set; }
         private IEventService _eventService;
         private readonly IFileStoreService _fileStoreService;
         private readonly IMainLoggerViewModel _mainLoggerViewModel;
+
+        #endregion
+
+        #region Constructors
 
         public SelectEventViewModel()
         {
@@ -23,6 +28,10 @@ namespace K5BZI_ViewModels
             Initialize();
             GetExistingLogs();
         }
+
+        #endregion
+
+        #region Private Methods
 
         private void Initialize()
         {
@@ -61,5 +70,7 @@ namespace K5BZI_ViewModels
         {
             _mainLoggerViewModel.SelectEvent(Model.SelectedLog);
         }
+
+        #endregion
     }
 }

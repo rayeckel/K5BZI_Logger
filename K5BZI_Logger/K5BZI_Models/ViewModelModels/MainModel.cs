@@ -8,6 +8,8 @@ namespace K5BZI_Models.Main
 {
     public class MainModel : BaseModel
     {
+        #region Constructors
+
         public MainModel()
         {
             _logItCommandCanExecute = true;
@@ -18,6 +20,10 @@ namespace K5BZI_Models.Main
 
             MainVisibility = Visibility.Hidden;
         }
+
+        #endregion
+
+        #region Properties
 
         public string EventName { get; set; }
         public LogEntry LogEntry { get; private set; }
@@ -31,6 +37,10 @@ namespace K5BZI_Models.Main
                 return MainVisibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
             }
         }
+
+        #endregion
+
+        #region Commands
 
         private bool _logItCommandCanExecute;
         private ICommand _logItCommand;
@@ -66,5 +76,7 @@ namespace K5BZI_Models.Main
             }
         }
         public Action SelectEventAction { get; set; }
+
+        #endregion
     }
 }

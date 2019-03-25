@@ -7,14 +7,24 @@ namespace K5BZI_Models.ViewModelModels
 {
     public class SelectEventModel : BaseModel
     {
+        #region Constructors
+
         public SelectEventModel()
         {
             ExistingLogs = new ObservableCollection<LogListing>();
         }
 
+        #endregion
+
+        #region Properties
+
         public string EventName { get; set; }
         public LogListing SelectedLog { get; set; }
         public ObservableCollection<LogListing> ExistingLogs { get; private set; }
+
+        #endregion
+
+        #region Commands
 
         private ICommand _selectLogCommand;
         public ICommand SelectLogCommand
@@ -36,5 +46,7 @@ namespace K5BZI_Models.ViewModelModels
             }
         }
         public Action CreateNewLogAction { get; set; }
+
+        #endregion
     }
 }

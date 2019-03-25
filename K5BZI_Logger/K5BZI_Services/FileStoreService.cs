@@ -1,7 +1,6 @@
 ﻿using K5BZI_Models;
 using K5BZI_Services.Interfaces;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,16 +10,26 @@ namespace K5BZI_Services
 {
     public class FileStoreService : IFileStoreService
     {
+        #region Properties
+
         private const string _loggerDirectoryName = "K5BZI_Logger";
         private const string _jsonExtension = ".json";
         private readonly string _filePath;
         private readonly ILogListingService _logListingService;
+
+        #endregion
+
+        #region Constructors
 
         public FileStoreService(ILogListingService logListingService)
         {
             _filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), _loggerDirectoryName);
             _logListingService = logListingService;
         }
+
+        #endregion
+
+        #region Public Methods
 
         public List<LogListing> GetLogListing()
         {
@@ -61,5 +70,7 @@ namespace K5BZI_Services
                 await Task.Run(() => serializer.Serialize(writer, LogEntries));
             }
         }
+
+        #endregion
     }
 }

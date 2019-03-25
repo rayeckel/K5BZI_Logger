@@ -11,9 +11,15 @@ namespace K5BZI_ViewModels
 {
     public class MainLoggerViewModel : IMainLoggerViewModel
     {
-        public MainModel Model { get; private set; }
+        #region Properties
 
+        public MainModel Model { get; private set; }
+        private string _fileName;
         private readonly IFileStoreService _fileStoreService;
+
+        #endregion
+
+        #region Constructors
 
         public MainLoggerViewModel(IFileStoreService fileStoreService)
         {
@@ -22,9 +28,14 @@ namespace K5BZI_ViewModels
             Initialize();
         }
 
+        #endregion
+
+        #region Public Methods
+
         public async void SelectEvent(LogListing selectedLog)
         {
-            var logEntries = await _fileStoreService.ReadLog(selectedLog.FileName);
+            _fileName = selectedLog.FileName;
+            var logEntries = await _fileStoreService.ReadLog(_fileName);
 
             Model.EventName = logEntries.First().Event.EventName;
 
@@ -35,12 +46,19 @@ namespace K5BZI_ViewModels
 
         public void CreateNewLog(Event newEvent)
         {
+            var eventName = Model.LogEntry.Event.EventName.Replace(" ", "_");
+            _fileName = String.Format("{0}_{1}", eventName, DateTime.UtcNow.ToString("yyyy'-'MM'-'dd"));
+
             CreateNewLogEntry();
 
             Model.LogEntry.Event.EventName = newEvent.EventName;
 
             Model.MainVisibility = Visibility.Visible;
         }
+
+        #endregion
+
+        #region Private Methods
 
         private void Initialize()
         {
@@ -55,10 +73,7 @@ namespace K5BZI_ViewModels
         {
             Model.LogEntries.Add(Model.LogEntry.Clone());
 
-            var eventName = Model.LogEntry.Event.EventName.Replace(" ", "_");
-            var fileName = String.Format("{0}_{1}", eventName, DateTime.UtcNow.ToString("yyyy'-'MM'-'dd"));
-
-            _fileStoreService.WriteToFile(Model.LogEntries, fileName);
+            _fileStoreService.WriteToFile(Model.LogEntries, _fileName);
 
             CreateNewLogEntry();
         }
@@ -67,5 +82,7 @@ namespace K5BZI_ViewModels
         {
             Model.LogEntry.ClearProperties();
         }
+
+        #endregion
     }
 }
