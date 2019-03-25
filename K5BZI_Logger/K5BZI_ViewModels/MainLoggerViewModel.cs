@@ -4,6 +4,7 @@ using K5BZI_Models.Main;
 using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels.Interfaces;
 using System;
+using System.Linq;
 using System.Windows;
 
 namespace K5BZI_ViewModels
@@ -21,8 +22,14 @@ namespace K5BZI_ViewModels
             Initialize();
         }
 
-        public void SelectEvent(LogListing selectedLog)
+        public async void SelectEvent(LogListing selectedLog)
         {
+            var logEntries = await _fileStoreService.ReadLog(selectedLog.FileName);
+
+            Model.EventName = logEntries.First().Event.EventName;
+
+            logEntries.ForEach(_ => Model.LogEntries.Add(_));
+
             Model.MainVisibility = Visibility.Visible;
         }
 
@@ -31,17 +38,17 @@ namespace K5BZI_ViewModels
             CreateNewLogEntry();
 
             Model.LogEntry.Event.EventName = newEvent.EventName;
+
+            Model.MainVisibility = Visibility.Visible;
         }
 
         private void Initialize()
         {
             Model = new MainModel
             {
-                CreateNewEntryAction = () => CreateMockLogEntry(),
+                CreateNewEntryAction = () => CreateNewLogEntry(),
                 LogItAction = () => SaveLogEntry()
             };
-
-            CreateMockLogEntry();
         }
 
         private void SaveLogEntry()
@@ -54,18 +61,6 @@ namespace K5BZI_ViewModels
             _fileStoreService.WriteToFile(Model.LogEntries, fileName);
 
             CreateNewLogEntry();
-        }
-
-        private void CreateMockLogEntry()
-        {
-            CreateNewLogEntry();
-            Model.LogEntry.CallSign = "KC5IHO";
-            Model.LogEntry.ContactTime = DateTime.Now;
-            Model.LogEntry.Event.EventName = "Parks On The Air";
-            Model.LogEntry.Signal.Band = "40m";
-            Model.LogEntry.Signal.Frequency = 7.225;
-            Model.LogEntry.SignalReport.Sent = 599;
-            Model.LogEntry.SignalReport.Received = 479;
         }
 
         private void CreateNewLogEntry()

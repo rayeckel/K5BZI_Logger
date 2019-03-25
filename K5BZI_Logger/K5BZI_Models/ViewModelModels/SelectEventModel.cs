@@ -1,5 +1,4 @@
 ﻿using K5BZI_Models.Base;
-using PropertyChanged;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -13,6 +12,7 @@ namespace K5BZI_Models.ViewModelModels
             ExistingLogs = new ObservableCollection<LogListing>();
         }
 
+        public string EventName { get; set; }
         public LogListing SelectedLog { get; set; }
         public ObservableCollection<LogListing> ExistingLogs { get; private set; }
 

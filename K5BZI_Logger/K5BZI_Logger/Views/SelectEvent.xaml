@@ -17,11 +17,12 @@
             HorizontalAlignment="Center" 
             VerticalAlignment="Center" 
             Background="AliceBlue"
-            Height="200"
+            Height="400"
             Width="400">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50" />
+                    <RowDefinition Height="100" />
                     <RowDefinition Height="100" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
@@ -37,7 +38,7 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     FontWeight="Bold"
-                    Content="Event"/>
+                    Content="Select Event"/>
                 <Border Grid.Row="1"
                         Grid.Column="0"
                         Height="30"
@@ -63,8 +64,50 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
                 </Border>
-                <Button 
+                <Grid Margin="0,0,0,10"
+                          Grid.Row="2"
+                          Grid.Column="0"
+                       Grid.ColumnSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label 
+                        Grid.Row="0"
+                        Margin="0,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontWeight="Bold"
+                        Content="New Event"/>
+                    <TextBox
                         Grid.Row="1"
+                        Text="{Binding Model.EventName, Mode=OneWayToSource}">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                                <Style.Resources>
+                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <Label Content="New Event Name" Foreground="LightGray" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                </Grid>
+                <Button 
+                        Grid.Row="2"
                         Grid.Column="1"
                         Margin="10,0,0,10"
                         Content="Select"
@@ -76,7 +119,7 @@
                         VerticalAlignment="Bottom"
                         Command="{Binding Model.SelectLogCommand}"/>
                 <Button 
-                        Grid.Row="2"
+                        Grid.Row="3"
                         Grid.Column="1"
                         Margin="10,0,0,10"
                         Content="New Log"

@@ -1,6 +1,7 @@
 ﻿using K5BZI_Models;
 using K5BZI_Services.Interfaces;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,6 +12,7 @@ namespace K5BZI_Services
     public class FileStoreService : IFileStoreService
     {
         private const string _loggerDirectoryName = "K5BZI_Logger";
+        private const string _jsonExtension = ".json";
         private readonly string _filePath;
         private readonly ILogListingService _logListingService;
 
@@ -33,9 +35,21 @@ namespace K5BZI_Services
             return listings;
         }
 
+        public async Task<List<LogEntry>> ReadLog(string logFileName)
+        {
+            var fileName = Path.Combine(_filePath, String.Concat(logFileName, _jsonExtension));
+            var serializer = new JsonSerializer();
+
+            using (var sr = new StreamReader(fileName))
+            using (var jsonTextReader = new JsonTextReader(sr))
+            {
+                return await Task.Run(() => serializer.Deserialize<List<LogEntry>>(jsonTextReader));
+            }
+        }
+
         public async void WriteToFile(ICollection<LogEntry> LogEntries, string logFileName)
         {
-            var fileName = Path.Combine(_filePath, String.Concat(logFileName, ".json"));
+            var fileName = Path.Combine(_filePath, String.Concat(logFileName, _jsonExtension));
 
             Directory.CreateDirectory(Path.GetDirectoryName(fileName));
 

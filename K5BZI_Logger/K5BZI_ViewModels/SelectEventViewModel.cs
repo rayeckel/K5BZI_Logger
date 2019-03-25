@@ -2,6 +2,7 @@
 using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels.Interfaces;
 using Microsoft.Practices.ServiceLocation;
+using System;
 using System.Windows.Forms;
 
 namespace K5BZI_ViewModels
@@ -44,12 +45,15 @@ namespace K5BZI_ViewModels
 
         private void CreateNewLog()
         {
-            MessageBox.Show("Not implemented");
-            return;
+            if (String.IsNullOrEmpty(Model.EventName))
+            {
+                MessageBox.Show("Please provide the Event Name.");
+                return;
+            }
 
             _eventService = ServiceLocator.Current.GetInstance<IEventService>();
 
-            var newEvent = _eventService.CreateNewEvent("Foo");
+            var newEvent = _eventService.CreateNewEvent(Model.EventName);
             _mainLoggerViewModel.CreateNewLog(newEvent);
         }
 

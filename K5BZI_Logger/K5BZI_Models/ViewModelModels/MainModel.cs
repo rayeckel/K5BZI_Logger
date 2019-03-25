@@ -19,6 +19,7 @@ namespace K5BZI_Models.Main
             MainVisibility = Visibility.Hidden;
         }
 
+        public string EventName { get; set; }
         public LogEntry LogEntry { get; private set; }
         public ObservableCollection<LogEntry> LogEntries { get; private set; }
 

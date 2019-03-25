@@ -111,7 +111,7 @@
                                 Height="29"
                                 Width="200"
                                 BorderThickness="0"
-                                Text="{Binding LogEntry.Event.EventName, Mode=TwoWay}"/>
+                                Text="{Binding EventName}"/>
                         </Border>
                     </Grid>
                     <Frame 
