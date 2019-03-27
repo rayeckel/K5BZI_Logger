@@ -26,16 +26,16 @@
         HorizontalAlignment="Center" 
         VerticalAlignment="Center" 
         Background="AliceBlue"
-        Height="350"
+        Height="300"
         Width="450">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30" />
                 <RowDefinition Height="50" />
-                <RowDefinition Height="50" />
+                <RowDefinition Height="40" />
                 <RowDefinition Height="30" />
                 <RowDefinition Height="50" />
-                <RowDefinition Height="100" />
+                <RowDefinition Height="50" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
