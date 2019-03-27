@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="K5BZI Logger"
         Height="770" Width="900"
-        BorderThickness="0" 
+        BorderThickness="1" 
         GlowBrush="Black"
         ResizeMode="NoResize"
         WindowTransitionsEnabled="False"

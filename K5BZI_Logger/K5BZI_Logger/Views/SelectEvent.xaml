@@ -8,7 +8,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:viewmodel="clr-namespace:K5BZI_ViewModels;assembly=K5BZI_ViewModels"
     Height="770" Width="900"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    Title="Select Event">
     <simpleChildWindow:ChildWindow.Resources>
         <viewmodel:SelectEventViewModel x:Key="SelectEventViewModel" />
     </simpleChildWindow:ChildWindow.Resources>
@@ -22,14 +23,13 @@
         -->
     </simpleChildWindow:ChildWindow.OverlayBrush>
     <Grid 
-            HorizontalAlignment="Center" 
-            VerticalAlignment="Center" 
-            Background="AliceBlue"
-            Height="400"
-            Width="400">
+        HorizontalAlignment="Center" 
+        VerticalAlignment="Center" 
+        Background="AliceBlue"
+        Height="400"
+        Width="400">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
                 <RowDefinition Height="100" />
                 <RowDefinition Height="100" />
                 <RowDefinition Height="Auto" />
@@ -38,29 +38,21 @@
                 <ColumnDefinition Width="250" />
                 <ColumnDefinition Width="150" />
             </Grid.ColumnDefinitions>
-            <Label 
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    Margin="0,0,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    FontWeight="Bold"
-                    Content="Select Event"/>
-            <Border Grid.Row="1"
-                        Grid.Column="0"
-                        Height="30"
-                        Width="200" 
-                        BorderBrush="Navy" 
-                        BorderThickness=".5" 
-                        Padding="2"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top">
+            <Border 
+                Grid.Row="0"
+                Grid.Column="0"
+                Height="30"
+                Width="200" 
+                BorderBrush="Navy" 
+                BorderThickness=".5" 
+                Padding="2"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top">
                 <ComboBox
-                            x:Name="existingLogsCombo"
-                            ItemsSource="{Binding Model.ExistingLogs}"
-                            SelectedItem="{Binding Model.SelectedLog, Mode=TwoWay}"
-                            IsSynchronizedWithCurrentItem="True">
+                    x:Name="existingLogsCombo"
+                    ItemsSource="{Binding Model.ExistingLogs}"
+                    SelectedItem="{Binding Model.SelectedLog, Mode=TwoWay}"
+                    IsSynchronizedWithCurrentItem="True">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -72,24 +64,25 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
             </Border>
-            <Grid Margin="0,0,0,10"
-                          Grid.Row="2"
-                          Grid.Column="0"
-                       Grid.ColumnSpan="2">
+            <Grid 
+                Margin="0,0,0,10"
+                Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Label 
-                        Grid.Row="0"
-                        Margin="0,0,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        FontWeight="Bold"
-                        Content="New Event"/>
+                    Grid.Row="0"
+                    Margin="0,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontWeight="Bold"
+                    Content="New Event"/>
                 <TextBox
-                        Grid.Row="1"
-                        Text="{Binding Model.EventName, Mode=OneWayToSource}">
+                    Grid.Row="1"
+                    Text="{Binding Model.EventName, Mode=OneWayToSource}">
                     <TextBox.Style>
                         <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
                             <Style.Resources>
@@ -115,29 +108,29 @@
                 </TextBox>
             </Grid>
             <Button 
-                        Grid.Row="2"
-                        Grid.Column="1"
-                        Margin="10,0,0,10"
-                        Content="Select"
-                        Width="100"
-                        Height="30"
-                        Foreground="Navy"
-                        FontWeight="Bold"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Bottom"
-                        Command="{Binding Model.SelectLogCommand}"/>
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="10,0,0,10"
+                Content="Select"
+                Width="100"
+                Height="30"
+                Foreground="Navy"
+                FontWeight="Bold"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Command="{Binding Model.SelectLogCommand}"/>
             <Button 
-                        Grid.Row="3"
-                        Grid.Column="1"
-                        Margin="10,0,0,10"
-                        Content="New Log"
-                        Width="100"
-                        Height="30"
-                        Foreground="Navy"
-                        FontWeight="Bold"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Bottom"
-                        Command="{Binding Model.CreateNewLogCommand}"/>
+                Grid.Row="2"
+                Grid.Column="1"
+                Margin="10,0,0,10"
+                Content="New Log"
+                Width="100"
+                Height="30"
+                Foreground="Navy"
+                FontWeight="Bold"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Command="{Binding Model.CreateNewLogCommand}"/>
         </Grid>
     </Grid>
 </simpleChildWindow:ChildWindow>
