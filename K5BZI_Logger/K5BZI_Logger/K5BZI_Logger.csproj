@@ -116,6 +116,15 @@
     <Compile Include="Views\Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MainGrid.xaml.cs">
+      <DependentUpon>MainGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainHeader.xaml.cs">
+      <DependentUpon>MainHeader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainInput.xaml.cs">
+      <DependentUpon>MainInput.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SelectEvent.xaml.cs">
       <DependentUpon>SelectEvent.xaml</DependentUpon>
     </Compile>
@@ -179,6 +188,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\MainGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainInput.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\SelectEvent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -199,7 +220,9 @@
   <ItemGroup>
     <Content Include="bzIcon.ico" />
     <Content Include="Images\bzIcon.ico" />
-    <Content Include="Images\bzIcon.jpg" />
+    <Resource Include="Images\bzIcon.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

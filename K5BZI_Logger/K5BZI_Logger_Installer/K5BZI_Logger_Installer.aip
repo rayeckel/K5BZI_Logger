@@ -7,16 +7,16 @@
     <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_CommonServiceLocator.NinjectAdapter.Unofficial.dll" Value="..\packages\CommonServiceLocator.NinjectAdapter.Unofficial.3.2.2.0\lib\Net40"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_ControlzEx.dll" Value="..\packages\ControlzEx.3.0.2.4\lib\net462"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_K5BZI_Logger.exe" Value="..\K5BZI_Logger\bin\Release"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_K5BZI_Logger.exe.config" Value="..\K5BZI_Logger\bin\Release"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_K5BZI_Models.dll" Value="..\K5BZI_Models\bin\Release"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_K5BZI_Models.dll_1" Value="..\K5BZI_Models\bin\Release"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_K5BZI_ServiceModels.dll" Value="..\K5BZI_ServiceModels\bin\Release"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_K5BZI_ServiceModels.dll_1" Value="..\K5BZI_ServiceModels\bin\Release"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_K5BZI_Services.dll" Value="..\K5BZI_Services\bin\Release"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_K5BZI_Services.dll_1" Value="..\K5BZI_Services\bin\Release"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_K5BZI_ViewModels.dll" Value="..\K5BZI_ViewModels\bin\Release"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_K5BZI_ViewModels.dll_1" Value="..\K5BZI_ViewModels\bin\Release"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_K5BZI_Logger.exe" Value="..\K5BZI_Logger\bin\Debug"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_K5BZI_Logger.exe.config" Value="..\K5BZI_Logger\bin\Debug"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_K5BZI_Models.dll" Value="..\K5BZI_Models\bin\Debug"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_K5BZI_Models.dll_1" Value="..\K5BZI_Models\bin\Debug"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_K5BZI_ServiceModels.dll" Value="..\K5BZI_ServiceModels\bin\Debug"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_K5BZI_ServiceModels.dll_1" Value="..\K5BZI_ServiceModels\bin\Debug"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_K5BZI_Services.dll" Value="..\K5BZI_Services\bin\Debug"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_K5BZI_Services.dll_1" Value="..\K5BZI_Services\bin\Debug"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_K5BZI_ViewModels.dll" Value="..\K5BZI_ViewModels\bin\Debug"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_K5BZI_ViewModels.dll_1" Value="..\K5BZI_ViewModels\bin\Debug"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_MahApps.Metro.IconPacks.FontAwesome.dll" Value="..\packages\MahApps.Metro.IconPacks.FontAwesome.2.3.0\lib\net46"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_MahApps.Metro.dll" Value="..\packages\MahApps.Metro.1.6.5\lib\net46"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Practices.ServiceLocation.dll" Value="..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8"/>
