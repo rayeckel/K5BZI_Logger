@@ -64,11 +64,15 @@ namespace K5BZI_ViewModels
 
             var newEvent = _eventService.CreateNewEvent(Model.EventName);
             _mainLoggerViewModel.CreateNewLog(newEvent);
+
+            Model.IsOpen = false;
         }
 
         private void SelectLog()
         {
             _mainLoggerViewModel.SelectEvent(Model.SelectedLog);
+
+            Model.IsOpen = false;
         }
 
         #endregion

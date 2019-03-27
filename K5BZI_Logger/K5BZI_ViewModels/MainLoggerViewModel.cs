@@ -40,8 +40,6 @@ namespace K5BZI_ViewModels
             Model.EventName = logEntries.First().Event.EventName;
 
             logEntries.ForEach(_ => Model.LogEntries.Add(_));
-
-            Model.MainVisibility = Visibility.Visible;
         }
 
         public void CreateNewLog(Event newEvent)
@@ -52,8 +50,6 @@ namespace K5BZI_ViewModels
             CreateNewLogEntry();
 
             Model.LogEntry.Event.EventName = newEvent.EventName;
-
-            Model.MainVisibility = Visibility.Visible;
         }
 
         #endregion

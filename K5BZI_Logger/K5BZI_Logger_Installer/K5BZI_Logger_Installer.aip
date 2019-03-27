@@ -6,7 +6,7 @@
   <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
     <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_CommonServiceLocator.NinjectAdapter.Unofficial.dll" Value="..\packages\CommonServiceLocator.NinjectAdapter.Unofficial.3.2.2.0\lib\Net40"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_ControlzEx.dll" Value="..\packages\ControlzEx.3.0.2.4\lib\net462"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_ControlzEx.dll" Value="..\packages\ControlzEx.4.0.0-alpha0232\lib\net462"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_K5BZI_Logger.exe" Value="..\K5BZI_Logger\bin\Debug"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_K5BZI_Logger.exe.config" Value="..\K5BZI_Logger\bin\Debug"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_K5BZI_Models.dll" Value="..\K5BZI_Models\bin\Debug"/>
@@ -18,7 +18,8 @@
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_K5BZI_ViewModels.dll" Value="..\K5BZI_ViewModels\bin\Debug"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_K5BZI_ViewModels.dll_1" Value="..\K5BZI_ViewModels\bin\Debug"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_MahApps.Metro.IconPacks.FontAwesome.dll" Value="..\packages\MahApps.Metro.IconPacks.FontAwesome.2.3.0\lib\net46"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_MahApps.Metro.dll" Value="..\packages\MahApps.Metro.1.6.5\lib\net46"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_MahApps.Metro.SimpleChildWindow.dll" Value="..\packages\MahApps.Metro.SimpleChildWindow.2.0.0-alpha0006\lib\net46"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_MahApps.Metro.dll" Value="..\packages\MahApps.Metro.2.0.0-alpha0262\lib\net46"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Practices.ServiceLocation.dll" Value="..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Practices.ServiceLocation.dll_1" Value="..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Web.Infrastructure.dll" Value="..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40"/>
@@ -50,7 +51,7 @@
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Web.WebPages.Razor.dll_1" Value="..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Web.WebPages.dll" Value="..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Web.WebPages.dll_1" Value="..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Windows.Interactivity.dll" Value="..\packages\ControlzEx.3.0.2.4\lib\net462"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Windows.Interactivity.dll" Value="..\packages\Microsoft.Xaml.Behaviors.Wpf.1.0.1\lib\net45"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_CommonServiceLocator.NinjectAdapter.Unofficial.dll" Value="CommonServiceLocator.NinjectAdapter.Unofficial.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_ControlzEx.dll" Value="ControlzEx.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_K5BZI_Logger.exe" Value="K5BZI_Logger.exe"/>
@@ -64,6 +65,7 @@
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_K5BZI_ViewModels.dll" Value="K5BZI_ViewModels.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_K5BZI_ViewModels.dll_1" Value="K5BZI_ViewModels.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_MahApps.Metro.IconPacks.FontAwesome.dll" Value="MahApps.Metro.IconPacks.FontAwesome.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_MahApps.Metro.SimpleChildWindow.dll" Value="MahApps.Metro.SimpleChildWindow.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_MahApps.Metro.dll" Value="MahApps.Metro.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Practices.ServiceLocation.dll" Value="Microsoft.Practices.ServiceLocation.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Practices.ServiceLocation.dll_1" Value="Microsoft.Practices.ServiceLocation.dll"/>
@@ -96,7 +98,7 @@
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.Web.WebPages.Razor.dll_1" Value="System.Web.WebPages.Razor.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.Web.WebPages.dll" Value="System.Web.WebPages.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.Web.WebPages.dll_1" Value="System.Web.WebPages.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.Windows.Interactivity.dll" Value="System.Windows.Interactivity.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.Windows.Interactivity.dll" Value="Microsoft.Xaml.Behaviors.dll"/>
     <ROW Property="ALLUSERS" Value="1"/>
     <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install the K5BZI Logger." ValueLocId="*"/>
     <ROW Property="ARPPRODUCTICON" Value="bzIcon.exe" Type="8"/>
@@ -128,7 +130,7 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
     <ROW Component="K5BZI_Logger_PrimaryOutput" ComponentId="{3A64F07D-30F8-4879-907A-004DD8EC6132}" Directory_="K5BZI_Logger_Dir" Attributes="0" KeyPath="K5BZI_Logger.exe"/>
-    <ROW Component="K5BZI_Logger_References" ComponentId="{BC0D23C2-3592-4EAE-9F54-5983AF419FD9}" Directory_="K5BZI_Logger_Dir" Attributes="0" KeyPath="System.Windows.Interactivity.dll"/>
+    <ROW Component="K5BZI_Logger_References" ComponentId="{BC0D23C2-3592-4EAE-9F54-5983AF419FD9}" Directory_="K5BZI_Logger_Dir" Attributes="0" KeyPath="MahApps.Metro.SimpleChildWindow.dll"/>
     <ROW Component="K5BZI_Models_PrimaryOutput" ComponentId="{8DB8B29B-B439-4D66-8995-F45C908C0280}" Directory_="K5BZI_Models_Dir" Attributes="0" KeyPath="K5BZI_Models.dll_1"/>
     <ROW Component="K5BZI_Models_References" ComponentId="{82C43708-4105-4F60-ABD1-C93C684C0847}" Directory_="K5BZI_Models_Dir" Attributes="0" KeyPath="PropertyChanged.dll_1"/>
     <ROW Component="K5BZI_ServiceModels_PrimaryOutput" ComponentId="{0CA6F3F3-986C-4433-9B34-F1CAFBF6AA23}" Directory_="K5BZI_ServiceModels_Dir" Attributes="0" KeyPath="K5BZI_ServiceModels.dll_1"/>
@@ -158,6 +160,7 @@
     <ROW File="K5BZI_ViewModels.dll" Component_="K5BZI_Logger_References" FileName="K5BZI_~5.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_K5BZI_ViewModels.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_K5BZI_ViewModels.dll&gt;" SelfReg="false" NextFile="PropertyChanged.dll"/>
     <ROW File="K5BZI_ViewModels.dll_1" Component_="K5BZI_ViewModels_PrimaryOutput" FileName="K5BZI_~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_K5BZI_ViewModels.dll_1]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_K5BZI_ViewModels.dll_1&gt;" SelfReg="false" NextFile="Microsoft.Practices.ServiceLocation.dll_1"/>
     <ROW File="MahApps.Metro.IconPacks.FontAwesome.dll" Component_="K5BZI_Logger_References" FileName="MAHAPP~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_MahApps.Metro.IconPacks.FontAwesome.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_MahApps.Metro.IconPacks.FontAwesome.dll&gt;" SelfReg="false" NextFile="System.Windows.Interactivity.dll"/>
+    <ROW File="MahApps.Metro.SimpleChildWindow.dll" Component_="K5BZI_Logger_References" FileName="MAHAPP~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_MahApps.Metro.SimpleChildWindow.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_MahApps.Metro.SimpleChildWindow.dll&gt;" SelfReg="false"/>
     <ROW File="MahApps.Metro.dll" Component_="K5BZI_Logger_References" FileName="MAHAPP~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_MahApps.Metro.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_MahApps.Metro.dll&gt;" SelfReg="false" NextFile="MahApps.Metro.IconPacks.FontAwesome.dll"/>
     <ROW File="Microsoft.Practices.ServiceLocation.dll" Component_="K5BZI_Logger_References" FileName="MICROS~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Practices.ServiceLocation.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Practices.ServiceLocation.dll&gt;" SelfReg="false" NextFile="Microsoft.Web.Infrastructure.dll"/>
     <ROW File="Microsoft.Practices.ServiceLocation.dll_1" Component_="K5BZI_ViewModels_References" FileName="MICROS~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Practices.ServiceLocation.dll_1]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Practices.ServiceLocation.dll_1&gt;" SelfReg="false" NextFile="Microsoft.Web.Infrastructure.dll_1"/>
@@ -187,7 +190,7 @@
     <ROW File="System.Web.WebPages.Deployment.dll" Component_="K5BZI_Logger_References" FileName="SYSTEM~5.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Web.WebPages.Deployment.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Web.WebPages.Deployment.dll&gt;" SelfReg="false" NextFile="System.Web.WebPages.dll"/>
     <ROW File="System.Web.WebPages.Deployment.dll_1" Component_="K5BZI_ViewModels_References" FileName="SYSTEM~5.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Web.WebPages.Deployment.dll_1]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Web.WebPages.Deployment.dll_1&gt;" SelfReg="false" NextFile="System.Web.WebPages.dll_1"/>
     <ROW File="System.Web.WebPages.Razor.dll" Component_="K5BZI_Logger_References" FileName="SYSTEM~7.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Web.WebPages.Razor.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Web.WebPages.Razor.dll&gt;" SelfReg="false" NextFile="CommonServiceLocator.NinjectAdapter.Unofficial.dll"/>
-    <ROW File="System.Web.WebPages.Razor.dll_1" Component_="K5BZI_ViewModels_References" FileName="SYSTEM~7.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Web.WebPages.Razor.dll_1]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Web.WebPages.Razor.dll_1&gt;" SelfReg="false"/>
+    <ROW File="System.Web.WebPages.Razor.dll_1" Component_="K5BZI_ViewModels_References" FileName="SYSTEM~7.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Web.WebPages.Razor.dll_1]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Web.WebPages.Razor.dll_1&gt;" SelfReg="false" NextFile="MahApps.Metro.SimpleChildWindow.dll"/>
     <ROW File="System.Web.WebPages.dll" Component_="K5BZI_Logger_References" FileName="SYSTEM~6.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Web.WebPages.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Web.WebPages.dll&gt;" SelfReg="false" NextFile="System.Web.WebPages.Razor.dll"/>
     <ROW File="System.Web.WebPages.dll_1" Component_="K5BZI_ViewModels_References" FileName="SYSTEM~6.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Web.WebPages.dll_1]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Web.WebPages.dll_1&gt;" SelfReg="false" NextFile="System.Web.WebPages.Razor.dll_1"/>
     <ROW File="System.Windows.Interactivity.dll" Component_="K5BZI_Logger_References" FileName="SYSTEM~8.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Windows.Interactivity.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Windows.Interactivity.dll&gt;" SelfReg="false" NextFile="K5BZI_Models.dll_1"/>
@@ -206,6 +209,7 @@
     <ROW Name="AI_APPPATH_PERBUILD_K5BZI_ViewModels.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_K5BZI_ViewModels.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_K5BZI_ViewModels.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_K5BZI_ViewModels.dll_1" Path="[|AI_PROPPATH_DIR_PERBUILD_K5BZI_ViewModels.dll_1]\[|AI_PROPPATH_FILENAME_PERBUILD_K5BZI_ViewModels.dll_1]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_MahApps.Metro.IconPacks.FontAwesome.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_MahApps.Metro.IconPacks.FontAwesome.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_MahApps.Metro.IconPacks.FontAwesome.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_MahApps.Metro.SimpleChildWindow.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_MahApps.Metro.SimpleChildWindow.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_MahApps.Metro.SimpleChildWindow.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_MahApps.Metro.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_MahApps.Metro.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_MahApps.Metro.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Practices.ServiceLocation.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Practices.ServiceLocation.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Practices.ServiceLocation.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Practices.ServiceLocation.dll_1" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Practices.ServiceLocation.dll_1]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Practices.ServiceLocation.dll_1]" Type="2" Content="0"/>
@@ -392,5 +396,6 @@
     <ROW ProjectId="{e5ab77fc-fb88-470d-9e3f-a106fd88349a}" ProjectName="K5BZI_ViewModels" OutputGroup="References" OutputFile="System.Web.WebPages.Deployment.dll_1"/>
     <ROW ProjectId="{e5ab77fc-fb88-470d-9e3f-a106fd88349a}" ProjectName="K5BZI_ViewModels" OutputGroup="References" OutputFile="System.Web.WebPages.dll_1"/>
     <ROW ProjectId="{e5ab77fc-fb88-470d-9e3f-a106fd88349a}" ProjectName="K5BZI_ViewModels" OutputGroup="References" OutputFile="System.Web.WebPages.Razor.dll_1"/>
+    <ROW ProjectId="{48eb1061-0f79-4c88-9fd0-e4299f11c75d}" ProjectName="K5BZI_Logger" OutputGroup="References" OutputFile="MahApps.Metro.SimpleChildWindow.dll"/>
   </COMPONENT>
 </DOCUMENT>

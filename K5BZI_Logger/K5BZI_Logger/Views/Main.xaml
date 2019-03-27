@@ -19,28 +19,31 @@
             <Button Content="settings" />
             <Button>
                 <StackPanel Orientation="Horizontal">
-                    <Rectangle Width="20"
-                               Height="20"
-                               Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                    <Rectangle 
+                        Width="20"
+                        Height="20"
+                        Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
                         <Rectangle.OpacityMask>
                             <VisualBrush Stretch="Fill"/>
                             <!--Visual="{StaticResource appbar_cupcake}" />-->
                         </Rectangle.OpacityMask>
                     </Rectangle>
-                    <TextBlock Margin="4 0 0 0"
-                               VerticalAlignment="Center"
-                               Text="Logout" />
+                    <TextBlock 
+                        Margin="4 0 0 0"
+                        VerticalAlignment="Center"
+                        Text="Logout" />
                 </StackPanel>
             </Button>
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
     <Grid>
         <local:SelectEvent 
-            Visibility="{Binding SelectVisibility}"
-            HorizontalAlignment="Center"/>
-        <Grid
-            Visibility="{Binding MainVisibility}"
-            Background="AliceBlue">
+                Grid.Row="0" 
+                Grid.RowSpan="3"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                HorizontalAlignment="Center"/>
+        <Grid Background="AliceBlue">
             <Grid.RowDefinitions>
                 <RowDefinition Height="135" />
                 <RowDefinition Height="160" />
@@ -50,24 +53,25 @@
                 <ColumnDefinition Width="450" />
                 <ColumnDefinition Width="450" />
             </Grid.ColumnDefinitions>
-            <local:MainHeader Grid.Row="0" 
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                BorderBrush="Navy" 
-                BorderThickness="1" 
-                Padding="2"/>
+            <local:MainHeader
+                    Grid.Row="0" 
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    BorderBrush="Navy" 
+                    BorderThickness="1" 
+                    Padding="2"/>
             <local:MainInput
-                Grid.Row="1" 
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                BorderBrush="Navy" 
-                BorderThickness="1"
-                Padding="2"/>
+                    Grid.Row="1" 
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    BorderBrush="Navy" 
+                    BorderThickness="1"
+                    Padding="2"/>
             <local:MainGrid
-                Grid.Row="2"
-                Grid.Column="0" 
-                Grid.ColumnSpan="2"
-                HorizontalAlignment="Center"/>
+                    Grid.Row="2"
+                    Grid.Column="0" 
+                    Grid.ColumnSpan="2"
+                    HorizontalAlignment="Center"/>
         </Grid>
     </Grid>
 </controls:MetroWindow>

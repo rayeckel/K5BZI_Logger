@@ -1,11 +1,12 @@
 ﻿using K5BZI_Models.Base;
+using PropertyChanged;
 using System;
 using System.Collections.ObjectModel;
-using System.Windows;
 using System.Windows.Input;
 
 namespace K5BZI_Models.Main
 {
+    [AddINotifyPropertyChangedInterface]
     public class MainModel : BaseModel
     {
         #region Constructors
@@ -17,8 +18,6 @@ namespace K5BZI_Models.Main
 
             LogEntry = new LogEntry();
             LogEntries = new ObservableCollection<LogEntry>();
-
-            MainVisibility = Visibility.Hidden;
         }
 
         #endregion
@@ -28,15 +27,6 @@ namespace K5BZI_Models.Main
         public string EventName { get; set; }
         public LogEntry LogEntry { get; private set; }
         public ObservableCollection<LogEntry> LogEntries { get; private set; }
-
-        public Visibility MainVisibility { get; set; }
-        public Visibility SelectVisibility
-        {
-            get
-            {
-                return MainVisibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
-            }
-        }
 
         #endregion
 
