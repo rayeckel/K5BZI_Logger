@@ -10,8 +10,9 @@
                 <RowDefinition Height="100" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="400" />
-                <ColumnDefinition Width="480" />
+                <ColumnDefinition Width="250" />
+                <ColumnDefinition Width="310" />
+                <ColumnDefinition Width="320" />
             </Grid.ColumnDefinitions>
             <!--
                     <controls1:DateRangePicker
@@ -26,8 +27,7 @@
             <Grid 
                 Margin="0,0,0,10"
                 Grid.Row="0"
-                Grid.Column="0"
-                Visibility="{Binding MainVisibility}">
+                Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30" />
                     <RowDefinition Height="30" />
@@ -60,27 +60,27 @@
                 </Border>
                 <Button 
                     Grid.Row="2"
-                    Margin="10,0,0,10"
+                    Margin="10,0,10,10"
                     Content="Change Event"
                     Width="100"
                     Height="30"
                     Foreground="Navy"
                     FontWeight="Bold"
-                    HorizontalAlignment="Center"
+                    HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
                     Command="{Binding ChangeEventCommand}"/>
             </Grid>
             <Frame 
                 Grid.Column="1"
-                HorizontalAlignment="Left"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
                 Source="../Controls/AllXamlClock.xaml"/>
             <Canvas
-                Grid.Column="1"
+                Grid.Column="2"
                 Height="130px" 
                 Width="120px"
                 HorizontalAlignment="Right"
-                Margin="0,0,0,0"
-                Visibility="{Binding MainVisibility}">
+                Margin="0,0,0,0">
                 <Canvas.Background>
                     <ImageBrush ImageSource="../Images/bzIcon.jpg" Stretch="Uniform"/>
                 </Canvas.Background>

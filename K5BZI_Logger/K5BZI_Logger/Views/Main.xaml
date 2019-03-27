@@ -10,8 +10,8 @@
         Title="K5BZI Logger"
         Height="770" Width="900"
         BorderThickness="1" 
-        GlowBrush="Black"
-        ResizeMode="NoResize"
+        GlowBrush="{DynamicResource AccentColorBrush}"
+        ResizeMode="CanResizeWithGrip"
         WindowTransitionsEnabled="False"
         WindowStartupLocation="CenterScreen">
     <controls:MetroWindow.RightWindowCommands>
