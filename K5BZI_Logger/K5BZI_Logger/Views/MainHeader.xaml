@@ -30,6 +30,7 @@
                 Visibility="{Binding MainVisibility}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Label 
@@ -57,6 +58,17 @@
                         BorderThickness="0"
                         Text="{Binding EventName}"/>
                 </Border>
+                <Button 
+                    Grid.Row="2"
+                    Margin="10,0,0,10"
+                    Content="Change Event"
+                    Width="100"
+                    Height="30"
+                    Foreground="Navy"
+                    FontWeight="Bold"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    Command="{Binding ChangeEventCommand}"/>
             </Grid>
             <Frame 
                 Grid.Column="1"

@@ -40,6 +40,8 @@ namespace K5BZI_ViewModels
                 CreateNewLogAction = () => CreateNewLog(),
                 SelectLogAction = () => SelectLog()
             };
+
+            _mainLoggerViewModel.Model.ChangeEventAction = () => ChangeEvent();
         }
 
         private void GetExistingLogs()
@@ -73,6 +75,11 @@ namespace K5BZI_ViewModels
             _mainLoggerViewModel.SelectEvent(Model.SelectedLog);
 
             Model.IsOpen = false;
+        }
+
+        private void ChangeEvent()
+        {
+            Model.IsOpen = true;
         }
 
         #endregion

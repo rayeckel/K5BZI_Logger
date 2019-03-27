@@ -67,6 +67,17 @@ namespace K5BZI_Models.Main
         }
         public Action SelectEventAction { get; set; }
 
+        private ICommand _changeEventCommand;
+        public ICommand ChangeEventCommand
+        {
+            get
+            {
+                return _changeEventCommand ??
+                    (_changeEventCommand = new CommandHandler(ChangeEventAction, true));
+            }
+        }
+        public Action ChangeEventAction { get; set; }
+
         #endregion
     }
 }

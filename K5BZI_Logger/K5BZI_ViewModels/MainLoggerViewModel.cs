@@ -39,6 +39,7 @@ namespace K5BZI_ViewModels
 
             Model.EventName = logEntries.First().Event.EventName;
 
+            Model.LogEntries.Clear();
             logEntries.ForEach(_ => Model.LogEntries.Add(_));
         }
 
@@ -49,6 +50,7 @@ namespace K5BZI_ViewModels
 
             CreateNewLogEntry();
 
+            Model.LogEntries.Clear();
             Model.LogEntry.Event.EventName = newEvent.EventName;
         }
 
