@@ -1,4 +1,5 @@
 ﻿using K5BZI_Models.Base;
+using Microsoft.VisualStudio.PlatformUI;
 using PropertyChanged;
 using System;
 using System.Collections.ObjectModel;
@@ -21,8 +22,8 @@ namespace K5BZI_Models.ViewModelModels
 
         #region Properties
 
-        public bool IsOpen { get; set; }
         public string EventName { get; set; }
+        public bool IsOpen { get; set; }
         public LogListing SelectedLog { get; set; }
         public ObservableCollection<LogListing> ExistingLogs { get; private set; }
 
@@ -30,12 +31,13 @@ namespace K5BZI_Models.ViewModelModels
 
         #region Commands
 
+        public bool SelectCommandCanExecute { get; set; }
         private ICommand _selectLogCommand;
         public ICommand SelectLogCommand
         {
             get
             {
-                return _selectLogCommand ?? (_selectLogCommand = new CommandHandler(SelectLogAction, true));
+                return _selectLogCommand ?? (_selectLogCommand = new CommandHandler(SelectLogAction, SelectCommandCanExecute));
             }
         }
         public Action SelectLogAction { get; set; }
@@ -46,10 +48,11 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _createNewLogCommand ??
-                    (_createNewLogCommand = new CommandHandler(CreateNewLogAction, true));
+                    (_createNewLogCommand = 
+                        new DelegateCommand(CreateNewLogAction, _ => { return !String.IsNullOrEmpty(EventName); }));
             }
         }
-        public Action CreateNewLogAction { get; set; }
+        public Action<object> CreateNewLogAction { get; set; }
 
         #endregion
     }

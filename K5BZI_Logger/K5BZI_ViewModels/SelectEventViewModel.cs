@@ -4,6 +4,7 @@ using K5BZI_ViewModels.Interfaces;
 using Microsoft.Practices.ServiceLocation;
 using System;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace K5BZI_ViewModels
 {
@@ -37,7 +38,7 @@ namespace K5BZI_ViewModels
         {
             Model = new SelectEventModel
             {
-                CreateNewLogAction = () => CreateNewLog(),
+                CreateNewLogAction = (_) => CreateNewLog(),
                 SelectLogAction = () => SelectLog()
             };
 
@@ -52,6 +53,8 @@ namespace K5BZI_ViewModels
             {
                 Model.ExistingLogs.Add(log);
             });
+
+            Model.SelectCommandCanExecute = Model.ExistingLogs.Any();
         }
 
         private void CreateNewLog()

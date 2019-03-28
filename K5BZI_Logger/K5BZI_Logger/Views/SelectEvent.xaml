@@ -7,14 +7,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:viewmodel="clr-namespace:K5BZI_ViewModels;assembly=K5BZI_ViewModels"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     Height="770" Width="900"
     mc:Ignorable="d"
     Title="Select Log">
-    <simpleChildWindow:ChildWindow.Resources>
-        <viewmodel:SelectEventViewModel x:Key="SelectEventViewModel" />
-    </simpleChildWindow:ChildWindow.Resources>
     <simpleChildWindow:ChildWindow.DataContext>
-        <Binding Source="{StaticResource SelectEventViewModel}" />
+        <viewmodel:SelectEventViewModel/>
     </simpleChildWindow:ChildWindow.DataContext>
     <simpleChildWindow:ChildWindow.OverlayBrush>
         <SolidColorBrush Opacity="0.8" Color="{StaticResource Gray2}" />
@@ -98,7 +96,7 @@
                 Width="300"
                 Height="30"
                 Margin="20,10,0,0"
-                Text="{Binding Model.EventName, Mode=OneWayToSource}">
+                Text="{Binding Model.EventName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <TextBox.Style>
                     <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
                         <Style.Resources>
