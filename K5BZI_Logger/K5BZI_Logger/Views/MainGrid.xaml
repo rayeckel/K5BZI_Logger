@@ -5,12 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:dgControls="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
              mc:Ignorable="d">
-    <Border>
+    <Border
+        BorderThickness="1"
+        BorderBrush="Navy">
         <dgControls:DataGrid 
             x:Name="dataGrid1" 
             Height="400"
             Width="850"
-            Margin="12"
             AutoGenerateColumns="False"
             ItemsSource="{Binding LogEntries}">
             <dgControls:DataGrid.Columns>

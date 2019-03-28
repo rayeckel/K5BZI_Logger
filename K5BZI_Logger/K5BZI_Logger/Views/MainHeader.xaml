@@ -4,17 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d">
-    <Border>
-        <Grid Margin="0,0,0,10">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="100" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="310" />
-                <ColumnDefinition Width="250" />
-                <ColumnDefinition Width="320" />
-            </Grid.ColumnDefinitions>
-            <!--
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="310" />
+            <ColumnDefinition Width="400" />
+            <ColumnDefinition Width="294" />
+        </Grid.ColumnDefinitions>
+        <!--
                     <controls1:DateRangePicker
                         Grid.Column="0"
                         Grid.ColumnSpan="2"
@@ -24,65 +23,53 @@
                         DateFrom="{Binding MinDateTime, Mode=TwoWay}"
                         DateTo="{Binding MaxDateTime, Mode=TwoWay}"/>
                     -->
-            <Grid 
-                Margin="10,0,0,0"
+        <Grid
+                Grid.Row="0"
                 Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="30" />
-                    <RowDefinition Height="30" />
-                    <RowDefinition Height="40" />
-                </Grid.RowDefinitions>
-                <Label 
-                    Grid.Row="0"
-                    Margin="0,0,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    FontWeight="Bold"
-                    Content="Event"/>
-                <Border 
-                    Grid.Row="1"
-                    Height="30"
-                    Width="200" 
-                    BorderBrush="Navy" 
-                    BorderThickness=".5"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top">
-                    <TextBox
-                        x:Name="lblEvent"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        Height="29"
-                        Width="200"
-                        BorderThickness="0"
-                        Text="{Binding EventName}"/>
-                </Border>
-                <Button 
-                    Grid.Row="2"
-                    Margin="0,0,100,0"
-                    Content="Change Event"
-                    Width="100"
-                    Height="30"
-                    Foreground="Navy"
-                    FontWeight="Bold"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Bottom"
-                    Command="{Binding ChangeEventCommand}"/>
-            </Grid>
-            <Frame 
-                Grid.Column="1"
-                HorizontalAlignment="Center"
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75" />
+                <RowDefinition Height="25" />
+            </Grid.RowDefinitions>
+            <Label
+                Grid.Row="0"
+                x:Name="lblEvent"
+                Margin="10,0,0,0"
+                HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Source="../Controls/AllXamlClock.xaml"/>
-            <Canvas
-                Grid.Column="2"
-                Height="130px" 
-                Width="120px"
-                HorizontalAlignment="Right"
-                Margin="0,0,0,0">
-                <Canvas.Background>
-                    <ImageBrush ImageSource="../Images/bzIcon.jpg" Stretch="Uniform"/>
-                </Canvas.Background>
-            </Canvas>
+                Height="50"
+                Width="300"
+                FontSize="28"
+                FontFamily="Tahoma"
+                BorderThickness="0"
+                Foreground="DarkSlateBlue"
+                Content="{Binding EventName}"/>
+            <Button 
+                Grid.Row="1"
+                Margin="10,0,0,0"
+                Content="Change Event"
+                Width="100"
+                Height="25"
+                Foreground="Navy"
+                FontWeight="Bold"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Command="{Binding ChangeEventCommand}"/>
         </Grid>
-    </Border>
+        <Frame 
+            Grid.Column="1"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Margin="0,10,0,0"
+            Source="../Controls/AllXamlClock.xaml"/>
+        <Canvas
+            Grid.Column="2"
+            Height="100px"
+            Width="120px"
+            HorizontalAlignment="Right"
+            Margin="0,0,0,0">
+            <Canvas.Background>
+                <ImageBrush ImageSource="../Images/bzIcon.jpg" Stretch="Uniform"/>
+            </Canvas.Background>
+        </Canvas>
+    </Grid>
 </UserControl>

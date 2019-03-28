@@ -8,8 +8,8 @@
         xmlns:local="clr-namespace:K5BZI_Logger.Views"
         mc:Ignorable="d"
         Title="K5BZI Logger"
-        Height="770" Width="900"
-        BorderThickness="1" 
+        Height="740" Width="1024"
+        BorderThickness="1"
         GlowBrush="{DynamicResource AccentColorBrush}"
         ResizeMode="CanResizeWithGrip"
         WindowTransitionsEnabled="False"
@@ -36,42 +36,38 @@
             </Button>
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
-    <Grid>
+    <Grid 
+        HorizontalAlignment="Center"
+        Background="AliceBlue">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="110" />
+            <RowDefinition Height="160" />
+            <RowDefinition Height="250*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="256" />
+            <ColumnDefinition Width="256" />
+            <ColumnDefinition Width="512" />
+        </Grid.ColumnDefinitions>
         <local:SelectEvent 
-                Grid.Row="0" 
-                Grid.RowSpan="3"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                HorizontalAlignment="Center"/>
-        <Grid Background="AliceBlue">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="135" />
-                <RowDefinition Height="160" />
-                <RowDefinition Height="250*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="450" />
-                <ColumnDefinition Width="450" />
-            </Grid.ColumnDefinitions>
-            <local:MainHeader
-                    Grid.Row="0" 
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    BorderBrush="Navy" 
-                    BorderThickness="1" 
-                    Padding="2"/>
-            <local:MainInput
-                    Grid.Row="1" 
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    BorderBrush="Navy" 
-                    BorderThickness="1"
-                    Padding="2"/>
-            <local:MainGrid
-                    Grid.Row="2"
-                    Grid.Column="0" 
-                    Grid.ColumnSpan="2"
-                    HorizontalAlignment="Center"/>
-        </Grid>
+            Grid.Row="0" 
+            Grid.RowSpan="3"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            HorizontalAlignment="Center"/>
+        <local:MainHeader
+            Grid.Row="0" 
+            Grid.Column="0"
+            Grid.ColumnSpan="3"/>
+        <local:MainInput
+            Grid.Row="1" 
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Margin="10,0,0,0"/>
+        <local:MainGrid
+            Grid.Row="2"
+            Grid.Column="0" 
+            Grid.ColumnSpan="3"
+            Margin="10,2,10,5"/>
     </Grid>
 </controls:MetroWindow>

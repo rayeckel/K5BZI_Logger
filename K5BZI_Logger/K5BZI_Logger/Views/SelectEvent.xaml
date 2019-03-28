@@ -7,8 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:viewmodel="clr-namespace:K5BZI_ViewModels;assembly=K5BZI_ViewModels"
-    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-    Height="770" Width="900"
+    Height="750" Width="1024"
     mc:Ignorable="d"
     Title="Select Log">
     <simpleChildWindow:ChildWindow.DataContext>
@@ -24,8 +23,7 @@
         HorizontalAlignment="Center" 
         VerticalAlignment="Center" 
         Background="AliceBlue"
-        Height="300"
-        Width="450">
+        Height="300">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30" />
@@ -45,6 +43,7 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
                 FontWeight="Bold"
+                FontFamily="Tahoma"
                 Content="Select Event"/>
             <Border 
                 Grid.Row="1"
@@ -60,7 +59,8 @@
                     x:Name="existingLogsCombo"
                     ItemsSource="{Binding Model.ExistingLogs}"
                     SelectedItem="{Binding Model.SelectedLog, Mode=TwoWay}"
-                    IsSynchronizedWithCurrentItem="True">
+                    IsSynchronizedWithCurrentItem="True"
+                    FontFamily="Tahoma">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -81,6 +81,7 @@
                 Height="30"
                 Foreground="Navy"
                 FontWeight="Bold"
+                FontFamily="Tahoma"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Bottom"
                 Command="{Binding Model.SelectLogCommand}"/>
@@ -90,12 +91,14 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
                 FontWeight="Bold"
+                FontFamily="Tahoma"
                 Content="Create New Event"/>
             <TextBox
                 Grid.Row="4"
                 Width="300"
                 Height="30"
                 Margin="20,10,0,0"
+                FontFamily="Tahoma"
                 Text="{Binding Model.EventName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <TextBox.Style>
                     <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
@@ -131,6 +134,7 @@
                 FontWeight="Bold"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
+                FontFamily="Tahoma"
                 Command="{Binding Model.CreateNewLogCommand}"/>
         </Grid>
     </Grid>

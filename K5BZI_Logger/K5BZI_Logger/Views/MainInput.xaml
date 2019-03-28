@@ -3,220 +3,160 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d">
-    <Border>
-        <Grid Margin="0,0,0,10">
+    <Border
+        BorderThickness="1"
+        BorderBrush="Navy">
+        <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="40" />
-                <RowDefinition Height="50" />
-                <RowDefinition Height="50" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="65" />
+                <RowDefinition Height="35" />
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="70" />
-                <ColumnDefinition Width="130" />
-                <ColumnDefinition Width="70" />
-                <ColumnDefinition Width="70" />
-                <ColumnDefinition Width="70" />
-                <ColumnDefinition Width="70" />
-                <ColumnDefinition Width="70" />
-                <ColumnDefinition Width="70" />
-                <ColumnDefinition Width="70" />
-                <ColumnDefinition Width="70" />
-                <ColumnDefinition Width="70" />
-                <ColumnDefinition Width="70" />
-            </Grid.ColumnDefinitions>
             <TextBlock 
                 Grid.Row="0"
-                Grid.Column="0" 
-                Grid.ColumnSpan="10"
-                Text="Contacts"
+                Text="Log Contact"
                 TextAlignment="Center"
                 VerticalAlignment="Top"
-                FontSize="18"/>
-            <Label 
+                FontFamily="Tahoma"
+                FontSize="18"
+                Foreground="DarkGray"/>
+            <Grid 
                 Grid.Row="1"
-                Grid.Column="0" 
-                Margin="10,0,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Content="Time"/>
-            <Border 
-                Grid.Row="1" 
-                Grid.Column="1"
-                Height="30"
-                Width="130" 
-                BorderBrush="Navy" 
-                BorderThickness=".5" 
-                Padding="2"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top">
-                <TextBox
+                Margin="10,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="40" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="60" />
+                </Grid.ColumnDefinitions>
+                <Label 
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontFamily="Tahoma"
+                    Foreground="DarkSlateBlue"
+                    Content="Time"/>
+                <Label
+                    Grid.Row="1" 
+                    Grid.Column="0"
+                    Height="27"
                     x:Name="lblTime"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    Height="29"
+                    FontFamily="Tahoma"
+                    Foreground="DarkGray"
                     Width="130"
-                    BorderThickness="0"
-                    Text="{Binding LogEntry.ContactTime, Mode=TwoWay}"/>
-            </Border>
-            <Label 
-                Grid.Row="1"
-                Grid.Column="2" 
-                Margin="10,0,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Content="Band"/>
-            <Border 
-                Grid.Row="1" 
-                Grid.Column="3"
-                Height="30"
-                Width="60" 
-                BorderBrush="Navy" 
-                BorderThickness=".5" 
-                Padding="2"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top">
+                    Content="{Binding LogEntry.ContactTime, Mode=TwoWay}"/>
+                <Label 
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontFamily="Tahoma"
+                    Foreground="DarkSlateBlue"
+                    Content="Band"/>
                 <TextBox
+                    Grid.Row="1" 
+                    Grid.Column="1"
+                    Height="27"
                     x:Name="lblBand"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    Height="29"
-                    Width="100"
-                    BorderThickness="0"
+                    Width="50"
+                    BorderThickness="1"
                     Text="{Binding LogEntry.Signal.Band}"/>
-            </Border>
-            <Label 
-                Grid.Row="1"
-                Grid.Column="4" 
-                Margin="10,0,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Content="Freq"/>
-            <Border 
-                Grid.Row="1" 
-                Grid.Column="5"
-                Height="30"
-                Width="60" 
-                BorderBrush="Navy" 
-                BorderThickness=".5" 
-                Padding="2"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top">
+                <Label 
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontFamily="Tahoma"
+                    Foreground="DarkSlateBlue"
+                    Content="Freq"/>
                 <TextBox
+                    Grid.Row="1" 
+                    Grid.Column="2"
+                    Height="27"
                     x:Name="lblFreq"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    Height="29"
-                    Width="100"
-                    BorderThickness="0"
+                    Width="70"
+                    BorderThickness="1"
                     Text="{Binding LogEntry.Signal.Frequency, Mode=TwoWay}"/>
-            </Border>
-            <Label 
-                Grid.Row="1"
-                Grid.Column="6" 
-                Margin="10,0,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Content="Call"/>
-            <Border 
-                Grid.Row="1" 
-                Grid.Column="7"
-                Height="30"
-                Width="60" 
-                BorderBrush="Navy" 
-                BorderThickness=".5" 
-                Padding="2"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top">
+                <Label 
+                    Grid.Row="0"
+                    Grid.Column="3"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontFamily="Tahoma"
+                    Foreground="DarkSlateBlue"
+                    Content="Call"/>
                 <TextBox
+                    Grid.Row="1" 
+                    Grid.Column="3"
+                    Height="27"
                     x:Name="lblCall"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    Height="29"
-                    Width="100"
-                    BorderThickness="0"
+                    Width="70"
+                    BorderThickness="1"
                     Text="{Binding LogEntry.CallSign, Mode=TwoWay}"/>
-            </Border>
-            <Label 
-                Grid.Row="1"
-                Grid.Column="8" 
-                Margin="10,0,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Content="Sent"/>
-            <Border
-                Grid.Row="1"
-                Grid.Column="9"
-                Height="30"
-                Width="60" 
-                BorderBrush="Navy" 
-                BorderThickness=".5" 
-                Padding="2"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top">
+                <Label 
+                    Grid.Row="0"
+                    Grid.Column="4"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontFamily="Tahoma"
+                    Foreground="DarkSlateBlue"
+                    Content="Sent"/>
                 <TextBox
+                    Grid.Row="1"
+                    Grid.Column="4"
+                    Height="27"
                     x:Name="lblSent"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Height="29"
-                    Width="100"
-                    BorderThickness="0"
+                    VerticalAlignment="Center"         
+                    Width="50"
+                    BorderThickness="1"
                     Text="{Binding LogEntry.SignalReport.Sent, Mode=TwoWay}"/>
-            </Border>
-            <Label 
-                Grid.Row="1"
-                Grid.Column="10" 
-                Margin="10,0,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Content="Recvd"/>
-            <Border 
-                Grid.Row="1" 
-                Grid.Column="11"
-                Height="30"
-                Width="60" 
-                BorderBrush="Navy" 
-                BorderThickness=".5" 
-                Padding="2"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top">
+                <Label 
+                    Grid.Row="0"
+                    Grid.Column="5"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontFamily="Tahoma"
+                    Foreground="DarkSlateBlue"
+                    Content="Recvd"/>
                 <TextBox
+                    Grid.Row="1" 
+                    Grid.Column="5"
+                    Height="27"
                     x:Name="lblRecvd"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Height="29"
-                    Width="100"
-                    BorderThickness="0"
+                    VerticalAlignment="Center"                  
+                    Width="50"
+                    BorderThickness="1"
                     Text="{Binding LogEntry.SignalReport.Received, Mode=TwoWay}"/>
-            </Border>
+            </Grid>
             <Button 
                 Grid.Row="2"
-                Grid.Column="0" 
-                Grid.ColumnSpan="12"
-                Margin="10,0,0,10"
                 Content="Log It!"
                 Width="100"
                 Height="30"
                 Foreground="Navy"
                 FontWeight="Bold"
+                FontFamily="Tahoma"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Bottom"
+                VerticalAlignment="Center"
                 Command="{Binding LogItCommand}"/>
-            <Canvas 
-                Grid.Row="3" 
-                Grid.Column="0" 
-                Grid.ColumnSpan="3"
-                x:Name="ProgressBar"
-                Visibility="Collapsed"
-                HorizontalAlignment="Center" 
-                Width="300px" >
-                <controls:MetroProgressBar 
-                    Width="300px" 
-                    IsIndeterminate="True" 
-                    Foreground="{DynamicResource AccentColorBrush}" />
-            </Canvas>
         </Grid>
     </Border>
 </UserControl>
