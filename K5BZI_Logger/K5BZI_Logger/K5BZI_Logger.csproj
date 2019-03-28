@@ -231,6 +231,9 @@
   <ItemGroup>
     <Content Include="bzIcon.ico" />
     <Content Include="Images\bzIcon.ico" />
+    <Resource Include="Images\Quill.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\bzIcon.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

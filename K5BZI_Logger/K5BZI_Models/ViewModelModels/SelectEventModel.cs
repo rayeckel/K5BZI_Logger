@@ -31,16 +31,16 @@ namespace K5BZI_Models.ViewModelModels
 
         #region Commands
 
-        public bool SelectCommandCanExecute { get; set; }
         private ICommand _selectLogCommand;
         public ICommand SelectLogCommand
         {
             get
             {
-                return _selectLogCommand ?? (_selectLogCommand = new CommandHandler(SelectLogAction, SelectCommandCanExecute));
+                return _selectLogCommand ?? (_selectLogCommand =
+                    new DelegateCommand(SelectLogAction, _ => { return SelectedLog != null; }));
             }
         }
-        public Action SelectLogAction { get; set; }
+        public Action<object> SelectLogAction { get; set; }
 
         private ICommand _createNewLogCommand;
         public ICommand CreateNewLogCommand
@@ -48,7 +48,7 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _createNewLogCommand ??
-                    (_createNewLogCommand = 
+                    (_createNewLogCommand =
                         new DelegateCommand(CreateNewLogAction, _ => { return !String.IsNullOrEmpty(EventName); }));
             }
         }

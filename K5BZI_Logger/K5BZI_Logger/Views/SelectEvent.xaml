@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:viewmodel="clr-namespace:K5BZI_ViewModels;assembly=K5BZI_ViewModels"
+    xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" 
     Height="750" Width="1024"
     mc:Ignorable="d"
     Title="Select Log">
@@ -45,33 +46,30 @@
                 FontWeight="Bold"
                 FontFamily="Tahoma"
                 Content="Select Event"/>
-            <Border 
+            <ComboBox
                 Grid.Row="1"
                 Grid.Column="0"
                 Height="30"
                 Width="300" 
-                BorderBrush="Navy" 
-                BorderThickness=".5" 
                 Margin="20,20,0,0"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Top">
-                <ComboBox
-                    x:Name="existingLogsCombo"
-                    ItemsSource="{Binding Model.ExistingLogs}"
-                    SelectedItem="{Binding Model.SelectedLog, Mode=TwoWay}"
-                    IsSynchronizedWithCurrentItem="True"
-                    FontFamily="Tahoma">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding FileName}" />
-                                <TextBlock Text="    " />
-                                <TextBlock Text="{Binding CreatedDate, StringFormat=d}" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-            </Border>
+                VerticalAlignment="Top"
+                x:Name="existingLogsCombo"
+                ItemsSource="{Binding Model.ExistingLogs}"
+                SelectedItem="{Binding Model.SelectedLog, Mode=OneWayToSource}"
+                FontFamily="Tahoma"
+                BorderThickness="1" 
+                controls:TextBoxHelper.Watermark="Select Existing Log" >
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding FileName}" />
+                            <TextBlock Text="    " />
+                            <TextBlock Text="{Binding CreatedDate, StringFormat=d}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
             <Button 
                 Grid.Row="2"
                 Grid.Column="1"
@@ -99,29 +97,9 @@
                 Height="30"
                 Margin="20,10,0,0"
                 FontFamily="Tahoma"
-                Text="{Binding Model.EventName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                <TextBox.Style>
-                    <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
-                        <Style.Resources>
-                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
-                                <VisualBrush.Visual>
-                                    <Label Content="New Event Name" Foreground="LightGray" />
-                                </VisualBrush.Visual>
-                            </VisualBrush>
-                        </Style.Resources>
-                        <Style.Triggers>
-                            <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
-                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                            </Trigger>
-                            <Trigger Property="Text" Value="{x:Null}">
-                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                            </Trigger>
-                            <Trigger Property="IsKeyboardFocused" Value="True">
-                                <Setter Property="Background" Value="White" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBox.Style>
+                Text="{Binding Model.EventName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                controls:TextBoxHelper.Watermark="New Event Name" 
+                controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>
             <Button 
                 Grid.Row="5"

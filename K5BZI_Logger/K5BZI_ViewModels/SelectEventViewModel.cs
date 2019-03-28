@@ -39,7 +39,7 @@ namespace K5BZI_ViewModels
             Model = new SelectEventModel
             {
                 CreateNewLogAction = (_) => CreateNewLog(),
-                SelectLogAction = () => SelectLog()
+                SelectLogAction = (_) => SelectLog()
             };
 
             _mainLoggerViewModel.Model.ChangeEventAction = () => ChangeEvent();
@@ -53,8 +53,6 @@ namespace K5BZI_ViewModels
             {
                 Model.ExistingLogs.Add(log);
             });
-
-            Model.SelectCommandCanExecute = Model.ExistingLogs.Any();
         }
 
         private void CreateNewLog()
