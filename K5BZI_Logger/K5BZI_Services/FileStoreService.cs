@@ -33,6 +33,8 @@ namespace K5BZI_Services
 
         public List<LogListing> GetLogListing()
         {
+            Directory.CreateDirectory(_filePath);
+
             var files = new DirectoryInfo(_filePath).GetFiles();
             var listings = new List<LogListing>();
 

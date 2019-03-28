@@ -45,13 +45,13 @@ namespace K5BZI_ViewModels
 
         public void CreateNewLog(Event newEvent)
         {
-            var eventName = Model.LogEntry.Event.EventName.Replace(" ", "_");
+            var eventName = newEvent.EventName.Replace(" ", "_");
             _fileName = String.Format("{0}_{1}", eventName, DateTime.UtcNow.ToString("yyyy'-'MM'-'dd"));
 
             CreateNewLogEntry();
 
             Model.LogEntries.Clear();
-            Model.LogEntry.Event.EventName = newEvent.EventName;
+            Model.LogEntry.Event.EventName = Model.EventName = newEvent.EventName;
         }
 
         #endregion

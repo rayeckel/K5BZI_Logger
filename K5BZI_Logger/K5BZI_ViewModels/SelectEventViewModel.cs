@@ -57,12 +57,6 @@ namespace K5BZI_ViewModels
 
         private void CreateNewLog()
         {
-            if (String.IsNullOrEmpty(Model.EventName))
-            {
-                MessageBox.Show("Please provide the Event Name.");
-                return;
-            }
-
             _eventService = ServiceLocator.Current.GetInstance<IEventService>();
 
             var newEvent = _eventService.CreateNewEvent(Model.EventName);
