@@ -63,18 +63,6 @@
         <member name="M:Nerdbank.Streams.BufferWriterStream.WriteByte(System.Byte)">
             <inheritdoc/>
         </member>
-        <member name="M:Nerdbank.Streams.BufferWriterStream.Read(System.Span{System.Byte})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Nerdbank.Streams.BufferWriterStream.ReadAsync(System.Memory{System.Byte},System.Threading.CancellationToken)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Nerdbank.Streams.BufferWriterStream.Write(System.ReadOnlySpan{System.Byte})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Nerdbank.Streams.BufferWriterStream.WriteAsync(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)">
-            <inheritdoc/>
-        </member>
         <member name="M:Nerdbank.Streams.BufferWriterStream.Dispose(System.Boolean)">
             <inheritdoc/>
         </member>
@@ -344,6 +332,14 @@
             </summary>
             <param name="message">The message for the exception.</param>
             <param name="inner">The inner exception.</param>
+        </member>
+        <member name="M:Nerdbank.Streams.MultiplexingProtocolException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Nerdbank.Streams.MultiplexingProtocolException"/> class
+            for use in deserialization.
+            </summary>
+            <param name="info">The serialization info.</param>
+            <param name="context">The serialization context.</param>
         </member>
         <member name="T:Nerdbank.Streams.MultiplexingStream">
             <content>
@@ -902,9 +898,6 @@
         <member name="M:Nerdbank.Streams.NestedStream.Read(System.Byte[],System.Int32,System.Int32)">
             <inheritdoc />
         </member>
-        <member name="M:Nerdbank.Streams.NestedStream.ReadAsync(System.Memory{System.Byte},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
         <member name="M:Nerdbank.Streams.NestedStream.Seek(System.Int64,System.IO.SeekOrigin)">
             <inheritdoc />
         </member>
@@ -1105,18 +1098,6 @@
         <member name="M:Nerdbank.Streams.PipeStream.ReadAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Nerdbank.Streams.PipeStream.ReadAsync(System.Memory{System.Byte},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Nerdbank.Streams.PipeStream.Read(System.Span{System.Byte})">
-            <inheritdoc />
-        </member>
-        <member name="M:Nerdbank.Streams.PipeStream.WriteAsync(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Nerdbank.Streams.PipeStream.Write(System.ReadOnlySpan{System.Byte})">
-            <inheritdoc />
-        </member>
         <member name="M:Nerdbank.Streams.PipeStream.Flush">
             <inheritdoc />
         </member>
@@ -1185,18 +1166,6 @@
         <member name="M:Nerdbank.Streams.ReadOnlySequenceStream.CopyToAsync(System.IO.Stream,System.Int32,System.Threading.CancellationToken)">
             <inheritdoc/>
         </member>
-        <member name="M:Nerdbank.Streams.ReadOnlySequenceStream.Read(System.Span{System.Byte})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Nerdbank.Streams.ReadOnlySequenceStream.ReadAsync(System.Memory{System.Byte},System.Threading.CancellationToken)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Nerdbank.Streams.ReadOnlySequenceStream.Write(System.ReadOnlySpan{System.Byte})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Nerdbank.Streams.ReadOnlySequenceStream.WriteAsync(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)">
-            <inheritdoc/>
-        </member>
         <member name="M:Nerdbank.Streams.ReadOnlySequenceStream.Dispose(System.Boolean)">
             <inheritdoc/>
         </member>
@@ -1211,7 +1180,8 @@
         </member>
         <member name="M:Nerdbank.Streams.Sequence`1.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:Nerdbank.Streams.Sequence`1"/> class.
+            Initializes a new instance of the <see cref="T:Nerdbank.Streams.Sequence`1"/> class
+            that uses the <see cref="P:System.Buffers.MemoryPool`1.Shared"/> memory pool for recycling arrays.
             </summary>
         </member>
         <member name="M:Nerdbank.Streams.Sequence`1.#ctor(System.Buffers.MemoryPool{`0})">
@@ -1277,11 +1247,13 @@
             <summary>
             Clears the entire sequence, recycles associated memory into pools,
             and resets this instance for reuse.
+            This invalidates any <see cref="T:System.Buffers.ReadOnlySequence`1"/> previously produced by this instance.
             </summary>
         </member>
         <member name="M:Nerdbank.Streams.Sequence`1.Reset">
             <summary>
             Clears the entire sequence and recycles associated memory into pools.
+            This invalidates any <see cref="T:System.Buffers.ReadOnlySequence`1"/> previously produced by this instance.
             </summary>
         </member>
         <member name="F:Nerdbank.Streams.Sequence`1.SequenceSegment.end">
@@ -1314,6 +1286,56 @@
             Gets the amount of writable bytes in this segment.
             It is the amount of bytes between <see cref="P:Nerdbank.Streams.Sequence`1.SequenceSegment.Length"/> and <see cref="P:Nerdbank.Streams.Sequence`1.SequenceSegment.End"/>.
             </summary>
+        </member>
+        <member name="M:Nerdbank.Streams.SpanPolyfillExtensions.ReadAsync(System.IO.Stream,System.Memory{System.Byte},System.Threading.CancellationToken)">
+            <summary>
+            Reads from the stream into a memory buffer.
+            </summary>
+            <param name="stream">The stream to read from.</param>
+            <param name="buffer">The buffer to read directly into.</param>
+            <param name="cancellationToken">A cancellation token.</param>
+            <returns>The number of bytes actually read.</returns>
+            <devremarks>
+            This method shamelessly copied from the .NET Core 2.1 Stream class: https://github.com/dotnet/coreclr/blob/a113b1c803783c9d64f1f0e946ff9a853e3bc140/src/System.Private.CoreLib/shared/System/IO/Stream.cs#L366-L391.
+            </devremarks>
+        </member>
+        <member name="M:Nerdbank.Streams.SpanPolyfillExtensions.WriteAsync(System.IO.Stream,System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)">
+            <summary>
+            Writes to a stream from a memory buffer.
+            </summary>
+            <param name="stream">The stream to write to.</param>
+            <param name="buffer">The buffer to read from.</param>
+            <param name="cancellationToken">A cancellation token.</param>
+            <returns>A task that indicates when the write operation is complete.</returns>
+            <devremarks>
+            This method shamelessly copied from the .NET Core 2.1 Stream class: https://github.com/dotnet/coreclr/blob/a113b1c803783c9d64f1f0e946ff9a853e3bc140/src/System.Private.CoreLib/shared/System/IO/Stream.cs#L672-L696.
+            </devremarks>
+        </member>
+        <member name="M:Nerdbank.Streams.SpanPolyfillExtensions.ReceiveAsync(System.Net.WebSockets.WebSocket,System.Memory{System.Byte},System.Threading.CancellationToken)">
+            <summary>
+            Reads from the stream into a memory buffer.
+            </summary>
+            <param name="webSocket">The stream to read from.</param>
+            <param name="buffer">The buffer to read directly into.</param>
+            <param name="cancellationToken">A cancellation token.</param>
+            <returns>The number of bytes actually read.</returns>
+            <devremarks>
+            This method shamelessly copied from the .NET Core 2.1 Stream class: https://github.com/dotnet/coreclr/blob/a113b1c803783c9d64f1f0e946ff9a853e3bc140/src/System.Private.CoreLib/shared/System/IO/Stream.cs#L366-L391.
+            </devremarks>
+        </member>
+        <member name="M:Nerdbank.Streams.SpanPolyfillExtensions.SendAsync(System.Net.WebSockets.WebSocket,System.ReadOnlyMemory{System.Byte},System.Net.WebSockets.WebSocketMessageType,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Writes to a stream from a memory buffer.
+            </summary>
+            <param name="webSocket">The stream to write to.</param>
+            <param name="buffer">The buffer to read from.</param>
+            <param name="messageType">The type of WebSocket message.</param>
+            <param name="endOfMessage">Whether to signify that this write operation concludes a "message" in the semantic of whatever protocol is being used.</param>
+            <param name="cancellationToken">A cancellation token.</param>
+            <returns>A task that indicates when the write operation is complete.</returns>
+            <devremarks>
+            This method shamelessly copied from the .NET Core 2.1 Stream class: https://github.com/dotnet/coreclr/blob/a113b1c803783c9d64f1f0e946ff9a853e3bc140/src/System.Private.CoreLib/shared/System/IO/Stream.cs#L672-L696.
+            </devremarks>
         </member>
         <member name="T:Nerdbank.Streams.StreamExtensions">
             <summary>

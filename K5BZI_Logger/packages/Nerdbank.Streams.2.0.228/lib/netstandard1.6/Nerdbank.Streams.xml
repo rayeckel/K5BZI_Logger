@@ -1172,7 +1172,8 @@
         </member>
         <member name="M:Nerdbank.Streams.Sequence`1.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:Nerdbank.Streams.Sequence`1"/> class.
+            Initializes a new instance of the <see cref="T:Nerdbank.Streams.Sequence`1"/> class
+            that uses the <see cref="P:System.Buffers.MemoryPool`1.Shared"/> memory pool for recycling arrays.
             </summary>
         </member>
         <member name="M:Nerdbank.Streams.Sequence`1.#ctor(System.Buffers.MemoryPool{`0})">
@@ -1238,11 +1239,13 @@
             <summary>
             Clears the entire sequence, recycles associated memory into pools,
             and resets this instance for reuse.
+            This invalidates any <see cref="T:System.Buffers.ReadOnlySequence`1"/> previously produced by this instance.
             </summary>
         </member>
         <member name="M:Nerdbank.Streams.Sequence`1.Reset">
             <summary>
             Clears the entire sequence and recycles associated memory into pools.
+            This invalidates any <see cref="T:System.Buffers.ReadOnlySequence`1"/> previously produced by this instance.
             </summary>
         </member>
         <member name="F:Nerdbank.Streams.Sequence`1.SequenceSegment.end">
