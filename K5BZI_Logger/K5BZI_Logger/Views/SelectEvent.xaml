@@ -122,6 +122,7 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 FontFamily="Tahoma"
+                IsDefault="True"
                 Command="{Binding Model.CreateNewLogCommand}"/>
         </Grid>
     </Grid>

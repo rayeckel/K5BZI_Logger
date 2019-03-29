@@ -13,8 +13,6 @@ namespace K5BZI_ViewModels
         #region Properties
 
         public SelectEventModel Model { get; private set; }
-        private IEventService _eventService;
-        private readonly IMainLoggerViewModel _mainLoggerViewModel;
 
         #endregion
 
@@ -22,9 +20,6 @@ namespace K5BZI_ViewModels
 
         public SelectEventViewModel()
         {
-            _eventService = ServiceLocator.Current.GetInstance<IEventService>();
-            _mainLoggerViewModel = ServiceLocator.Current.GetInstance<IMainLoggerViewModel>();
-
             Initialize();
             GetExistingEvents();
         }
@@ -41,12 +36,14 @@ namespace K5BZI_ViewModels
                 SelectLogAction = (_) => SelectLog()
             };
 
-            _mainLoggerViewModel.Model.ChangeEventAction = () => ChangeEvent();
+            var mainLoggerViewModel = ServiceLocator.Current.GetInstance<IMainLoggerViewModel>();
+            mainLoggerViewModel.Model.ChangeEventAction = () => ChangeEvent();
         }
 
         private void GetExistingEvents()
         {
-            var events = _eventService.GetAllEvents();
+            var eventService = ServiceLocator.Current.GetInstance<IEventService>();
+            var events = eventService.GetAllEvents();
 
             events.ForEach(item =>
             {
@@ -56,15 +53,19 @@ namespace K5BZI_ViewModels
 
         private void CreateNewLog()
         {
-            var newEvent = _eventService.CreateNewEvent(Model.EventName);
-            _mainLoggerViewModel.CreateNewLog(newEvent);
+            var eventService = ServiceLocator.Current.GetInstance<IEventService>();
+            var newEvent = eventService.CreateNewEvent(Model.EventName);
+
+            var mainLoggerViewModel = ServiceLocator.Current.GetInstance<IMainLoggerViewModel>();
+            mainLoggerViewModel.CreateNewLog(newEvent);
 
             Model.IsOpen = false;
         }
 
         private void SelectLog()
         {
-            _mainLoggerViewModel.SelectEvent(Model.SelectedEvent);
+            var mainLoggerViewModel = ServiceLocator.Current.GetInstance<IMainLoggerViewModel>();
+            mainLoggerViewModel.SelectEvent(Model.SelectedEvent);
 
             Model.IsOpen = false;
         }
