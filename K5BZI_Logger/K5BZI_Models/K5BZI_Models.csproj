@@ -121,7 +121,7 @@
     <Compile Include="Base\BaseModel.cs" />
     <Compile Include="Base\CommandHandler.cs" />
     <Compile Include="Base\IBaseModel.cs" />
-    <Compile Include="ContactDate.cs" />
+    <Compile Include="Event.cs" />
     <Compile Include="Extensions\LogEntryExtensions.cs" />
     <Compile Include="LogListing.cs" />
     <Compile Include="ViewModelModels\MainModel.cs" />

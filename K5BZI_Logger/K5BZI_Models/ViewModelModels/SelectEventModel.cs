@@ -18,7 +18,7 @@ namespace K5BZI_Models.ViewModelModels
         public SelectEventModel()
         {
             IsOpen = true;
-            ExistingLogs = new ObservableCollection<LogListing>();
+            ExistingEvents = new ObservableCollection<Event>();
         }
 
         #endregion
@@ -29,15 +29,15 @@ namespace K5BZI_Models.ViewModelModels
 
         public bool IsOpen { get; set; }
 
-        public LogListing SelectedLog { get; set; }
+        public Event SelectedEvent { get; set; }
 
-        public ObservableCollection<LogListing> ExistingLogs { get; private set; }
+        public ObservableCollection<Event> ExistingEvents { get; private set; }
 
         public Visibility SelectLogVisibility
         {
             get
             {
-                return ExistingLogs.Any() ? Visibility.Visible : Visibility.Collapsed;
+                return ExistingEvents.Any() ? Visibility.Visible : Visibility.Collapsed;
             }
         }
 
@@ -45,7 +45,7 @@ namespace K5BZI_Models.ViewModelModels
         {
             get
             {
-                return !ExistingLogs.Any() ? Visibility.Visible : Visibility.Collapsed;
+                return !ExistingEvents.Any() ? Visibility.Visible : Visibility.Collapsed;
             }
         }
 
@@ -59,7 +59,7 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _selectLogCommand ?? (_selectLogCommand =
-                    new DelegateCommand(SelectLogAction, _ => { return SelectedLog != null; }));
+                    new DelegateCommand(SelectLogAction, _ => { return SelectedEvent != null; }));
             }
         }
         public Action<object> SelectLogAction { get; set; }

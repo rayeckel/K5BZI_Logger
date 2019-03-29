@@ -6,7 +6,8 @@ namespace K5BZI_Models
     [AddINotifyPropertyChangedInterface]
     public class LogEntry
     {
-        public Event Event { get; set; }
+        public int Id { get; set; }
+        public int EventId { get; set; }
         public DateTime? ContactTime { get; set; }
         public string CallSign { get; set; }
         public Signal Signal { get; set; }
@@ -14,7 +15,6 @@ namespace K5BZI_Models
 
         public LogEntry()
         {
-            Event = new Event();
             Signal = new Signal();
             SignalReport = new SignalReport();
         }

@@ -24,7 +24,7 @@ namespace K5BZI_Models.Main
 
         #region Properties
 
-        public string EventName { get; set; }
+        public Event Event { get; set; }
         public LogEntry LogEntry { get; private set; }
         public ObservableCollection<LogEntry> LogEntries { get; private set; }
 

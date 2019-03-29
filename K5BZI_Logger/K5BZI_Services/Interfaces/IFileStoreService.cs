@@ -1,15 +1,18 @@
 ﻿using K5BZI_Models;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace K5BZI_Services.Interfaces
 {
     public interface IFileStoreService
     {
-        List<LogListing> GetLogListing();
+        FileInfo[] GetLogListing();
 
-        Task<List<LogEntry>> ReadLog(string logFileName);
+        List<T> ReadLog<T>(string logFileName, bool isLogFile = true)
+            where T : class;
 
-        void WriteToFile(ICollection<LogEntry> LogEntries, string logFileName);
+        void WriteToFile<T>(ICollection<T> LogEntries, string logFileName, bool isLogFile = true)
+            where T : class;
     }
 }

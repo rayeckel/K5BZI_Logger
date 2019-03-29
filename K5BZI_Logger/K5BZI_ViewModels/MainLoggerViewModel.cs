@@ -15,16 +15,15 @@ namespace K5BZI_ViewModels
         #region Properties
 
         public MainModel Model { get; private set; }
-        private string _fileName;
-        private readonly IFileStoreService _fileStoreService;
+        private readonly ILogListingService _logListingService;
 
         #endregion
 
         #region Constructors
 
-        public MainLoggerViewModel(IFileStoreService fileStoreService)
+        public MainLoggerViewModel(ILogListingService logListingService)
         {
-            _fileStoreService = fileStoreService;
+            _logListingService = logListingService;
 
             Initialize();
         }
@@ -33,13 +32,11 @@ namespace K5BZI_ViewModels
 
         #region Public Methods
 
-        public async void SelectEvent(LogListing selectedLog)
+        public void SelectEvent(Event selectedEvent)
         {
-            _fileName = selectedLog.FileName;
-            var logEntries = await _fileStoreService.ReadLog(_fileName);
+            var logEntries = _logListingService.ReadLog(selectedEvent.LogFileName);
 
-            Model.EventName = logEntries.First().Event.EventName;
-
+            Model.Event = selectedEvent;
             Model.LogEntries.Clear();
 
             if (logEntries.Any())
@@ -53,13 +50,10 @@ namespace K5BZI_ViewModels
 
         public void CreateNewLog(Event newEvent)
         {
-            var eventName = newEvent.EventName.Replace(" ", "_");
-            _fileName = String.Format("{0}_{1}", eventName, DateTime.UtcNow.ToString("yyyy'-'MM'-'dd"));
-
-            CreateNewLogEntry();
-
+            Model.Event = newEvent;
             Model.LogEntries.Clear();
-            Model.LogEntry.Event.EventName = Model.EventName = newEvent.EventName;
+            Model.LogEntry.ClearProperties();
+            Model.LogEntry.EventId = newEvent.Id;
         }
 
         #endregion
@@ -70,7 +64,7 @@ namespace K5BZI_ViewModels
         {
             Model = new MainModel
             {
-                CreateNewEntryAction = () => CreateNewLogEntry(),
+                CreateNewEntryAction = () => Model.LogEntry.ClearProperties(),
                 LogItAction = () => SaveLogEntry()
             };
         }
@@ -85,13 +79,8 @@ namespace K5BZI_ViewModels
 
             Model.LogEntries.Add(Model.LogEntry.Clone());
 
-            _fileStoreService.WriteToFile(Model.LogEntries, _fileName);
+            _logListingService.SaveLogEntry(Model.LogEntry, Model.Event);
 
-            CreateNewLogEntry();
-        }
-
-        private void CreateNewLogEntry()
-        {
             Model.LogEntry.ClearProperties();
         }
 

@@ -14,7 +14,6 @@ namespace K5BZI_ViewModels
 
         public SelectEventModel Model { get; private set; }
         private IEventService _eventService;
-        private readonly IFileStoreService _fileStoreService;
         private readonly IMainLoggerViewModel _mainLoggerViewModel;
 
         #endregion
@@ -23,11 +22,11 @@ namespace K5BZI_ViewModels
 
         public SelectEventViewModel()
         {
-            _fileStoreService = ServiceLocator.Current.GetInstance<IFileStoreService>();
+            _eventService = ServiceLocator.Current.GetInstance<IEventService>();
             _mainLoggerViewModel = ServiceLocator.Current.GetInstance<IMainLoggerViewModel>();
 
             Initialize();
-            GetExistingLogs();
+            GetExistingEvents();
         }
 
         #endregion
@@ -45,20 +44,18 @@ namespace K5BZI_ViewModels
             _mainLoggerViewModel.Model.ChangeEventAction = () => ChangeEvent();
         }
 
-        private void GetExistingLogs()
+        private void GetExistingEvents()
         {
-            _fileStoreService
-                .GetLogListing()
-                .ForEach(log =>
+            var events = _eventService.GetAllEvents();
+
+            events.ForEach(item =>
             {
-                Model.ExistingLogs.Add(log);
+                Model.ExistingEvents.Add(item);
             });
         }
 
         private void CreateNewLog()
         {
-            _eventService = ServiceLocator.Current.GetInstance<IEventService>();
-
             var newEvent = _eventService.CreateNewEvent(Model.EventName);
             _mainLoggerViewModel.CreateNewLog(newEvent);
 
@@ -67,7 +64,7 @@ namespace K5BZI_ViewModels
 
         private void SelectLog()
         {
-            _mainLoggerViewModel.SelectEvent(Model.SelectedLog);
+            _mainLoggerViewModel.SelectEvent(Model.SelectedEvent);
 
             Model.IsOpen = false;
         }

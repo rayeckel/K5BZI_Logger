@@ -66,17 +66,15 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 x:Name="existingLogsCombo"
-                ItemsSource="{Binding Model.ExistingLogs}"
-                SelectedItem="{Binding Model.SelectedLog, Mode=OneWayToSource}"
+                ItemsSource="{Binding Model.ExistingEvents}"
+                SelectedItem="{Binding Model.SelectedEvent, Mode=OneWayToSource}"
                 FontFamily="Tahoma"
                 BorderThickness="1" 
                 controls:TextBoxHelper.Watermark="Select Existing Log" >
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding FileName}" />
-                            <TextBlock Text="    " />
-                            <TextBlock Text="{Binding CreatedDate, StringFormat=d}" />
+                            <TextBlock Text="{Binding EventName}" />
                         </StackPanel>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>

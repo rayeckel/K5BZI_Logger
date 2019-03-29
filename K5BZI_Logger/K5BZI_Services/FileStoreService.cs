@@ -8,62 +8,34 @@ using System.Threading.Tasks;
 
 namespace K5BZI_Services
 {
-    public class FileStoreService : IFileStoreService
+    internal class FileStoreService : IFileStoreService
     {
-        #region Properties
-
-        private const string _loggerDirectoryName = "K5BZI_Logger";
-        private const string _jsonExtension = ".json";
-        private readonly string _filePath;
-        private readonly ILogListingService _logListingService;
-
-        #endregion
-
-        #region Constructors
-
-        public FileStoreService(ILogListingService logListingService)
-        {
-            _filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), _loggerDirectoryName);
-            _logListingService = logListingService;
-        }
-
-        #endregion
-
         #region Public Methods
 
-        public List<LogListing> GetLogListing()
+        public FileInfo[] GetLogListing()
         {
-            Directory.CreateDirectory(_filePath);
+            var filePath = CreateFilePath(String.Empty);
 
-            var files = new DirectoryInfo(_filePath).GetFiles();
-            var listings = new List<LogListing>();
-
-            foreach (var file in files)
-            {
-                listings.Add(_logListingService.CreateNewLogListing(file));
-            }
-
-            return listings;
+            return new DirectoryInfo(filePath).GetFiles();
         }
 
-        public async Task<List<LogEntry>> ReadLog(string logFileName)
+        public List<T> ReadLog<T>(string logFileName, bool isLogFile = true)
+            where T : class
         {
-            var fileName = Path.Combine(_filePath, String.Concat(logFileName, _jsonExtension));
+            var fileName = CreateFilePath(logFileName, isLogFile);
             var serializer = new JsonSerializer();
 
-            using (var sr = new StreamReader(fileName))
+            using (var sr = new StreamReader(File.Open(fileName, FileMode.OpenOrCreate)))
             using (var jsonTextReader = new JsonTextReader(sr))
             {
-                return await Task.Run(() => serializer.Deserialize<List<LogEntry>>(jsonTextReader));
+                return serializer.Deserialize<List<T>>(jsonTextReader);
             }
         }
 
-        public async void WriteToFile(ICollection<LogEntry> LogEntries, string logFileName)
+        public async void WriteToFile<T>(ICollection<T> LogEntries, string logFileName, bool isLogFile = true)
+            where T : class
         {
-            var fileName = Path.Combine(_filePath, String.Concat(logFileName, _jsonExtension));
-
-            Directory.CreateDirectory(Path.GetDirectoryName(fileName));
-
+            var fileName = CreateFilePath(logFileName, isLogFile);
             var serializer = new JsonSerializer();
 
             using (var sw = new StreamWriter(File.Open(fileName, FileMode.OpenOrCreate)))
@@ -71,6 +43,33 @@ namespace K5BZI_Services
             {
                 await Task.Run(() => serializer.Serialize(writer, LogEntries));
             }
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private string CreateFilePath(string logFileName, bool isLogFile = true)
+        {
+            var loggerDirectoryName = "K5BZI_Logger";
+            var jsonExtension = ".json";
+            var filePath = String.Empty;
+
+            if (!isLogFile)
+                filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), loggerDirectoryName);
+            else
+                filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), loggerDirectoryName);
+
+            Directory.CreateDirectory(filePath);
+
+            if (String.IsNullOrEmpty(logFileName))
+                return filePath;
+
+            var fileName = Path.Combine(filePath, String.Concat(logFileName, jsonExtension));
+
+            Directory.CreateDirectory(Path.GetDirectoryName(fileName));
+
+            return fileName;
         }
 
         #endregion
