@@ -133,6 +133,9 @@
     <Compile Include="Views\MainHeader.xaml.cs">
       <DependentUpon>MainHeader.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MainDuplicates.xaml.cs">
+      <DependentUpon>MainDuplicates.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainInput.xaml.cs">
       <DependentUpon>MainInput.xaml</DependentUpon>
     </Compile>
@@ -206,6 +209,10 @@
     <Page Include="Views\MainHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainDuplicates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\MainInput.xaml">
       <SubType>Designer</SubType>

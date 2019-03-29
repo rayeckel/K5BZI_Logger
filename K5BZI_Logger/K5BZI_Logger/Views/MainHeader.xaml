@@ -33,7 +33,7 @@
             <Label
                 Grid.Row="0"
                 x:Name="lblEvent"
-                Margin="10,0,0,0"
+                Margin="10,10,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 Height="50"
