@@ -30,8 +30,8 @@
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150" />
-                    <ColumnDefinition Width="60" />
                     <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="60" />
                     <ColumnDefinition Width="80" />
                     <ColumnDefinition Width="60" />
                     <ColumnDefinition Width="60" />
@@ -62,10 +62,30 @@
                     VerticalAlignment="Top"
                     FontFamily="Tahoma"
                     Foreground="DarkSlateBlue"
-                    Content="Band"/>
+                    Content="Call"/>
                 <TextBox
                     Grid.Row="1" 
                     Grid.Column="1"
+                    Height="27"
+                    x:Name="lblCall"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Width="70"
+                    BorderThickness="1"
+                    CharacterCasing="Upper" 
+                    FocusManager.FocusedElement="{Binding RelativeSource={RelativeSource Self}}"
+                    Text="{Binding LogEntry.CallSign, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label 
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontFamily="Tahoma"
+                    Foreground="DarkSlateBlue"
+                    Content="Band"/>
+                <TextBox
+                    Grid.Row="1" 
+                    Grid.Column="2"
                     Height="27"
                     x:Name="lblBand"
                     HorizontalAlignment="Left"
@@ -75,7 +95,7 @@
                     Text="{Binding LogEntry.Signal.Band}"/>
                 <Label 
                     Grid.Row="0"
-                    Grid.Column="2"
+                    Grid.Column="3"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     FontFamily="Tahoma"
@@ -83,7 +103,7 @@
                     Content="Freq"/>
                 <TextBox
                     Grid.Row="1" 
-                    Grid.Column="2"
+                    Grid.Column="3"
                     Height="27"
                     x:Name="lblFreq"
                     HorizontalAlignment="Left"
@@ -91,24 +111,6 @@
                     Width="70"
                     BorderThickness="1"
                     Text="{Binding LogEntry.Signal.Frequency, Mode=TwoWay}"/>
-                <Label 
-                    Grid.Row="0"
-                    Grid.Column="3"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    FontFamily="Tahoma"
-                    Foreground="DarkSlateBlue"
-                    Content="Call"/>
-                <TextBox
-                    Grid.Row="1" 
-                    Grid.Column="3"
-                    Height="27"
-                    x:Name="lblCall"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Width="70"
-                    BorderThickness="1"
-                    Text="{Binding LogEntry.CallSign, Mode=TwoWay}"/>
                 <Label 
                     Grid.Row="0"
                     Grid.Column="4"
@@ -152,10 +154,10 @@
                 Width="100"
                 Height="30"
                 Foreground="Navy"
-                FontWeight="Bold"
                 FontFamily="Tahoma"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
+                IsDefault="True"
                 Command="{Binding LogItCommand}"/>
         </Grid>
     </Border>

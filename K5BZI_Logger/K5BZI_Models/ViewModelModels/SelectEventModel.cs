@@ -3,6 +3,9 @@ using Microsoft.VisualStudio.PlatformUI;
 using PropertyChanged;
 using System;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace K5BZI_Models.ViewModelModels
@@ -23,9 +26,28 @@ namespace K5BZI_Models.ViewModelModels
         #region Properties
 
         public string EventName { get; set; }
+
         public bool IsOpen { get; set; }
+
         public LogListing SelectedLog { get; set; }
+
         public ObservableCollection<LogListing> ExistingLogs { get; private set; }
+
+        public Visibility SelectLogVisibility
+        {
+            get
+            {
+                return ExistingLogs.Any() ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+
+        public Visibility NewLogVisibility
+        {
+            get
+            {
+                return !ExistingLogs.Any() ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
 
         #endregion
 

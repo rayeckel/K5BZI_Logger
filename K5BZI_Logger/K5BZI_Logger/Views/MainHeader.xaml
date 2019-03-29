@@ -9,9 +9,9 @@
             <RowDefinition Height="100" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="310" />
             <ColumnDefinition Width="400" />
-            <ColumnDefinition Width="294" />
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="400" />
         </Grid.ColumnDefinitions>
         <!--
                     <controls1:DateRangePicker
@@ -27,8 +27,8 @@
                 Grid.Row="0"
                 Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="75" />
-                <RowDefinition Height="25" />
+                <RowDefinition Height="70" />
+                <RowDefinition Height="30" />
             </Grid.RowDefinitions>
             <Label
                 Grid.Row="0"
@@ -38,19 +38,20 @@
                 VerticalAlignment="Center"
                 Height="50"
                 Width="300"
-                FontSize="28"
+                FontSize="25"
                 FontFamily="Tahoma"
                 BorderThickness="0"
                 Foreground="DarkSlateBlue"
                 Content="{Binding EventName}"/>
-            <Button 
+            <Button
                 Grid.Row="1"
+                Grid.Column="0"
                 Margin="10,0,0,0"
                 Content="Change Event"
-                Width="100"
-                Height="25"
+                Width="120"
                 Foreground="Navy"
-                FontWeight="Bold"
+                FontSize="12"
+                FontFamily="Tahoma"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
                 Command="{Binding ChangeEventCommand}"/>

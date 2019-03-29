@@ -6,6 +6,7 @@ using K5BZI_ViewModels.Interfaces;
 using System;
 using System.Linq;
 using System.Windows;
+using System.Windows.Forms;
 
 namespace K5BZI_ViewModels
 {
@@ -40,7 +41,14 @@ namespace K5BZI_ViewModels
             Model.EventName = logEntries.First().Event.EventName;
 
             Model.LogEntries.Clear();
-            logEntries.ForEach(_ => Model.LogEntries.Add(_));
+
+            if (logEntries.Any())
+            {
+                logEntries.ForEach(_ => Model.LogEntries.Add(_));
+
+                Model.LogEntry.Signal.Band = logEntries.Last().Signal.Band;
+                Model.LogEntry.Signal.Frequency = logEntries.Last().Signal.Frequency;
+            }
         }
 
         public void CreateNewLog(Event newEvent)
@@ -69,6 +77,12 @@ namespace K5BZI_ViewModels
 
         private void SaveLogEntry()
         {
+            if (String.IsNullOrEmpty(Model.LogEntry.CallSign))
+            {
+                MessageBox.Show("You must provide a valid Call Sign.", "Oops!");
+                return;
+            }
+
             Model.LogEntries.Add(Model.LogEntry.Clone());
 
             _fileStoreService.WriteToFile(Model.LogEntries, _fileName);

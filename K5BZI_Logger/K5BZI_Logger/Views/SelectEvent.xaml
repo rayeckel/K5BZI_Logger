@@ -38,8 +38,18 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="150" />
             </Grid.ColumnDefinitions>
-            <Label 
+            <Label
+                Grid.Row="1"
+                Visibility="{Binding Model.NewLogVisibility}"
+                Margin="15,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                FontWeight="Bold"
+                FontFamily="Tahoma"
+                Content="Welcome! Create your first log!"/>
+            <Label
                 Grid.Row="0"
+                Visibility="{Binding Model.SelectLogVisibility}"
                 Margin="15,0,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
@@ -49,6 +59,7 @@
             <ComboBox
                 Grid.Row="1"
                 Grid.Column="0"
+                Visibility="{Binding Model.SelectLogVisibility}"
                 Height="30"
                 Width="300" 
                 Margin="20,20,0,0"
@@ -70,15 +81,15 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <Button 
+            <Button
                 Grid.Row="2"
                 Grid.Column="1"
+                Visibility="{Binding Model.SelectLogVisibility}"
                 Margin="0,0,20,0"
                 Content="Select"
                 Width="100"
                 Height="30"
                 Foreground="Navy"
-                FontWeight="Bold"
                 FontFamily="Tahoma"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Bottom"
