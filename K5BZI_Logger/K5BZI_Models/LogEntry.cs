@@ -31,6 +31,11 @@ namespace K5BZI_Models
             {
                 CheckDuplicateEntriesAction.Invoke();
             }
+
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }
