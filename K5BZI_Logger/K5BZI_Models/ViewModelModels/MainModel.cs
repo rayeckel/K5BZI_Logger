@@ -18,6 +18,7 @@ namespace K5BZI_Models.Main
 
             LogEntry = new LogEntry();
             LogEntries = new ObservableCollection<LogEntry>();
+            DuplicateEntries = new ObservableCollection<LogEntry>();
         }
 
         #endregion
@@ -27,6 +28,7 @@ namespace K5BZI_Models.Main
         public Event Event { get; set; }
         public LogEntry LogEntry { get; private set; }
         public ObservableCollection<LogEntry> LogEntries { get; private set; }
+        public ObservableCollection<LogEntry> DuplicateEntries { get; private set; }
 
         #endregion
 

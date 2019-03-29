@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dgControls="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
     mc:Ignorable="d">
     <Border
         BorderThickness="1"
@@ -11,8 +12,7 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30" />
-                <RowDefinition Height="65" />
-                <RowDefinition Height="30" />
+                <RowDefinition Height="100" />
             </Grid.RowDefinitions>
             <TextBlock 
                 Grid.Row="0"
@@ -22,6 +22,42 @@
                 FontFamily="Tahoma"
                 FontSize="18"
                 Foreground="DarkGray"/>
+            <dgControls:DataGrid 
+                Grid.Row="1"
+                x:Name="dataGrid1" 
+                Height="400"
+                Width="850"
+                AutoGenerateColumns="False"
+                ItemsSource="{Binding DuplicateEntries}">
+                <dgControls:DataGrid.Columns>
+                    <dgControls:DataGridTextColumn 
+                                Header="Call" 
+                                Width="150"
+                                Binding="{Binding CallSign}" 
+                                FontSize="12" >
+                        <dgControls:DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                            </Style>
+                        </dgControls:DataGridTextColumn.ElementStyle>
+                        <dgControls:DataGridTextColumn.EditingElementStyle>
+                            <Style TargetType="TextBox">
+                                <Setter Property="Foreground" Value="Blue"/>
+                            </Style>
+                        </dgControls:DataGridTextColumn.EditingElementStyle>
+                    </dgControls:DataGridTextColumn>
+                    <dgControls:DataGridTextColumn 
+                                Header="Band"
+                                Width="100"
+                                Binding="{Binding Signal.Band}" 
+                                FontSize="12" />
+                    <dgControls:DataGridTextColumn
+                                Header="Frequency" 
+                                Width="100"
+                                Binding="{Binding Signal.Frequency}"
+                                FontSize="12" />
+                </dgControls:DataGrid.Columns>
+            </dgControls:DataGrid>
         </Grid>
     </Border>
 </UserControl>

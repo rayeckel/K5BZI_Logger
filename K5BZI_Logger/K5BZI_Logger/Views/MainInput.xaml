@@ -112,7 +112,7 @@
                     VerticalAlignment="Center"
                     Width="70"
                     BorderThickness="1"
-                    Text="{Binding LogEntry.Signal.Frequency, Mode=TwoWay}"/>
+                    Text="{Binding LogEntry.Signal.Frequency, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <Label 
                     Grid.Row="0"
                     Grid.Column="4"

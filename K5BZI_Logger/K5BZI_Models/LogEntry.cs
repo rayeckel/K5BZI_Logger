@@ -1,10 +1,13 @@
-﻿using PropertyChanged;
+﻿using K5BZI_Models.Base;
+using PropertyChanged;
 using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace K5BZI_Models
 {
     [AddINotifyPropertyChangedInterface]
-    public class LogEntry
+    public class LogEntry : INotifyPropertyChanged
     {
         public int Id { get; set; }
         public int EventId { get; set; }
@@ -17,6 +20,17 @@ namespace K5BZI_Models
         {
             Signal = new Signal();
             SignalReport = new SignalReport();
+        }
+
+        public Action CheckDuplicateEntriesAction { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            if (propertyName == "CallSign" && CheckDuplicateEntriesAction != null)
+            {
+                CheckDuplicateEntriesAction.Invoke();
+            }
         }
     }
 }

@@ -5,7 +5,6 @@ using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels.Interfaces;
 using System;
 using System.Linq;
-using System.Windows;
 using System.Windows.Forms;
 
 namespace K5BZI_ViewModels
@@ -26,6 +25,10 @@ namespace K5BZI_ViewModels
             _logListingService = logListingService;
 
             Initialize();
+
+            var newDuplicate = new LogEntry { CallSign = "K5BZI" };
+            newDuplicate.Signal.Band = "20M";
+            Model.DuplicateEntries.Add(newDuplicate);
         }
 
         #endregion
@@ -60,6 +63,16 @@ namespace K5BZI_ViewModels
 
         #region Private Methods
 
+        private void CheckForDuplicates()
+        {
+            Model.DuplicateEntries.Clear();
+
+            Model.LogEntries
+                .Where(_ => _.CallSign.StartsWith(Model.LogEntry.CallSign))
+                .ToList()
+                .ForEach(_ => Model.DuplicateEntries.Add(_));
+        }
+
         private void Initialize()
         {
             Model = new MainModel
@@ -67,6 +80,8 @@ namespace K5BZI_ViewModels
                 CreateNewEntryAction = () => Model.LogEntry.ClearProperties(),
                 LogItAction = () => SaveLogEntry()
             };
+
+            Model.LogEntry.CheckDuplicateEntriesAction = () => CheckForDuplicates();
         }
 
         private void SaveLogEntry()
