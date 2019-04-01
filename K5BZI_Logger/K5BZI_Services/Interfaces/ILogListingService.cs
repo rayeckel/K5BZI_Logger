@@ -14,5 +14,7 @@ namespace K5BZI_Services.Interfaces
         void OpenLogListing();
 
         void SaveLogEntry(LogEntry logEntry, Event eventEntry);
+
+        void UpdateLogEntry(LogEntry logEntry, Event eventEntry);
     }
 }

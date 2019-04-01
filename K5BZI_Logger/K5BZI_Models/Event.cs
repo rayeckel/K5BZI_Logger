@@ -1,4 +1,5 @@
 ﻿using PropertyChanged;
+using System;
 
 namespace K5BZI_Models
 {
@@ -9,5 +10,6 @@ namespace K5BZI_Models
         public string EventName { get; set; }
         public bool IsActive { get; set; }
         public string LogFileName { get; set; }
+        public DateTime CreatedDate { get; set; }
     }
 }

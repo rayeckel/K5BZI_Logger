@@ -4,7 +4,9 @@ using K5BZI_Models.Main;
 using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels.Interfaces;
 using System;
+using System.Collections.Specialized;
 using System.Linq;
+using System.Windows.Controls;
 using System.Windows.Forms;
 
 namespace K5BZI_ViewModels
@@ -25,10 +27,6 @@ namespace K5BZI_ViewModels
             _logListingService = logListingService;
 
             Initialize();
-
-            var newDuplicate = new LogEntry { CallSign = "K5BZI" };
-            newDuplicate.Signal.Band = "20M";
-            Model.DuplicateEntries.Add(newDuplicate);
         }
 
         #endregion
@@ -67,6 +65,9 @@ namespace K5BZI_ViewModels
         {
             Model.DuplicateEntries.Clear();
 
+            if (String.IsNullOrEmpty(Model.LogEntry.CallSign))
+                return;
+
             Model.LogEntries
                 .Where(_ => _.CallSign.StartsWith(Model.LogEntry.CallSign))
                 .ToList()
@@ -79,7 +80,8 @@ namespace K5BZI_ViewModels
             {
                 CreateNewEntryAction = () => Model.LogEntry.ClearProperties(),
                 LogItAction = () => SaveLogEntry(),
-                ViewFileStoreAction = () => _logListingService.OpenLogListing()
+                ViewFileStoreAction = () => _logListingService.OpenLogListing(),
+                UpdateLogEntryAction = (obj, args) => UpdateLogEntry(obj, args)
             };
 
             Model.LogEntry.CheckDuplicateEntriesAction = () => CheckForDuplicates();
@@ -93,11 +95,17 @@ namespace K5BZI_ViewModels
                 return;
             }
 
-            Model.LogEntries.Add(Model.LogEntry.Clone());
-
             _logListingService.SaveLogEntry(Model.LogEntry, Model.Event);
 
+            Model.LogEntries.Add(Model.LogEntry.Clone());
             Model.LogEntry.ClearProperties();
+        }
+
+        private void UpdateLogEntry(object obj, DataGridCellEditEndingEventArgs args)
+        {
+            var rowBeingEdited = args.Row.Item as LogEntry;
+
+            _logListingService.UpdateLogEntry(rowBeingEdited, Model.Event);
         }
 
         #endregion

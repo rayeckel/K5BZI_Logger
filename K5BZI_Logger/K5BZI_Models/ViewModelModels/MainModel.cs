@@ -1,7 +1,9 @@
 ﻿using K5BZI_Models.Base;
+using Prism.Commands;
 using PropertyChanged;
 using System;
 using System.Collections.ObjectModel;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace K5BZI_Models.Main
@@ -79,6 +81,17 @@ namespace K5BZI_Models.Main
             }
         }
         public Action ChangeEventAction { get; set; }
+
+        private ICommand _updateLogEntryCommand;
+        public ICommand UpdateLogEntryCommand
+        {
+            get
+            {
+                return _updateLogEntryCommand ??
+                    (_updateLogEntryCommand = new CommandHandler(UpdateLogEntryAction, true));
+            }
+        }
+        public Action UpdateLogEntryAction { get; set; }
 
         private ICommand _viewFileStoreCommand;
         public ICommand ViewFileStoreCommand

@@ -3,6 +3,7 @@ using K5BZI_Models.Extensions;
 using K5BZI_Services.Interfaces;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace K5BZI_Services
 {
@@ -67,6 +68,19 @@ namespace K5BZI_Services
         public void SaveLogEntry(LogEntry logEntry, Event eventEntry)
         {
             _logEntries.Add(logEntry.Clone());
+
+            _fileStoreService.WriteToFile(_logEntries, eventEntry.LogFileName);
+        }
+
+        public void UpdateLogEntry(LogEntry logEntry, Event eventEntry)
+        {
+            var updatedLogEntry = _logEntries.First(_ => _.Id == logEntry.Id);
+
+            updatedLogEntry.CallSign = logEntry.CallSign;
+            updatedLogEntry.Signal.Frequency = logEntry.Signal.Frequency;
+            updatedLogEntry.Signal.Band = logEntry.Signal.Band;
+            updatedLogEntry.SignalReport.Sent = logEntry.SignalReport.Sent;
+            updatedLogEntry.SignalReport.Received = logEntry.SignalReport.Received;
 
             _fileStoreService.WriteToFile(_logEntries, eventEntry.LogFileName);
         }

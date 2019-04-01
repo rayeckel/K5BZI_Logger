@@ -6,7 +6,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" 
         xmlns:local="clr-namespace:K5BZI_Logger.Views"
-        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
         Title="K5BZI Logger"
         Height="740" Width="1024"
@@ -17,7 +16,6 @@
         WindowStartupLocation="CenterScreen">
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
-            <Button Content="settings" />
             <Button Command="{Binding ViewFileStoreCommand}" Content="Open Log Directory" />
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
@@ -38,7 +36,7 @@
         </Grid.ColumnDefinitions>
         <local:SelectEvent 
             Grid.Row="0" 
-            Grid.RowSpan="3"
+            Grid.RowSpan="4"
             Grid.Column="0"
             Grid.ColumnSpan="4"
             HorizontalAlignment="Center"/>

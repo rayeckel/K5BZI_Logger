@@ -45,6 +45,10 @@ namespace K5BZI_ViewModels
             var eventService = ServiceLocator.Current.GetInstance<IEventService>();
             var events = eventService.GetAllEvents();
 
+            events.OrderByDescending(_ => _.CreatedDate);
+
+            Model.SelectedEvent = events.FirstOrDefault();
+
             events.ForEach(item =>
             {
                 Model.ExistingEvents.Add(item);
@@ -72,6 +76,7 @@ namespace K5BZI_ViewModels
 
         private void ChangeEvent()
         {
+            Model.ShowCloseButton = true;
             Model.IsOpen = true;
         }
 

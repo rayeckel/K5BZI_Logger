@@ -18,6 +18,7 @@ namespace K5BZI_Models.ViewModelModels
         public SelectEventModel()
         {
             IsOpen = true;
+            ShowCloseButton = false;
             ExistingEvents = new ObservableCollection<Event>();
         }
 
@@ -28,6 +29,8 @@ namespace K5BZI_Models.ViewModelModels
         public string EventName { get; set; }
 
         public bool IsOpen { get; set; }
+
+        public bool ShowCloseButton { get; set; }
 
         public Event SelectedEvent { get; set; }
 

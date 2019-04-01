@@ -42,7 +42,8 @@ namespace K5BZI_Services
             {
                 Id = eventId,
                 EventName = eventName,
-                LogFileName = String.Format("{0}_{1}", newEventName, DateTime.UtcNow.ToString("yyyy'-'MM'-'dd"))
+                LogFileName = String.Format("{0}_{1}", newEventName, DateTime.UtcNow.ToString("yyyy'-'MM'-'dd")),
+                CreatedDate = DateTime.Now
             };
 
             _eventList.Add(newEvent);
