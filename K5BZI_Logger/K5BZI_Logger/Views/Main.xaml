@@ -6,6 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" 
         xmlns:local="clr-namespace:K5BZI_Logger.Views"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
         Title="K5BZI Logger"
         Height="740" Width="1024"
@@ -17,23 +18,7 @@
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
             <Button Content="settings" />
-            <Button>
-                <StackPanel Orientation="Horizontal">
-                    <Rectangle 
-                        Width="20"
-                        Height="20"
-                        Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
-                        <Rectangle.OpacityMask>
-                            <VisualBrush Stretch="Fill"/>
-                            <!--Visual="{StaticResource appbar_cupcake}" />-->
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                    <TextBlock 
-                        Margin="4 0 0 0"
-                        VerticalAlignment="Center"
-                        Text="Logout" />
-                </StackPanel>
-            </Button>
+            <Button Command="{Binding ViewFileStoreCommand}" Content="Open Log Directory" />
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
     <Grid 
@@ -43,6 +28,7 @@
             <RowDefinition Height="110" />
             <RowDefinition Height="140" />
             <RowDefinition Height="250*" />
+            <RowDefinition Height="50" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="256" />

@@ -78,7 +78,8 @@ namespace K5BZI_ViewModels
             Model = new MainModel
             {
                 CreateNewEntryAction = () => Model.LogEntry.ClearProperties(),
-                LogItAction = () => SaveLogEntry()
+                LogItAction = () => SaveLogEntry(),
+                ViewFileStoreAction = () => _logListingService.OpenLogListing()
             };
 
             Model.LogEntry.CheckDuplicateEntriesAction = () => CheckForDuplicates();

@@ -9,6 +9,8 @@ namespace K5BZI_Services.Interfaces
     {
         FileInfo[] GetLogListing();
 
+        void OpenLogDirectory();
+
         List<T> ReadLog<T>(string logFileName, bool isLogFile = true)
             where T : class;
 

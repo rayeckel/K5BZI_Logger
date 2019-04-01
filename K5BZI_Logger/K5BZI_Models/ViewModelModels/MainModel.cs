@@ -80,6 +80,17 @@ namespace K5BZI_Models.Main
         }
         public Action ChangeEventAction { get; set; }
 
+        private ICommand _viewFileStoreCommand;
+        public ICommand ViewFileStoreCommand
+        {
+            get
+            {
+                return _viewFileStoreCommand ??
+                    (_viewFileStoreCommand = new CommandHandler(ViewFileStoreAction, true));
+            }
+        }
+        public Action ViewFileStoreAction { get; set; }
+
         #endregion
     }
 }

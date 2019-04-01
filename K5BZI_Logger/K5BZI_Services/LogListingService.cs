@@ -58,6 +58,12 @@ namespace K5BZI_Services
             return listings;
         }
 
+        public void OpenLogListing()
+        {
+            _fileStoreService.OpenLogDirectory();
+        }
+
+
         public void SaveLogEntry(LogEntry logEntry, Event eventEntry)
         {
             _logEntries.Add(logEntry.Clone());

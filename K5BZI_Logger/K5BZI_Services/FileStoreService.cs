@@ -3,6 +3,7 @@ using K5BZI_Services.Interfaces;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -10,6 +11,9 @@ namespace K5BZI_Services
 {
     internal class FileStoreService : IFileStoreService
     {
+        private string _loggerDirectoryName = "K5BZI_Logger";
+        private string _jsonExtension = ".json";
+
         #region Public Methods
 
         public FileInfo[] GetLogListing()
@@ -17,6 +21,12 @@ namespace K5BZI_Services
             var filePath = CreateFilePath(String.Empty);
 
             return new DirectoryInfo(filePath).GetFiles();
+        }
+
+        public void OpenLogDirectory()
+        {
+            Process.Start(
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), _loggerDirectoryName));
         }
 
         public List<T> ReadLog<T>(string logFileName, bool isLogFile = true)
@@ -51,21 +61,19 @@ namespace K5BZI_Services
 
         private string CreateFilePath(string logFileName, bool isLogFile = true)
         {
-            var loggerDirectoryName = "K5BZI_Logger";
-            var jsonExtension = ".json";
             var filePath = String.Empty;
 
             if (!isLogFile)
-                filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), loggerDirectoryName);
+                filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), _loggerDirectoryName);
             else
-                filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), loggerDirectoryName);
+                filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), _loggerDirectoryName);
 
             Directory.CreateDirectory(filePath);
 
             if (String.IsNullOrEmpty(logFileName))
                 return filePath;
 
-            var fileName = Path.Combine(filePath, String.Concat(logFileName, jsonExtension));
+            var fileName = Path.Combine(filePath, String.Concat(logFileName, _jsonExtension));
 
             Directory.CreateDirectory(Path.GetDirectoryName(fileName));
 

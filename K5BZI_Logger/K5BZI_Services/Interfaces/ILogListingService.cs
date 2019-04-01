@@ -11,6 +11,8 @@ namespace K5BZI_Services.Interfaces
 
         List<LogEntry> ReadLog(string logFileName);
 
+        void OpenLogListing();
+
         void SaveLogEntry(LogEntry logEntry, Event eventEntry);
     }
 }
