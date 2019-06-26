@@ -85,7 +85,7 @@ namespace K5BZI_ViewModels
                 CreateNewEntryAction = () => Model.LogEntry.ClearProperties(),
                 LogItAction = () => SaveLogEntry(),
                 ViewFileStoreAction = () => _logListingService.OpenLogListing(),
-                ExportLogAction = () => _exportService.ExportLog(Model.Event, LogType.Adif),
+                ExportLogAction = () => _exportService.ExportLog(Model.Event, Model.LogEntries, LogType.Adif),
                 UpdateLogEntryAction = (obj, args) => UpdateLogEntry(obj, args)
             };
 
