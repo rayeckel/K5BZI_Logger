@@ -36,11 +36,6 @@ namespace K5BZI_Services
 
             foreach (var entry in logEntries)
             {
-                var entryProperties = from p in entry.GetType().GetProperties()
-                                      let attr = p.GetCustomAttributes(typeof(AdifAttribute), true)
-                                      where attr.Length == 1
-                                      select new { Property = p, Attribute = attr.First() as AdifAttribute };
-
                 foreach (var eventProp in eventProperties)
                 {
                     var value = eventProp.Property.GetValue(eventLog) as string;
@@ -55,6 +50,11 @@ namespace K5BZI_Services
                     adifData.AppendLine(line);
                 };
 
+                var entryProperties = from p in entry.GetType().GetProperties()
+                                      let attr = p.GetCustomAttributes(typeof(AdifAttribute), true)
+                                      where attr.Length == 1
+                                      select new { Property = p, Attribute = attr.First() as AdifAttribute };
+
                 foreach (var entryProp in entryProperties)
                 {
                     var value = entryProp.Property.GetValue(entry) as string;
@@ -65,6 +65,25 @@ namespace K5BZI_Services
                     }
 
                     var line = String.Format("<{0}:{1}>{2}", entryProp.Attribute.FieldName, value.Length, value);
+
+                    adifData.AppendLine(line);
+                };
+
+                var signalProperties = from p in entry.Signal.GetType().GetProperties()
+                                       let attr = p.GetCustomAttributes(typeof(AdifAttribute), true)
+                                       where attr.Length == 1
+                                       select new { Property = p, Attribute = attr.First() as AdifAttribute };
+
+                foreach (var signalProp in signalProperties)
+                {
+                    var value = signalProp.Property.GetValue(entry.Signal) as string;
+
+                    if (value == null)
+                    {
+                        continue;
+                    }
+
+                    var line = String.Format("<{0}:{1}>{2}", signalProp.Attribute.FieldName, value.Length, value);
 
                     adifData.AppendLine(line);
                 };

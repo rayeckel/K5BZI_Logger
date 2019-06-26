@@ -12,13 +12,26 @@ namespace K5BZI_Models
     {
         public LogEntry()
         {
-            Cont = "NA";
             Signal = new Signal();
             SignalReport = new SignalReport();
+
+            //DELETE THESE
+            QslSent = "N";
+            QslReceived = "N";
+            Country = "USA";
+            Continent = "NA";
         }
 
-        [Adif("QSO_Date")]
         public DateTime? ContactTime { get; set; }
+
+        [Adif("QSO_Date")]
+        public string QsoDate
+        {
+            get
+            {
+                return ContactTime != null ? ((DateTime)ContactTime).ToString("yyyyMMdd") : String.Empty;
+            }
+        }
 
         [Adif("Call")]
         public string CallSign { get; set; }
@@ -27,7 +40,7 @@ namespace K5BZI_Models
         public string Prefix { get; set; }
 
         [Adif("Cont")]
-        public string Cont { get; set; }
+        public string Continent { get; set; }
 
         [Adif("Country")]
         public string Country { get; set; }
