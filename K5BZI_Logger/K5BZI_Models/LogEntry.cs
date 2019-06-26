@@ -33,6 +33,15 @@ namespace K5BZI_Models
             }
         }
 
+        [Adif("time_on")]
+        public string QsoTime
+        {
+            get
+            {
+                return ContactTime != null ? ((DateTime)ContactTime).TimeOfDay.ToString() : String.Empty;
+            }
+        }
+
         [Adif("Call")]
         public string CallSign { get; set; }
 
