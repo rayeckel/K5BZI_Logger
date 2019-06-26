@@ -123,12 +123,15 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ADIF.cs" />
+    <Compile Include="Attributes\AdifAttribute.cs" />
     <Compile Include="Base\BaseModel.cs" />
     <Compile Include="Base\CommandHandler.cs" />
     <Compile Include="Base\IBaseModel.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="Extensions\LogEntryExtensions.cs" />
     <Compile Include="LogListing.cs" />
+    <Compile Include="LogType.cs" />
     <Compile Include="ViewModelModels\MainModel.cs" />
     <Compile Include="Signal.cs" />
     <Compile Include="LogEntry.cs" />

@@ -83,15 +83,27 @@ namespace K5BZI_Models.Main
         public Action ChangeEventAction { get; set; }
 
         private ICommand _updateLogEntryCommand;
-        public ICommand UpdateLogEntryCommand
-        {
+        public ICommand UpdateLogEntryCommand { get; set; }
+        /*{
             get
             {
                 return _updateLogEntryCommand ??
                     (_updateLogEntryCommand = new CommandHandler(UpdateLogEntryAction, true));
             }
+        }*/
+
+        public Action<object, DataGridCellEditEndingEventArgs> UpdateLogEntryAction { get; set; }
+
+        private ICommand _exportLogCommand;
+        public ICommand ExportLogCommand
+        {
+            get
+            {
+                return _exportLogCommand ??
+                    (_exportLogCommand = new CommandHandler(ExportLogAction, true));
+            }
         }
-        public Action UpdateLogEntryAction { get; set; }
+        public Action ExportLogAction { get; set; }
 
         private ICommand _viewFileStoreCommand;
         public ICommand ViewFileStoreCommand

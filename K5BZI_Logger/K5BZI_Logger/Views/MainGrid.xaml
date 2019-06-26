@@ -41,8 +41,7 @@
                     BorderThickness=".5"
                     BorderBrush="Navy"
                     AutoGenerateColumns="False"
-                    ItemsSource="{Binding LogEntries}"
-                    CellEditEnding="{Binding UpdateLogEntryAction}">
+                    ItemsSource="{Binding LogEntries}">
                     <dgControls:DataGrid.Columns>
                         <dgControls:DataGridTextColumn 
                             Header="Time" 

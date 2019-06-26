@@ -17,14 +17,18 @@ namespace K5BZI_ViewModels
 
         public MainModel Model { get; private set; }
         private readonly ILogListingService _logListingService;
+        private readonly IExportService _exportService;
 
         #endregion
 
         #region Constructors
 
-        public MainLoggerViewModel(ILogListingService logListingService)
+        public MainLoggerViewModel(
+            ILogListingService logListingService,
+            IExportService exportService)
         {
             _logListingService = logListingService;
+            _exportService = exportService;
 
             Initialize();
         }
@@ -81,6 +85,7 @@ namespace K5BZI_ViewModels
                 CreateNewEntryAction = () => Model.LogEntry.ClearProperties(),
                 LogItAction = () => SaveLogEntry(),
                 ViewFileStoreAction = () => _logListingService.OpenLogListing(),
+                ExportLogAction = () => _exportService.ExportLog(Model.Event, LogType.Adif),
                 UpdateLogEntryAction = (obj, args) => UpdateLogEntry(obj, args)
             };
 

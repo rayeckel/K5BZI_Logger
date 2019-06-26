@@ -48,13 +48,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EventService.cs" />
+    <Compile Include="ExportService.cs" />
     <Compile Include="FileStoreService.cs" />
+    <Compile Include="Interfaces\IEntityUtility.cs" />
     <Compile Include="Interfaces\IEventService.cs" />
+    <Compile Include="Interfaces\IExportService.cs" />
     <Compile Include="Interfaces\IFileStoreService.cs" />
     <Compile Include="Interfaces\ILogListingService.cs" />
     <Compile Include="K5BZIServiceModelBindings.cs" />
     <Compile Include="LogListingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\BaseUtility.cs" />
+    <Compile Include="Utilities\EntityUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\K5BZI_Models\K5BZI_Models.csproj">
