@@ -1,6 +1,7 @@
 ﻿using K5BZI_Models.Attributes;
 using PropertyChanged;
 using System;
+using System.Collections.ObjectModel;
 
 namespace K5BZI_Models
 {
@@ -9,6 +10,8 @@ namespace K5BZI_Models
     {
         public Event()
         {
+            Operators = new ObservableCollection<Operator>();
+
             //REMOVE THESE
             DXCC = 291;
             CqZone = 05;
@@ -20,7 +23,10 @@ namespace K5BZI_Models
 
         public int Id { get; set; }
 
+        public ObservableCollection<Operator> Operators { get; set; }
+
         [Adif("Contest_ID")]
+        [Cabrillo("CONTEST")]
         public string EventName { get; set; }
 
         public bool IsActive { get; set; }
@@ -46,5 +52,11 @@ namespace K5BZI_Models
 
         [Adif("State")]
         public string State { get; set; }
+
+        [Cabrillo("SOAPBOX")]
+        public string Comments { get; set; }
+
+        [Cabrillo("CLAIMED-SCORE")]
+        public double Score { get; set; }
     }
 }

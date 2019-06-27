@@ -2,8 +2,6 @@
 using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels.Interfaces;
 using Microsoft.Practices.ServiceLocation;
-using System;
-using System.Windows.Forms;
 using System.Linq;
 
 namespace K5BZI_ViewModels

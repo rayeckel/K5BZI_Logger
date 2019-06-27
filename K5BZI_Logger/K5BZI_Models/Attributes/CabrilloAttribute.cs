@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace K5BZI_Models.Attributes
 {
     [AttributeUsage(AttributeTargets.Property)]
-    public class AdifAttribute : Attribute
+    public class CabrilloAttribute : Attribute
     {
-        public AdifAttribute(string propertyName)
+        public CabrilloAttribute(string propertyName)
         {
             PropertyName = propertyName;
         }

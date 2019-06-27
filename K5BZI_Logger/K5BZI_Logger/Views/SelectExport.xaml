@@ -1,0 +1,101 @@
+﻿<simpleChildWindow:ChildWindow
+    x:Class="K5BZI_Logger.Views.SelectExport"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:viewmodel="clr-namespace:K5BZI_ViewModels;assembly=K5BZI_ViewModels"
+    xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
+    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:Enums="clr-namespace:K5BZI_Models.Enums;assembly=K5BZI_Models"
+    xmlns:Converters="clr-namespace:K5BZI_Logger.Converters"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    Height="750" Width="1024"
+    mc:Ignorable="d"
+    IsOpen="{Binding Model.IsOpen}"
+    ShowCloseButton="{Binding Model.ShowCloseButton}"
+    Title="Select Log">
+    <simpleChildWindow:ChildWindow.DataContext>
+        <viewmodel:SelectExportViewModel/>
+    </simpleChildWindow:ChildWindow.DataContext>
+    <simpleChildWindow:ChildWindow.OverlayBrush>
+        <SolidColorBrush Opacity="0.8" Color="{StaticResource Gray2}" />
+    </simpleChildWindow:ChildWindow.OverlayBrush>
+    <simpleChildWindow:ChildWindow.Icon>
+        <iconPacks:PackIconModern Width="22"
+                              Height="22"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"
+                              Foreground="{DynamicResource IdealForegroundColorBrush}"
+                              Kind="Cog" />
+    </simpleChildWindow:ChildWindow.Icon>
+    <simpleChildWindow:ChildWindow.Resources>
+        <Converters:EnumDescriptionConverter x:Key="EnumDescriptionConverter" />
+        <ObjectDataProvider MethodName="GetValues"
+                ObjectType="{x:Type sys:Enum}"
+                x:Key="LogTypeEnumValues">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="Enums:LogType" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </simpleChildWindow:ChildWindow.Resources>
+    <Grid 
+        HorizontalAlignment="Center" 
+        VerticalAlignment="Center" 
+        Background="AliceBlue"
+        Height="300">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="150" />
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.Row="0"
+                Margin="15,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                FontWeight="Bold"
+                FontFamily="Tahoma"
+                Content="Select Export Format"/>
+            <ComboBox
+                Grid.Row="1"
+                Grid.Column="0"
+                Height="30"
+                Width="300" 
+                Margin="20,20,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                x:Name="existingLogsCombo"
+                SelectedItem="{Binding Model.SelectedExport, Mode=TwoWay}"
+                FontFamily="Tahoma"
+                BorderThickness="1"
+                ItemsSource="{Binding Source={StaticResource LogTypeEnumValues}}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Converter={StaticResource EnumDescriptionConverter}}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Button
+                Grid.Row="2"
+                Grid.Column="1"
+                Margin="0,0,20,0"
+                Content="Select"
+                Width="100"
+                Height="30"
+                Foreground="Navy"
+                FontFamily="Tahoma"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Command="{Binding Model.SelectExportCommand}"/>
+        </Grid>
+    </Grid>
+</simpleChildWindow:ChildWindow>

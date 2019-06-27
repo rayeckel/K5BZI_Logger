@@ -92,9 +92,11 @@
   <ItemGroup>
     <Compile Include="Interfaces\IMainLoggerViewModel.cs" />
     <Compile Include="Interfaces\ISelectEventViewModel.cs" />
+    <Compile Include="Interfaces\ISelectExportViewModel.cs" />
     <Compile Include="K5BZIViewModelBindings.cs" />
     <Compile Include="MainLoggerViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SelectExportViewModel.cs" />
     <Compile Include="SelectEventViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

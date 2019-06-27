@@ -1,10 +1,12 @@
 ﻿using K5BZI_Models.Base;
-using Prism.Commands;
 using PropertyChanged;
 using System;
 using System.Collections.ObjectModel;
-using System.Windows.Controls;
+using Microsoft.VisualStudio.PlatformUI;
+using System.Linq;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Controls;
 
 namespace K5BZI_Models.Main
 {
@@ -83,27 +85,27 @@ namespace K5BZI_Models.Main
         public Action ChangeEventAction { get; set; }
 
         private ICommand _updateLogEntryCommand;
-        public ICommand UpdateLogEntryCommand { get; set; }
-        /*{
-            get
-            {
-                return _updateLogEntryCommand ??
-                    (_updateLogEntryCommand = new CommandHandler(UpdateLogEntryAction, true));
-            }
-        }*/
-
-        public Action<object, DataGridCellEditEndingEventArgs> UpdateLogEntryAction { get; set; }
-
-        private ICommand _exportLogCommand;
-        public ICommand ExportLogCommand
+        public ICommand UpdateLogEntryCommand
         {
             get
             {
-                return _exportLogCommand ??
-                    (_exportLogCommand = new CommandHandler(ExportLogAction, true));
+                return _updateLogEntryCommand ??
+                    (_updateLogEntryCommand = new DelegateCommand(UpdateLogEntryAction));
             }
         }
-        public Action ExportLogAction { get; set; }
+
+        public Action<object> UpdateLogEntryAction { get; set; }
+
+        private ICommand _selectExportLogCommand;
+        public ICommand SelectExportLogCommand
+        {
+            get
+            {
+                return _selectExportLogCommand ??
+                    (_selectExportLogCommand = new CommandHandler(SelectExportLogAction, true));
+            }
+        }
+        public Action SelectExportLogAction { get; set; }
 
         private ICommand _viewFileStoreCommand;
         public ICommand ViewFileStoreCommand
@@ -116,6 +118,16 @@ namespace K5BZI_Models.Main
         }
         public Action ViewFileStoreAction { get; set; }
 
+        private ICommand _editOperatorsCommand;
+        public ICommand EditOperatorsCommand
+        {
+            get
+            {
+                return _editOperatorsCommand ??
+                    (_editOperatorsCommand = new CommandHandler(EditOperatorsAction, true));
+            }
+        }
+        public Action EditOperatorsAction { get; set; }
         #endregion
     }
 }

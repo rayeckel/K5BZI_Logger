@@ -3,7 +3,6 @@ using Microsoft.VisualStudio.PlatformUI;
 using PropertyChanged;
 using System;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -61,7 +60,7 @@ namespace K5BZI_Models.ViewModelModels
         {
             get
             {
-                return _selectLogCommand ?? (_selectLogCommand =
+                return _selectLogCommand ?? (_selectLogCommand = 
                     new DelegateCommand(SelectLogAction, _ => { return SelectedEvent != null; }));
             }
         }

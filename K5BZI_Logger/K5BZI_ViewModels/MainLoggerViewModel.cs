@@ -17,18 +17,14 @@ namespace K5BZI_ViewModels
 
         public MainModel Model { get; private set; }
         private readonly ILogListingService _logListingService;
-        private readonly IExportService _exportService;
 
         #endregion
 
         #region Constructors
 
-        public MainLoggerViewModel(
-            ILogListingService logListingService,
-            IExportService exportService)
+        public MainLoggerViewModel(ILogListingService logListingService)
         {
             _logListingService = logListingService;
-            _exportService = exportService;
 
             Initialize();
         }
@@ -61,6 +57,11 @@ namespace K5BZI_ViewModels
             Model.LogEntry.EventId = newEvent.Id;
         }
 
+        public void SelectExport(int selectedExport)
+        {
+            MessageBox.Show("Not Implemented.");
+        }
+
         #endregion
 
         #region Private Methods
@@ -85,8 +86,8 @@ namespace K5BZI_ViewModels
                 CreateNewEntryAction = () => Model.LogEntry.ClearProperties(),
                 LogItAction = () => SaveLogEntry(),
                 ViewFileStoreAction = () => _logListingService.OpenLogListing(),
-                ExportLogAction = () => _exportService.ExportLog(Model.Event, Model.LogEntries, LogType.Adif),
-                UpdateLogEntryAction = (obj, args) => UpdateLogEntry(obj, args)
+                UpdateLogEntryAction = (obj) => UpdateLogEntry(obj),
+                EditOperatorsAction = () => EditOperators()
             };
 
             Model.LogEntry.CheckDuplicateEntriesAction = () => CheckForDuplicates();
@@ -106,11 +107,16 @@ namespace K5BZI_ViewModels
             Model.LogEntry.ClearProperties();
         }
 
-        private void UpdateLogEntry(object obj, DataGridCellEditEndingEventArgs args)
+        private void UpdateLogEntry(object obj)
         {
-            var rowBeingEdited = args.Row.Item as LogEntry;
+            //var rowBeingEdited = args.Row.Item as LogEntry;
 
-            _logListingService.UpdateLogEntry(rowBeingEdited, Model.Event);
+            //_logListingService.UpdateLogEntry(rowBeingEdited, Model.Event);
+        }
+
+        private void EditOperators()
+        {
+            MessageBox.Show("Not Implemented.");
         }
 
         #endregion

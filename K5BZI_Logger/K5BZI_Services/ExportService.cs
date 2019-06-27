@@ -1,5 +1,6 @@
 ﻿using K5BZI_Models;
 using K5BZI_Models.Attributes;
+using K5BZI_Models.Enums;
 using K5BZI_Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,9 @@ namespace K5BZI_Services
             {
                 case LogType.Adif:
                     ExportToAdif(evntLog, logEntries);
+                    break;
+                case LogType.Cabrillo:
+                    ExportToCabrillo(evntLog, logEntries);
                     break;
             }
         }
@@ -57,7 +61,7 @@ namespace K5BZI_Services
                         continue;
                     }
 
-                    var line = String.Format("<{0}:{1}>{2}", eventProp.Attribute.FieldName, value.Length, value);
+                    var line = String.Format("<{0}:{1}>{2}", eventProp.Attribute.PropertyName, value.Length, value);
 
                     adifData.AppendLine(line);
                 };
@@ -76,7 +80,7 @@ namespace K5BZI_Services
                         continue;
                     }
 
-                    var line = String.Format("<{0}:{1}>{2}", entryProp.Attribute.FieldName, value.Length, value);
+                    var line = String.Format("<{0}:{1}>{2}", entryProp.Attribute.PropertyName, value.Length, value);
 
                     adifData.AppendLine(line);
                 };
@@ -95,7 +99,7 @@ namespace K5BZI_Services
                         continue;
                     }
 
-                    var line = String.Format("<{0}:{1}>{2}", signalProp.Attribute.FieldName, value.Length, value);
+                    var line = String.Format("<{0}:{1}>{2}", signalProp.Attribute.PropertyName, value.Length, value);
 
                     adifData.AppendLine(line);
                 };
@@ -104,6 +108,79 @@ namespace K5BZI_Services
             }
 
             await _fileStoreService.WriteToFile(adifData.ToString(), eventLog.LogFileName, FileExtensions.Adif);
+
+            _fileStoreService.OpenLogDirectory();
+        }
+
+        private async void ExportToCabrillo(Event eventLog, ICollection<LogEntry> logEntries)
+        {
+            var headerString = String.Format(
+                "START-OF-LOG: {0}{1}CREATED-BY: K5BZI Logger version {2}{3}",
+                "3.0", //TODO Appsettings.Get("CabrilloVersion")
+                Environment.NewLine, 
+                "1.0", //TODO: AppSettings.Get("AppVersion") 
+                Environment.NewLine);
+
+            var cabrilloData = new StringBuilder(headerString);
+
+            /*
+    "CATEGORY-OPERATOR: {3}" + Environment.NewLine +
+    "CATEGORY-ASSISTED: {4}" + Environment.NewLine +
+    "CATEGORY-BAND: {5}" + Environment.NewLine +
+    "CATEGORY-POWER: {6}" + Environment.NewLine +
+    "CATEGORY-MODE: {7}" + Environment.NewLine +
+    "CATEGORY-TRANSMITTER: {8} " + Environment.NewLine +
+    "CATEGORY-OVERLAY: {9}" + Environment.NewLine +
+    "CLUB: {11}" + Environment.NewLine +
+    "LOCATION: {12}" + Environment.NewLine +
+    "OPERATORS: {20}" + Environment.NewLine +
+
+ * DateTime.UtcNow.ToString("g")
+*/
+            var eventProperties = from p in eventLog.GetType().GetProperties()
+                                  let attr = p.GetCustomAttributes(typeof(CabrilloAttribute), true)
+                                  where attr.Length == 1
+                                  select new { Property = p, Attribute = attr.First() as CabrilloAttribute };
+
+            foreach (var entry in logEntries)
+            {
+                foreach (var eventProp in eventProperties)
+                {
+                    var value = eventProp.Property.GetValue(eventLog) as string;
+
+                    if (value == null)
+                    {
+                        continue;
+                    }
+
+                    var line = String.Format("{0}:{1}", eventProp.Attribute.PropertyName, value.Length, value);
+
+                    cabrilloData.AppendLine(line);
+                };
+
+                var entryProperties = from p in entry.GetType().GetProperties()
+                                      let attr = p.GetCustomAttributes(typeof(CabrilloAttribute), true)
+                                      where attr.Length == 1
+                                      select new { Property = p, Attribute = attr.First() as CabrilloAttribute };
+
+                foreach (var entryProp in entryProperties)
+                {
+                    var value = entryProp.Property.GetValue(entry) as string;
+
+                    if (value == null)
+                    {
+                        continue;
+                    }
+
+                    var line = String.Format("{0}:{1}", entryProp.Attribute.PropertyName, value);
+
+                    cabrilloData.AppendLine(line);
+                };
+
+                cabrilloData.AppendLine(String.Format("END-OF-LOG:{0}", Environment.NewLine));
+            }
+
+            await _fileStoreService.WriteToFile(cabrilloData.ToString(), eventLog.LogFileName, FileExtensions.Cabrillo);
 
             _fileStoreService.OpenLogDirectory();
         }

@@ -10,5 +10,7 @@ namespace K5BZI_ViewModels.Interfaces
         void SelectEvent(Event selectedEvent);
 
         void CreateNewLog(Event newEvent);
+
+        void SelectExport(int selectedExport);
     }
 }

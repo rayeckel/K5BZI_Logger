@@ -9,6 +9,7 @@ namespace K5BZI_ViewModels
         {
             Bind<IMainLoggerViewModel>().To<MainLoggerViewModel>().InSingletonScope();
             Bind<ISelectEventViewModel>().To<SelectEventViewModel>().InSingletonScope();
+            Bind<ISelectExportViewModel>().To<SelectExportViewModel>();
         }
     }
 }

@@ -1,9 +1,6 @@
 ﻿using K5BZI_Models;
-using System;
+using K5BZI_Models.Enums;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace K5BZI_Services.Interfaces
 {
