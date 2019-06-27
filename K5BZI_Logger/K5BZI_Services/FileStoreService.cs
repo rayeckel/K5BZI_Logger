@@ -12,7 +12,6 @@ namespace K5BZI_Services
     internal class FileStoreService : IFileStoreService
     {
         private string _loggerDirectoryName = "K5BZI_Logger";
-        private string _jsonExtension = ".json";
 
         #region Public Methods
 
@@ -42,7 +41,7 @@ namespace K5BZI_Services
             }
         }
 
-        public async void WriteToFile<T>(ICollection<T> LogEntries, string logFileName, bool isLogFile = true)
+        public async Task<bool> WriteToFile<T>(ICollection<T> LogEntries, string logFileName, bool isLogFile = true)
             where T : class
         {
             var fileName = CreateFilePath(logFileName, isLogFile);
@@ -53,13 +52,30 @@ namespace K5BZI_Services
             {
                 await Task.Run(() => serializer.Serialize(writer, LogEntries));
             }
+
+            return true;
+        }
+
+        public async Task<bool> WriteToFile(string fileData, string logFileName, string extension = "")
+        {
+            extension = String.IsNullOrEmpty(extension) ? FileExtensions.Json : extension;
+
+            var fileName = CreateFilePath(logFileName, true, extension);
+
+            using (var sw = new StreamWriter(File.Open(fileName, FileMode.OpenOrCreate)))
+            using (var writer = new JsonTextWriter(sw))
+            {
+                await sw.WriteAsync(fileData);
+            }
+
+            return true;
         }
 
         #endregion
 
         #region Private Methods
 
-        private string CreateFilePath(string logFileName, bool isLogFile = true)
+        private string CreateFilePath(string logFileName, bool isLogFile = true, string extension = "")
         {
             var filePath = String.Empty;
 
@@ -73,7 +89,9 @@ namespace K5BZI_Services
             if (String.IsNullOrEmpty(logFileName))
                 return filePath;
 
-            var fileName = Path.Combine(filePath, String.Concat(logFileName, _jsonExtension));
+            extension = String.IsNullOrEmpty(extension) ? FileExtensions.Json : extension;
+
+            var fileName = Path.Combine(filePath, String.Concat(logFileName, extension));
 
             Directory.CreateDirectory(Path.GetDirectoryName(fileName));
 

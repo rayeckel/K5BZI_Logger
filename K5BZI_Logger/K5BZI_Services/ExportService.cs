@@ -10,9 +10,11 @@ namespace K5BZI_Services
 {
     public class ExportService : IExportService
     {
-        public ExportService()
-        {
+        private readonly IFileStoreService _fileStoreService;
 
+        public ExportService(IFileStoreService fileStoreService)
+        {
+            _fileStoreService = fileStoreService;
         }
 
         public void ExportLog(Event evntLog, ICollection<LogEntry> logEntries, LogType logType)
@@ -25,9 +27,19 @@ namespace K5BZI_Services
             }
         }
 
-        private void ExportToAdif(Event eventLog, ICollection<LogEntry> logEntries)
+        private async void ExportToAdif(Event eventLog, ICollection<LogEntry> logEntries)
         {
-            var adifData = new StringBuilder();
+            var header = String.Format(
+                "ADIF Export from K5BZI Logger version {0} {1}Written by: Ray Eckel{2}Log exported on: {3}{4}<EOH>{5}{6}",
+                "1.0", //Appsettings.Get("Version")
+                Environment.NewLine,
+                Environment.NewLine,
+                DateTime.UtcNow.ToString("g"),
+                Environment.NewLine,
+                Environment.NewLine,
+                Environment.NewLine);
+
+            var adifData = new StringBuilder(header);
 
             var eventProperties = from p in eventLog.GetType().GetProperties()
                         let attr = p.GetCustomAttributes(typeof(AdifAttribute), true)
@@ -91,8 +103,9 @@ namespace K5BZI_Services
                 adifData.AppendLine(String.Format("<eor>{0}", Environment.NewLine));
             }
 
-            var foo = adifData.ToString();
-            eventProperties.GetType();
+            await _fileStoreService.WriteToFile(adifData.ToString(), eventLog.LogFileName, FileExtensions.Adif);
+
+            _fileStoreService.OpenLogDirectory();
         }
     }
 }

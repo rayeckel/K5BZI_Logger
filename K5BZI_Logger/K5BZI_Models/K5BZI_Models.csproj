@@ -130,6 +130,7 @@
     <Compile Include="Base\IBaseModel.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="Extensions\LogEntryExtensions.cs" />
+    <Compile Include="FileExtensions.cs" />
     <Compile Include="LogListing.cs" />
     <Compile Include="LogType.cs" />
     <Compile Include="ViewModelModels\MainModel.cs" />
