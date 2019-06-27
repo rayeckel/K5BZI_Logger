@@ -1,10 +1,7 @@
 ﻿using K5BZI_Models.ViewModelModels;
 using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels.Interfaces;
-using K5BZI_Models;
-using System.Collections.Generic;
 using Microsoft.Practices.ServiceLocation;
-using K5BZI_Models.Enums;
 
 namespace K5BZI_ViewModels
 {
@@ -54,7 +51,7 @@ namespace K5BZI_ViewModels
             exportService.ExportLog(
                 mainLoggerViewModel.Model.Event,
                 mainLoggerViewModel.Model.LogEntries, 
-               (LogType)Model.SelectedExport);
+                Model.SelectedExport);
         }
 
         #endregion

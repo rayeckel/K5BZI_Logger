@@ -1,13 +1,14 @@
-﻿using System;
+﻿using K5BZI_Services.Interfaces;
+using System;
 using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Data;
 
-namespace K5BZI_Logger.Converters
+namespace K5BZI_Services.Utilities
 {
-    public class EnumDescriptionConverter : IValueConverter
+    public class EnumUtility : IValueConverter, IEnumUtility
     {
-        private string GetEnumDescription(Enum enumObj)
+        public string GetEnumDescription(Enum enumObj)
         {
             var fieldInfo = enumObj.GetType().GetField(enumObj.ToString());
             var attribArray = fieldInfo.GetCustomAttributes(false);

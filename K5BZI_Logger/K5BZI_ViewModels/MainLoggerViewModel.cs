@@ -4,9 +4,7 @@ using K5BZI_Models.Main;
 using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels.Interfaces;
 using System;
-using System.Collections.Specialized;
 using System.Linq;
-using System.Windows.Controls;
 using System.Windows.Forms;
 
 namespace K5BZI_ViewModels
@@ -55,11 +53,6 @@ namespace K5BZI_ViewModels
             Model.LogEntries.Clear();
             Model.LogEntry.ClearProperties();
             Model.LogEntry.EventId = newEvent.Id;
-        }
-
-        public void SelectExport(int selectedExport)
-        {
-            MessageBox.Show("Not Implemented.");
         }
 
         #endregion

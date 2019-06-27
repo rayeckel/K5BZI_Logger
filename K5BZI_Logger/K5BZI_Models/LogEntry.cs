@@ -1,5 +1,6 @@
 ﻿using K5BZI_Models.Attributes;
 using K5BZI_Models.Base;
+using K5BZI_Models.Enums;
 using PropertyChanged;
 using System;
 using System.ComponentModel;
@@ -20,6 +21,9 @@ namespace K5BZI_Models
             QslReceived = "N";
             Country = "USA";
             Continent = "NA";
+            Assisted = Assisted.NONAssisted;
+            Power = Power.HIGH;
+            Operator = new Operator { CallSign = "K5BZI", Name = "Ray Eckel", City = "Austin", State = "TX" };
         }
 
         public DateTime? ContactTime { get; set; }
@@ -59,6 +63,14 @@ namespace K5BZI_Models
 
         [Adif("QSL_Rcvd")]
         public string QslReceived { get; set; }
+
+        [Cabrillo("CATEGORY-ASSISTED")]
+        public Assisted Assisted { get; set; }
+
+        [Cabrillo("CATEGORY-POWER")]
+        public Power Power { get; set; }
+
+        public Operator Operator { get; set; }
 
         public int Id { get; set; }
 

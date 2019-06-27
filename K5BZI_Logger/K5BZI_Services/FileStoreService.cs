@@ -62,7 +62,7 @@ namespace K5BZI_Services
 
             var fileName = CreateFilePath(logFileName, true, extension);
 
-            using (var sw = new StreamWriter(File.Open(fileName, FileMode.OpenOrCreate)))
+            using (var sw = new StreamWriter(File.Open(fileName, FileMode.Create)))
             using (var writer = new JsonTextWriter(sw))
             {
                 await sw.WriteAsync(fileData);

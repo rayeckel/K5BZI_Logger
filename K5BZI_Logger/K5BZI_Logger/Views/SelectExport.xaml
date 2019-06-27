@@ -8,7 +8,7 @@
     xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:Enums="clr-namespace:K5BZI_Models.Enums;assembly=K5BZI_Models"
-    xmlns:Converters="clr-namespace:K5BZI_Logger.Converters"
+    xmlns:Converters="clr-namespace:K5BZI_Services.Utilities;assembly=K5BZI_Services"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     Height="750" Width="1024"
     mc:Ignorable="d"
@@ -30,10 +30,8 @@
                               Kind="Cog" />
     </simpleChildWindow:ChildWindow.Icon>
     <simpleChildWindow:ChildWindow.Resources>
-        <Converters:EnumDescriptionConverter x:Key="EnumDescriptionConverter" />
-        <ObjectDataProvider MethodName="GetValues"
-                ObjectType="{x:Type sys:Enum}"
-                x:Key="LogTypeEnumValues">
+        <Converters:EnumUtility x:Key="EnumDescriptionConverter" />
+        <ObjectDataProvider MethodName="GetValues" ObjectType="{x:Type sys:Enum}" x:Key="LogTypeEnumValues">
             <ObjectDataProvider.MethodParameters>
                 <x:Type TypeName="Enums:LogType" />
             </ObjectDataProvider.MethodParameters>

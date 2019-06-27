@@ -20,7 +20,7 @@ namespace K5BZI_Services
 
         public void ExportLog(Event evntLog, ICollection<LogEntry> logEntries, LogType logType)
         {
-            switch(logType)
+            switch (logType)
             {
                 case LogType.Adif:
                     ExportToAdif(evntLog, logEntries);
@@ -46,9 +46,9 @@ namespace K5BZI_Services
             var adifData = new StringBuilder(header);
 
             var eventProperties = from p in eventLog.GetType().GetProperties()
-                        let attr = p.GetCustomAttributes(typeof(AdifAttribute), true)
-                        where attr.Length == 1
-                        select new { Property = p, Attribute = attr.First() as AdifAttribute };
+                                  let attr = p.GetCustomAttributes(typeof(AdifAttribute), true)
+                                  where attr.Length == 1
+                                  select new { Property = p, Attribute = attr.First() as AdifAttribute };
 
             foreach (var entry in logEntries)
             {
@@ -115,70 +115,51 @@ namespace K5BZI_Services
         private async void ExportToCabrillo(Event eventLog, ICollection<LogEntry> logEntries)
         {
             var headerString = String.Format(
-                "START-OF-LOG: {0}{1}CREATED-BY: K5BZI Logger version {2}{3}",
+                "START-OF-LOG: {0}{1}CREATED-BY: K5BZI Logger version {2}{3}{3}{3}",
                 "3.0", //TODO Appsettings.Get("CabrilloVersion")
-                Environment.NewLine, 
+                Environment.NewLine,
                 "1.0", //TODO: AppSettings.Get("AppVersion") 
                 Environment.NewLine);
 
             var cabrilloData = new StringBuilder(headerString);
 
-            /*
-    "CATEGORY-OPERATOR: {3}" + Environment.NewLine +
-    "CATEGORY-ASSISTED: {4}" + Environment.NewLine +
-    "CATEGORY-BAND: {5}" + Environment.NewLine +
-    "CATEGORY-POWER: {6}" + Environment.NewLine +
-    "CATEGORY-MODE: {7}" + Environment.NewLine +
-    "CATEGORY-TRANSMITTER: {8} " + Environment.NewLine +
-    "CATEGORY-OVERLAY: {9}" + Environment.NewLine +
-    "CLUB: {11}" + Environment.NewLine +
-    "LOCATION: {12}" + Environment.NewLine +
-    "OPERATORS: {20}" + Environment.NewLine +
-
- * DateTime.UtcNow.ToString("g")
-*/
             var eventProperties = from p in eventLog.GetType().GetProperties()
                                   let attr = p.GetCustomAttributes(typeof(CabrilloAttribute), true)
                                   where attr.Length == 1
                                   select new { Property = p, Attribute = attr.First() as CabrilloAttribute };
 
+            foreach (var eventProp in eventProperties)
+            {
+                var value = eventProp.Property.GetValue(eventLog) as string;
+
+                if (value == null)
+                {
+                    continue;
+                }
+
+                var line = String.Format("{0}:{1}", eventProp.Attribute.PropertyName, value);
+
+                cabrilloData.AppendLine(line);
+            };
+
             foreach (var entry in logEntries)
             {
-                foreach (var eventProp in eventProperties)
-                {
-                    var value = eventProp.Property.GetValue(eventLog) as string;
+                var line = new StringBuilder("QSO:");
 
-                    if (value == null)
-                    {
-                        continue;
-                    }
+                line.Append(String.Format("{0} ", entry.Signal.Frequency));
+                line.Append(String.Format("{0} ", entry.Signal.Mode));
+                line.Append(String.Format("{0} ", entry.QsoDate));
+                line.Append(String.Format("{0} ", entry.Operator.CallSign));
+                line.Append(String.Format("{0} ", entry.SignalReport.Sent));
+                //line.Append(String.Format("{0} ", entry.SignalReport.Received)); EXCHANGE
+                line.Append(String.Format("{0} ", entry.CallSign));
+                line.Append(String.Format("{0} ", entry.SignalReport.Received));
+                //line.Append(String.Format("{0} ", entry.SignalReport.Received)); TRANSMITTER
 
-                    var line = String.Format("{0}:{1}", eventProp.Attribute.PropertyName, value.Length, value);
-
-                    cabrilloData.AppendLine(line);
-                };
-
-                var entryProperties = from p in entry.GetType().GetProperties()
-                                      let attr = p.GetCustomAttributes(typeof(CabrilloAttribute), true)
-                                      where attr.Length == 1
-                                      select new { Property = p, Attribute = attr.First() as CabrilloAttribute };
-
-                foreach (var entryProp in entryProperties)
-                {
-                    var value = entryProp.Property.GetValue(entry) as string;
-
-                    if (value == null)
-                    {
-                        continue;
-                    }
-
-                    var line = String.Format("{0}:{1}", entryProp.Attribute.PropertyName, value);
-
-                    cabrilloData.AppendLine(line);
-                };
-
-                cabrilloData.AppendLine(String.Format("END-OF-LOG:{0}", Environment.NewLine));
+                cabrilloData.AppendLine(line.ToString());
             }
+
+            cabrilloData.AppendLine(String.Format("{0}END-OF-LOG:{0}", Environment.NewLine));
 
             await _fileStoreService.WriteToFile(cabrilloData.ToString(), eventLog.LogFileName, FileExtensions.Cabrillo);
 
