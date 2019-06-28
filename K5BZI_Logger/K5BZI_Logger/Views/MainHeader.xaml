@@ -55,6 +55,18 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
                 Command="{Binding ChangeEventCommand}"/>
+            <Button
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="140,0,0,0"
+                Content="Edit Event"
+                Width="120"
+                Foreground="Navy"
+                FontSize="12"
+                FontFamily="Tahoma"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Command="{Binding EditEventCommand}"/>
         </Grid>
         <Frame 
             Grid.Column="1"

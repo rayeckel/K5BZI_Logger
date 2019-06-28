@@ -2,8 +2,6 @@
 using PropertyChanged;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 
 namespace K5BZI_Models
 {
@@ -12,7 +10,7 @@ namespace K5BZI_Models
     {
         public Event()
         {
-            //Operators = new ObservableCollection<Operator>();
+            //Operators = new List<string>();
 
             //REMOVE THESE
             DXCC = 291;
@@ -22,17 +20,12 @@ namespace K5BZI_Models
             State = "TX";
             Class = "5A";
             ClubName = " Oak Hill Amateur Radio Club";
-            Operators = new ObservableCollection<Operator>
-            {
-                new Operator{ CallSign = "N5OAK", Name = "Oakie Goatboy", City = "Austin", State = "TX"},
-                new Operator{ CallSign = "K5BZI", Name = "Ray Eckel", City = "Austin", State = "TX"},
-                new Operator{ CallSign = "KC5IHO", Name = "Jason Zubik", City = "Austin", State = "TX"}
-            };
+            Operators = new List<string> { "N5OAK", "K5BZI", "KC5IHO" };
         }
 
         public int Id { get; set; }
 
-        public ObservableCollection<Operator> Operators { get; set; }
+        public List<string> Operators { get; set; }
 
         [Cabrillo("OPERATORS")]
         public string OperatorNameList
@@ -41,9 +34,7 @@ namespace K5BZI_Models
             {
                 var callString = String.Empty;
 
-                Operators.Select(_ => _.CallSign)
-                    .ToList()
-                    .ForEach(_ => callString += String.Format("{0}, ", _));
+                Operators.ForEach(_ => callString += String.Format("{0}, ", _));
 
                 return callString;
             }
@@ -54,7 +45,7 @@ namespace K5BZI_Models
         public string EventName { get; set; }
 
         [Cabrillo("CLUB")]
-        public string ClubName{ get; set; }
+        public string ClubName { get; set; }
 
         public bool IsActive { get; set; }
 

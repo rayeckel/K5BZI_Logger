@@ -91,6 +91,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EditEventViewModel.cs" />
+    <Compile Include="Interfaces\IEditEventViewModel.cs" />
     <Compile Include="Interfaces\IMainLoggerViewModel.cs" />
     <Compile Include="Interfaces\ISelectEventViewModel.cs" />
     <Compile Include="Interfaces\ISelectExportViewModel.cs" />

@@ -19,6 +19,7 @@ namespace K5BZI_Models.Main
             LogEntry = new LogEntry();
             LogEntries = new ObservableCollection<LogEntry>();
             DuplicateEntries = new ObservableCollection<LogEntry>();
+            Operators = new ObservableCollection<Operator>();
         }
 
         #endregion
@@ -28,6 +29,8 @@ namespace K5BZI_Models.Main
         public Event Event { get; set; }
         public LogEntry LogEntry { get; private set; }
         public LogEntry SelectedEntry { get; set; }
+        public LogEntry SelectedOperator { get; set; }
+        public ObservableCollection<Operator> Operators { get; private set; }
         public ObservableCollection<LogEntry> LogEntries { get; private set; }
         public ObservableCollection<LogEntry> DuplicateEntries { get; private set; }
 
@@ -81,17 +84,28 @@ namespace K5BZI_Models.Main
         }
         public Action ChangeEventAction { get; set; }
 
+        private ICommand _editEventCommand;
+        public ICommand EditEventCommand
+        {
+            get
+            {
+                return _editEventCommand ??
+                    (_editEventCommand = new CommandHandler(EditEventAction, true));
+            }
+        }
+        public Action EditEventAction { get; set; }
+
         private ICommand _updateLogEntryCommand;
         public ICommand UpdateLogEntryCommand
         {
             get
             {
                 return _updateLogEntryCommand ??
-                    (_updateLogEntryCommand = new CommandHandler(UpdateLogEntryAction, SelectedEntry != null));
+                    (_updateLogEntryCommand = new CommandHandler(EditLogEntryAction, SelectedEntry != null));
             }
         }
 
-        public Action UpdateLogEntryAction { get; set; }
+        public Action EditLogEntryAction { get; set; }
 
         private ICommand _selectExportLogCommand;
         public ICommand SelectExportLogCommand

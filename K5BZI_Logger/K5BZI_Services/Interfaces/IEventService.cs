@@ -7,6 +7,8 @@ namespace K5BZI_Services.Interfaces
     {
         Event CreateNewEvent(string eventName);
 
+        Event UpdateEvent(Event editEvent);
+
         List<Event> GetAllEvents();
     }
 }

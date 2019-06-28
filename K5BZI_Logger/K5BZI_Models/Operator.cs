@@ -1,10 +1,5 @@
 ﻿using K5BZI_Models.Attributes;
 using PropertyChanged;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace K5BZI_Models
 {
@@ -13,6 +8,10 @@ namespace K5BZI_Models
     {
         [Cabrillo("CALLSIGN")]
         public string CallSign { get; set; }
+
+        public bool IsClub { get; set; }
+
+        public string ClubCall { get; set; }
 
         [Cabrillo("NAME")]
         public string Name { get; set; }

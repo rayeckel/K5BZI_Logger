@@ -15,14 +15,21 @@ namespace K5BZI_ViewModels
 
         public MainModel Model { get; private set; }
         private readonly ILogListingService _logListingService;
+        private readonly IOperatorService _operatorService;
+        private readonly IEventService _eventService;
 
         #endregion
 
         #region Constructors
 
-        public MainLoggerViewModel(ILogListingService logListingService)
+        public MainLoggerViewModel(
+            ILogListingService logListingService,
+            IOperatorService operatorService,
+            IEventService eventService)
         {
             _logListingService = logListingService;
+            _operatorService = operatorService;
+            _eventService = eventService;
 
             Initialize();
         }
@@ -33,10 +40,11 @@ namespace K5BZI_ViewModels
 
         public void SelectEvent(Event selectedEvent)
         {
-            var logEntries = _logListingService.ReadLog(selectedEvent.LogFileName);
-
             Model.Event = selectedEvent;
             Model.LogEntries.Clear();
+            Model.Operators.Clear();
+
+            var logEntries = _logListingService.ReadLog(Model.Event.LogFileName);
 
             if (logEntries.Any())
             {
@@ -45,10 +53,19 @@ namespace K5BZI_ViewModels
                 Model.LogEntry.Signal.Band = logEntries.Last().Signal.Band;
                 Model.LogEntry.Signal.Frequency = logEntries.Last().Signal.Frequency;
             }
+
+            var operators = _operatorService.GetOperatorsByEvent(Model.Event);
+
+            if (operators.Any())
+            {
+                operators.ForEach(_ => Model.Operators.Add(_));
+            }
         }
 
-        public void CreateNewLog(Event newEvent)
+        public void CreateNewLog(string eventName)
         {
+            var newEvent = _eventService.CreateNewEvent(eventName);
+
             Model.Event = newEvent;
             Model.LogEntries.Clear();
             Model.LogEntry.ClearProperties();
@@ -77,9 +94,9 @@ namespace K5BZI_ViewModels
             Model = new MainModel
             {
                 CreateNewEntryAction = () => Model.LogEntry.ClearProperties(),
-                LogItAction = () => SaveLogEntry(),
                 ViewFileStoreAction = () => _logListingService.OpenLogListing(),
-                UpdateLogEntryAction = () => UpdateLogEntry(),
+                LogItAction = () => SaveLogEntry(),
+                EditLogEntryAction = () => EditLogEntry(),
                 EditOperatorsAction = () => EditOperators()
             };
 
@@ -100,7 +117,7 @@ namespace K5BZI_ViewModels
             Model.LogEntry.ClearProperties();
         }
 
-        private void UpdateLogEntry()
+        private void EditLogEntry()
         {
             _logListingService.UpdateLogEntry(Model.SelectedEntry, Model.Event);
         }

@@ -55,11 +55,8 @@ namespace K5BZI_ViewModels
 
         private void CreateNewLog()
         {
-            var eventService = ServiceLocator.Current.GetInstance<IEventService>();
-            var newEvent = eventService.CreateNewEvent(Model.EventName);
-
             var mainLoggerViewModel = ServiceLocator.Current.GetInstance<IMainLoggerViewModel>();
-            mainLoggerViewModel.CreateNewLog(newEvent);
+            mainLoggerViewModel.CreateNewLog(Model.EventName);
 
             Model.IsOpen = false;
         }

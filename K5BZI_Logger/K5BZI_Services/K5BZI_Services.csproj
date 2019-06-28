@@ -69,10 +69,12 @@
     <Compile Include="Interfaces\IExportService.cs" />
     <Compile Include="Interfaces\IFileStoreService.cs" />
     <Compile Include="Interfaces\ILogListingService.cs" />
+    <Compile Include="Interfaces\IOperatorService.cs" />
     <Compile Include="K5BZIServiceModelBindings.cs" />
     <Compile Include="LogListingService.cs" />
     <Compile Include="Interfaces\INetworkService.cs" />
     <Compile Include="NetworkService.cs" />
+    <Compile Include="OperatorService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\BaseUtility.cs" />
     <Compile Include="Utilities\EntityUtility.cs" />

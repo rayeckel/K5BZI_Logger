@@ -143,6 +143,7 @@
     <Compile Include="LogListing.cs" />
     <Compile Include="Enums\LogType.cs" />
     <Compile Include="Operator.cs" />
+    <Compile Include="ViewModelModels\EditEventModel.cs" />
     <Compile Include="ViewModelModels\MainModel.cs" />
     <Compile Include="Signal.cs" />
     <Compile Include="LogEntry.cs" />

@@ -10,6 +10,7 @@ namespace K5BZI_Services
             Bind<IEventService>().To<EventService>().InSingletonScope();
             Bind<IFileStoreService>().To<FileStoreService>().InSingletonScope();
             Bind<ILogListingService>().To<LogListingService>();
+            Bind<IOperatorService>().To<OperatorService>();
             Bind<IExportService>().To<ExportService>();
         }
     }

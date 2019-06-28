@@ -16,20 +16,14 @@ namespace K5BZI_Models.ViewModelModels
 
         public SelectEventModel()
         {
-            IsOpen = true;
-            ShowCloseButton = false;
             ExistingEvents = new ObservableCollection<Event>();
+
+            IsOpen = true;
         }
 
         #endregion
 
         #region Properties
-
-        public string EventName { get; set; }
-
-        public bool IsOpen { get; set; }
-
-        public bool ShowCloseButton { get; set; }
 
         public Event SelectedEvent { get; set; }
 
@@ -60,7 +54,7 @@ namespace K5BZI_Models.ViewModelModels
         {
             get
             {
-                return _selectLogCommand ?? (_selectLogCommand = 
+                return _selectLogCommand ?? (_selectLogCommand =
                     new DelegateCommand(SelectLogAction, _ => { return SelectedEvent != null; }));
             }
         }

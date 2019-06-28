@@ -128,11 +128,17 @@
     <Compile Include="Controls\DateRangePicker.xaml.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\Interfaces\IView.cs" />
+    <Compile Include="Views\MainTabs.xaml.cs">
+      <DependentUpon>MainTabs.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MainGrid.xaml.cs">
-      <DependentUpon>MainGrid.xaml</DependentUpon>
+    <Compile Include="Views\OperatorsGrid.xaml.cs">
+      <DependentUpon>OperatorsGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LogGrid.xaml.cs">
+      <DependentUpon>LogGrid.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainHeader.xaml.cs">
       <DependentUpon>MainHeader.xaml</DependentUpon>
@@ -142,6 +148,9 @@
     </Compile>
     <Compile Include="Views\MainInput.xaml.cs">
       <DependentUpon>MainInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditEvent.xaml.cs">
+      <DependentUpon>EditEvent.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SelectExport.xaml.cs">
       <DependentUpon>SelectExport.xaml</DependentUpon>
@@ -206,11 +215,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\MainTabs.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Main.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MainGrid.xaml">
+    <Page Include="Views\OperatorsGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\LogGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -225,6 +242,10 @@
     <Page Include="Views\MainInput.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditEvent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\SelectExport.xaml">
       <Generator>MSBuild:Compile</Generator>

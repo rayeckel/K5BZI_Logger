@@ -9,15 +9,11 @@ namespace K5BZI_Services
 {
     public class LogListingService : ILogListingService
     {
-        private readonly IEventService _eventService;
         private readonly IFileStoreService _fileStoreService;
         private List<LogEntry> _logEntries;
 
-        public LogListingService(
-            IEventService eventService,
-            IFileStoreService fileStoreService)
+        public LogListingService(IFileStoreService fileStoreService)
         {
-            _eventService = eventService;
             _fileStoreService = fileStoreService;
 
             _logEntries = new List<LogEntry>();

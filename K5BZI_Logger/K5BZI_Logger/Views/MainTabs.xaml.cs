@@ -7,16 +7,11 @@ namespace K5BZI_Logger.Views
     /// <summary>
     /// Interaction logic for MainGrid.xaml
     /// </summary>
-    public partial class MainGrid : UserControl
+    public partial class MainTabs : UserControl
     {
-        public MainGrid()
+        public MainTabs()
         {
             InitializeComponent();
-        }
-
-        private void DataGrid1_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
-        {
-            ((MainModel)DataContext).UpdateLogEntryCommand.Execute(this);
         }
     }
 }
