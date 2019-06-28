@@ -29,7 +29,8 @@ namespace K5BZI_Models.Main
         public Event Event { get; set; }
         public LogEntry LogEntry { get; private set; }
         public LogEntry SelectedEntry { get; set; }
-        public LogEntry SelectedOperator { get; set; }
+        public Operator SelectedOperator { get; set; }
+        public Operator CurrentOperator { get; set; }
         public ObservableCollection<Operator> Operators { get; private set; }
         public ObservableCollection<LogEntry> LogEntries { get; private set; }
         public ObservableCollection<LogEntry> DuplicateEntries { get; private set; }

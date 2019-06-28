@@ -59,6 +59,7 @@ namespace K5BZI_ViewModels
             if (operators.Any())
             {
                 operators.ForEach(_ => Model.Operators.Add(_));
+                Model.CurrentOperator = operators.First();
             }
         }
 

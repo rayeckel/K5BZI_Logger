@@ -9,9 +9,10 @@
             <RowDefinition Height="100" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="400" />
+            <ColumnDefinition Width="300" />
             <ColumnDefinition Width="200" />
-            <ColumnDefinition Width="400" />
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="200" />
         </Grid.ColumnDefinitions>
         <!--
                     <controls1:DateRangePicker
@@ -74,8 +75,42 @@
             VerticalAlignment="Center"
             Margin="0,10,0,0"
             Source="../Controls/AllXamlClock.xaml"/>
+        <Grid
+                Grid.Row="0"
+                Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="70" />
+            </Grid.RowDefinitions>
+            <Label
+                Grid.Row="0"
+                x:Name="lblOperatorName"
+                Margin="0,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Height="30"
+                Width="300"
+                FontSize="15"
+                FontFamily="Tahoma"
+                BorderThickness="0"
+                Foreground="DarkSlateBlue"
+                Content="{Binding CurrentOperator.Name}"/>
+            <Label
+                Grid.Row="1"
+                x:Name="lblOperatorCall"
+                Margin="0,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Height="70"
+                Width="300"
+                FontSize="25"
+                FontFamily="Tahoma"
+                BorderThickness="0"
+                Foreground="DarkSlateBlue"
+                Content="{Binding CurrentOperator.CallSign}"/>
+        </Grid>
         <Canvas
-            Grid.Column="2"
+            Grid.Column="3"
             Height="100px"
             Width="120px"
             HorizontalAlignment="Right"
