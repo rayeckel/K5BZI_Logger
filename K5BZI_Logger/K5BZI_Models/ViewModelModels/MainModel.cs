@@ -2,11 +2,7 @@
 using PropertyChanged;
 using System;
 using System.Collections.ObjectModel;
-using Microsoft.VisualStudio.PlatformUI;
-using System.Linq;
-using System.Windows;
 using System.Windows.Input;
-using System.Windows.Controls;
 
 namespace K5BZI_Models.Main
 {
@@ -31,6 +27,7 @@ namespace K5BZI_Models.Main
 
         public Event Event { get; set; }
         public LogEntry LogEntry { get; private set; }
+        public LogEntry SelectedEntry { get; set; }
         public ObservableCollection<LogEntry> LogEntries { get; private set; }
         public ObservableCollection<LogEntry> DuplicateEntries { get; private set; }
 
@@ -90,11 +87,11 @@ namespace K5BZI_Models.Main
             get
             {
                 return _updateLogEntryCommand ??
-                    (_updateLogEntryCommand = new DelegateCommand(UpdateLogEntryAction));
+                    (_updateLogEntryCommand = new CommandHandler(UpdateLogEntryAction, SelectedEntry != null));
             }
         }
 
-        public Action<object> UpdateLogEntryAction { get; set; }
+        public Action UpdateLogEntryAction { get; set; }
 
         private ICommand _selectExportLogCommand;
         public ICommand SelectExportLogCommand
@@ -128,6 +125,7 @@ namespace K5BZI_Models.Main
             }
         }
         public Action EditOperatorsAction { get; set; }
+
         #endregion
     }
 }

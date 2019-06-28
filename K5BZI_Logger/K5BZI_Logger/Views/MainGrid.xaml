@@ -41,7 +41,14 @@
                     BorderThickness=".5"
                     BorderBrush="Navy"
                     AutoGenerateColumns="False"
-                    ItemsSource="{Binding LogEntries}">
+                    ItemsSource="{Binding LogEntries}"
+                    SelectedItem="{Binding SelectedEntry, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                    CellEditEnding="DataGrid1_CellEditEnding">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="CellEditEnding">
+                            <i:InvokeCommandAction Command="{Binding Path=UpdateLogEntryCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                     <dgControls:DataGrid.Columns>
                         <dgControls:DataGridTextColumn 
                             Header="Time" 
@@ -52,7 +59,7 @@
                         <dgControls:DataGridTextColumn 
                             Header="Time" 
                             Width="175"
-                            Binding="{Binding ContactTime}" 
+                            Binding="{Binding ContactTime, UpdateSourceTrigger=PropertyChanged}" 
                             FontSize="12" />
                         <dgControls:DataGridTextColumn 
                             Header="Call" 
@@ -73,22 +80,22 @@
                         <dgControls:DataGridTextColumn 
                             Header="Band"
                             Width="75"
-                            Binding="{Binding Signal.Band}" 
+                            Binding="{Binding Signal.Band, UpdateSourceTrigger=PropertyChanged}" 
                             FontSize="12" />
                         <dgControls:DataGridTextColumn
                             Header="Frequency" 
                             Width="95"
-                            Binding="{Binding Signal.Frequency}"
+                            Binding="{Binding Signal.Frequency, UpdateSourceTrigger=PropertyChanged}"
                             FontSize="12" />
                         <dgControls:DataGridTextColumn
                             Header="Sent" 
                             Width="75"
-                            Binding="{Binding SignalReport.Sent}"
+                            Binding="{Binding SignalReport.Sent, UpdateSourceTrigger=PropertyChanged}"
                             FontSize="12" />
                         <dgControls:DataGridTextColumn
                             Header="Recvd" 
                             Width="75"
-                            Binding="{Binding SignalReport.Received}"
+                            Binding="{Binding SignalReport.Received, UpdateSourceTrigger=PropertyChanged}"
                             FontSize="12" />
                     </dgControls:DataGrid.Columns>
                 </dgControls:DataGrid>

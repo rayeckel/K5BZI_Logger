@@ -79,7 +79,7 @@ namespace K5BZI_ViewModels
                 CreateNewEntryAction = () => Model.LogEntry.ClearProperties(),
                 LogItAction = () => SaveLogEntry(),
                 ViewFileStoreAction = () => _logListingService.OpenLogListing(),
-                UpdateLogEntryAction = (obj) => UpdateLogEntry(obj),
+                UpdateLogEntryAction = () => UpdateLogEntry(),
                 EditOperatorsAction = () => EditOperators()
             };
 
@@ -100,11 +100,9 @@ namespace K5BZI_ViewModels
             Model.LogEntry.ClearProperties();
         }
 
-        private void UpdateLogEntry(object obj)
+        private void UpdateLogEntry()
         {
-            //var rowBeingEdited = args.Row.Item as LogEntry;
-
-            //_logListingService.UpdateLogEntry(rowBeingEdited, Model.Event);
+            _logListingService.UpdateLogEntry(Model.SelectedEntry, Model.Event);
         }
 
         private void EditOperators()
