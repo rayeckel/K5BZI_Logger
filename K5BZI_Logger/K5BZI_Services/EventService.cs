@@ -60,7 +60,7 @@ namespace K5BZI_Services
             {
                 existing.ARRL_Sect = editEvent.ARRL_Sect;
                 existing.Class = editEvent.Class;
-                existing.ClubName = editEvent.ClubName;
+                existing.Club = editEvent.Club;
                 existing.Comments = editEvent.Comments;
                 existing.CqZone = editEvent.CqZone;
                 existing.DXCC = editEvent.DXCC;

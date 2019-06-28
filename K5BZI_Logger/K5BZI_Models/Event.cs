@@ -19,7 +19,7 @@ namespace K5BZI_Models
             ARRL_Sect = "STX";
             State = "TX";
             Class = "5A";
-            ClubName = " Oak Hill Amateur Radio Club";
+            Club = new Operator { Name = "Oak Hill Amateur Radio Club", IsClub = true, CallSign = "N5OAK" };
             Operators = new List<string> { "N5OAK", "K5BZI", "KC5IHO" };
         }
 
@@ -45,7 +45,15 @@ namespace K5BZI_Models
         public string EventName { get; set; }
 
         [Cabrillo("CLUB")]
-        public string ClubName { get; set; }
+        public string ClubName
+        {
+            get
+            {
+                return Club != null ? Club.Name : String.Empty;
+            }
+        }
+
+        public Operator Club { get; set; }
 
         public bool IsActive { get; set; }
 
