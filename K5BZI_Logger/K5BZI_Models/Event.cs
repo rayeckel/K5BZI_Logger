@@ -20,7 +20,6 @@ namespace K5BZI_Models
             State = "TX";
             Class = "5A";
             Club = new Operator { Name = "Oak Hill Amateur Radio Club", IsClub = true, CallSign = "N5OAK" };
-            Operators = new List<string> { "N5OAK", "K5BZI", "KC5IHO" };
         }
 
         public int Id { get; set; }
