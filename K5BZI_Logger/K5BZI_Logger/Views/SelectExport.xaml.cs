@@ -13,7 +13,7 @@ namespace K5BZI_Logger.Views
         {
             InitializeComponent();
 
-            var viewModel = ServiceLocator.Current.GetInstance<ISelectExportViewModel>();
+            var viewModel = ServiceLocator.Current.GetInstance<IExportViewModel>();
 
             DataContext = viewModel.Model;
         }

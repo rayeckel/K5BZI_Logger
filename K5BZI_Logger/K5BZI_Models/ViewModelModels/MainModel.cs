@@ -59,39 +59,6 @@ namespace K5BZI_Models.Main
         }
         public Action CreateNewEntryAction { get; set; }
 
-        private ICommand _selectEventCommand;
-        public ICommand SelectEventCommand
-        {
-            get
-            {
-                return _selectEventCommand ??
-                    (_selectEventCommand = new CommandHandler(SelectEventAction, true));
-            }
-        }
-        public Action SelectEventAction { get; set; }
-
-        private ICommand _changeEventCommand;
-        public ICommand ChangeEventCommand
-        {
-            get
-            {
-                return _changeEventCommand ??
-                    (_changeEventCommand = new CommandHandler(ChangeEventAction, true));
-            }
-        }
-        public Action ChangeEventAction { get; set; }
-
-        private ICommand _editEventCommand;
-        public ICommand EditEventCommand
-        {
-            get
-            {
-                return _editEventCommand ??
-                    (_editEventCommand = new CommandHandler(EditEventAction, true));
-            }
-        }
-        public Action EditEventAction { get; set; }
-
         private ICommand _updateLogEntryCommand;
         public ICommand UpdateLogEntryCommand
         {

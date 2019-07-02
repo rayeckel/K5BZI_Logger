@@ -6,7 +6,6 @@
             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
             xmlns:dgControls="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
             xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
-            xmlns:viewmodel="clr-namespace:K5BZI_ViewModels;assembly=K5BZI_ViewModels"
             mc:Ignorable="d"
             Padding="2"
             BorderThickness=".5" 

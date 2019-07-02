@@ -38,8 +38,7 @@
                     BorderBrush="Navy"
                     AutoGenerateColumns="False"
                     ItemsSource="{Binding LogEntries}"
-                    SelectedItem="{Binding SelectedEntry, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                    CellEditEnding="DataGrid1_CellEditEnding">
+                    SelectedItem="{Binding SelectedEntry, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="CellEditEnding">
                         <i:InvokeCommandAction Command="{Binding Path=UpdateLogEntryCommand}"/>

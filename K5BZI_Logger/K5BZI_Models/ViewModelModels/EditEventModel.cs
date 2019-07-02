@@ -20,6 +20,16 @@ namespace K5BZI_Models.ViewModelModels
         }
         public Action EditEventAction { get; set; }
 
+        private ICommand _updateEventCommand;
+        public ICommand UpdateEventCommand
+        {
+            get
+            {
+                return _updateEventCommand ?? (_updateEventCommand = new CommandHandler(UpdateEventAction, true));
+            }
+        }
+        public Action UpdateEventAction { get; set; }
+
         #endregion
     }
 }

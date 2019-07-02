@@ -10,12 +10,9 @@
     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
     Height="750" Width="1024"
     mc:Ignorable="d"
-    IsOpen="{Binding Model.IsOpen}"
-    ShowCloseButton="{Binding Model.ShowCloseButton}"
+    IsOpen="{Binding IsOpen}"
+    ShowCloseButton="{Binding ShowCloseButton}"
     Title="Edit Event">
-    <simpleChildWindow:ChildWindow.DataContext>
-        <viewmodel:EditEventViewModel/>
-    </simpleChildWindow:ChildWindow.DataContext>
     <simpleChildWindow:ChildWindow.OverlayBrush>
         <SolidColorBrush Opacity="0.8" Color="{StaticResource Gray2}" />
     </simpleChildWindow:ChildWindow.OverlayBrush>
@@ -67,7 +64,7 @@
                 Height="30"
                 Margin="20,10,0,0"
                 FontFamily="Tahoma"
-                Text="{Binding Model.Event.EventName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Text="{Binding Event.EventName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 controls:TextBoxHelper.Watermark="Event Name" 
                 controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>
@@ -110,7 +107,7 @@
                 Height="30"
                 Margin="20,10,0,0"
                 FontFamily="Tahoma"
-                Text="{Binding Model.Event.ClubName, Mode=OneWay}"
+                Text="{Binding Event.ClubName, Mode=OneWay}"
                 controls:TextBoxHelper.Watermark="No Club Affilliated" 
                 controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>
@@ -130,7 +127,7 @@
                 Height="30"
                 Margin="20,10,0,0"
                 FontFamily="Tahoma"
-                Text="{Binding Model.Event.IsActive, Mode=OneWay}"
+                Text="{Binding Event.IsActive, Mode=OneWay}"
                 controls:TextBoxHelper.Watermark="Is Active" 
                 controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>
@@ -150,7 +147,7 @@
                 Height="30"
                 Margin="20,10,0,0"
                 FontFamily="Tahoma"
-                Text="{Binding Model.Event.ARRL_Sect, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Text="{Binding Event.ARRL_Sect, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 controls:TextBoxHelper.Watermark="ARRL Section" 
                 controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>
@@ -170,7 +167,7 @@
                 Height="30"
                 Margin="20,10,0,0"
                 FontFamily="Tahoma"
-                Text="{Binding Model.Event.DXCC, Mode=OneWay}"
+                Text="{Binding Event.DXCC, Mode=OneWay}"
                 controls:TextBoxHelper.Watermark="DXCC" 
                 controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>
@@ -190,7 +187,7 @@
                 Height="30"
                 Margin="20,10,0,0"
                 FontFamily="Tahoma"
-                Text="{Binding Model.Event.CqZone, Mode=OneWay}"
+                Text="{Binding Event.CqZone, Mode=OneWay}"
                 controls:TextBoxHelper.Watermark="CQ Zone" 
                 controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>
@@ -210,7 +207,7 @@
                 Height="30"
                 Margin="20,10,0,0"
                 FontFamily="Tahoma"
-                Text="{Binding Model.Event.ItuZone, Mode=OneWay}"
+                Text="{Binding Event.ItuZone, Mode=OneWay}"
                 controls:TextBoxHelper.Watermark="ITU Zone" 
                 controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>
@@ -230,7 +227,7 @@
                 Height="30"
                 Margin="20,10,0,0"
                 FontFamily="Tahoma"
-                Text="{Binding Model.Event.Class, Mode=OneWay}"
+                Text="{Binding Event.Class, Mode=OneWay}"
                 controls:TextBoxHelper.Watermark="Class" 
                 controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>
@@ -250,7 +247,7 @@
                 Height="30"
                 Margin="20,10,0,0"
                 FontFamily="Tahoma"
-                Text="{Binding Model.Event.LogFileName, Mode=OneWay}"
+                Text="{Binding Event.LogFileName, Mode=OneWay}"
                 controls:TextBoxHelper.Watermark="Log File Name" 
                 controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>
@@ -270,7 +267,7 @@
                 Height="30"
                 Margin="20,10,0,0"
                 FontFamily="Tahoma"
-                Text="{Binding Model.Event.OperatorNameList, Mode=OneWay}"
+                Text="{Binding Event.OperatorNameList, Mode=OneWay}"
                 controls:TextBoxHelper.Watermark="Operators" 
                 controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>
@@ -287,7 +284,7 @@
                 VerticalAlignment="Center"
                 FontFamily="Tahoma"
                 IsDefault="True"
-                Command="{Binding Model.EditEventCommand}"/>
+                Command="{Binding UpdateEventCommand}"/>
         </Grid>
     </Grid>
 </simpleChildWindow:ChildWindow>

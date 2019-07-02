@@ -91,18 +91,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EditEventViewModel.cs" />
     <Compile Include="Interfaces\IEditEventViewModel.cs" />
     <Compile Include="Interfaces\IMainLoggerViewModel.cs" />
     <Compile Include="Interfaces\IOperatorsViewModel.cs" />
-    <Compile Include="Interfaces\ISelectEventViewModel.cs" />
-    <Compile Include="Interfaces\ISelectExportViewModel.cs" />
+    <Compile Include="Interfaces\IEventViewModel.cs" />
+    <Compile Include="Interfaces\IExportViewModel.cs" />
     <Compile Include="K5BZIViewModelBindings.cs" />
     <Compile Include="MainLoggerViewModel.cs" />
     <Compile Include="OperatorsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SelectExportViewModel.cs" />
-    <Compile Include="SelectEventViewModel.cs" />
+    <Compile Include="ExportViewModel.cs" />
+    <Compile Include="EventViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -2,7 +2,7 @@
 
 namespace K5BZI_ViewModels.Interfaces
 {
-    public interface ISelectExportViewModel
+    public interface IExportViewModel
     {
         SelectExportModel Model { get; }
     }

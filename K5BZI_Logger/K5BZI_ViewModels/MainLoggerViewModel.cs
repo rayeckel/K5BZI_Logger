@@ -15,7 +15,6 @@ namespace K5BZI_ViewModels
 
         public MainModel Model { get; private set; }
         private readonly ILogListingService _logListingService;
-        private readonly IOperatorsViewModel _operatorsViewModel;
         private readonly IEventService _eventService;
 
         #endregion
@@ -24,11 +23,9 @@ namespace K5BZI_ViewModels
 
         public MainLoggerViewModel(
             ILogListingService logListingService,
-            IOperatorsViewModel operatorsViewModel,
             IEventService eventService)
         {
             _logListingService = logListingService;
-            _operatorsViewModel = operatorsViewModel;
             _eventService = eventService;
 
             Initialize();
@@ -52,14 +49,10 @@ namespace K5BZI_ViewModels
                 Model.LogEntry.Signal.Band = logEntries.Last().Signal.Band;
                 Model.LogEntry.Signal.Frequency = logEntries.Last().Signal.Frequency;
             }
-
-            _operatorsViewModel.PopulateOperators(selectedEvent);
         }
 
-        public void CreateNewLog(string eventName)
+        public void CreateNewLog(Event newEvent)
         {
-            var newEvent = _eventService.CreateNewEvent(eventName);
-
             Model.Event = newEvent;
             Model.LogEntries.Clear();
             Model.LogEntry.ClearProperties();

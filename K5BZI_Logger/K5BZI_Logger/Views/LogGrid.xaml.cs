@@ -9,10 +9,5 @@ namespace K5BZI_Logger.Views
         {
             InitializeComponent();
         }
-
-        private void DataGrid1_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
-        {
-            //((MainModel)DataContext).UpdateLogEntryCommand.Execute(this);
-        }
     }
 }

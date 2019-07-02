@@ -72,6 +72,17 @@ namespace K5BZI_Models.ViewModelModels
         }
         public Action<object> CreateNewLogAction { get; set; }
 
+        private ICommand _changeEventCommand;
+        public ICommand ChangeEventCommand
+        {
+            get
+            {
+                return _changeEventCommand ??
+                    (_changeEventCommand = new CommandHandler(ChangeEventAction, true));
+            }
+        }
+        public Action ChangeEventAction { get; set; }
+
         #endregion
     }
 }

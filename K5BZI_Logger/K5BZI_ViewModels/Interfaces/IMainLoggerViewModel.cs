@@ -9,6 +9,6 @@ namespace K5BZI_ViewModels.Interfaces
 
         void SelectEvent(Event selectedEvent);
 
-        void CreateNewLog(string eventName);
+        void CreateNewLog(Event newEvent);
     }
 }

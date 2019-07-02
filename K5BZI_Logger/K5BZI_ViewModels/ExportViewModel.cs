@@ -4,7 +4,7 @@ using K5BZI_ViewModels.Interfaces;
 
 namespace K5BZI_ViewModels
 {
-    public class SelectExportViewModel : ISelectExportViewModel
+    public class ExportViewModel : IExportViewModel
     {
         #region Properties
 
@@ -16,7 +16,7 @@ namespace K5BZI_ViewModels
 
         #region Constructors
 
-        public SelectExportViewModel(
+        public ExportViewModel(
             IExportService exportService,
             IMainLoggerViewModel mainLoggerViewModel)
         {
