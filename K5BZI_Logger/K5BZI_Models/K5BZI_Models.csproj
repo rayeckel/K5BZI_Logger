@@ -132,8 +132,9 @@
     <Compile Include="Attributes\AdifAttribute.cs" />
     <Compile Include="Attributes\CabrilloAttribute.cs" />
     <Compile Include="Base\BaseModel.cs" />
+    <Compile Include="Base\BaseViewModel.cs" />
     <Compile Include="Base\CommandHandler.cs" />
-    <Compile Include="Base\IBaseModel.cs" />
+    <Compile Include="Base\IBaseViewModel.cs" />
     <Compile Include="Enums\Assisted.cs" />
     <Compile Include="Enums\Mode.cs" />
     <Compile Include="Enums\Power.cs" />
@@ -144,12 +145,13 @@
     <Compile Include="Enums\LogType.cs" />
     <Compile Include="Operator.cs" />
     <Compile Include="ViewModelModels\EditEventModel.cs" />
+    <Compile Include="ViewModelModels\EditOperatorModel.cs" />
     <Compile Include="ViewModelModels\MainModel.cs" />
     <Compile Include="Signal.cs" />
     <Compile Include="LogEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignalReport.cs" />
-    <Compile Include="ViewModelModels\OperatorsModel.cs" />
+    <Compile Include="ViewModelModels\OperatorModel.cs" />
     <Compile Include="ViewModelModels\SelectExportModel.cs" />
     <Compile Include="ViewModelModels\SelectEventModel.cs" />
   </ItemGroup>

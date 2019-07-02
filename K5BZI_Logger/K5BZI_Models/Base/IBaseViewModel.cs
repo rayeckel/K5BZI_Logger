@@ -1,6 +1,6 @@
 ﻿namespace K5BZI_Models.Base
 {
-    public interface IBaseModel
+    public interface IBaseViewModel
     {
     }
 }

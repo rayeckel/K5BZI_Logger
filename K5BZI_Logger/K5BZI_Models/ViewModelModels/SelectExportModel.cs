@@ -8,7 +8,7 @@ using System.Windows.Input;
 namespace K5BZI_Models.ViewModelModels
 {
     [AddINotifyPropertyChangedInterface]
-    public class SelectExportModel : BaseModel
+    public class SelectExportModel : BaseViewModel
     {
         #region Properties
 

@@ -127,6 +127,9 @@
     </Compile>
     <Compile Include="Controls\DateRangePicker.xaml.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\EditOperator.xaml.cs">
+      <DependentUpon>EditOperator.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Interfaces\IView.cs" />
     <Compile Include="Views\MainTabs.xaml.cs">
       <DependentUpon>MainTabs.xaml</DependentUpon>
@@ -134,8 +137,11 @@
     <Compile Include="Views\Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\OperatorsGrid.xaml.cs">
-      <DependentUpon>OperatorsGrid.xaml</DependentUpon>
+    <Compile Include="Views\Operators.xaml.cs">
+      <DependentUpon>Operators.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OperatorsTab.xaml.cs">
+      <DependentUpon>OperatorsTab.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LogGrid.xaml.cs">
       <DependentUpon>LogGrid.xaml</DependentUpon>
@@ -215,6 +221,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\EditOperator.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\MainTabs.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -223,7 +233,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\OperatorsGrid.xaml">
+    <Page Include="Views\Operators.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\OperatorsTab.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

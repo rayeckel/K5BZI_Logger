@@ -5,8 +5,8 @@ namespace K5BZI_Services.Interfaces
 {
     public interface IOperatorService
     {
-        void UpdateOperator(Operator newOperator);
+        Operator UpdateOperator(Operator newOperator);
 
-        List<Operator> GetOperatorsByEvent(Event eventObject);
+        List<Operator> GetFullOperatorListing();
     }
 }

@@ -10,7 +10,7 @@ using System.Windows.Input;
 namespace K5BZI_Models.ViewModelModels
 {
     [AddINotifyPropertyChangedInterface]
-    public class SelectEventModel : BaseModel
+    public class SelectEventModel : BaseViewModel
     {
         #region Constructors
 

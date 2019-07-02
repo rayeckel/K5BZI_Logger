@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace K5BZI_Models.ViewModelModels
 {
-    public class EditEventModel : BaseModel
+    public class EditEventModel : BaseViewModel
     {
         public Event Event { get; set; }
 

@@ -91,13 +91,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IEditEventViewModel.cs" />
     <Compile Include="Interfaces\IMainLoggerViewModel.cs" />
     <Compile Include="Interfaces\IOperatorsViewModel.cs" />
     <Compile Include="Interfaces\IEventViewModel.cs" />
     <Compile Include="Interfaces\IExportViewModel.cs" />
     <Compile Include="K5BZIViewModelBindings.cs" />
-    <Compile Include="MainLoggerViewModel.cs" />
+    <Compile Include="MainViewModel.cs" />
     <Compile Include="OperatorsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ExportViewModel.cs" />

@@ -7,7 +7,7 @@ using System.Windows.Input;
 namespace K5BZI_Models.Main
 {
     [AddINotifyPropertyChangedInterface]
-    public class MainModel : BaseModel
+    public class MainModel : BaseViewModel
     {
         #region Constructors
 

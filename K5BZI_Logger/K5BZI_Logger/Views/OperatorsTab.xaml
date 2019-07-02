@@ -1,4 +1,4 @@
-﻿<Controls:MetroTabItem x:Class="K5BZI_Logger.Views.OperatorsGrid"
+﻿<Controls:MetroTabItem x:Class="K5BZI_Logger.Views.OperatorsTab"
             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -41,11 +41,11 @@
                 BorderThickness=".5"
                 BorderBrush="Navy"
                 AutoGenerateColumns="False"
-                ItemsSource="{Binding Operators}"
+                ItemsSource="{Binding EventOperators}"
                 SelectedItem="{Binding SelectedOperator, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="CellEditEnding">
-                        <i:InvokeCommandAction Command="{Binding Path=EditOperatorsCommand}"/>
+                        <i:InvokeCommandAction Command="{Binding Path=EditOperatorCommand}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <dgControls:DataGrid.Columns>
@@ -121,7 +121,7 @@
                     Foreground="Navy"
                     FontSize="12"
                     FontFamily="Tahoma"
-                    Command="{Binding EditOperatorsCommand}"/>
+                    Command="{Binding AddOperatorToEventCommand}"/>
                 <Button
                     VerticalAlignment="Center"
                     Grid.Row="2"
@@ -132,7 +132,7 @@
                     Foreground="Navy"
                     FontSize="12"
                     FontFamily="Tahoma"
-                    Command="{Binding EditOperatorsCommand}"/>
+                    Command="{Binding AddClubToEventCommand}"/>
             </Grid>
         </Grid>
     </Controls:MetroTabItem.Content>

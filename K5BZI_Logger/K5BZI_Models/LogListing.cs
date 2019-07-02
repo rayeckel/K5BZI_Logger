@@ -4,7 +4,7 @@ using System;
 
 namespace K5BZI_Models
 {
-    public class LogListing : BaseModel
+    public class LogListing : BaseViewModel
     {
         public string FileName { get; set; }
 

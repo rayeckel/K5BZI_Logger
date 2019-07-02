@@ -10,6 +10,6 @@
         TabStripPlacement="Top"
         BorderBrush="Navy">
         <local:LogGrid/>
-        <local:OperatorsGrid/>
+        <local:OperatorsTab/>
     </Controls:MetroAnimatedSingleRowTabControl>
 </UserControl>

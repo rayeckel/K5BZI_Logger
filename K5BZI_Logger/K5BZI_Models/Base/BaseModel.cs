@@ -1,20 +1,25 @@
-﻿using PropertyChanged;
+﻿using System;
 
 namespace K5BZI_Models.Base
 {
-    [AddINotifyPropertyChangedInterface]
-    public class BaseModel : IBaseModel
+    public class BaseModel
     {
-        public BaseModel()
+        public void Clear()
         {
-            IsOpen = false;
-            ShowCloseButton = true;
+            var type = this.GetType();
+            var properties = type.GetProperties();
+
+            for (int i = 0; i < properties.Length; ++i)
+            {
+                try
+                {
+                    properties[i].SetValue(this, null);
+                }
+                catch(Exception ex)
+                {
+                    ex.GetType();
+                }
+            }
         }
-
-        public string EventName { get; set; }
-
-        public bool IsOpen { get; set; }
-
-        public bool ShowCloseButton { get; set; }
     }
 }

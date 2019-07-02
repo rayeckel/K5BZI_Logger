@@ -1,10 +1,11 @@
 ﻿using K5BZI_Models.Attributes;
+using K5BZI_Models.Base;
 using PropertyChanged;
 
 namespace K5BZI_Models
 {
     [AddINotifyPropertyChangedInterface]
-    public class Operator
+    public class Operator : BaseModel
     {
         [Cabrillo("CALLSIGN")]
         public string CallSign { get; set; }

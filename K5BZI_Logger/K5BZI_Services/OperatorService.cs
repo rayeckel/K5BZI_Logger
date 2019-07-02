@@ -1,6 +1,5 @@
 ﻿using K5BZI_Models;
 using K5BZI_Services.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,11 +16,6 @@ namespace K5BZI_Services
             _fileStoreService = fileStoreService;
 
             _operators = new List<Operator>();
-
-            //TODO: DELETE THiS
-            CreateOperator("N5OAK", "Oakie Goatboy", "Austin", "TX", "78758", "USA", "N5OAK", true);
-            CreateOperator("K5BZI", "Ray Eckel", "Austin", "TX", "78748", "USA", "N5OAK");
-            CreateOperator("KC5IHO", "Jason Zubik", "Austin", "TX", "78756", "USA", "N5OAK");
         }
 
         public void CreateOperator(
@@ -47,13 +41,14 @@ namespace K5BZI_Services
             });
         }
 
-        public void UpdateOperator(Operator editOperator)
+        public Operator UpdateOperator(Operator editOperator)
         {
             var existingOperator = _operators.FirstOrDefault(_ => _.CallSign == editOperator.CallSign);
 
             if (existingOperator == null)
             {
                 _operators.Add(editOperator);
+                existingOperator = editOperator;
             }
             else
             {
@@ -66,13 +61,8 @@ namespace K5BZI_Services
             }
 
             _fileStoreService.WriteToFile(_operators, _operatorsFileName, false);
-        }
 
-        public List<Operator> GetOperatorsByEvent(Event eventObject)
-        {
-            GetFullOperatorListing();
-
-            return _operators.Where(_ => eventObject.Operators.Contains(_.CallSign)).ToList();
+            return existingOperator;
         }
 
         public List<Operator> GetFullOperatorListing()

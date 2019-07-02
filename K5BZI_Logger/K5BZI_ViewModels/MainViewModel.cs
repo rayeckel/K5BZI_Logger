@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace K5BZI_ViewModels
 {
-    public class MainLoggerViewModel : IMainLoggerViewModel
+    public class MainViewModel : IMainLoggerViewModel
     {
         #region Properties
 
@@ -21,7 +21,7 @@ namespace K5BZI_ViewModels
 
         #region Constructors
 
-        public MainLoggerViewModel(
+        public MainViewModel(
             ILogListingService logListingService,
             IEventService eventService)
         {

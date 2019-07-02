@@ -3,27 +3,35 @@ using K5BZI_Models.ViewModelModels;
 using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels.Interfaces;
 using System.Linq;
-using System.Windows;
 
 namespace K5BZI_ViewModels
 {
     public class OperatorsViewModel : IOperatorsViewModel
     {
-        public OperatorsModel Model { get; private set; }
+        public OperatorModel Model { get; private set; }
+        public EditOperatorModel EditOperator { get; private set; }
         private readonly IOperatorService _operatorService;
+        private readonly IEventService _eventService;
+        private Event currentEvent;
+        private bool _addToEvent;
 
-        public OperatorsViewModel(IOperatorService operatorService)
+        public OperatorsViewModel(
+            IOperatorService operatorService,
+            IEventService eventService)
         {
             _operatorService = operatorService;
+            _eventService = eventService;
 
             Initialize();
         }
 
         public void PopulateOperators(Event eventModel)
         {
+            currentEvent = eventModel;
             Model.Operators.Clear();
+            Model.EventOperators.Clear();
 
-            var operators = _operatorService.GetOperatorsByEvent(eventModel);
+            var operators = _operatorService.GetFullOperatorListing();
 
             if (operators.Any())
             {
@@ -31,19 +39,87 @@ namespace K5BZI_ViewModels
 
                 Model.CurrentOperator = operators.First();
             }
+
+            var eventOperators = operators.Where(_ => currentEvent.Operators.Contains(_.CallSign))
+                .ToList();
+
+            if (eventOperators.Any())
+            {
+                eventOperators.ForEach(_ => Model.EventOperators.Add(_));
+            }
         }
 
         private void Initialize()
         {
-            Model = new OperatorsModel
+            Model = new OperatorModel
             {
-                EditOperatorsAction = () => EditOperators()
+                EditOperatorAction = () => UpdateOperator(Model.SelectedOperator),
+                AddOperatorToEventAction = () => AddOperatorToEvent(),
+                AddClubToEventAction = () => AddClubToEvent(),
+                AddOperatorAction = () => AddOperator(),
+                AddClubAction = () => AddClub()
+            };
+
+            EditOperator = new EditOperatorModel
+            {
+                Model = new Operator(),
+                UpdateOperatorAction = () => UpdateOperator(EditOperator.Model)
             };
         }
 
-        private void EditOperators()
+        private void UpdateOperator(Operator operatorObj)
         {
-            MessageBox.Show("Not Implemented.");
+            var newOperator = _operatorService.UpdateOperator(operatorObj);
+
+            if (!Model.EventOperators.Any(_ => _.CallSign == newOperator.CallSign))
+            {
+                Model.EventOperators.Add(newOperator);
+            }
+
+            if (_addToEvent)
+            {
+                currentEvent.Operators.Add(EditOperator.Model.CallSign);
+
+                _eventService.UpdateEvent(currentEvent);
+
+                _addToEvent = false;
+            }
+        }
+
+        private void AddOperatorToEvent()
+        {
+            _addToEvent = true;
+
+            EditOperator.Model.Clear();
+
+            EditOperator.ShowCloseButton = true;
+            EditOperator.IsOpen = true;
+
+            EditOperator.Model.IsClub = false;
+        }
+
+        private void AddClubToEvent()
+        {
+            _addToEvent = true;
+
+            EditOperator.Model.Clear();
+
+            EditOperator.ShowCloseButton = true;
+            EditOperator.IsOpen = true;
+
+            EditOperator.Model.IsClub = true;
+        }
+
+        private void AddOperator()
+        {
+            Model.ShowCloseButton = true;
+            Model.IsOpen = true;
+        }
+
+        private void AddClub()
+        {
+            Model.ShowCloseButton = true;
+            Model.IsOpen = true;
         }
     }
 }

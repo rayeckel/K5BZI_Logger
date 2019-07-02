@@ -7,7 +7,7 @@ namespace K5BZI_ViewModels
     {
         public override void Load()
         {
-            Bind<IMainLoggerViewModel>().To<MainLoggerViewModel>().InSingletonScope();
+            Bind<IMainLoggerViewModel>().To<MainViewModel>().InSingletonScope();
             Bind<IEventViewModel>().To<EventViewModel>().InSingletonScope();
             Bind<IExportViewModel>().To<ExportViewModel>();
             Bind<IOperatorsViewModel>().To<OperatorsViewModel>().InSingletonScope();

@@ -1,18 +1,21 @@
 ﻿using K5BZI_ViewModels.Interfaces;
-using MahApps.Metro.Controls;
+using MahApps.Metro.SimpleChildWindow;
 using Microsoft.Practices.ServiceLocation;
 
 namespace K5BZI_Logger.Views
 {
-    public partial class OperatorsGrid : MetroTabItem
+    /// <summary>
+    /// Interaction logic for SelectEvent.xaml
+    /// </summary>
+    public partial class EditOperator : ChildWindow
     {
-        public OperatorsGrid()
+        public EditOperator()
         {
             InitializeComponent();
 
             var viewModel = ServiceLocator.Current.GetInstance<IOperatorsViewModel>();
 
-            DataContext = viewModel.Model;
+            DataContext = viewModel.EditOperator;
         }
     }
 }

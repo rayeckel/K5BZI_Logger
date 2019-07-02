@@ -16,6 +16,7 @@
         WindowStartupLocation="CenterScreen">
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
+            <Button x:Name ="OperatorsButton" Command="{Binding AddOperatorCommand}" Content="Operators" />
             <Button Command="{Binding SelectExportLogCommand}" Content="Export Log" />
             <Button Command="{Binding ViewFileStoreCommand}" Content="Open Log Directory" />
         </controls:WindowCommands>
@@ -48,6 +49,12 @@
             Grid.ColumnSpan="4"
             HorizontalAlignment="Center"/>
         <local:EditEvent 
+            Grid.Row="0" 
+            Grid.RowSpan="4"
+            Grid.Column="0"
+            Grid.ColumnSpan="4"
+            HorizontalAlignment="Center"/>
+        <local:Operators 
             Grid.Row="0" 
             Grid.RowSpan="4"
             Grid.Column="0"
