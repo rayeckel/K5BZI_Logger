@@ -42,10 +42,10 @@
                 BorderBrush="Navy"
                 AutoGenerateColumns="False"
                 ItemsSource="{Binding EventOperators}"
-                SelectedItem="{Binding SelectedOperator, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                SelectedItem="{Binding SelectedEventOperator, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="CellEditEnding">
-                        <i:InvokeCommandAction Command="{Binding Path=EditOperatorCommand}"/>
+                        <i:InvokeCommandAction Command="{Binding Path=EditEventOperatorCommand}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <dgControls:DataGrid.Columns>

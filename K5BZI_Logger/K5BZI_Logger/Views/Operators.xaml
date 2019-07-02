@@ -100,8 +100,8 @@
             </dgControls:DataGrid.Columns>
         </dgControls:DataGrid>
         <Grid 
-                Grid.Column="1"
-                VerticalAlignment="Top">
+            Grid.Column="1"
+            VerticalAlignment="Top">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
@@ -118,7 +118,7 @@
                     Foreground="Navy"
                     FontSize="12"
                     FontFamily="Tahoma"
-                    Command="{Binding AddOperatorToEventCommand}"/>
+                    Command="{Binding AddOperatorCommand}"/>
             <Button
                     VerticalAlignment="Center"
                     Grid.Row="2"
@@ -129,7 +129,7 @@
                     Foreground="Navy"
                     FontSize="12"
                     FontFamily="Tahoma"
-                    Command="{Binding AddClubToEventCommand}"/>
+                    Command="{Binding AddClubCommand}"/>
         </Grid>
     </Grid>
 </simpleChildWindow:ChildWindow>

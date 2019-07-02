@@ -23,6 +23,8 @@ namespace K5BZI_Models.ViewModelModels
 
         public Operator SelectedOperator { get; set; }
 
+        public Operator SelectedEventOperator { get; set; }
+
         public Operator CurrentOperator { get; set; }
 
         public ObservableCollection<Operator> Operators { get; private set; }
@@ -41,6 +43,17 @@ namespace K5BZI_Models.ViewModelModels
             }
         }
         public Action EditOperatorAction { get; set; }
+
+        private ICommand _editEventOperatorCommand;
+        public ICommand EditEventOperatorCommand
+        {
+            get
+            {
+                return _editEventOperatorCommand ??
+                    (_editEventOperatorCommand = new CommandHandler(EditEventOperatorAction, true));
+            }
+        }
+        public Action EditEventOperatorAction { get; set; }
 
         private ICommand _addOperatorToEventCommand;
         public ICommand AddOperatorToEventCommand
@@ -85,5 +98,16 @@ namespace K5BZI_Models.ViewModelModels
             }
         }
         public Action AddClubAction { get; set; }
+
+        private ICommand _editOperatorsCommand;
+        public ICommand EditOperatorsCommand
+        {
+            get
+            {
+                return _editOperatorsCommand ??
+                    (_editOperatorsCommand = new CommandHandler(EditOperatorsAction, true));
+            }
+        }
+        public Action EditOperatorsAction { get; set; }
     }
 }

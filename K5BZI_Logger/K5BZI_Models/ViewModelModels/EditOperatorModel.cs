@@ -17,5 +17,15 @@ namespace K5BZI_Models.ViewModelModels
             }
         }
         public Action UpdateOperatorAction { get; set; }
+
+        private ICommand _updateEventOperatorCommand;
+        public ICommand UpdateEventOperatorCommand
+        {
+            get
+            {
+                return _updateEventOperatorCommand ?? (_updateEventOperatorCommand = new CommandHandler(UpdateEventOperatorAction, true));
+            }
+        }
+        public Action UpdateEventOperatorAction { get; set; }
     }
 }

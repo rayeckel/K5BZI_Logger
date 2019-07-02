@@ -53,27 +53,35 @@ namespace K5BZI_ViewModels
         {
             Model = new OperatorModel
             {
-                EditOperatorAction = () => UpdateOperator(Model.SelectedOperator),
+                EditOperatorAction = () => UpdateOperator(Model.SelectedOperator, false),
+                EditEventOperatorAction = () => UpdateOperator(Model.SelectedEventOperator, true),
                 AddOperatorToEventAction = () => AddOperatorToEvent(),
                 AddClubToEventAction = () => AddClubToEvent(),
                 AddOperatorAction = () => AddOperator(),
-                AddClubAction = () => AddClub()
+                AddClubAction = () => AddClub(),
+                EditOperatorsAction = () => EditOperators()
             };
 
             EditOperator = new EditOperatorModel
             {
                 Model = new Operator(),
-                UpdateOperatorAction = () => UpdateOperator(EditOperator.Model)
+                UpdateOperatorAction = () => UpdateOperator(EditOperator.Model, false),
+                UpdateEventOperatorAction = () => UpdateOperator(EditOperator.Model, true)
             };
         }
 
-        private void UpdateOperator(Operator operatorObj)
+        private void UpdateOperator(Operator operatorObj, bool isEvent)
         {
             var newOperator = _operatorService.UpdateOperator(operatorObj);
 
-            if (!Model.EventOperators.Any(_ => _.CallSign == newOperator.CallSign))
+            if (isEvent && !Model.EventOperators.Any(_ => _.CallSign == newOperator.CallSign))
             {
                 Model.EventOperators.Add(newOperator);
+            }
+
+            if (!isEvent && !Model.Operators.Any(_ => _.CallSign == newOperator.CallSign))
+            {
+                Model.Operators.Add(newOperator);
             }
 
             if (_addToEvent)
@@ -89,7 +97,23 @@ namespace K5BZI_ViewModels
         private void AddOperatorToEvent()
         {
             _addToEvent = true;
+            AddOperator();
+        }
 
+        private void AddClubToEvent()
+        {
+            _addToEvent = true;
+            AddClub();
+        }
+
+        private void EditOperators()
+        {
+            Model.ShowCloseButton = true;
+            Model.IsOpen = true;
+        }
+
+        private void AddOperator()
+        {
             EditOperator.Model.Clear();
 
             EditOperator.ShowCloseButton = true;
@@ -98,28 +122,14 @@ namespace K5BZI_ViewModels
             EditOperator.Model.IsClub = false;
         }
 
-        private void AddClubToEvent()
+        private void AddClub()
         {
-            _addToEvent = true;
-
             EditOperator.Model.Clear();
 
             EditOperator.ShowCloseButton = true;
             EditOperator.IsOpen = true;
 
             EditOperator.Model.IsClub = true;
-        }
-
-        private void AddOperator()
-        {
-            Model.ShowCloseButton = true;
-            Model.IsOpen = true;
-        }
-
-        private void AddClub()
-        {
-            Model.ShowCloseButton = true;
-            Model.IsOpen = true;
         }
     }
 }
