@@ -60,6 +60,12 @@
             Grid.Column="0"
             Grid.ColumnSpan="4"
             HorizontalAlignment="Center"/>
+        <local:EditOperator 
+            Grid.Row="0" 
+            Grid.RowSpan="4"
+            Grid.Column="0"
+            Grid.ColumnSpan="4"
+            HorizontalAlignment="Center"/>
         <local:MainHeader
             Grid.Row="0" 
             Grid.Column="0"
