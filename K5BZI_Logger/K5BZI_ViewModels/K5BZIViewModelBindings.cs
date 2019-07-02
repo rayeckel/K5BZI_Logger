@@ -11,6 +11,7 @@ namespace K5BZI_ViewModels
             Bind<ISelectEventViewModel>().To<SelectEventViewModel>().InSingletonScope();
             Bind<ISelectExportViewModel>().To<SelectExportViewModel>();
             Bind<IEditEventViewModel>().To<EditEventViewModel>();
+            Bind<IOperatorsViewModel>().To<OperatorsViewModel>().InSingletonScope();
         }
     }
 }

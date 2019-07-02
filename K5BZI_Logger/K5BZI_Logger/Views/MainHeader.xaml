@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             mc:Ignorable="d">
+             mc:Ignorable="d"
+             xmlns:viewmodel="clr-namespace:K5BZI_ViewModels;assembly=K5BZI_ViewModels">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100" />
@@ -94,7 +95,7 @@
                 FontFamily="Tahoma"
                 BorderThickness="0"
                 Foreground="DarkSlateBlue"
-                Content="{Binding CurrentOperator.Name}"/>
+                Content="{Binding Model.CurrentOperator.Name}"/>
             <Label
                 Grid.Row="1"
                 x:Name="lblOperatorCall"
@@ -107,7 +108,7 @@
                 FontFamily="Tahoma"
                 BorderThickness="0"
                 Foreground="DarkSlateBlue"
-                Content="{Binding CurrentOperator.CallSign}"/>
+                Content="{Binding Model.CurrentOperator.CallSign}"/>
         </Grid>
         <Canvas
             Grid.Column="3"

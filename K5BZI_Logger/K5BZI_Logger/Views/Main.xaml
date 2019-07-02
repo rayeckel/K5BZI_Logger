@@ -16,7 +16,6 @@
         WindowStartupLocation="CenterScreen">
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
-            <Button Command="{Binding EditOperatorsCommand}" Content="Operators" />
             <Button Command="{Binding SelectExportLogCommand}" Content="Export Log" />
             <Button Command="{Binding ViewFileStoreCommand}" Content="Open Log Directory" />
         </controls:WindowCommands>

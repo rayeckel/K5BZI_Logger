@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:viewmodel="clr-namespace:K5BZI_ViewModels;assembly=K5BZI_ViewModels"
     xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:Enums="clr-namespace:K5BZI_Models.Enums;assembly=K5BZI_Models"
@@ -12,12 +11,9 @@
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     Height="750" Width="1024"
     mc:Ignorable="d"
-    IsOpen="{Binding Model.IsOpen}"
-    ShowCloseButton="{Binding Model.ShowCloseButton}"
+    IsOpen="{Binding IsOpen}"
+    ShowCloseButton="{Binding ShowCloseButton}"
     Title="Select Log">
-    <simpleChildWindow:ChildWindow.DataContext>
-        <viewmodel:SelectExportViewModel/>
-    </simpleChildWindow:ChildWindow.DataContext>
     <simpleChildWindow:ChildWindow.OverlayBrush>
         <SolidColorBrush Opacity="0.8" Color="{StaticResource Gray2}" />
     </simpleChildWindow:ChildWindow.OverlayBrush>
@@ -72,7 +68,7 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 x:Name="existingLogsCombo"
-                SelectedItem="{Binding Model.SelectedExport, Mode=TwoWay}"
+                SelectedItem="{Binding SelectedExport, Mode=TwoWay}"
                 FontFamily="Tahoma"
                 BorderThickness="1"
                 ItemsSource="{Binding Source={StaticResource LogTypeEnumValues}}">
@@ -93,7 +89,7 @@
                 FontFamily="Tahoma"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Bottom"
-                Command="{Binding Model.SelectExportCommand}"/>
+                Command="{Binding SelectExportCommand}"/>
         </Grid>
     </Grid>
 </simpleChildWindow:ChildWindow>

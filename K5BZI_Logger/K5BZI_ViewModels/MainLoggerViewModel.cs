@@ -15,7 +15,7 @@ namespace K5BZI_ViewModels
 
         public MainModel Model { get; private set; }
         private readonly ILogListingService _logListingService;
-        private readonly IOperatorService _operatorService;
+        private readonly IOperatorsViewModel _operatorsViewModel;
         private readonly IEventService _eventService;
 
         #endregion
@@ -24,11 +24,11 @@ namespace K5BZI_ViewModels
 
         public MainLoggerViewModel(
             ILogListingService logListingService,
-            IOperatorService operatorService,
+            IOperatorsViewModel operatorsViewModel,
             IEventService eventService)
         {
             _logListingService = logListingService;
-            _operatorService = operatorService;
+            _operatorsViewModel = operatorsViewModel;
             _eventService = eventService;
 
             Initialize();
@@ -42,7 +42,6 @@ namespace K5BZI_ViewModels
         {
             Model.Event = selectedEvent;
             Model.LogEntries.Clear();
-            Model.Operators.Clear();
 
             var logEntries = _logListingService.ReadLog(Model.Event.LogFileName);
 
@@ -54,13 +53,7 @@ namespace K5BZI_ViewModels
                 Model.LogEntry.Signal.Frequency = logEntries.Last().Signal.Frequency;
             }
 
-            var operators = _operatorService.GetOperatorsByEvent(Model.Event);
-
-            if (operators.Any())
-            {
-                operators.ForEach(_ => Model.Operators.Add(_));
-                Model.CurrentOperator = operators.First();
-            }
+            _operatorsViewModel.PopulateOperators(selectedEvent);
         }
 
         public void CreateNewLog(string eventName)
@@ -97,8 +90,7 @@ namespace K5BZI_ViewModels
                 CreateNewEntryAction = () => Model.LogEntry.ClearProperties(),
                 ViewFileStoreAction = () => _logListingService.OpenLogListing(),
                 LogItAction = () => SaveLogEntry(),
-                EditLogEntryAction = () => EditLogEntry(),
-                EditOperatorsAction = () => EditOperators()
+                EditLogEntryAction = () => EditLogEntry()
             };
 
             Model.LogEntry.CheckDuplicateEntriesAction = () => CheckForDuplicates();
@@ -121,11 +113,6 @@ namespace K5BZI_ViewModels
         private void EditLogEntry()
         {
             _logListingService.UpdateLogEntry(Model.SelectedEntry, Model.Event);
-        }
-
-        private void EditOperators()
-        {
-            MessageBox.Show("Not Implemented.");
         }
 
         #endregion

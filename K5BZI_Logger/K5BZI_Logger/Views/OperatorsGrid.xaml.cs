@@ -1,5 +1,6 @@
-﻿using MahApps.Metro.Controls;
-using System.Windows.Controls;
+﻿using K5BZI_ViewModels.Interfaces;
+using MahApps.Metro.Controls;
+using Microsoft.Practices.ServiceLocation;
 
 namespace K5BZI_Logger.Views
 {
@@ -8,6 +9,10 @@ namespace K5BZI_Logger.Views
         public OperatorsGrid()
         {
             InitializeComponent();
+
+            var viewModel = ServiceLocator.Current.GetInstance<IOperatorsViewModel>();
+
+            DataContext = viewModel.Model;
         }
     }
 }

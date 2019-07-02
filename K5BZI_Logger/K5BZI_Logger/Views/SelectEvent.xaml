@@ -4,18 +4,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:viewmodel="clr-namespace:K5BZI_ViewModels;assembly=K5BZI_ViewModels"
     xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
     Height="750" Width="1024"
     mc:Ignorable="d"
-    IsOpen="{Binding Model.IsOpen}"
-    ShowCloseButton="{Binding Model.ShowCloseButton}"
+    IsOpen="{Binding IsOpen}"
+    ShowCloseButton="{Binding ShowCloseButton}"
     Title="Select Log">
-    <simpleChildWindow:ChildWindow.DataContext>
-        <viewmodel:SelectEventViewModel/>
-    </simpleChildWindow:ChildWindow.DataContext>
     <simpleChildWindow:ChildWindow.OverlayBrush>
         <SolidColorBrush Opacity="0.8" Color="{StaticResource Gray2}" />
     </simpleChildWindow:ChildWindow.OverlayBrush>
@@ -47,7 +43,7 @@
             </Grid.ColumnDefinitions>
             <Label
                 Grid.Row="1"
-                Visibility="{Binding Model.NewLogVisibility}"
+                Visibility="{Binding NewLogVisibility}"
                 Margin="15,0,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
@@ -56,7 +52,7 @@
                 Content="Welcome! Create your first log!"/>
             <Label
                 Grid.Row="0"
-                Visibility="{Binding Model.SelectLogVisibility}"
+                Visibility="{Binding SelectLogVisibility}"
                 Margin="15,0,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
@@ -66,15 +62,15 @@
             <ComboBox
                 Grid.Row="1"
                 Grid.Column="0"
-                Visibility="{Binding Model.SelectLogVisibility}"
+                Visibility="{Binding SelectLogVisibility}"
                 Height="30"
                 Width="300" 
                 Margin="20,20,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 x:Name="existingLogsCombo"
-                ItemsSource="{Binding Model.ExistingEvents}"
-                SelectedItem="{Binding Model.SelectedEvent, Mode=TwoWay}"
+                ItemsSource="{Binding ExistingEvents}"
+                SelectedItem="{Binding SelectedEvent, Mode=TwoWay}"
                 FontFamily="Tahoma"
                 BorderThickness="1">
                 <ComboBox.ItemTemplate>
@@ -88,7 +84,7 @@
             <Button
                 Grid.Row="2"
                 Grid.Column="1"
-                Visibility="{Binding Model.SelectLogVisibility}"
+                Visibility="{Binding SelectLogVisibility}"
                 Margin="0,0,20,0"
                 Content="Select"
                 Width="100"
@@ -97,7 +93,7 @@
                 FontFamily="Tahoma"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Bottom"
-                Command="{Binding Model.SelectLogCommand}"/>
+                Command="{Binding SelectLogCommand}"/>
             <Label 
                 Grid.Row="3"
                 Margin="15,0,0,0"
@@ -112,7 +108,7 @@
                 Height="30"
                 Margin="20,10,0,0"
                 FontFamily="Tahoma"
-                Text="{Binding Model.EventName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Text="{Binding EventName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 controls:TextBoxHelper.Watermark="New Event Name" 
                 controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>
@@ -129,7 +125,7 @@
                 VerticalAlignment="Center"
                 FontFamily="Tahoma"
                 IsDefault="True"
-                Command="{Binding Model.CreateNewLogCommand}"/>
+                Command="{Binding CreateNewLogCommand}"/>
         </Grid>
     </Grid>
 </simpleChildWindow:ChildWindow>

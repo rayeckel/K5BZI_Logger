@@ -149,6 +149,7 @@
     <Compile Include="LogEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignalReport.cs" />
+    <Compile Include="ViewModelModels\OperatorsModel.cs" />
     <Compile Include="ViewModelModels\SelectExportModel.cs" />
     <Compile Include="ViewModelModels\SelectEventModel.cs" />
   </ItemGroup>

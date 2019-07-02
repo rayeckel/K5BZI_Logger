@@ -1,7 +1,6 @@
 ﻿using K5BZI_Models.ViewModelModels;
 using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels.Interfaces;
-using Microsoft.Practices.ServiceLocation;
 
 namespace K5BZI_ViewModels
 {
@@ -10,13 +9,20 @@ namespace K5BZI_ViewModels
         #region Properties
 
         public SelectExportModel Model { get; private set; }
+        private readonly IExportService _exportService;
+        private readonly IMainLoggerViewModel _mainLoggerViewModel;
 
         #endregion
 
         #region Constructors
 
-        public SelectExportViewModel()
+        public SelectExportViewModel(
+            IExportService exportService,
+            IMainLoggerViewModel mainLoggerViewModel)
         {
+            _exportService = exportService;
+            _mainLoggerViewModel = mainLoggerViewModel;
+
             Initialize();
         }
 
@@ -31,8 +37,7 @@ namespace K5BZI_ViewModels
                 SelectExportAction = (_) => ChangeExport()
             };
 
-            var mainLoggerViewModel = ServiceLocator.Current.GetInstance<IMainLoggerViewModel>();
-            mainLoggerViewModel.Model.SelectExportLogAction = () => SelectLog();
+            _mainLoggerViewModel.Model.SelectExportLogAction = () => SelectLog();
         }
 
         public void SelectLog()
@@ -45,12 +50,9 @@ namespace K5BZI_ViewModels
         {
             Model.IsOpen = false;
 
-            var mainLoggerViewModel = ServiceLocator.Current.GetInstance<IMainLoggerViewModel>();
-            var exportService = ServiceLocator.Current.GetInstance<IExportService>();
-
-            exportService.ExportLog(
-                mainLoggerViewModel.Model.Event,
-                mainLoggerViewModel.Model.LogEntries, 
+            _exportService.ExportLog(
+                _mainLoggerViewModel.Model.Event,
+                _mainLoggerViewModel.Model.LogEntries,
                 Model.SelectedExport);
         }
 

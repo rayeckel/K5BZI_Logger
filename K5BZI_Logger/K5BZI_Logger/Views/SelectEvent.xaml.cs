@@ -1,4 +1,6 @@
-﻿using MahApps.Metro.SimpleChildWindow;
+﻿using K5BZI_ViewModels.Interfaces;
+using MahApps.Metro.SimpleChildWindow;
+using Microsoft.Practices.ServiceLocation;
 
 namespace K5BZI_Logger.Views
 {
@@ -10,6 +12,10 @@ namespace K5BZI_Logger.Views
         public SelectEvent()
         {
             InitializeComponent();
+
+            var viewModel = ServiceLocator.Current.GetInstance<ISelectEventViewModel>();
+
+            DataContext = viewModel.Model;
         }
     }
 }
