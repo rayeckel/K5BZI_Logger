@@ -83,7 +83,8 @@ namespace K5BZI_ViewModels
                 CreateNewEntryAction = (_) => Model.LogEntry.ClearProperties(),
                 ViewFileStoreAction = (_) => _logListingService.OpenLogListing(),
                 LogItAction = (_) => SaveLogEntry(),
-                EditLogEntryAction = (_) => EditLogEntry()
+                EditLogEntryAction = (_) => EditLogEntry(),
+                DeleteLogEntryAction = (_) => DeleteLogEntry()
             };
 
             Model.LogEntry.CheckDuplicateEntriesAction = () => CheckForDuplicates();
@@ -108,6 +109,18 @@ namespace K5BZI_ViewModels
             _logListingService.UpdateLogEntry(Model.SelectedEntry, Model.Event);
         }
 
+        private void DeleteLogEntry()
+        {
+            var deleteConfirmName = String.Format("Delete {0}?", Model.SelectedEntry.CallSign);
+            var confirmResult = MessageBox.Show(deleteConfirmName, "Are you sure?", MessageBoxButtons.YesNo);
+
+            if (confirmResult == DialogResult.Yes)
+            {
+                _logListingService.DeleteLogEntry(Model.SelectedEntry, Model.Event);
+
+                Model.LogEntries.Remove(Model.SelectedEntry);
+            }
+        }
         #endregion
     }
 }

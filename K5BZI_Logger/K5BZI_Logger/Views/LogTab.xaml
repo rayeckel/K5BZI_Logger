@@ -1,4 +1,4 @@
-﻿<Controls:MetroTabItem  x:Class="K5BZI_Logger.Views.LogGrid"
+﻿<Controls:MetroTabItem  x:Class="K5BZI_Logger.Views.LogTab"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -28,6 +28,11 @@
                 </StackPanel>
             </Controls:MetroTabItem.Header>
         <Controls:MetroTabItem.Content>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="850"/>
+                <ColumnDefinition Width="150"/>
+            </Grid.ColumnDefinitions>
             <dgControls:DataGrid 
                     x:Name="dataGrid1" 
                     Height="400"
@@ -94,5 +99,30 @@
                             FontSize="12" />
                 </dgControls:DataGrid.Columns>
             </dgControls:DataGrid>
-        </Controls:MetroTabItem.Content>
+            <Grid 
+                Grid.Column="1"
+                VerticalAlignment="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Button
+                    VerticalAlignment="Center"
+                    Grid.Row="5"
+                    Margin="10,0,0,0"
+                    Content="Delete Log Entry"
+                    Width="120"
+                    Height="30"
+                    Foreground="Navy"
+                    FontSize="12"
+                    FontFamily="Tahoma"
+                    Command="{Binding DeleteLogEntryCommand}"/>
+            </Grid>
+        </Grid>
+    </Controls:MetroTabItem.Content>
     </Controls:MetroTabItem>

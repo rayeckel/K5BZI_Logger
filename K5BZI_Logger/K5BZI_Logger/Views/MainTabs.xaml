@@ -9,7 +9,7 @@
     <Controls:MetroAnimatedSingleRowTabControl
         TabStripPlacement="Top"
         BorderBrush="Navy">
-        <local:LogGrid/>
+        <local:LogTab/>
         <local:OperatorsTab/>
     </Controls:MetroAnimatedSingleRowTabControl>
 </UserControl>

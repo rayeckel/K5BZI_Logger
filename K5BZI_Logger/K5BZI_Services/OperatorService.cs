@@ -7,9 +7,15 @@ namespace K5BZI_Services
 {
     public class OperatorService : IOperatorService
     {
+        #region Properties
+
         private readonly IFileStoreService _fileStoreService;
         private List<Operator> _operators;
         private const string _operatorsFileName = "k5bziLogger_operators";
+
+        #endregion
+
+        #region Constructors
 
         public OperatorService(IFileStoreService fileStoreService)
         {
@@ -17,6 +23,10 @@ namespace K5BZI_Services
 
             _operators = new List<Operator>();
         }
+
+        #endregion
+
+        #region Public Methods
 
         public void CreateOperator(
             string callSign,
@@ -88,5 +98,7 @@ namespace K5BZI_Services
 
             return _operators;
         }
+
+        #endregion
     }
 }

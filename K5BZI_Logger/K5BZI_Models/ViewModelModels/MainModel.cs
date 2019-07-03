@@ -14,9 +14,6 @@ namespace K5BZI_Models.Main
 
         public MainModel()
         {
-            _logItCommandCanExecute = true;
-            _createNewEntryCanExecute = true;
-
             LogEntry = new LogEntry();
             LogEntries = new ObservableCollection<LogEntry>();
             DuplicateEntries = new ObservableCollection<LogEntry>();
@@ -36,20 +33,18 @@ namespace K5BZI_Models.Main
 
         #region Commands
 
-        private bool _logItCommandCanExecute;
         private ICommand _logItCommand;
         public ICommand LogItCommand
         {
             get
             {
                 return _logItCommand ?? (_logItCommand =
-                    new DelegateCommand(LogItAction, _ => { return _logItCommandCanExecute; }));
+                    new DelegateCommand(LogItAction, _ => { return true; }));
             }
         }
         public Action<object> LogItAction { get; set; }
 
 
-        private bool _createNewEntryCanExecute;
         private ICommand _createNewEntryCommand;
         public ICommand CreateNewEntryCommand
         {
@@ -57,7 +52,7 @@ namespace K5BZI_Models.Main
             {
                 return _createNewEntryCommand ??
                     (_createNewEntryCommand =
-                    new DelegateCommand(CreateNewEntryAction, _ => { return _createNewEntryCanExecute; }));
+                    new DelegateCommand(CreateNewEntryAction, _ => { return true; }));
             }
         }
         public Action<object> CreateNewEntryAction { get; set; }
@@ -97,6 +92,17 @@ namespace K5BZI_Models.Main
         }
         public Action<object> ViewFileStoreAction { get; set; }
 
+        private ICommand _deleteLogEntryCommand;
+        public ICommand DeleteLogEntryCommand
+        {
+            get
+            {
+                return _deleteLogEntryCommand ??
+                    (_deleteLogEntryCommand =
+                    new DelegateCommand(DeleteLogEntryAction, _ => { return SelectedEntry != null; }));
+            }
+        }
+        public Action<object> DeleteLogEntryAction { get; set; }
         #endregion
     }
 }

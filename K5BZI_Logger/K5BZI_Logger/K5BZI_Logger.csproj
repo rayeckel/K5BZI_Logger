@@ -143,8 +143,8 @@
     <Compile Include="Views\OperatorsTab.xaml.cs">
       <DependentUpon>OperatorsTab.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\LogGrid.xaml.cs">
-      <DependentUpon>LogGrid.xaml</DependentUpon>
+    <Compile Include="Views\LogTab.xaml.cs">
+      <DependentUpon>LogTab.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainHeader.xaml.cs">
       <DependentUpon>MainHeader.xaml</DependentUpon>
@@ -241,7 +241,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\LogGrid.xaml">
+    <Page Include="Views\LogTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

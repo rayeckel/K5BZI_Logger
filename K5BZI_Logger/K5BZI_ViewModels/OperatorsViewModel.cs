@@ -10,12 +10,18 @@ namespace K5BZI_ViewModels
 {
     public class OperatorsViewModel : IOperatorsViewModel
     {
+        #region Properties
+
         public OperatorModel Model { get; private set; }
         public EditOperatorModel EditOperator { get; private set; }
         private readonly IOperatorService _operatorService;
         private readonly IEventService _eventService;
         private Event currentEvent;
         private bool _addToEvent;
+
+        #endregion
+
+        #region Constructors
 
         public OperatorsViewModel(
             IOperatorService operatorService,
@@ -26,6 +32,10 @@ namespace K5BZI_ViewModels
 
             Initialize();
         }
+
+        #endregion
+
+        #region Public Methods
 
         public void PopulateOperators(Event eventModel)
         {
@@ -51,21 +61,25 @@ namespace K5BZI_ViewModels
             }
         }
 
+        #endregion
+
+        #region Private Methods
+
         private void Initialize()
         {
             Model = new OperatorModel
             {
                 EditOperatorAction = (_) => UpdateOperator(Model.SelectedOperator, false),
                 EditEventOperatorAction = (_) => UpdateOperator(Model.SelectedEventOperator, true),
+                CurrentOperatorAction = (_) => SetCurrentOperator(Model.SelectedOperator),
+                DeleteOperatorAction = (_) => DeleteOperator(Model.SelectedOperator),
+                CurrentEventOperatorAction = (_) => SetCurrentOperator(Model.SelectedEventOperator),
+                DeleteEventOperatorAction = (_) => DeleteOperator(Model.SelectedEventOperator),
                 AddOperatorToEventAction = (_) => AddOperatorToEvent(),
                 AddClubToEventAction = (_) => AddClubToEvent(),
                 AddOperatorAction = (_) => AddOperator(),
                 AddClubAction = (_) => AddClub(),
-                EditOperatorsAction = (_) => EditOperators(),
-                CurrentOperatorAction = (_) => SetCurrentOperator(Model.SelectedOperator),
-                DeleteOperatorAction = (_) => DeleteOperator(Model.SelectedOperator),
-                CurrentEventOperatorAction = (_) => SetCurrentOperator(Model.SelectedEventOperator),
-                DeleteEventOperatorAction = (_) => DeleteOperator(Model.SelectedEventOperator)
+                EditOperatorsAction = (_) => EditOperators()
             };
 
             EditOperator = new EditOperatorModel
@@ -78,9 +92,6 @@ namespace K5BZI_ViewModels
 
         private void SetCurrentOperator(Operator operatorObj)
         {
-            if (operatorObj == null)
-                return;
-
             if (operatorObj.IsClub)
             {
                 MessageBox.Show("Only individuals can be set as active operator", "You can't do that", MessageBoxButtons.OK);
@@ -93,11 +104,8 @@ namespace K5BZI_ViewModels
 
         private void DeleteOperator(Operator operatorObj)
         {
-            if (operatorObj == null)
-                return;
-
             var deleteConfirmName = String.Format("Delete {0}?", operatorObj.CallSign);
-            var confirmResult = MessageBox.Show(deleteConfirmName, "Confirm Delete", MessageBoxButtons.YesNo);
+            var confirmResult = MessageBox.Show(deleteConfirmName, "Are you sure?", MessageBoxButtons.YesNo);
 
             if (confirmResult == DialogResult.Yes)
             {
@@ -168,5 +176,7 @@ namespace K5BZI_ViewModels
 
             EditOperator.Model.IsClub = true;
         }
+
+        #endregion
     }
 }

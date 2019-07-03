@@ -80,5 +80,17 @@ namespace K5BZI_Services
 
             _fileStoreService.WriteToFile(_logEntries, eventEntry.LogFileName);
         }
+
+        public void DeleteLogEntry(LogEntry logEntry, Event eventEntry)
+        {
+            var existingLogEntry = _logEntries.FirstOrDefault(_ => _.CallSign == logEntry.CallSign);
+
+            if (existingLogEntry != null)
+            {
+                _logEntries.Remove(existingLogEntry);
+
+                _fileStoreService.WriteToFile(_logEntries, eventEntry.LogFileName);
+            }
+        }
     }
 }
