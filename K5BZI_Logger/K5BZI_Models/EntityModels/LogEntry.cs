@@ -14,14 +14,6 @@ namespace K5BZI_Models
         {
             Signal = new Signal();
             SignalReport = new SignalReport();
-
-            //DELETE THESE
-            QslSent = "N";
-            QslReceived = "N";
-            Country = "USA";
-            Continent = "NA";
-            Assisted = Assisted.NONAssisted;
-            Power = Power.HIGH;
         }
 
         public DateTime? ContactTime { get; set; }

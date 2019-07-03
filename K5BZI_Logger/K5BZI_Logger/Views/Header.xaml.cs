@@ -13,11 +13,12 @@ namespace K5BZI_Logger.Views
         {
             InitializeComponent();
 
-            var operatorsViewModel = ServiceLocator.Current.GetInstance<IOperatorsViewModel>();
-            OperatorsGrid.DataContext = operatorsViewModel.Model;
+            OperatorsGrid.DataContext = ServiceLocator.Current
+                .GetInstance<IOperatorsViewModel>()
+                .Model;
 
-            var eventViewModel = ServiceLocator.Current.GetInstance<IEventViewModel>();
-            EventGrid.DataContext = eventViewModel;
+            EventGrid.DataContext = ServiceLocator.Current
+                .GetInstance<IEventViewModel>();
         }
     }
 }

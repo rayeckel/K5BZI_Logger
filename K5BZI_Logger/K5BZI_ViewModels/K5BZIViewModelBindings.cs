@@ -9,8 +9,9 @@ namespace K5BZI_ViewModels
         {
             Bind<IMainViewModel>().To<MainViewModel>().InSingletonScope();
             Bind<IEventViewModel>().To<EventViewModel>().InSingletonScope();
-            Bind<IExportViewModel>().To<ExportViewModel>();
             Bind<IOperatorsViewModel>().To<OperatorsViewModel>().InSingletonScope();
+            Bind<IDefaultsViewModel>().To<DefaultsViewModel>().InSingletonScope();
+            Bind<IExportViewModel>().To<ExportViewModel>();
         }
     }
 }

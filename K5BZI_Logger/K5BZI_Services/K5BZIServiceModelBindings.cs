@@ -12,6 +12,7 @@ namespace K5BZI_Services
             Bind<ILogListingService>().To<LogListingService>();
             Bind<IOperatorService>().To<OperatorService>();
             Bind<IExportService>().To<ExportService>();
+            Bind<IDefaultsService>().To<DefaultsService>();
         }
     }
 }

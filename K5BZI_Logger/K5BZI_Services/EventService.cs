@@ -8,15 +8,25 @@ namespace K5BZI_Services
 {
     public class EventService : IEventService
     {
+        #region Properties
+
         private readonly IFileStoreService _fileStoreService;
         private List<Event> _eventList;
         private string _eventLogFileName = "Events";
+
+        #endregion
+
+        #region Constructors
 
         public EventService(IFileStoreService fileStoreService)
         {
             _fileStoreService = fileStoreService;
             _eventList = new List<Event>();
         }
+
+        #endregion
+
+        #region Public Methods
 
         public List<Event> GetAllEvents()
         {
@@ -78,5 +88,7 @@ namespace K5BZI_Services
 
             return editEvent;
         }
+
+        #endregion
     }
 }

@@ -127,10 +127,12 @@
     </Compile>
     <Compile Include="Controls\DateRangePicker.xaml.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Defaults.xaml.cs">
+      <DependentUpon>Defaults.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\EditOperator.xaml.cs">
       <DependentUpon>EditOperator.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Interfaces\IView.cs" />
     <Compile Include="Views\Tabs.xaml.cs">
       <DependentUpon>Tabs.xaml</DependentUpon>
     </Compile>
@@ -218,6 +220,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\DateRangePicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Defaults.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

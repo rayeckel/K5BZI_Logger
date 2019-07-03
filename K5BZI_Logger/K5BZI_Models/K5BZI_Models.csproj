@@ -133,6 +133,7 @@
     <Compile Include="Base\BaseModel.cs" />
     <Compile Include="Base\BaseViewModel.cs" />
     <Compile Include="Base\IBaseViewModel.cs" />
+    <Compile Include="EntityModels\Defaults.cs" />
     <Compile Include="Enums\Assisted.cs" />
     <Compile Include="Enums\Mode.cs" />
     <Compile Include="Enums\Power.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="EntityModels\LogListing.cs" />
     <Compile Include="Enums\LogType.cs" />
     <Compile Include="EntityModels\Operator.cs" />
+    <Compile Include="ViewModelModels\DefaultsModel.cs" />
     <Compile Include="ViewModelModels\EditEventModel.cs" />
     <Compile Include="ViewModelModels\EditOperatorModel.cs" />
     <Compile Include="ViewModelModels\MainModel.cs" />

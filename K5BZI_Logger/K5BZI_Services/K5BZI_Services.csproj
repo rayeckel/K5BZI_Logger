@@ -60,9 +60,11 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DefaultsService.cs" />
     <Compile Include="EventService.cs" />
     <Compile Include="ExportService.cs" />
     <Compile Include="FileStoreService.cs" />
+    <Compile Include="Interfaces\IDefaultsService.cs" />
     <Compile Include="Interfaces\IEntityUtility.cs" />
     <Compile Include="Interfaces\IEnumUtility.cs" />
     <Compile Include="Interfaces\IEventService.cs" />

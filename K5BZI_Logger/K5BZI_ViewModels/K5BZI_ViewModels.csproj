@@ -91,6 +91,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DefaultsViewModel.cs" />
+    <Compile Include="Interfaces\IDefaultsViewModel.cs" />
     <Compile Include="Interfaces\IMainViewModel.cs" />
     <Compile Include="Interfaces\IOperatorsViewModel.cs" />
     <Compile Include="Interfaces\IEventViewModel.cs" />

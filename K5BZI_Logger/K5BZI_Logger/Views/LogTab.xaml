@@ -103,7 +103,7 @@
                     <dgControls:DataGridTextColumn
                             Header="Mode"
                             Width="75"
-                            Binding="{Binding SignalReport.Mode, UpdateSourceTrigger=PropertyChanged}"
+                            Binding="{Binding Signal.Mode, UpdateSourceTrigger=PropertyChanged}"
                             FontSize="12" />
                     <dgControls:DataGridTextColumn
                             Header="Power"

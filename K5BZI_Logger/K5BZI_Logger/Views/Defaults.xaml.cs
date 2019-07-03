@@ -7,15 +7,15 @@ namespace K5BZI_Logger.Views
     /// <summary>
     /// Interaction logic for SelectEvent.xaml
     /// </summary>
-    public partial class EditEvent : ChildWindow
+    public partial class Defaults : ChildWindow
     {
-        public EditEvent()
+        public Defaults()
         {
             InitializeComponent();
 
             DataContext = ServiceLocator.Current
-                .GetInstance<IEventViewModel>()
-                .EditModel;
+                .GetInstance<IDefaultsViewModel>()
+                .Model;
         }
     }
 }

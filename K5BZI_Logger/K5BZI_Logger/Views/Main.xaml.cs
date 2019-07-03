@@ -1,7 +1,5 @@
-﻿using K5BZI_Logger.Views.Interfaces;
-using K5BZI_ViewModels.Interfaces;
+﻿using K5BZI_ViewModels.Interfaces;
 using MahApps.Metro.Controls;
-using Microsoft.Practices.ServiceLocation;
 using System;
 using System.Windows.Threading;
 
@@ -10,16 +8,17 @@ namespace K5BZI_Logger.Views
     /// <summary>
     /// Interaction logic for Main.xaml
     /// </summary>
-    public partial class Main : MetroWindow, IView
+    public partial class Main : MetroWindow
     {
-        public Main(IMainViewModel viewModel)
+        public Main(
+            IMainViewModel viewModel,
+            IOperatorsViewModel operatorsViewModel,
+            IDefaultsViewModel defaultsViewModel)
         {
             InitializeComponent();
 
             DataContext = viewModel.Model;
-
-            var operatorsViewModel = ServiceLocator.Current.GetInstance<IOperatorsViewModel>();
-
+            DefaultsButton.DataContext = defaultsViewModel.Model;
             OperatorsButton.DataContext = operatorsViewModel.Model;
 
             var timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate

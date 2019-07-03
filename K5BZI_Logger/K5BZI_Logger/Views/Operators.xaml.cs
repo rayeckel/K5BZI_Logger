@@ -10,9 +10,9 @@ namespace K5BZI_Logger.Views
         {
             InitializeComponent();
 
-            var viewModel = ServiceLocator.Current.GetInstance<IOperatorsViewModel>();
-
-            DataContext = viewModel.Model;
+            DataContext = ServiceLocator.Current
+                .GetInstance<IOperatorsViewModel>()
+                .Model;
         }
     }
 }
