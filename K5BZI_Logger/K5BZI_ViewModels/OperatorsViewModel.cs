@@ -2,7 +2,9 @@
 using K5BZI_Models.ViewModelModels;
 using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels.Interfaces;
+using System;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace K5BZI_ViewModels
 {
@@ -53,21 +55,56 @@ namespace K5BZI_ViewModels
         {
             Model = new OperatorModel
             {
-                EditOperatorAction = () => UpdateOperator(Model.SelectedOperator, false),
-                EditEventOperatorAction = () => UpdateOperator(Model.SelectedEventOperator, true),
-                AddOperatorToEventAction = () => AddOperatorToEvent(),
-                AddClubToEventAction = () => AddClubToEvent(),
-                AddOperatorAction = () => AddOperator(),
-                AddClubAction = () => AddClub(),
-                EditOperatorsAction = () => EditOperators()
+                EditOperatorAction = (_) => UpdateOperator(Model.SelectedOperator, false),
+                EditEventOperatorAction = (_) => UpdateOperator(Model.SelectedEventOperator, true),
+                AddOperatorToEventAction = (_) => AddOperatorToEvent(),
+                AddClubToEventAction = (_) => AddClubToEvent(),
+                AddOperatorAction = (_) => AddOperator(),
+                AddClubAction = (_) => AddClub(),
+                EditOperatorsAction = (_) => EditOperators(),
+                CurrentOperatorAction = (_) => SetCurrentOperator(Model.SelectedOperator),
+                DeleteOperatorAction = (_) => DeleteOperator(Model.SelectedOperator),
+                CurrentEventOperatorAction = (_) => SetCurrentOperator(Model.SelectedEventOperator),
+                DeleteEventOperatorAction = (_) => DeleteOperator(Model.SelectedEventOperator)
             };
 
             EditOperator = new EditOperatorModel
             {
                 Model = new Operator(),
-                UpdateOperatorAction = () => UpdateOperator(EditOperator.Model, false),
-                UpdateEventOperatorAction = () => UpdateOperator(EditOperator.Model, true)
+                UpdateOperatorAction = (_) => UpdateOperator(EditOperator.Model, false),
+                UpdateEventOperatorAction = (_) => UpdateOperator(EditOperator.Model, true)
             };
+        }
+
+        private void SetCurrentOperator(Operator operatorObj)
+        {
+            if (operatorObj == null)
+                return;
+
+            if (operatorObj.IsClub)
+            {
+                MessageBox.Show("Only individuals can be set as active operator", "You can't do that", MessageBoxButtons.OK);
+
+                return;
+            }
+
+            Model.CurrentOperator = operatorObj;
+        }
+
+        private void DeleteOperator(Operator operatorObj)
+        {
+            if (operatorObj == null)
+                return;
+
+            var deleteConfirmName = String.Format("Delete {0}?", operatorObj.CallSign);
+            var confirmResult = MessageBox.Show(deleteConfirmName, "Confirm Delete", MessageBoxButtons.YesNo);
+
+            if (confirmResult == DialogResult.Yes)
+            {
+                _operatorService.DeleteOperator(operatorObj);
+
+                Model.Operators.Remove(operatorObj);
+            }
         }
 
         private void UpdateOperator(Operator operatorObj, bool isEvent)

@@ -1,4 +1,5 @@
 ﻿using K5BZI_Models.Base;
+using Microsoft.VisualStudio.PlatformUI;
 using PropertyChanged;
 using System;
 using System.Collections.ObjectModel;
@@ -39,10 +40,10 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _editOperatorCommand ??
-                    (_editOperatorCommand = new CommandHandler(EditOperatorAction, true));
+                    (_editOperatorCommand = new DelegateCommand(EditOperatorAction, _ => { return true; }));
             }
         }
-        public Action EditOperatorAction { get; set; }
+        public Action<object> EditOperatorAction { get; set; }
 
         private ICommand _editEventOperatorCommand;
         public ICommand EditEventOperatorCommand
@@ -50,10 +51,10 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _editEventOperatorCommand ??
-                    (_editEventOperatorCommand = new CommandHandler(EditEventOperatorAction, true));
+                    (_editEventOperatorCommand = new DelegateCommand(EditEventOperatorAction, _ => { return true; }));
             }
         }
-        public Action EditEventOperatorAction { get; set; }
+        public Action<object> EditEventOperatorAction { get; set; }
 
         private ICommand _addOperatorToEventCommand;
         public ICommand AddOperatorToEventCommand
@@ -61,10 +62,34 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _addOperatorToEventCommand ??
-                    (_addOperatorToEventCommand = new CommandHandler(AddOperatorToEventAction, true));
+                    (_addOperatorToEventCommand = new DelegateCommand(AddOperatorToEventAction, _ => { return true; }));
             }
         }
-        public Action AddOperatorToEventAction { get; set; }
+        public Action<object> AddOperatorToEventAction { get; set; }
+
+        private ICommand _currentEventOperatorCommand;
+        public ICommand CurrentEventOperatorCommand
+        {
+            get
+            {
+                return _currentEventOperatorCommand ??
+                    (_currentEventOperatorCommand = 
+                    new DelegateCommand(CurrentEventOperatorAction, _ => { return SelectedEventOperator != null; }));
+            }
+        }
+        public Action<object> CurrentEventOperatorAction { get; set; }
+
+        private ICommand _deleteEventOperatorCommand;
+        public ICommand DeleteEventOperatorCommand
+        {
+            get
+            {
+                return _deleteEventOperatorCommand ??
+                    (_deleteEventOperatorCommand = 
+                    new DelegateCommand(DeleteEventOperatorAction, _ => { return SelectedEventOperator != null; }));
+            }
+        }
+        public Action<object> DeleteEventOperatorAction { get; set; }
 
         private ICommand _addClubToEventCommand;
         public ICommand AddClubToEventCommand
@@ -72,10 +97,23 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _addClubToEventCommand ??
-                    (_addClubToEventCommand = new CommandHandler(AddClubToEventAction, true));
+                    (_addClubToEventCommand = 
+                    new DelegateCommand(AddClubToEventAction, _ => { return SelectedEventOperator != null; }));
             }
         }
-        public Action AddClubToEventAction { get; set; }
+        public Action<object> AddClubToEventAction { get; set; }
+
+        private ICommand _currentOperatorCommand;
+        public ICommand CurrentOperatorCommand
+        {
+            get
+            {
+                return _currentOperatorCommand ??
+                    (_currentOperatorCommand = 
+                    new DelegateCommand(CurrentOperatorAction, _ => { return SelectedEventOperator != null; }));
+            }
+        }
+        public Action<object> CurrentOperatorAction { get; set; }
 
         private ICommand _addOperatorCommand;
         public ICommand AddOperatorCommand
@@ -83,10 +121,21 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _addOperatorCommand ??
-                    (_addOperatorCommand = new CommandHandler(AddOperatorAction, true));
+                    (_addOperatorCommand = new DelegateCommand(AddOperatorAction, _ => { return true; }));
             }
         }
-        public Action AddOperatorAction { get; set; }
+        public Action<object> AddOperatorAction { get; set; }
+
+        private ICommand _deleteOperatorCommand;
+        public ICommand DeleteOperatorCommand
+        {
+            get
+            {
+                return _deleteOperatorCommand ??
+                    (_deleteOperatorCommand = new DelegateCommand(DeleteOperatorAction, _ => { return SelectedEventOperator != null; }));
+            }
+        }
+        public Action<object> DeleteOperatorAction { get; set; }
 
         private ICommand _addClubCommand;
         public ICommand AddClubCommand
@@ -94,10 +143,10 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _addClubCommand ??
-                    (_addClubCommand = new CommandHandler(AddClubAction, true));
+                    (_addClubCommand = new DelegateCommand(AddClubAction, _ => { return true; }));
             }
         }
-        public Action AddClubAction { get; set; }
+        public Action<object> AddClubAction { get; set; }
 
         private ICommand _editOperatorsCommand;
         public ICommand EditOperatorsCommand
@@ -105,9 +154,9 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _editOperatorsCommand ??
-                    (_editOperatorsCommand = new CommandHandler(EditOperatorsAction, true));
+                    (_editOperatorsCommand = new DelegateCommand(EditOperatorsAction, _ => { return true; }));
             }
         }
-        public Action EditOperatorsAction { get; set; }
+        public Action<object> EditOperatorsAction { get; set; }
     }
 }

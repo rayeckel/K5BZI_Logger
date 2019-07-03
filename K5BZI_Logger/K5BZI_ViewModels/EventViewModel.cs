@@ -42,13 +42,13 @@ namespace K5BZI_ViewModels
             {
                 CreateNewLogAction = (_) => CreateNewLog(),
                 SelectLogAction = (_) => SelectLog(),
-                ChangeEventAction = () => ChangeEvent()
+                ChangeEventAction = (_) => ChangeEvent()
             };
 
             EditModel = new EditEventModel
             {
-                EditEventAction = () => EditEvent(),
-                UpdateEventAction = () => UpdateEvent()
+                EditEventAction = (_) => EditEvent(),
+                UpdateEventAction = (_) => UpdateEvent()
             };
         }
 

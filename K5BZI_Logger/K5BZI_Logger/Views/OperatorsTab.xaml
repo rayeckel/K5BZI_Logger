@@ -42,7 +42,7 @@
                 BorderBrush="Navy"
                 AutoGenerateColumns="False"
                 ItemsSource="{Binding EventOperators}"
-                SelectedItem="{Binding SelectedEventOperator, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                SelectedItem="{Binding SelectedEventOperator, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="CellEditEnding">
                         <i:InvokeCommandAction Command="{Binding Path=EditEventOperatorCommand}"/>
@@ -58,7 +58,18 @@
                             Header="Name" 
                             Width="175"
                             Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
-                            FontSize="12" />
+                            FontSize="12" >
+                        <dgControls:DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsClub}" Value="True">
+                                        <Setter Property="FontWeight" Value="Bold"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </dgControls:DataGridTextColumn.ElementStyle>
+                    </dgControls:DataGridTextColumn>
                     <dgControls:DataGridTextColumn 
                             Header="Call" 
                             Width="100"
@@ -67,6 +78,11 @@
                         <dgControls:DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsClub}" Value="True">
+                                        <Setter Property="FontWeight" Value="Bold"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
                             </Style>
                         </dgControls:DataGridTextColumn.ElementStyle>
                         <dgControls:DataGridTextColumn.EditingElementStyle>
@@ -110,10 +126,24 @@
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
                 <Button
                     VerticalAlignment="Center"
                     Grid.Row="1"
+                    Margin="10,0,0,0"
+                    Content="Active Operator"
+                    Width="120"
+                    Height="30"
+                    Foreground="Navy"
+                    FontSize="12"
+                    FontFamily="Tahoma"
+                    Command="{Binding CurrentEventOperatorCommand}"/>
+                <Button
+                    VerticalAlignment="Center"
+                    Grid.Row="2"
                     Margin="10,0,0,0"
                     Content="Add Operator"
                     Width="120"
@@ -121,10 +151,10 @@
                     Foreground="Navy"
                     FontSize="12"
                     FontFamily="Tahoma"
-                    Command="{Binding AddOperatorToEventCommand}"/>
+                    Command="{Binding AddOperatorCommand}"/>
                 <Button
                     VerticalAlignment="Center"
-                    Grid.Row="2"
+                    Grid.Row="3"
                     Margin="10,0,0,0"
                     Content="Add Club"
                     Width="120"
@@ -132,7 +162,18 @@
                     Foreground="Navy"
                     FontSize="12"
                     FontFamily="Tahoma"
-                    Command="{Binding AddClubToEventCommand}"/>
+                    Command="{Binding AddClubCommand}"/>
+                <Button
+                    VerticalAlignment="Center"
+                    Grid.Row="5"
+                    Margin="10,0,0,0"
+                    Content="Delete Operator"
+                    Width="120"
+                    Height="30"
+                    Foreground="Navy"
+                    FontSize="12"
+                    FontFamily="Tahoma"
+                    Command="{Binding DeleteEventOperatorCommand}"/>
             </Grid>
         </Grid>
     </Controls:MetroTabItem.Content>

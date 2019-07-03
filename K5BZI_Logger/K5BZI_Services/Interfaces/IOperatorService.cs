@@ -7,6 +7,8 @@ namespace K5BZI_Services.Interfaces
     {
         Operator UpdateOperator(Operator newOperator);
 
+        void DeleteOperator(Operator newOperator);
+
         List<Operator> GetFullOperatorListing();
     }
 }

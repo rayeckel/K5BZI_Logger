@@ -41,6 +41,18 @@ namespace K5BZI_Services
             });
         }
 
+        public void DeleteOperator(Operator editOperator)
+        {
+            var existingOperator = _operators.FirstOrDefault(_ => _.CallSign == editOperator.CallSign);
+
+            if (existingOperator != null)
+            {
+                _operators.Remove(editOperator);
+
+                _fileStoreService.WriteToFile(_operators, _operatorsFileName, false);
+            }
+        }
+
         public Operator UpdateOperator(Operator editOperator)
         {
             var existingOperator = _operators.FirstOrDefault(_ => _.CallSign == editOperator.CallSign);

@@ -37,7 +37,7 @@ namespace K5BZI_ViewModels
                 SelectExportAction = (_) => ChangeExport()
             };
 
-            _mainLoggerViewModel.Model.SelectExportLogAction = () => SelectLog();
+            _mainLoggerViewModel.Model.SelectExportLogAction = (_) => SelectLog();
         }
 
         public void SelectLog()

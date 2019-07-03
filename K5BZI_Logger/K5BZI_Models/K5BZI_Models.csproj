@@ -133,7 +133,6 @@
     <Compile Include="Attributes\CabrilloAttribute.cs" />
     <Compile Include="Base\BaseModel.cs" />
     <Compile Include="Base\BaseViewModel.cs" />
-    <Compile Include="Base\CommandHandler.cs" />
     <Compile Include="Base\IBaseViewModel.cs" />
     <Compile Include="Enums\Assisted.cs" />
     <Compile Include="Enums\Mode.cs" />

@@ -78,10 +78,10 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _changeEventCommand ??
-                    (_changeEventCommand = new CommandHandler(ChangeEventAction, true));
+                    (_changeEventCommand = new DelegateCommand(ChangeEventAction, _ => { return true; }));
             }
         }
-        public Action ChangeEventAction { get; set; }
+        public Action<object> ChangeEventAction { get; set; }
 
         #endregion
     }

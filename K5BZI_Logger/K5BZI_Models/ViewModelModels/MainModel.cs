@@ -1,4 +1,5 @@
 ﻿using K5BZI_Models.Base;
+using Microsoft.VisualStudio.PlatformUI;
 using PropertyChanged;
 using System;
 using System.Collections.ObjectModel;
@@ -41,10 +42,11 @@ namespace K5BZI_Models.Main
         {
             get
             {
-                return _logItCommand ?? (_logItCommand = new CommandHandler(LogItAction, _logItCommandCanExecute));
+                return _logItCommand ?? (_logItCommand =
+                    new DelegateCommand(LogItAction, _ => { return _logItCommandCanExecute; }));
             }
         }
-        public Action LogItAction { get; set; }
+        public Action<object> LogItAction { get; set; }
 
 
         private bool _createNewEntryCanExecute;
@@ -54,10 +56,11 @@ namespace K5BZI_Models.Main
             get
             {
                 return _createNewEntryCommand ??
-                    (_createNewEntryCommand = new CommandHandler(CreateNewEntryAction, _createNewEntryCanExecute));
+                    (_createNewEntryCommand =
+                    new DelegateCommand(CreateNewEntryAction, _ => { return _createNewEntryCanExecute; }));
             }
         }
-        public Action CreateNewEntryAction { get; set; }
+        public Action<object> CreateNewEntryAction { get; set; }
 
         private ICommand _updateLogEntryCommand;
         public ICommand UpdateLogEntryCommand
@@ -65,11 +68,12 @@ namespace K5BZI_Models.Main
             get
             {
                 return _updateLogEntryCommand ??
-                    (_updateLogEntryCommand = new CommandHandler(EditLogEntryAction, SelectedEntry != null));
+                    (_updateLogEntryCommand =
+                    new DelegateCommand(EditLogEntryAction, _ => { return SelectedEntry != null; }));
             }
         }
 
-        public Action EditLogEntryAction { get; set; }
+        public Action<object> EditLogEntryAction { get; set; }
 
         private ICommand _selectExportLogCommand;
         public ICommand SelectExportLogCommand
@@ -77,10 +81,10 @@ namespace K5BZI_Models.Main
             get
             {
                 return _selectExportLogCommand ??
-                    (_selectExportLogCommand = new CommandHandler(SelectExportLogAction, true));
+                    (_selectExportLogCommand = new DelegateCommand(SelectExportLogAction, _ => { return true; }));
             }
         }
-        public Action SelectExportLogAction { get; set; }
+        public Action<object> SelectExportLogAction { get; set; }
 
         private ICommand _viewFileStoreCommand;
         public ICommand ViewFileStoreCommand
@@ -88,10 +92,10 @@ namespace K5BZI_Models.Main
             get
             {
                 return _viewFileStoreCommand ??
-                    (_viewFileStoreCommand = new CommandHandler(ViewFileStoreAction, true));
+                    (_viewFileStoreCommand = new DelegateCommand(ViewFileStoreAction, _ => { return true; }));
             }
         }
-        public Action ViewFileStoreAction { get; set; }
+        public Action<object> ViewFileStoreAction { get; set; }
 
         #endregion
     }

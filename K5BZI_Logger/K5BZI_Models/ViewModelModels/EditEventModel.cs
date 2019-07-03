@@ -1,4 +1,5 @@
 ﻿using K5BZI_Models.Base;
+using Microsoft.VisualStudio.PlatformUI;
 using System;
 using System.Windows.Input;
 
@@ -15,20 +16,22 @@ namespace K5BZI_Models.ViewModelModels
         {
             get
             {
-                return _editEventCommand ?? (_editEventCommand = new CommandHandler(EditEventAction, true));
+                return _editEventCommand ??
+                    (_editEventCommand = new DelegateCommand(EditEventAction, _ => { return true; }));
             }
         }
-        public Action EditEventAction { get; set; }
+        public Action<object> EditEventAction { get; set; }
 
         private ICommand _updateEventCommand;
         public ICommand UpdateEventCommand
         {
             get
             {
-                return _updateEventCommand ?? (_updateEventCommand = new CommandHandler(UpdateEventAction, true));
+                return _updateEventCommand ??
+                    (_updateEventCommand = new DelegateCommand(UpdateEventAction, _ => { return true; }));
             }
         }
-        public Action UpdateEventAction { get; set; }
+        public Action<object> UpdateEventAction { get; set; }
 
         #endregion
     }

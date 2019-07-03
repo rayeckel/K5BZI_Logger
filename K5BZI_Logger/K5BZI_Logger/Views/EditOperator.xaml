@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:viewmodel="clr-namespace:K5BZI_ViewModels;assembly=K5BZI_ViewModels"
     xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
@@ -64,6 +63,7 @@
                 Height="30"
                 Margin="20,10,0,0"
                 FontFamily="Tahoma"
+                CharacterCasing="Upper"
                 Text="{Binding Model.CallSign, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 controls:TextBoxHelper.Watermark="Call Sign" 
                 controls:TextBoxHelper.ClearTextButton="True">
@@ -227,6 +227,7 @@
                 Height="30"
                 Margin="20,10,0,0"
                 FontFamily="Tahoma"
+                CharacterCasing="Upper" 
                 Text="{Binding Model.ClubCall, Mode=OneWayToSource}"
                 controls:TextBoxHelper.Watermark="Club Call" 
                 controls:TextBoxHelper.ClearTextButton="True" >
