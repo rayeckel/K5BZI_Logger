@@ -10,7 +10,7 @@ namespace K5BZI_ViewModels
 
         public SelectExportModel Model { get; private set; }
         private readonly IExportService _exportService;
-        private readonly IMainLoggerViewModel _mainLoggerViewModel;
+        private readonly IMainViewModel _mainLoggerViewModel;
 
         #endregion
 
@@ -18,7 +18,7 @@ namespace K5BZI_ViewModels
 
         public ExportViewModel(
             IExportService exportService,
-            IMainLoggerViewModel mainLoggerViewModel)
+            IMainViewModel mainLoggerViewModel)
         {
             _exportService = exportService;
             _mainLoggerViewModel = mainLoggerViewModel;

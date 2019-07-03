@@ -9,24 +9,21 @@ using System.Windows.Forms;
 
 namespace K5BZI_ViewModels
 {
-    public class MainViewModel : IMainLoggerViewModel
+    public class MainViewModel : IMainViewModel
     {
         #region Properties
 
         public MainModel Model { get; private set; }
+        private Operator _currentOperator;
         private readonly ILogListingService _logListingService;
-        private readonly IEventService _eventService;
 
         #endregion
 
         #region Constructors
 
-        public MainViewModel(
-            ILogListingService logListingService,
-            IEventService eventService)
+        public MainViewModel(ILogListingService logListingService)
         {
             _logListingService = logListingService;
-            _eventService = eventService;
 
             Initialize();
         }
@@ -57,6 +54,11 @@ namespace K5BZI_ViewModels
             Model.LogEntries.Clear();
             Model.LogEntry.ClearProperties();
             Model.LogEntry.EventId = newEvent.Id;
+        }
+
+        public void UpdateCurrentOperator(Operator currentOperator)
+        {
+            _currentOperator = currentOperator;
         }
 
         #endregion
@@ -98,6 +100,8 @@ namespace K5BZI_ViewModels
                 return;
             }
 
+            Model.LogEntry.Operator = _currentOperator;
+
             _logListingService.SaveLogEntry(Model.LogEntry, Model.Event);
 
             Model.LogEntries.Add(Model.LogEntry.Clone());
@@ -121,6 +125,7 @@ namespace K5BZI_ViewModels
                 Model.LogEntries.Remove(Model.SelectedEntry);
             }
         }
+
         #endregion
     }
 }

@@ -8,7 +8,8 @@
         xmlns:local="clr-namespace:K5BZI_Logger.Views"
         mc:Ignorable="d"
         Title="K5BZI Logger"
-        Height="740" Width="1024"
+        Height="740" 
+        Width="1024"
         BorderThickness="1"
         GlowBrush="{DynamicResource AccentColorBrush}"
         ResizeMode="CanResizeWithGrip"
@@ -26,15 +27,15 @@
         Background="AliceBlue">
         <Grid.RowDefinitions>
             <RowDefinition Height="110" />
-            <RowDefinition Height="140" />
+            <RowDefinition Height="165" />
             <RowDefinition Height="250*" />
-            <RowDefinition Height="50" />
+            <RowDefinition Height="20" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="256" />
-            <ColumnDefinition Width="128" />
-            <ColumnDefinition Width="128" />
-            <ColumnDefinition Width="510" />
+            <ColumnDefinition Width="260" />
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="364" />
         </Grid.ColumnDefinitions>
         <local:SelectEvent 
             Grid.Row="0" 
@@ -66,26 +67,26 @@
             Grid.Column="0"
             Grid.ColumnSpan="4"
             HorizontalAlignment="Center"/>
-        <local:MainHeader
+        <local:Header
             Grid.Row="0" 
             Grid.Column="0"
             Grid.ColumnSpan="4"/>
-        <local:MainInput
+        <local:LogInput
             Grid.Row="1" 
             Grid.Column="0"
             Grid.ColumnSpan="3"
             Margin="8,0,0,0"
             Padding="2"/>
-        <local:MainDuplicates
+        <local:Duplicates
             Grid.Row="1" 
             Grid.Column="3"
             Margin="0,0,8,0"
             Padding="2"/>
-        <local:MainTabs
+        <local:Tabs
             Grid.Row="2"
             Grid.Column="0" 
             Grid.ColumnSpan="4"
-            Margin="10,2,10,0"/>
+            Margin="10,2,0,0"/>
 
     </Grid>
 </controls:MetroWindow>

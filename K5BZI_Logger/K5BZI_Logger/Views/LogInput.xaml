@@ -1,0 +1,260 @@
+﻿<UserControl 
+    x:Class="K5BZI_Logger.Views.LogInput"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    mc:Ignorable="d" 
+    FocusManager.FocusedElement="{x:Reference lblCall}">
+    <Border
+        BorderThickness="1"
+        BorderBrush="Navy">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="135" />
+            </Grid.RowDefinitions>
+            <TextBlock 
+                Grid.Row="0"
+                Text="Log Contact"
+                TextAlignment="Center"
+                VerticalAlignment="Top"
+                FontFamily="Tahoma"
+                FontSize="18"
+                Foreground="DarkGray"/>
+            <Grid 
+                Grid.Row="1"
+                Margin="10,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="60" />
+                </Grid.ColumnDefinitions>
+                <Label 
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontFamily="Tahoma"
+                    Foreground="DarkSlateBlue"
+                    Content="Time"/>
+                <Label
+                    Grid.Row="1" 
+                    Grid.Column="0"
+                    Height="27"
+                    x:Name="lblTime"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontFamily="Tahoma"
+                    Foreground="DarkGray"
+                    Width="130"
+                    Content="{Binding LogEntry.ContactTime, Mode=TwoWay}"/>
+                <Label 
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontFamily="Tahoma"
+                    Foreground="DarkSlateBlue"
+                    Content="Call"/>
+                <TextBox
+                    Grid.Row="1" 
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Height="27"
+                    x:Name="lblCall"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Width="70"
+                    BorderThickness="1"
+                    CharacterCasing="Upper" 
+                    FocusManager.FocusedElement="{Binding RelativeSource={RelativeSource Self}}"
+                    Text="{Binding LogEntry.CallSign, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label 
+                    Grid.Row="0"
+                    Grid.Column="3"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontFamily="Tahoma"
+                    Foreground="DarkSlateBlue"
+                    Content="Band"/>
+                <TextBox
+                    Grid.Row="1" 
+                    Grid.Column="3"
+                    Height="27"
+                    x:Name="lblBand"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Width="50"
+                    BorderThickness="1"
+                    Text="{Binding LogEntry.Signal.Band}"/>
+                <Label 
+                    Grid.Row="0"
+                    Grid.Column="4"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontFamily="Tahoma"
+                    Foreground="DarkSlateBlue"
+                    Content="Freq"/>
+                <TextBox
+                    Grid.Row="1" 
+                    Grid.Column="4"
+                    Height="27"
+                    x:Name="lblFreq"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Width="70"
+                    BorderThickness="1"
+                    Text="{Binding LogEntry.Signal.Frequency, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label 
+                    Grid.Row="2"
+                    Grid.Column="2"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontFamily="Tahoma"
+                    Foreground="DarkSlateBlue"
+                    Content="Sent"/>
+                <TextBox
+                    Grid.Row="3"
+                    Grid.Column="2"
+                    Height="27"
+                    x:Name="lblSent"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"         
+                    Width="50"
+                    BorderThickness="1"
+                    Text="{Binding LogEntry.SignalReport.Sent, Mode=TwoWay}"/>
+                <Label 
+                    Grid.Row="2"
+                    Grid.Column="3"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontFamily="Tahoma"
+                    Foreground="DarkSlateBlue"
+                    Content="Recvd"/>
+                <TextBox
+                    Grid.Row="3" 
+                    Grid.Column="3"
+                    Height="27"
+                    x:Name="lblRecvd"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"                  
+                    Width="50"
+                    BorderThickness="1"
+                    Text="{Binding LogEntry.SignalReport.Received, Mode=TwoWay}"/>
+                <Label 
+                    Grid.Row="2"
+                    Grid.Column="4"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontFamily="Tahoma"
+                    Foreground="DarkSlateBlue"
+                    Content="Mode"/>
+                <TextBox
+                    Grid.Row="3" 
+                    Grid.Column="4"
+                    Height="27"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"                  
+                    Width="70"
+                    BorderThickness="1"
+                    Text="{Binding LogEntry.SignalReport.Mode, Mode=TwoWay}"/>
+                <Label 
+                    Grid.Row="2"
+                    Grid.Column="5"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontFamily="Tahoma"
+                    Foreground="DarkSlateBlue"
+                    Content="Power"/>
+                <TextBox
+                    Grid.Row="3" 
+                    Grid.Column="5"
+                    Height="27"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"                  
+                    Width="50"
+                    BorderThickness="1"
+                    Text="{Binding LogEntry.Power, Mode=TwoWay}"/>
+                <Label 
+                    Grid.Row="2"
+                    Grid.Column="6"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontFamily="Tahoma"
+                    Foreground="DarkSlateBlue"
+                    Content="Assist"/>
+                <TextBox
+                    Grid.Row="3" 
+                    Grid.Column="6"
+                    Height="27"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"                  
+                    Width="50"
+                    BorderThickness="1"
+                    Text="{Binding LogEntry.Assisted, Mode=TwoWay}"/>
+                <Label 
+                    Grid.Row="2"
+                    Grid.Column="7"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontFamily="Tahoma"
+                    Foreground="DarkSlateBlue"
+                    Content="Country"/>
+                <TextBox
+                    Grid.Row="3" 
+                    Grid.Column="7"
+                    Height="27"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"                  
+                    Width="50"
+                    BorderThickness="1"
+                    Text="{Binding LogEntry.Country, Mode=TwoWay}"/>
+                <Label 
+                    Grid.Row="2"
+                    Grid.Column="8"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontFamily="Tahoma"
+                    Foreground="DarkSlateBlue"
+                    Content="Continent"/>
+                <TextBox
+                    Grid.Row="3" 
+                    Grid.Column="8"
+                    Height="27"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"                  
+                    Width="50"
+                    BorderThickness="1"
+                    Text="{Binding LogEntry.Continent, Mode=TwoWay}"/>
+                <Button 
+                    Grid.Row="1"
+                    Grid.Column="4"
+                    Grid.ColumnSpan="5"
+                    Content="Log It!"
+                    Width="130"
+                    FontSize="12"
+                    Foreground="Navy"
+                    FontFamily="Tahoma"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    IsDefault="True"
+                    Command="{Binding LogItCommand}"/>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

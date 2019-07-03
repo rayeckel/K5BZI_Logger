@@ -12,7 +12,7 @@ namespace K5BZI_ViewModels
         public SelectEventModel Model { get; private set; }
         public EditEventModel EditModel { get; private set; }
         private readonly IEventService _eventService;
-        private readonly IMainLoggerViewModel _mainLoggerViewModel;
+        private readonly IMainViewModel _mainLoggerViewModel;
         private readonly IOperatorsViewModel _operatorsViewModel;
 
         #endregion
@@ -21,7 +21,7 @@ namespace K5BZI_ViewModels
 
         public EventViewModel(
             IEventService eventService,
-            IMainLoggerViewModel mainLoggerViewModel,
+            IMainViewModel mainLoggerViewModel,
             IOperatorsViewModel operatorsViewModel)
         {
             _eventService = eventService;

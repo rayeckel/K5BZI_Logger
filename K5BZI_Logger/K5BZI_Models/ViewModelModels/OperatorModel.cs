@@ -34,6 +34,8 @@ namespace K5BZI_Models.ViewModelModels
 
         #endregion
 
+        #region Commands
+
         private ICommand _editOperatorCommand;
         public ICommand EditOperatorCommand
         {
@@ -73,7 +75,7 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _currentEventOperatorCommand ??
-                    (_currentEventOperatorCommand = 
+                    (_currentEventOperatorCommand =
                     new DelegateCommand(CurrentEventOperatorAction, _ => { return SelectedEventOperator != null; }));
             }
         }
@@ -85,7 +87,7 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _deleteEventOperatorCommand ??
-                    (_deleteEventOperatorCommand = 
+                    (_deleteEventOperatorCommand =
                     new DelegateCommand(DeleteEventOperatorAction, _ => { return SelectedEventOperator != null; }));
             }
         }
@@ -97,7 +99,7 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _addClubToEventCommand ??
-                    (_addClubToEventCommand = 
+                    (_addClubToEventCommand =
                     new DelegateCommand(AddClubToEventAction, _ => { return SelectedEventOperator != null; }));
             }
         }
@@ -109,7 +111,7 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _currentOperatorCommand ??
-                    (_currentOperatorCommand = 
+                    (_currentOperatorCommand =
                     new DelegateCommand(CurrentOperatorAction, _ => { return SelectedEventOperator != null; }));
             }
         }
@@ -158,5 +160,7 @@ namespace K5BZI_Models.ViewModelModels
             }
         }
         public Action<object> EditOperatorsAction { get; set; }
+
+        #endregion
     }
 }

@@ -1,13 +1,21 @@
 ﻿using K5BZI_Models.Base;
 using Microsoft.VisualStudio.PlatformUI;
+using PropertyChanged;
 using System;
 using System.Windows.Input;
 
 namespace K5BZI_Models.ViewModelModels
 {
+    [AddINotifyPropertyChangedInterface]
     public class EditOperatorModel : BaseViewModel
     {
+        #region Properties
+
         public Operator Model { get; set; }
+
+        #endregion
+
+        #region Commands
 
         private ICommand _updateOperatorCommand;
         public ICommand UpdateOperatorCommand
@@ -30,5 +38,7 @@ namespace K5BZI_Models.ViewModelModels
             }
         }
         public Action<object> UpdateEventOperatorAction { get; set; }
+
+        #endregion
     }
 }

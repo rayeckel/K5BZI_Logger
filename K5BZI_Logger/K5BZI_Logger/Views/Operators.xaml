@@ -11,7 +11,7 @@
     mc:Ignorable="d"
     IsOpen="{Binding IsOpen}"
     ShowCloseButton="{Binding ShowCloseButton}"
-    Title="Select Log">
+    Title="All Operators">
     <simpleChildWindow:ChildWindow.OverlayBrush>
         <SolidColorBrush Opacity="0.8" Color="{StaticResource Gray2}" />
     </simpleChildWindow:ChildWindow.OverlayBrush>

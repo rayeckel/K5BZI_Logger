@@ -85,10 +85,6 @@
       <Project>{EA0EF54B-D709-45CF-9F8D-0F81232D1610}</Project>
       <Name>K5BZI_Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\K5BZI_ServiceModels\K5BZI_ServiceModels.csproj">
-      <Project>{b32c1c56-32a4-41de-9e3e-f79fa8493e0b}</Project>
-      <Name>K5BZI_ServiceModels</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

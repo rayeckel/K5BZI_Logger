@@ -1,13 +1,19 @@
 ﻿using K5BZI_Models.Base;
 using Microsoft.VisualStudio.PlatformUI;
+using PropertyChanged;
 using System;
 using System.Windows.Input;
 
 namespace K5BZI_Models.ViewModelModels
 {
+    [AddINotifyPropertyChangedInterface]
     public class EditEventModel : BaseViewModel
     {
+        #region Properties
+
         public Event Event { get; set; }
+
+        #endregion
 
         #region Commands
 

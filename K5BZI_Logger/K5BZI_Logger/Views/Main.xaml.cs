@@ -12,7 +12,7 @@ namespace K5BZI_Logger.Views
     /// </summary>
     public partial class Main : MetroWindow, IView
     {
-        public Main(IMainLoggerViewModel viewModel)
+        public Main(IMainViewModel viewModel)
         {
             InitializeComponent();
 
