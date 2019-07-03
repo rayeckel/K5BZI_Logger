@@ -11,8 +11,6 @@ namespace K5BZI_Models.Extensions
             logEntry.Id = entryId + 1;
             logEntry.CallSign = string.Empty;
             logEntry.ContactTime = DateTime.Now;
-            logEntry.SignalReport.Sent = 599;
-            logEntry.SignalReport.Received = 599;
         }
 
         public static LogEntry Clone(this LogEntry logEntry)

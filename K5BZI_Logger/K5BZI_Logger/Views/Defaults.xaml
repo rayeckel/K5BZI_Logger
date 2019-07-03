@@ -168,6 +168,26 @@
                 controls:TextBoxHelper.Watermark="Assisted" 
                 controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>
+            <Label 
+                Grid.Row="6"
+                Grid.Column="0"
+                Margin="15,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                FontWeight="Bold"
+                FontFamily="Tahoma"
+                Content="Mode"/>
+            <TextBox
+                Grid.Row="6"
+                Grid.Column="1"
+                Width="300"
+                Height="30"
+                Margin="20,10,0,0"
+                FontFamily="Tahoma"
+                Text="{Binding Defaults.Mode, Mode=OneWay}"
+                controls:TextBoxHelper.Watermark="Mode" 
+                controls:TextBoxHelper.ClearTextButton="True" >
+            </TextBox>
             <Button 
                 Grid.Row="10"
                 Grid.Column="1"

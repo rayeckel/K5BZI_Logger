@@ -13,6 +13,7 @@ namespace K5BZI_Models.EntityModels
             Continent = "NA";
             Assisted = Assisted.NONAssisted;
             Power = Power.HIGH;
+            Mode = Mode.SSB;
         }
 
         public String QslSent { get; set; }
@@ -26,5 +27,7 @@ namespace K5BZI_Models.EntityModels
         public Assisted Assisted { get; set; }
 
         public Power Power { get; set; }
+
+        public Mode Mode { get; set; }
     }
 }

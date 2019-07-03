@@ -1,4 +1,5 @@
-﻿using K5BZI_Models.EntityModels;
+﻿using K5BZI_Models;
+using K5BZI_Models.EntityModels;
 
 namespace K5BZI_Services.Interfaces
 {
@@ -7,5 +8,7 @@ namespace K5BZI_Services.Interfaces
         Defaults GetDefaults();
 
         void UpdateDefaults(Defaults editDefaults);
+
+        void SetDefaults(LogEntry logEntry);
     }
 }

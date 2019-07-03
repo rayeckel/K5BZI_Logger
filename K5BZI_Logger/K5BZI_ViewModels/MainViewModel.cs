@@ -16,14 +16,18 @@ namespace K5BZI_ViewModels
         public MainModel Model { get; private set; }
         private Operator _currentOperator;
         private readonly ILogListingService _logListingService;
+        private readonly IDefaultsService _defaultsService;
 
         #endregion
 
         #region Constructors
 
-        public MainViewModel(ILogListingService logListingService)
+        public MainViewModel(
+            ILogListingService logListingService,
+            IDefaultsService defaultsService)
         {
             _logListingService = logListingService;
+            _defaultsService = defaultsService;
 
             Initialize();
         }
@@ -88,6 +92,8 @@ namespace K5BZI_ViewModels
                 EditLogEntryAction = (_) => EditLogEntry(),
                 DeleteLogEntryAction = (_) => DeleteLogEntry()
             };
+
+            _defaultsService.SetDefaults(Model.LogEntry);
 
             Model.LogEntry.CheckDuplicateEntriesAction = () => CheckForDuplicates();
         }

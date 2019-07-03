@@ -1,4 +1,5 @@
-﻿using K5BZI_Models.EntityModels;
+﻿using K5BZI_Models;
+using K5BZI_Models.EntityModels;
 using K5BZI_Services.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,8 @@ namespace K5BZI_Services
         public DefaultsService(IFileStoreService fileStoreService)
         {
             _fileStoreService = fileStoreService;
+
+            GetDefaults();
         }
 
         #endregion
@@ -59,6 +62,17 @@ namespace K5BZI_Services
             }
 
             _fileStoreService.WriteToFile(new List<Defaults> { _storedDefaults }, _defaultsFileName, false);
+        }
+
+        public void SetDefaults(LogEntry logEntry)
+        {
+            logEntry.Assisted = _storedDefaults.Assisted;
+            logEntry.Continent = _storedDefaults.Continent;
+            logEntry.Country = _storedDefaults.Country;
+            logEntry.Power = _storedDefaults.Power;
+            logEntry.QslReceived = _storedDefaults.QslReceived;
+            logEntry.QslSent = _storedDefaults.QslSent;
+            logEntry.Signal.Mode = _storedDefaults.Mode;
         }
 
         #endregion
