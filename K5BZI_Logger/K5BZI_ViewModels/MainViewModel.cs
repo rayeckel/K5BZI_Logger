@@ -114,6 +114,11 @@ namespace K5BZI_ViewModels
             Model.LogEntry.ClearProperties();
         }
 
+        private void CreateNewLogEntry()
+        {
+            _logListingService.UpdateLogEntry(Model.SelectedEntry, Model.Event);
+        }
+
         private void EditLogEntry()
         {
             _logListingService.UpdateLogEntry(Model.SelectedEntry, Model.Event);

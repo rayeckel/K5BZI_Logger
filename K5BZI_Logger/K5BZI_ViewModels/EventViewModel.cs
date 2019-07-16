@@ -1,6 +1,8 @@
-﻿using K5BZI_Models.ViewModelModels;
+﻿using K5BZI_Models;
+using K5BZI_Models.ViewModelModels;
 using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels.Interfaces;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace K5BZI_ViewModels
@@ -40,7 +42,7 @@ namespace K5BZI_ViewModels
         {
             Model = new SelectEventModel
             {
-                CreateNewLogAction = (_) => CreateNewLog(),
+                CreateNewLogAction = (_) => CreateNewEvent(),
                 SelectLogAction = (_) => SelectLog(),
                 ChangeEventAction = (_) => ChangeEvent()
             };
@@ -66,7 +68,7 @@ namespace K5BZI_ViewModels
             });
         }
 
-        private void CreateNewLog()
+        private void CreateNewEvent()
         {
             var newEvent = _eventService.CreateNewEvent(Model.EventName);
 
@@ -75,6 +77,10 @@ namespace K5BZI_ViewModels
             Model.SelectedEvent = newEvent;
             Model.ExistingEvents.Add(newEvent);
             Model.IsOpen = false;
+
+            EditEvent();
+
+            //TODO: Selected Operators are not saved on new event creation.
         }
 
         private void SelectLog()
@@ -100,10 +106,12 @@ namespace K5BZI_ViewModels
                 .Where(_ => _.Selected)
                 .ToList();
 
+            UpdateOperators(updatedOperators);
+
             _eventService.UpdateEvent(EditModel.Event, updatedOperators);
         }
 
-        public void EditEvent()
+        private void EditEvent()
         {
             EditModel.Event = Model.SelectedEvent;
             EditModel.Operators.Clear();
@@ -120,6 +128,16 @@ namespace K5BZI_ViewModels
 
             EditModel.ShowCloseButton = true;
             EditModel.IsOpen = true;
+        }
+
+        private void UpdateOperators(List<Operator> operators)
+        {
+            _operatorsViewModel.Model.EventOperators.Clear();
+
+            foreach (var op in operators)
+            {
+                _operatorsViewModel.Model.EventOperators.Add(op);
+            }
         }
 
         #endregion

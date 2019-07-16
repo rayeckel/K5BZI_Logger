@@ -44,17 +44,10 @@ namespace K5BZI_ViewModels
             Model.Operators.Clear();
             Model.EventOperators.Clear();
 
-            var currentEventOperators = currentEvent.Operators.Select(x => x.CallSign);
-            var operators = _operatorService.GetFullOperatorListing();
-
-            if (operators.Any())
-            {
-                operators.ForEach(_ => Model.Operators.Add(_));
-
-                Model.CurrentOperator = operators.First();
-            }
-
-            var eventOperators = operators.Where(_ => currentEventOperators.Contains(_.CallSign))
+            var currentEventOperators = currentEvent.Operators
+                .Select(x => x.CallSign);
+            var eventOperators = Model.Operators
+                .Where(_ => currentEventOperators.Contains(_.CallSign))
                 .ToList();
 
             if (eventOperators.Any())
@@ -90,6 +83,15 @@ namespace K5BZI_ViewModels
                 UpdateOperatorAction = (_) => UpdateOperator(EditOperator.Model, false),
                 UpdateEventOperatorAction = (_) => UpdateOperator(EditOperator.Model, true)
             };
+
+            var operators = _operatorService.GetFullOperatorListing();
+
+            if (operators.Any())
+            {
+                operators.ForEach(_ => Model.Operators.Add(_));
+
+                Model.CurrentOperator = operators.First();
+            }
         }
 
         private void SetCurrentOperator(Operator operatorObj)
