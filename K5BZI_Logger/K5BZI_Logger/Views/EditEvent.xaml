@@ -247,7 +247,7 @@
                 Width="250" 
                 Margin="10,0,10,0"
                 x:Name="operatorsSelect"
-                ItemsSource="{Binding Event.Operators}"
+                ItemsSource="{Binding Operators}"
                 FontFamily="Tahoma"
                 BorderThickness="1"
                 controls:TextBoxHelper.Watermark="Operators" 
@@ -261,6 +261,11 @@
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListBoxItem}">
+                        <Setter Property="IsSelected" Value="{Binding Mode=TwoWay, Path=Selected}"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
             </ListBox>
             <Label 
                 Grid.Row="2"

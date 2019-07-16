@@ -50,10 +50,10 @@ namespace K5BZI_Services
                 EventName = eventName,
                 LogFileName = String.Format("{0}_{1}", newEventName, DateTime.UtcNow.ToString("yyyy'-'MM'-'dd")),
                 CreatedDate = DateTime.Now
-            });
+            }, new List<Operator>());
         }
 
-        public Event UpdateEvent(Event editEvent)
+        public Event UpdateEvent(Event editEvent, List<Operator> operators)
         {
             var existing = _eventList.FirstOrDefault(_ => _.Id == editEvent.Id);
 
@@ -63,6 +63,8 @@ namespace K5BZI_Services
 
                 if (_eventList.Any())
                     editEvent.Id = _eventList.Select(_ => _.Id).Max() + 1;
+
+                operators.ForEach(_ => editEvent.Operators.Add(_));
 
                 _eventList.Add(editEvent);
             }
@@ -82,6 +84,9 @@ namespace K5BZI_Services
                 existing.Score = editEvent.Score;
                 existing.State = editEvent.State;
                 existing.TransmitterCount = editEvent.TransmitterCount;
+
+                existing.Operators.Clear();
+                operators.ForEach(_ => editEvent.Operators.Add(_));
             }
 
             _fileStoreService.WriteToFile(_eventList, _eventLogFileName, false);

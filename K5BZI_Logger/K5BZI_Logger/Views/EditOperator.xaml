@@ -11,7 +11,7 @@
     mc:Ignorable="d"
     IsOpen="{Binding IsOpen}"
     ShowCloseButton="{Binding ShowCloseButton}"
-    Title="Edit Event">
+    Title="Edit Operator">
     <simpleChildWindow:ChildWindow.OverlayBrush>
         <SolidColorBrush Opacity="0.8" Color="{StaticResource Gray2}" />
     </simpleChildWindow:ChildWindow.OverlayBrush>
@@ -31,18 +31,18 @@
         Width="600">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="30" />
-                <RowDefinition Height="50" />
-                <RowDefinition Height="30" />
-                <RowDefinition Height="50" />
-                <RowDefinition Height="30" />
-                <RowDefinition Height="50" />
-                <RowDefinition Height="30" />
-                <RowDefinition Height="50" />
-                <RowDefinition Height="30" />
-                <RowDefinition Height="50" />
-                <RowDefinition Height="30" />
-                <RowDefinition Height="50" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150" />
@@ -52,7 +52,7 @@
                 Grid.Row="0"
                 Margin="15,0,0,0"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Bottom"
+                VerticalAlignment="Center"
                 FontWeight="Bold"
                 FontFamily="Tahoma"
                 Content="Call Sign"/>
@@ -61,54 +61,31 @@
                 Grid.Column="1"
                 Width="300"
                 Height="30"
-                Margin="20,10,0,0"
+                Margin="20,0,0,0"
                 FontFamily="Tahoma"
                 CharacterCasing="Upper"
                 Text="{Binding Model.CallSign, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 controls:TextBoxHelper.Watermark="Call Sign" 
                 controls:TextBoxHelper.ClearTextButton="True">
             </TextBox>
-            <!--
-            <ComboBox
-                Grid.Row="1"
-                Grid.Column="0"
-                Height="30"
-                Width="300" 
-                Margin="20,20,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                x:Name="existingLogsCombo"
-                ItemsSource="{Binding Model.ExistingEvents}"
-                SelectedItem="{Binding Model.SelectedEvent, Mode=TwoWay}"
-                FontFamily="Tahoma"
-                BorderThickness="1">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding EventName}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-            -->
             <Label 
                 Grid.Row="1"
                 Grid.Column="0"
                 Margin="15,0,0,0"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Bottom"
+                VerticalAlignment="Center"
                 FontWeight="Bold"
                 FontFamily="Tahoma"
-                Content="Operator Name"/>
+                Content="First Name"/>
             <TextBox
                 Grid.Row="1"
                 Grid.Column="1"
                 Width="300"
                 Height="30"
-                Margin="20,10,0,0"
+                Margin="20,0,0,0"
                 FontFamily="Tahoma"
-                Text="{Binding Model.Name, Mode=TwoWay}"
-                controls:TextBoxHelper.Watermark="Operator Name" 
+                Text="{Binding Model.FirstName, Mode=TwoWay}"
+                controls:TextBoxHelper.Watermark="First Name" 
                 controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>
             <Label 
@@ -116,96 +93,116 @@
                 Grid.Column="0"
                 Margin="15,0,0,0"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Bottom"
+                VerticalAlignment="Center"
                 FontWeight="Bold"
                 FontFamily="Tahoma"
-                Content="Address"/>
+                Content="Last Name"/>
             <TextBox
                 Grid.Row="2"
                 Grid.Column="1"
                 Width="300"
                 Height="30"
-                Margin="20,10,0,0"
+                Margin="20,0,0,0"
+                FontFamily="Tahoma"
+                Text="{Binding Model.LastName, Mode=TwoWay}"
+                controls:TextBoxHelper.Watermark="Last Name" 
+                controls:TextBoxHelper.ClearTextButton="True" >
+            </TextBox>
+            <Label 
+                Grid.Row="3"
+                Grid.Column="0"
+                Margin="15,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                FontWeight="Bold"
+                FontFamily="Tahoma"
+                Content="Address"/>
+            <TextBox
+                Grid.Row="3"
+                Grid.Column="1"
+                Width="300"
+                Height="30"
+                Margin="20,0,0,0"
                 FontFamily="Tahoma"
                 Text="{Binding Model.Address, Mode=TwoWay}"
                 controls:TextBoxHelper.Watermark="Address" 
                 controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>
             <Label 
-                Grid.Row="3"
+                Grid.Row="4"
                 Grid.Column="0"
                 Margin="15,0,0,0"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Bottom"
+                VerticalAlignment="Center"
                 FontWeight="Bold"
                 FontFamily="Tahoma"
                 Content="City"/>
             <TextBox
-                Grid.Row="3"
+                Grid.Row="4"
                 Grid.Column="1"
                 Width="300"
                 Height="30"
-                Margin="20,10,0,0"
+                Margin="20,0,0,0"
                 FontFamily="Tahoma"
                 Text="{Binding Model.City, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                 controls:TextBoxHelper.Watermark="City" 
                 controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>
             <Label 
-                Grid.Row="4"
+                Grid.Row="5"
                 Grid.Column="0"
                 Margin="15,0,0,0"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Bottom"
+                VerticalAlignment="Center"
                 FontWeight="Bold"
                 FontFamily="Tahoma"
                 Content="State"/>
             <TextBox
-                Grid.Row="4"
+                Grid.Row="5"
                 Grid.Column="1"
                 Width="300"
                 Height="30"
-                Margin="20,10,0,0"
+                Margin="20,0,0,0"
                 FontFamily="Tahoma"
                 Text="{Binding Model.State, Mode=OneWayToSource}"
                 controls:TextBoxHelper.Watermark="State" 
                 controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>
             <Label 
-                Grid.Row="5"
+                Grid.Row="6"
                 Grid.Column="0"
                 Margin="15,0,0,0"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Bottom"
+                VerticalAlignment="Center"
                 FontWeight="Bold"
                 FontFamily="Tahoma"
                 Content="Zip"/>
             <TextBox
-                Grid.Row="5"
+                Grid.Row="6"
                 Grid.Column="1"
                 Width="300"
                 Height="30"
-                Margin="20,10,0,0"
+                Margin="20,0,0,0"
                 FontFamily="Tahoma"
                 Text="{Binding Model.ZipCode, Mode=OneWayToSource}"
                 controls:TextBoxHelper.Watermark="Zip Code" 
                 controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>
             <Label 
-                Grid.Row="6"
+                Grid.Row="7"
                 Grid.Column="0"
                 Margin="15,0,0,0"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Bottom"
+                VerticalAlignment="Center"
                 FontWeight="Bold"
                 FontFamily="Tahoma"
                 Content="Country"/>
             <TextBox
-                Grid.Row="6"
+                Grid.Row="7"
                 Grid.Column="1"
                 Width="300"
                 Height="30"
-                Margin="20,10,0,0"
+                Margin="20,0,0,0"
                 FontFamily="Tahoma"
                 Text="{Binding Model.Country, Mode=OneWayToSource}"
                 controls:TextBoxHelper.Watermark="Country" 
@@ -216,7 +213,7 @@
                 Grid.Column="0"
                 Margin="15,0,0,0"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Bottom"
+                VerticalAlignment="Center"
                 FontWeight="Bold"
                 FontFamily="Tahoma"
                 Content="Club Call"/>
@@ -225,7 +222,7 @@
                 Grid.Column="1"
                 Width="300"
                 Height="30"
-                Margin="20,10,0,0"
+                Margin="20,0,0,0"
                 FontFamily="Tahoma"
                 CharacterCasing="Upper" 
                 Text="{Binding Model.ClubCall, Mode=OneWayToSource}"

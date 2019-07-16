@@ -137,7 +137,7 @@ namespace K5BZI_ViewModels
             {
                 currentEvent.Operators.Add(EditOperator.Model);
 
-                _eventService.UpdateEvent(currentEvent);
+                _eventService.UpdateEvent(currentEvent, currentEvent.Operators.ToList());
 
                 _addToEvent = false;
             }

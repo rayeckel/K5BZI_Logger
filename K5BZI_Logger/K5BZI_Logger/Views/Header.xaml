@@ -96,7 +96,7 @@
                 FontFamily="Tahoma"
                 BorderThickness="0"
                 Foreground="DarkSlateBlue"
-                Content="{Binding CurrentOperator.Name}"/>
+                Content="{Binding CurrentOperator.FullName}"/>
             <Label
                 Grid.Row="2"
                 x:Name="lblOperatorCall"

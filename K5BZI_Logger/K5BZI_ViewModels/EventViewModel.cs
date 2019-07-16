@@ -96,12 +96,28 @@ namespace K5BZI_ViewModels
         {
             EditModel.IsOpen = false;
 
-            _eventService.UpdateEvent(Model.SelectedEvent);
+            var updatedOperators = EditModel.Operators
+                .Where(_ => _.Selected)
+                .ToList();
+
+            _eventService.UpdateEvent(EditModel.Event, updatedOperators);
         }
 
         public void EditEvent()
         {
             EditModel.Event = Model.SelectedEvent;
+            EditModel.Operators.Clear();
+
+            foreach (var op in _operatorsViewModel.Model.Operators)
+            {
+                if (_operatorsViewModel.Model.EventOperators.Contains(op))
+                {
+                    op.Selected = true;
+                }
+
+                EditModel.Operators.Add(op);
+            };
+
             EditModel.ShowCloseButton = true;
             EditModel.IsOpen = true;
         }

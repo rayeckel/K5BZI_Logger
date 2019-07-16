@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.PlatformUI;
 using PropertyChanged;
 using System;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace K5BZI_Models.ViewModelModels
@@ -12,6 +13,16 @@ namespace K5BZI_Models.ViewModelModels
         #region Properties
 
         public Event Event { get; set; }
+        public ObservableCollection<Operator> Operators { get; set; }
+
+        #endregion
+
+        #region Constructors
+
+        public EditEventModel()
+        {
+            Operators = new ObservableCollection<Operator>();
+        }
 
         #endregion
 

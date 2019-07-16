@@ -1,7 +1,8 @@
 ﻿using K5BZI_Models.Attributes;
 using PropertyChanged;
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace K5BZI_Models
 {
@@ -10,12 +11,12 @@ namespace K5BZI_Models
     {
         public Event()
         {
-            Operators = new List<Operator>();
+            Operators = new ObservableCollection<Operator>();
         }
 
         public int Id { get; set; }
 
-        public List<Operator> Operators { get; set; }
+        public ObservableCollection<Operator> Operators { get; set; }
 
         [Cabrillo("OPERATORS")]
         public string OperatorNameList
@@ -24,7 +25,7 @@ namespace K5BZI_Models
             {
                 var callString = String.Empty;
 
-                Operators.ForEach(_ => callString += String.Format("{0}, ", _.FullName));
+                Operators.ToList().ForEach(_ => callString += String.Format("{0}, ", _.FullName));
 
                 return callString;
             }

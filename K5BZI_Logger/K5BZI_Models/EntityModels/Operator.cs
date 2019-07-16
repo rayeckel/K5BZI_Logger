@@ -7,6 +7,8 @@ namespace K5BZI_Models
     [AddINotifyPropertyChangedInterface]
     public class Operator : BaseModel
     {
+        public bool Selected { get; set; }
+
         [Cabrillo("CALLSIGN")]
         public string CallSign { get; set; }
 
