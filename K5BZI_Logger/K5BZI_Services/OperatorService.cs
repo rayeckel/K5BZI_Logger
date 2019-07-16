@@ -11,7 +11,7 @@ namespace K5BZI_Services
 
         private readonly IFileStoreService _fileStoreService;
         private List<Operator> _operators;
-        private const string _operatorsFileName = "k5bziLogger_operators";
+        private const string _operatorsFileName = "Operators";
 
         #endregion
 
@@ -30,7 +30,9 @@ namespace K5BZI_Services
 
         public void CreateOperator(
             string callSign,
-            string name,
+            string firstname,
+            string lastname,
+            string clubname,
             string city,
             string state,
             string zipcode,
@@ -41,7 +43,9 @@ namespace K5BZI_Services
             UpdateOperator(new Operator
             {
                 CallSign = callSign,
-                Name = name,
+                FirstName = firstname,
+                LastName = lastname,
+                ClubName = clubname,
                 City = city,
                 State = state,
                 ZipCode = zipcode,
@@ -77,9 +81,13 @@ namespace K5BZI_Services
                 existingOperator.CallSign = editOperator.CallSign;
                 existingOperator.City = editOperator.City;
                 existingOperator.Country = editOperator.Country;
-                existingOperator.Name = editOperator.Name;
+                existingOperator.FirstName = editOperator.FirstName;
+                existingOperator.LastName = editOperator.LastName;
                 existingOperator.State = existingOperator.State;
                 existingOperator.ZipCode = editOperator.ZipCode;
+                existingOperator.IsClub = editOperator.IsClub;
+                existingOperator.ClubCall = editOperator.ClubCall;
+                existingOperator.ClubName = editOperator.ClubName;
             }
 
             _fileStoreService.WriteToFile(_operators, _operatorsFileName, false);

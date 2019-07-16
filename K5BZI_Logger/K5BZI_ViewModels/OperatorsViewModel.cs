@@ -44,6 +44,7 @@ namespace K5BZI_ViewModels
             Model.Operators.Clear();
             Model.EventOperators.Clear();
 
+            var currentEventOperators = currentEvent.Operators.Select(x => x.CallSign);
             var operators = _operatorService.GetFullOperatorListing();
 
             if (operators.Any())
@@ -53,7 +54,7 @@ namespace K5BZI_ViewModels
                 Model.CurrentOperator = operators.First();
             }
 
-            var eventOperators = operators.Where(_ => currentEvent.Operators.Contains(_.CallSign))
+            var eventOperators = operators.Where(_ => currentEventOperators.Contains(_.CallSign))
                 .ToList();
 
             if (eventOperators.Any())
@@ -134,7 +135,7 @@ namespace K5BZI_ViewModels
 
             if (_addToEvent)
             {
-                currentEvent.Operators.Add(EditOperator.Model.CallSign);
+                currentEvent.Operators.Add(EditOperator.Model);
 
                 _eventService.UpdateEvent(currentEvent);
 

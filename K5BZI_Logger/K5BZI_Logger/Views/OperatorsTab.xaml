@@ -57,7 +57,7 @@
                     <dgControls:DataGridTextColumn 
                             Header="Name" 
                             Width="175"
-                            Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
+                            Binding="{Binding FullName, UpdateSourceTrigger=PropertyChanged}" 
                             FontSize="12" >
                         <dgControls:DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">

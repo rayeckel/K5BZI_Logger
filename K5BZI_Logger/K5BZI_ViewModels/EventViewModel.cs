@@ -72,6 +72,8 @@ namespace K5BZI_ViewModels
 
             _mainLoggerViewModel.CreateNewLog(newEvent);
 
+            Model.SelectedEvent = newEvent;
+            Model.ExistingEvents.Add(newEvent);
             Model.IsOpen = false;
         }
 

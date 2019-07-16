@@ -15,7 +15,19 @@ namespace K5BZI_Models
         public string ClubCall { get; set; }
 
         [Cabrillo("NAME")]
-        public string Name { get; set; }
+        public string FullName
+        {
+            get
+            {
+                return !IsClub ? FirstName + " " + LastName : ClubName;
+            }
+        }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public string ClubName { get; set; }
 
         [Cabrillo("ADDRESS")]
         public string Address { get; set; }

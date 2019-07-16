@@ -10,21 +10,12 @@ namespace K5BZI_Models
     {
         public Event()
         {
-            //Operators = new List<string>();
-
-            //REMOVE THESE
-            DXCC = 291;
-            CqZone = 05;
-            ItuZone = 08;
-            ARRL_Sect = "STX";
-            State = "TX";
-            Class = "5A";
-            Club = new Operator { Name = "Oak Hill Amateur Radio Club", IsClub = true, CallSign = "N5OAK" };
+            Operators = new List<Operator>();
         }
 
         public int Id { get; set; }
 
-        public List<string> Operators { get; set; }
+        public List<Operator> Operators { get; set; }
 
         [Cabrillo("OPERATORS")]
         public string OperatorNameList
@@ -33,7 +24,7 @@ namespace K5BZI_Models
             {
                 var callString = String.Empty;
 
-                Operators.ForEach(_ => callString += String.Format("{0}, ", _));
+                Operators.ForEach(_ => callString += String.Format("{0}, ", _.FullName));
 
                 return callString;
             }
@@ -48,7 +39,7 @@ namespace K5BZI_Models
         {
             get
             {
-                return Club != null ? Club.Name : String.Empty;
+                return Club != null ? Club.FullName : String.Empty;
             }
         }
 
