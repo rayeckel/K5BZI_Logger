@@ -7,11 +7,15 @@
     xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:local="clr-namespace:K5BZI_Logger.Controls"
     Height="750" Width="1024"
     mc:Ignorable="d"
     IsOpen="{Binding IsOpen}"
     ShowCloseButton="{Binding ShowCloseButton}"
     Title="Edit Event">
+    <simpleChildWindow:ChildWindow.Resources>
+        <local:BoolInverterConverter x:Key="BoolInverterConverter" />
+    </simpleChildWindow:ChildWindow.Resources>
     <simpleChildWindow:ChildWindow.OverlayBrush>
         <SolidColorBrush Opacity="0.8" Color="{StaticResource Gray2}" />
     </simpleChildWindow:ChildWindow.OverlayBrush>
@@ -102,17 +106,26 @@
                 FontWeight="Bold"
                 FontFamily="Tahoma"
                 Content="Active"/>
-            <TextBox
+            <Grid
                 Grid.Row="2"
                 Grid.Column="1"
-                Width="240"
-                Height="30"
-                Margin="10,0,0,0"
-                FontFamily="Tahoma"
-                Text="{Binding Event.IsActive, Mode=OneWay}"
-                controls:TextBoxHelper.Watermark="Is Active" 
-                controls:TextBoxHelper.ClearTextButton="True" >
-            </TextBox>
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="75" />
+                    <ColumnDefinition Width="75" />
+                </Grid.ColumnDefinitions>
+                <RadioButton 
+                    Grid.Column="0"
+                    GroupName="Group1" 
+                    IsChecked="{Binding Event.IsActive}" 
+                    Content="Yes" />
+                <RadioButton
+                    Grid.Column="1"
+                    GroupName="Group1"  
+                    Content="No" 
+                    IsChecked="{Binding Event.IsActive, Converter={StaticResource BoolInverterConverter}}" />
+            </Grid>
             <Label 
                 Grid.Row="3"
                 Grid.Column="0"
@@ -244,8 +257,8 @@
                 Grid.ColumnSpan="2"
                 HorizontalAlignment="Right"
                 Height="200"
-                Width="250" 
-                Margin="10,0,10,0"
+                Width="300" 
+                Margin="10,0,20,0"
                 x:Name="operatorsSelect"
                 ItemsSource="{Binding Operators}"
                 FontFamily="Tahoma"
@@ -282,9 +295,9 @@
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
                 HorizontalAlignment="Right"
-                Width="250"
+                Width="300"
                 Height="30"
-                Margin="10,0,10,0"
+                Margin="10,0,20,0"
                 FontFamily="Tahoma"
                 Text="{Binding Event.LogFileName, Mode=OneWay}"
                 controls:TextBoxHelper.Watermark="Log File Name" 

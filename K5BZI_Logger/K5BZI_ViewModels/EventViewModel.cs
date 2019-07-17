@@ -79,8 +79,6 @@ namespace K5BZI_ViewModels
             Model.IsOpen = false;
 
             EditEvent();
-
-            //TODO: Selected Operators are not saved on new event creation.
         }
 
         private void SelectLog()

@@ -41,7 +41,6 @@ namespace K5BZI_ViewModels
         public void PopulateOperators(Event eventModel)
         {
             currentEvent = eventModel;
-            Model.Operators.Clear();
             Model.EventOperators.Clear();
 
             var currentEventOperators = currentEvent.Operators

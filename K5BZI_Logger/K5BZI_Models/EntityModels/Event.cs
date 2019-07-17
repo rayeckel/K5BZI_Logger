@@ -12,6 +12,7 @@ namespace K5BZI_Models
         public Event()
         {
             Operators = new ObservableCollection<Operator>();
+            IsActive = true;
         }
 
         public int Id { get; set; }
