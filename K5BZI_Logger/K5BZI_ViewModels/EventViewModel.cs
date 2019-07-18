@@ -120,8 +120,8 @@ namespace K5BZI_ViewModels
         private void EditEvent()
         {
             EditModel.Event = Model.SelectedEvent;
-            EditModel.Operators.Clear();
 
+            EditModel.Operators.Clear();
             foreach (var op in _operatorsViewModel.Model.Operators)
             {
                 if (_operatorsViewModel.Model.EventOperators.Contains(op))

@@ -134,6 +134,7 @@
     <Compile Include="Base\BaseViewModel.cs" />
     <Compile Include="Base\IBaseViewModel.cs" />
     <Compile Include="EntityModels\Defaults.cs" />
+    <Compile Include="EntityModels\DXCC.cs" />
     <Compile Include="Enums\ArrlSection.cs" />
     <Compile Include="Enums\Assisted.cs" />
     <Compile Include="Enums\CqZone.cs" />
