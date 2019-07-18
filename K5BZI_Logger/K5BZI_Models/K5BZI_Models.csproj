@@ -134,7 +134,9 @@
     <Compile Include="Base\BaseViewModel.cs" />
     <Compile Include="Base\IBaseViewModel.cs" />
     <Compile Include="EntityModels\Defaults.cs" />
-    <Compile Include="Enums\ArrlSection.cs" />
+    <Compile Include="Enums\ArrlSectionsCanada.cs" />
+    <Compile Include="Enums\ArrlSectionsMexico.cs" />
+    <Compile Include="Enums\ArrlSectionsUSA.cs" />
     <Compile Include="Enums\Assisted.cs" />
     <Compile Include="Enums\Mode.cs" />
     <Compile Include="Enums\Power.cs" />

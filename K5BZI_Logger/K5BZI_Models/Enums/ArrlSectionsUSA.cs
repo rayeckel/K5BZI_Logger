@@ -2,7 +2,7 @@
 
 namespace K5BZI_Models.Enums
 {
-    public enum ArrlSection
+    public enum ArrlSectionsUSA
     {
         [Description("Connecticut")]
         CT,
@@ -100,5 +100,51 @@ namespace K5BZI_Models.Enums
         PAC,
         [Description("Arizona")]
         AZ,
+        [Description("Eastern Washington")]
+        EWA,
+        [Description("Idaho")]
+        ID,
+        [Description("Montana")]
+        MT,
+        [Description("Nevada")]
+        NV,
+        [Description("Oregon")]
+        OR,
+        [Description("Utah")]
+        UT,
+        [Description("Western Washington")]
+        WWA,
+        [Description("Wyoming")]
+        WY,
+        [Description("Alaska")]
+        AK,
+        [Description("Michigan")]
+        MI,
+        [Description("Ohio")]
+        OH,
+        [Description("West Virginia")]
+        WV,
+        [Description("Illinois")]
+        IL,
+        [Description("Indiana")]
+        IN,
+        [Description("Wisconsin")]
+        WI,
+        [Description("Colorado")]
+        CO,
+        [Description("Iowa")]
+        IA,
+        [Description("Kansas")]
+        KS,
+        [Description("Minnesota")]
+        MN,
+        [Description("Missouri")]
+        MO,
+        [Description("Nebraska")]
+        NE,
+        [Description("North Dakota")]
+        ND,
+        [Description("South Dakota")]
+        SD
     }
 }
