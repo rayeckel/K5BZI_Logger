@@ -1,32 +1,27 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows.Data;
 
 namespace K5BZI_Logger.Controls
 {
     public class BoolInverterConverter : IValueConverter
     {
-        #region IValueConverter Members
-
-        public object Convert(object value, Type targetType, object parameter,
-            System.Globalization.CultureInfo culture)
+        public object Convert(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture)
         {
-            if (value is bool)
-            {
-                return !(bool)value;
-            }
-            return value;
+            return (value is bool) ? !(bool)value : value;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter,
-            System.Globalization.CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture)
         {
-            if (value is bool)
-            {
-                return !(bool)value;
-            }
-            return value;
+            return Convert(value, targetType, parameter, culture);
         }
-
-        #endregion
     }
 }

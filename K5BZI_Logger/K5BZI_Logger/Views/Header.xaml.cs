@@ -13,7 +13,7 @@ namespace K5BZI_Logger.Views
         {
             InitializeComponent();
 
-            OperatorsGrid.DataContext = ServiceLocator.Current
+            OperatorGrid.DataContext = ServiceLocator.Current
                 .GetInstance<IOperatorsViewModel>()
                 .Model;
 

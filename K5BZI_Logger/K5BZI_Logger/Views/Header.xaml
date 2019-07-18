@@ -76,7 +76,7 @@
             Margin="0,10,0,0"
             Source="../Controls/AllXamlClock.xaml"/>
         <Grid
-            x:Name="OperatorsGrid"
+            x:Name="OperatorGrid"
             Grid.Row="0"
             Grid.Column="2">
             <Grid.RowDefinitions>
