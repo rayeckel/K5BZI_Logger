@@ -1,8 +1,10 @@
 ﻿using K5BZI_Models.Enums;
+using PropertyChanged;
 using System.Collections.Generic;
 
 namespace K5BZI_Models.EntityModels
 {
+    [AddINotifyPropertyChangedInterface]
     public class DXCC
     {
         public DXCC()

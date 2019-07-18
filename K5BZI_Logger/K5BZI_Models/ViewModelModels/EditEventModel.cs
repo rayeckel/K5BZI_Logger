@@ -25,6 +25,8 @@ namespace K5BZI_Models.ViewModelModels
 
         public ObservableCollection<Operator> Clubs { get; set; }
 
+        public List<DXCC> DxccEntities { get; set; }
+
         #endregion
 
         #region Constructors
@@ -33,6 +35,8 @@ namespace K5BZI_Models.ViewModelModels
         {
             Operators = new ObservableCollection<Operator>();
             Clubs = new ObservableCollection<Operator>();
+
+            PopulateDxcc();
         }
 
         #endregion
@@ -63,11 +67,9 @@ namespace K5BZI_Models.ViewModelModels
 
         #endregion
 
-        public List<DXCC> DxccEntities
+        public void PopulateDxcc()
         {
-            get
-            {
-                return new List<DXCC>
+            DxccEntities =  new List<DXCC>
                 {
                     new DXCC("1A", "SMO Malta", "Eu", 28, CqZone.Zone15, 1, "42N", "13E", new List<string> { "1A" }, new List<string>()),
                     new DXCC("1M8", "Minerva Reef", "Oc", 62, CqZone.Zone32, -12, "24S", "179W", new List<string>(), new List<string>()),
@@ -125,7 +127,6 @@ namespace K5BZI_Models.ViewModelModels
                     new DXCC("9J", "Zambia", "Af", 53, CqZone.Zone36, 2, "15S", "28E", new List<string> { "9I-9J" }, new List<string>()),
                     new DXCC("9K", "Kuwait", "As", 39, CqZone.Zone21, 3, "29N", "48E", new List<string> { "9K" }, new List<string>()),
                 };
-            }
         }
     }
 }
