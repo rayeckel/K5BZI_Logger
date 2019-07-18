@@ -188,18 +188,28 @@
                 FontWeight="Bold"
                 FontFamily="Tahoma"
                 Content="DXCC"/>
-            <TextBox
+            <ComboBox
                 Grid.Row="4"
                 Grid.Column="1"
                 Width="220"
                 Height="30"
                 Margin="10,0,0,0"
+                x:Name="dxccCombo"
+                ItemsSource="{Binding DxccEntities}"
+                SelectedItem="{Binding EventDxcc, Mode=OneWay}"
                 FontFamily="Tahoma"
-                Text="{Binding Event.DXCC}"
-                controls:TextBoxHelper.Watermark="DXCC" 
-                controls:TextBoxHelper.ClearTextButton="True" >
-            </TextBox>
-            <Label 
+                BorderThickness="1">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Prefix}" />
+                                <TextBlock Text=" - " />
+                                <TextBlock Text="{Binding Entity}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Label 
                 Grid.Row="5"
                 Grid.Column="0"
                 Margin="10,0,0,0"

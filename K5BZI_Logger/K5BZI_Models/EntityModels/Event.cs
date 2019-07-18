@@ -1,4 +1,5 @@
 ﻿using K5BZI_Models.Attributes;
+using K5BZI_Models.EntityModels;
 using K5BZI_Models.Enums;
 using PropertyChanged;
 using System;
@@ -55,7 +56,7 @@ namespace K5BZI_Models
         public DateTime CreatedDate { get; set; }
 
         [Adif("DXCC")]
-        public int DXCC { get; set; }
+        public DXCC DXCC { get; set; }
 
         [Adif("CQz")]
         public CqZone CqZone { get; set; }

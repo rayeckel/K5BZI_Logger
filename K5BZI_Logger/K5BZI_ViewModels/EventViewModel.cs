@@ -142,6 +142,9 @@ namespace K5BZI_ViewModels
             EditModel.EventClub = EditModel.Clubs
                 .FirstOrDefault(_ => _.CallSign == EditModel.Event.Club?.CallSign);
 
+            EditModel.EventDxcc = EditModel.DxccEntities
+                .FirstOrDefault(_ => _.Prefix == EditModel.Event.DXCC?.Prefix);
+
             EditModel.ShowCloseButton = true;
             EditModel.IsOpen = true;
         }
