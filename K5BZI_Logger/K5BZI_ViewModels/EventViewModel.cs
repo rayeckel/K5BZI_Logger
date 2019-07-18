@@ -113,6 +113,7 @@ namespace K5BZI_ViewModels
 
             UpdateOperators(updatedOperators);
 
+            EditModel.Event.Club = EditModel.EventClub;
             _eventService.UpdateEvent(EditModel.Event, updatedOperators);
         }
 
@@ -136,6 +137,10 @@ namespace K5BZI_ViewModels
             {
                 EditModel.Clubs.Add(club);
             };
+
+
+            EditModel.EventClub = EditModel.Clubs
+                .FirstOrDefault(_ => _.CallSign == EditModel.Event.Club?.CallSign);
 
             EditModel.ShowCloseButton = true;
             EditModel.IsOpen = true;

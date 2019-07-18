@@ -79,6 +79,7 @@
     <Compile Include="OperatorService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\BaseUtility.cs" />
+    <Compile Include="Utilities\BoolInverterConverter.cs" />
     <Compile Include="Utilities\EntityUtility.cs" />
     <Compile Include="Utilities\EnumUtility.cs" />
   </ItemGroup>

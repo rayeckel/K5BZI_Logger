@@ -14,6 +14,8 @@ namespace K5BZI_Models.ViewModelModels
 
         public Event Event { get; set; }
 
+        public Operator EventClub { get; set; }
+
         public ObservableCollection<Operator> Operators { get; set; }
 
         public ObservableCollection<Operator> Clubs { get; set; }

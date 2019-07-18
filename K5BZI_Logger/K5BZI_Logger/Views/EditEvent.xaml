@@ -7,14 +7,27 @@
     xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-    xmlns:local="clr-namespace:K5BZI_Logger.Controls"
+    xmlns:Converters="clr-namespace:K5BZI_Services.Utilities;assembly=K5BZI_Services"
+    xmlns:Enums="clr-namespace:K5BZI_Models.Enums;assembly=K5BZI_Models"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
     Height="750" Width="1024"
     mc:Ignorable="d"
     IsOpen="{Binding IsOpen}"
     ShowCloseButton="{Binding ShowCloseButton}"
     Title="Edit Event">
     <simpleChildWindow:ChildWindow.Resources>
-        <local:BoolInverterConverter x:Key="BoolInverterConverter" />
+        <Converters:EnumUtility x:Key="EnumDescriptionConverter" />
+        <Converters:BoolInverterConverter x:Key="BoolInverterConverter" />
+        <ObjectDataProvider MethodName="GetValues" ObjectType="{x:Type sys:Enum}" x:Key="ArrlSectionEnumValues">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="Enums:ArrlSection" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <ObjectDataProvider MethodName="GetValues" ObjectType="{x:Type sys:Enum}" x:Key="CqZoneEnumValues">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="Enums:CqZone" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
     </simpleChildWindow:ChildWindow.Resources>
     <simpleChildWindow:ChildWindow.OverlayBrush>
         <SolidColorBrush Opacity="0.8" Color="{StaticResource Gray2}" />
@@ -94,7 +107,7 @@
                 Margin="10,0,0,0"
                 x:Name="clubsCombo"
                 ItemsSource="{Binding Clubs}"
-                SelectedItem="{Binding Event.Club}"
+                SelectedItem="{Binding EventClub, Mode=OneWay}"
                 FontFamily="Tahoma"
                 BorderThickness="1">
                 <ComboBox.ItemTemplate>
@@ -145,17 +158,27 @@
                 FontWeight="Bold"
                 FontFamily="Tahoma"
                 Content="ARRL Section"/>
-            <TextBox
+            <ComboBox
                 Grid.Row="3"
                 Grid.Column="1"
                 Width="220"
                 Height="30"
                 Margin="10,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                x:Name="arrlSectionsCombo"
+                SelectedItem="{Binding Event.ARRL_Sect, Mode=TwoWay}"
                 FontFamily="Tahoma"
-                Text="{Binding Event.ARRL_Sect, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                controls:TextBoxHelper.Watermark="ARRL Section" 
-                controls:TextBoxHelper.ClearTextButton="True" >
-            </TextBox>
+                BorderThickness="1"
+                ItemsSource="{Binding Source={StaticResource ArrlSectionEnumValues}}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Converter={StaticResource EnumDescriptionConverter}}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
             <Label 
                 Grid.Row="4"
                 Grid.Column="0"
@@ -185,17 +208,27 @@
                 FontWeight="Bold"
                 FontFamily="Tahoma"
                 Content="CQ Zone"/>
-            <TextBox
+            <ComboBox
                 Grid.Row="5"
                 Grid.Column="1"
                 Width="220"
                 Height="30"
                 Margin="10,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                x:Name="cqZoneCombo"
+                SelectedItem="{Binding Event.CqZone, Mode=TwoWay}"
                 FontFamily="Tahoma"
-                Text="{Binding Event.CqZone}"
-                controls:TextBoxHelper.Watermark="CQ Zone" 
-                controls:TextBoxHelper.ClearTextButton="True" >
-            </TextBox>
+                BorderThickness="1"
+                ItemsSource="{Binding Source={StaticResource CqZoneEnumValues}}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Converter={StaticResource EnumDescriptionConverter}}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
             <Label 
                 Grid.Row="6"
                 Grid.Column="0"

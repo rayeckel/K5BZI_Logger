@@ -1,4 +1,5 @@
 ﻿using K5BZI_Models.Attributes;
+using K5BZI_Models.Enums;
 using PropertyChanged;
 using System;
 using System.Collections.ObjectModel;
@@ -57,7 +58,7 @@ namespace K5BZI_Models
         public int DXCC { get; set; }
 
         [Adif("CQz")]
-        public int CqZone { get; set; }
+        public CqZone CqZone { get; set; }
 
         [Adif("Class")]
         public string Class { get; set; }
@@ -67,7 +68,7 @@ namespace K5BZI_Models
 
         [Adif("ARRL_Sect")]
         [Cabrillo("LOCATION")]
-        public string ARRL_Sect { get; set; }
+        public ArrlSection ARRL_Sect { get; set; }
 
         [Adif("State")]
         public string State { get; set; }

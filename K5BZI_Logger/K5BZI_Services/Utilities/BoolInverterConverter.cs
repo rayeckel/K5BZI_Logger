@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace K5BZI_Logger.Controls
+namespace K5BZI_Services.Utilities
 {
     public class BoolInverterConverter : IValueConverter
     {
