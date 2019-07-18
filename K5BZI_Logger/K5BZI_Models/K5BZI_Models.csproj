@@ -138,6 +138,7 @@
     <Compile Include="Enums\ArrlSectionsMexico.cs" />
     <Compile Include="Enums\ArrlSectionsUSA.cs" />
     <Compile Include="Enums\Assisted.cs" />
+    <Compile Include="Enums\CqZones.cs" />
     <Compile Include="Enums\Mode.cs" />
     <Compile Include="Enums\Power.cs" />
     <Compile Include="EntityModels\Event.cs" />

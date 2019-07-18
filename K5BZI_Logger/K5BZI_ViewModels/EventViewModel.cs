@@ -4,6 +4,7 @@ using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 
 namespace K5BZI_ViewModels
 {
@@ -98,6 +99,12 @@ namespace K5BZI_ViewModels
 
         private void UpdateEvent()
         {
+            if (EditModel.Event.ItuZone < 0 || EditModel.Event.ItuZone > 90)
+            {
+                MessageBox.Show("Please enter an ITU one value between 0 and 90", "Invalid input");
+                return;
+            }
+
             EditModel.IsOpen = false;
 
             var updatedOperators = EditModel.Operators
@@ -122,6 +129,12 @@ namespace K5BZI_ViewModels
                 }
 
                 EditModel.Operators.Add(op);
+            };
+
+            EditModel.Clubs.Clear();
+            foreach (var club in _operatorsViewModel.Model.Operators.Where(_ => _.IsClub))
+            {
+                EditModel.Clubs.Add(club);
             };
 
             EditModel.ShowCloseButton = true;

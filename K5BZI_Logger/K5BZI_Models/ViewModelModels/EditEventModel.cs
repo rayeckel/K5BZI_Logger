@@ -13,7 +13,10 @@ namespace K5BZI_Models.ViewModelModels
         #region Properties
 
         public Event Event { get; set; }
+
         public ObservableCollection<Operator> Operators { get; set; }
+
+        public ObservableCollection<Operator> Clubs { get; set; }
 
         #endregion
 
@@ -22,6 +25,7 @@ namespace K5BZI_Models.ViewModelModels
         public EditEventModel()
         {
             Operators = new ObservableCollection<Operator>();
+            Clubs = new ObservableCollection<Operator>();
         }
 
         #endregion

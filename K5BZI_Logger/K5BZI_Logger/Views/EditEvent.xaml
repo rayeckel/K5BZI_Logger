@@ -55,8 +55,8 @@
                 <RowDefinition Height="50" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="250" />
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="230" />
             </Grid.ColumnDefinitions>
             <Label
                 Grid.Row="0"
@@ -69,7 +69,7 @@
             <TextBox
                 Grid.Row="0"
                 Grid.Column="1"
-                Width="240"
+                Width="220"
                 Height="30"
                 Margin="10,0,0,0"
                 FontFamily="Tahoma"
@@ -86,17 +86,27 @@
                 FontWeight="Bold"
                 FontFamily="Tahoma"
                 Content="Club"/>
-            <TextBox
+            <ComboBox
                 Grid.Row="1"
                 Grid.Column="1"
-                Width="240"
+                Width="220"
                 Height="30"
                 Margin="10,0,0,0"
+                x:Name="clubsCombo"
+                ItemsSource="{Binding Clubs}"
+                SelectedItem="{Binding Event.Club}"
                 FontFamily="Tahoma"
-                Text="{Binding Event.ClubName, Mode=OneWay}"
-                controls:TextBoxHelper.Watermark="No Club Affilliated" 
-                controls:TextBoxHelper.ClearTextButton="True" >
-            </TextBox>
+                BorderThickness="1">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding CallSign}" FontWeight="Bold"/>
+                            <TextBlock Text=" - " />
+                            <TextBlock Text="{Binding FullName}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
             <Label 
                 Grid.Row="2"
                 Grid.Column="0"
@@ -112,8 +122,8 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="75" />
-                    <ColumnDefinition Width="75" />
+                    <ColumnDefinition Width="70" />
+                    <ColumnDefinition Width="70" />
                 </Grid.ColumnDefinitions>
                 <RadioButton 
                     Grid.Column="0"
@@ -138,7 +148,7 @@
             <TextBox
                 Grid.Row="3"
                 Grid.Column="1"
-                Width="240"
+                Width="220"
                 Height="30"
                 Margin="10,0,0,0"
                 FontFamily="Tahoma"
@@ -158,11 +168,11 @@
             <TextBox
                 Grid.Row="4"
                 Grid.Column="1"
-                Width="240"
+                Width="220"
                 Height="30"
                 Margin="10,0,0,0"
                 FontFamily="Tahoma"
-                Text="{Binding Event.DXCC, Mode=OneWay}"
+                Text="{Binding Event.DXCC}"
                 controls:TextBoxHelper.Watermark="DXCC" 
                 controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>
@@ -178,11 +188,11 @@
             <TextBox
                 Grid.Row="5"
                 Grid.Column="1"
-                Width="240"
+                Width="220"
                 Height="30"
                 Margin="10,0,0,0"
                 FontFamily="Tahoma"
-                Text="{Binding Event.CqZone, Mode=OneWay}"
+                Text="{Binding Event.CqZone}"
                 controls:TextBoxHelper.Watermark="CQ Zone" 
                 controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>
@@ -194,15 +204,15 @@
                 VerticalAlignment="Center"
                 FontWeight="Bold"
                 FontFamily="Tahoma"
-                Content="ITU Zone"/>
+                Content="ITU Zone (0-90)"/>
             <TextBox
                 Grid.Row="6"
                 Grid.Column="1"
-                Width="240"
+                Width="220"
                 Height="30"
                 Margin="10,0,0,0"
                 FontFamily="Tahoma"
-                Text="{Binding Event.ItuZone, Mode=OneWay}"
+                Text="{Binding Event.ItuZone}"
                 controls:TextBoxHelper.Watermark="ITU Zone" 
                 controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>
@@ -218,11 +228,11 @@
             <TextBox
                 Grid.Row="7"
                 Grid.Column="1"
-                Width="240"
+                Width="220"
                 Height="30"
                 Margin="10,0,0,0"
                 FontFamily="Tahoma"
-                Text="{Binding Event.Class, Mode=OneWay}"
+                Text="{Binding Event.Class}"
                 controls:TextBoxHelper.Watermark="Class" 
                 controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>
