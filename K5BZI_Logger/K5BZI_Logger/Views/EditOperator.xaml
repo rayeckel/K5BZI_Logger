@@ -11,7 +11,7 @@
     mc:Ignorable="d"
     IsOpen="{Binding IsOpen}"
     ShowCloseButton="{Binding ShowCloseButton}"
-    Title="Edit Operator">
+    Title="{Binding Model.EditOperatorTitle}">
     <simpleChildWindow:ChildWindow.OverlayBrush>
         <SolidColorBrush Opacity="0.8" Color="{StaticResource Gray2}" />
     </simpleChildWindow:ChildWindow.OverlayBrush>
@@ -69,6 +69,29 @@
                 controls:TextBoxHelper.ClearTextButton="True">
             </TextBox>
             <Label 
+                Visibility="{Binding Model.IsClubVisibility}"
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="15,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                FontWeight="Bold"
+                FontFamily="Tahoma"
+                Content="Club Name"/>
+            <TextBox
+                Visibility="{Binding Model.IsClubVisibility}"
+                Grid.Row="1"
+                Grid.Column="1"
+                Width="300"
+                Height="30"
+                Margin="20,0,0,0"
+                FontFamily="Tahoma"
+                Text="{Binding Model.ClubName, Mode=TwoWay}"
+                controls:TextBoxHelper.Watermark="First Name" 
+                controls:TextBoxHelper.ClearTextButton="True" >
+            </TextBox>
+            <Label 
+                Visibility="{Binding Model.IsNotClubVisibility}"
                 Grid.Row="1"
                 Grid.Column="0"
                 Margin="15,0,0,0"
@@ -78,6 +101,7 @@
                 FontFamily="Tahoma"
                 Content="First Name"/>
             <TextBox
+                Visibility="{Binding Model.IsNotClubVisibility}"
                 Grid.Row="1"
                 Grid.Column="1"
                 Width="300"
@@ -89,6 +113,7 @@
                 controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>
             <Label 
+                Visibility="{Binding Model.IsNotClubVisibility}"
                 Grid.Row="2"
                 Grid.Column="0"
                 Margin="15,0,0,0"
@@ -98,6 +123,7 @@
                 FontFamily="Tahoma"
                 Content="Last Name"/>
             <TextBox
+                Visibility="{Binding Model.IsNotClubVisibility}"
                 Grid.Row="2"
                 Grid.Column="1"
                 Width="300"
@@ -209,6 +235,7 @@
                 controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>
             <Label 
+                Visibility="{Binding Model.IsNotClubVisibility}"
                 Grid.Row="9"
                 Grid.Column="0"
                 Margin="15,0,0,0"
@@ -218,6 +245,7 @@
                 FontFamily="Tahoma"
                 Content="Club Call"/>
             <TextBox
+                Visibility="{Binding Model.IsNotClubVisibility}"
                 Grid.Row="9"
                 Grid.Column="1"
                 Width="300"

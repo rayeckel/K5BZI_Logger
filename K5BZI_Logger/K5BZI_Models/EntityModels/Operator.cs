@@ -1,6 +1,7 @@
 ﻿using K5BZI_Models.Attributes;
 using K5BZI_Models.Base;
 using PropertyChanged;
+using System.Windows;
 
 namespace K5BZI_Models
 {
@@ -12,7 +13,51 @@ namespace K5BZI_Models
         [Cabrillo("CALLSIGN")]
         public string CallSign { get; set; }
 
-        public bool IsClub { get; set; }
+        private bool _isClub;
+        public bool IsClub
+        {
+            get
+            {
+                return _isClub;
+            }
+            set
+            {
+                _isClub = value;
+            }
+        }
+
+        [AlsoNotifyFor("IsClub")]
+        public string EditOperatorTitle
+        {
+            get
+            {
+                return IsClub ?
+                    "Edit Club" :
+                    "Edit Operator";
+            }
+        }
+
+        [AlsoNotifyFor("IsClub")]
+        public Visibility IsClubVisibility
+        {
+            get
+            {
+                return IsClub ?
+                    Visibility.Visible :
+                    Visibility.Collapsed;
+            }
+        }
+
+        [AlsoNotifyFor("IsClub")]
+        public Visibility IsNotClubVisibility
+        {
+            get
+            {
+                return !IsClub ?
+                    Visibility.Visible :
+                    Visibility.Collapsed;
+            }
+        }
 
         public string ClubCall { get; set; }
 
