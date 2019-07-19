@@ -13,6 +13,7 @@ namespace K5BZI_Services
             Bind<IOperatorService>().To<OperatorService>();
             Bind<IExportService>().To<ExportService>();
             Bind<IDefaultsService>().To<DefaultsService>();
+            Bind<IExcelFileService>().To<ExcelFileService>();
         }
     }
 }

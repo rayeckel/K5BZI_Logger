@@ -17,6 +17,7 @@ namespace K5BZI_ViewModels
         private readonly IEventService _eventService;
         private readonly IMainViewModel _mainLoggerViewModel;
         private readonly IOperatorsViewModel _operatorsViewModel;
+        private readonly IExcelFileService _excelFileService;
 
         #endregion
 
@@ -25,11 +26,13 @@ namespace K5BZI_ViewModels
         public EventViewModel(
             IEventService eventService,
             IMainViewModel mainLoggerViewModel,
-            IOperatorsViewModel operatorsViewModel)
+            IOperatorsViewModel operatorsViewModel,
+            IExcelFileService excelFileService)
         {
             _eventService = eventService;
             _mainLoggerViewModel = mainLoggerViewModel;
             _operatorsViewModel = operatorsViewModel;
+            _excelFileService = excelFileService;
 
             Initialize();
             GetExistingEvents();
@@ -50,6 +53,7 @@ namespace K5BZI_ViewModels
 
             EditModel = new EditEventModel
             {
+                DxccEntities = _excelFileService.ReadDxccExcelData(),
                 EditEventAction = (_) => EditEvent(),
                 UpdateEventAction = (_) => UpdateEvent()
             };
