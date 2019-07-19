@@ -36,11 +36,11 @@
     </simpleChildWindow:ChildWindow.OverlayBrush>
     <simpleChildWindow:ChildWindow.Icon>
         <iconPacks:PackIconModern Width="22"
-                              Height="22"
-                              HorizontalAlignment="Center"
-                              VerticalAlignment="Center"
-                              Foreground="{DynamicResource IdealForegroundColorBrush}"
-                              Kind="Cog" />
+            Height="22"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Foreground="{DynamicResource IdealForegroundColorBrush}"
+            Kind="Cog" />
     </simpleChildWindow:ChildWindow.Icon>
     <Grid>
         <Grid
@@ -71,7 +71,7 @@
                     </i:Interaction.Triggers>
                     <dgControls:DataGrid.Columns>
                     <dgControls:DataGridCheckBoxColumn 
-                        Width="100"
+                        Width="75"
                         Header="Is Active"
                         Binding="{Binding IsActive, UpdateSourceTrigger=PropertyChanged}">
                     </dgControls:DataGridCheckBoxColumn>
@@ -84,46 +84,70 @@
                     </dgControls:DataGridTextColumn>
                     <dgControls:DataGridTextColumn 
                         Header="DXCC"
-                        Width="50"
+                        Width="55"
                         Binding="{Binding DXCC.Prefix, UpdateSourceTrigger=PropertyChanged}" 
                         FontSize="12" />
                     <dgControls:DataGridTextColumn
                         Header="CQ Zone" 
-                        Width="95"
+                        Width="75"
                         Binding="{Binding CqZone, UpdateSourceTrigger=PropertyChanged}"
                         FontSize="12" />
                     <dgControls:DataGridTextColumn
                         Header="Class" 
-                        Width="75"
+                        Width="60"
                         Binding="{Binding Class, UpdateSourceTrigger=PropertyChanged}"
                         FontSize="12" />
                     <dgControls:DataGridTextColumn
                         Header="ITU Zone" 
-                        Width="75"
+                        Width="80"
                         Binding="{Binding ItuZone, UpdateSourceTrigger=PropertyChanged}"
                         FontSize="12" />
                     <dgControls:DataGridTextColumn
                         Header="State" 
-                        Width="80"
+                        Width="60"
                         Binding="{Binding State, UpdateSourceTrigger=PropertyChanged}"
                         FontSize="12" />
                     <dgControls:DataGridTextColumn
-                        Header="ARL Section" 
-                        Width="80"
+                        Header="Section" 
+                        Width="70"
                         Binding="{Binding ARRL_Sect, UpdateSourceTrigger=PropertyChanged}"
                         FontSize="12" />
                     <dgControls:DataGridTextColumn
-                        Header="Transmitter Count" 
-                        Width="80"
+                        Header="Transmitters" 
+                        Width="110"
                         Binding="{Binding TransmitterCount, UpdateSourceTrigger=PropertyChanged}"
                         FontSize="12" />
                     <dgControls:DataGridTextColumn
-                        Header="Operator Count" 
-                        Width="80"
+                        Header="Operators" 
+                        Width="100"
                         Binding="{Binding OperatorCount, UpdateSourceTrigger=PropertyChanged}"
                         FontSize="12" />
                 </dgControls:DataGrid.Columns>
             </dgControls:DataGrid>
+            <Grid 
+                Grid.Column="1"
+                VerticalAlignment="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Button
+                    VerticalAlignment="Center"
+                    Grid.Row="5"
+                    Margin="10,0,0,0"
+                    Content="Create New Event"
+                    Width="120"
+                    Height="30"
+                    Foreground="Navy"
+                    FontSize="12"
+                    FontFamily="Tahoma"
+                    Command="{Binding CreateEventCommand}"/>
+            </Grid>
         </Grid>
         <Grid
             Visibility="{Binding EditEventsVisibility}"

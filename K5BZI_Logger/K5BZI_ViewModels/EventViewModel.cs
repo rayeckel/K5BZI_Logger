@@ -2,6 +2,7 @@
 using K5BZI_Models.ViewModelModels;
 using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -46,7 +47,7 @@ namespace K5BZI_ViewModels
         {
             Model = new SelectEventModel
             {
-                CreateNewLogAction = (_) => CreateNewEvent(),
+                CreateNewLogAction = (_) => CreateNewEvent(Model.EventName),
                 SelectLogAction = (_) => SelectLog(),
                 ChangeEventAction = (_) => ChangeEvent()
             };
@@ -57,7 +58,8 @@ namespace K5BZI_ViewModels
                 EditEventsAction = (_) => EditEvents(),
                 EditAllEventsAction = (_) => EditAllEvents(),
                 EditEventAction = (_) => EditEvent(),
-                UpdateEventAction = (_) => UpdateEvent()
+                UpdateEventAction = (_) => UpdateEvent(),
+                CreateEventAction = (_) => CreateNewEvent(String.Empty)
             };
         }
 
@@ -75,9 +77,9 @@ namespace K5BZI_ViewModels
             });
         }
 
-        private void CreateNewEvent()
+        private void CreateNewEvent(string eventName)
         {
-            var newEvent = _eventService.CreateNewEvent(Model.EventName);
+            var newEvent = _eventService.CreateNewEvent(eventName);
 
             _mainLoggerViewModel.CreateNewLog(newEvent);
 
@@ -144,7 +146,15 @@ namespace K5BZI_ViewModels
 
         private void EditAllEvents()
         {
-            MessageBox.Show("Not Implemented");
+            if (EditModel.Event.ItuZone < 0 || EditModel.Event.ItuZone > 90)
+            {
+                MessageBox.Show("Please enter an ITU one value between 0 and 90", "Invalid input");
+                return;
+            }
+
+            EditModel.IsOpen = false;
+
+            _eventService.UpdateEvent(EditModel.Event, EditModel.Event.Operators.ToList());
         }
 
         private void EditEvent()

@@ -68,6 +68,17 @@ namespace K5BZI_Models.ViewModelModels
 
         #region Commands
 
+        private ICommand _createEventCommand;
+        public ICommand CreateEventCommand
+        {
+            get
+            {
+                return _createEventCommand ??
+                    (_createEventCommand = new DelegateCommand(CreateEventAction, _ => { return true; }));
+            }
+        }
+        public Action<object> CreateEventAction { get; set; }
+
         private ICommand _editEventsCommand;
         public ICommand EditEventsCommand
         {

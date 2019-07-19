@@ -39,7 +39,7 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="50" />
             </Grid.ColumnDefinitions>
             <Label
                 Grid.Row="1"
@@ -83,7 +83,8 @@
             </ComboBox>
             <Button
                 Grid.Row="2"
-                Grid.Column="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
                 Visibility="{Binding SelectLogVisibility}"
                 Margin="0,0,20,0"
                 Content="Select"
@@ -91,7 +92,7 @@
                 Height="30"
                 Foreground="Navy"
                 FontFamily="Tahoma"
-                HorizontalAlignment="Center"
+                HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
                 Command="{Binding SelectLogCommand}"/>
             <Label 
@@ -114,14 +115,15 @@
             </TextBox>
             <Button 
                 Grid.Row="5"
-                Grid.Column="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
                 Margin="0,0,20,0"
                 Content="New Log"
                 Width="100"
                 Height="30"
                 Foreground="Navy"
                 FontWeight="Bold"
-                HorizontalAlignment="Center"
+                HorizontalAlignment="Right"
                 VerticalAlignment="Center"
                 FontFamily="Tahoma"
                 IsDefault="True"
