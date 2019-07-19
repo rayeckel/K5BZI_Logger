@@ -54,6 +54,8 @@ namespace K5BZI_ViewModels
             EditModel = new EditEventModel
             {
                 DxccEntities = _excelFileService.ReadDxccExcelData(),
+                EditEventsAction = (_) => EditEvents(),
+                EditAllEventsAction = (_) => EditAllEvents(),
                 EditEventAction = (_) => EditEvent(),
                 UpdateEventAction = (_) => UpdateEvent()
             };
@@ -123,8 +125,31 @@ namespace K5BZI_ViewModels
             _eventService.UpdateEvent(EditModel.Event, updatedOperators);
         }
 
+        private void EditEvents()
+        {
+            EditModel.EditAllEvents = true;
+
+            EditModel.ExistingEvents.Clear();
+            foreach (var eventObj in Model.ExistingEvents)
+            {
+                if (!eventObj.IsDeleted)
+                {
+                    EditModel.ExistingEvents.Add(eventObj);
+                }
+            };
+
+            EditModel.ShowCloseButton = true;
+            EditModel.IsOpen = true;
+        }
+
+        private void EditAllEvents()
+        {
+            MessageBox.Show("Not Implemented");
+        }
+
         private void EditEvent()
         {
+            EditModel.EditAllEvents = false;
             EditModel.Event = Model.SelectedEvent;
 
             EditModel.Operators.Clear();

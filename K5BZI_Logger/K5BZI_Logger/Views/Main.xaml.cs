@@ -13,12 +13,14 @@ namespace K5BZI_Logger.Views
         public Main(
             IMainViewModel viewModel,
             IOperatorsViewModel operatorsViewModel,
+            IEventViewModel eventViewModel,
             IDefaultsViewModel defaultsViewModel)
         {
             InitializeComponent();
 
             DataContext = viewModel.Model;
             DefaultsButton.DataContext = defaultsViewModel.Model;
+            EventsButton.DataContext = eventViewModel.EditModel;
             OperatorsButton.DataContext = operatorsViewModel.Model;
 
             var timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate

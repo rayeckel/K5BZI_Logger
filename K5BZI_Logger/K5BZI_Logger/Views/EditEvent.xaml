@@ -10,6 +10,8 @@
     xmlns:Converters="clr-namespace:K5BZI_Services.Utilities;assembly=K5BZI_Services"
     xmlns:Enums="clr-namespace:K5BZI_Models.Enums;assembly=K5BZI_Models"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:dgControls="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     Height="750" Width="1024"
     mc:Ignorable="d"
     IsOpen="{Binding IsOpen}"
@@ -40,337 +42,422 @@
                               Foreground="{DynamicResource IdealForegroundColorBrush}"
                               Kind="Cog" />
     </simpleChildWindow:ChildWindow.Icon>
-    <Grid 
-        HorizontalAlignment="Center" 
-        VerticalAlignment="Center" 
-        Background="AliceBlue"
-        Height="500"
-        Width="700">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="400" />
-            <RowDefinition Height="100" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="350" />
-            <ColumnDefinition Width="350" />
-        </Grid.ColumnDefinitions>
-        <Grid 
-            Grid.Row="0"
-            Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
-                <RowDefinition Height="50" />
-                <RowDefinition Height="50" />
-                <RowDefinition Height="50" />
-                <RowDefinition Height="50" />
-                <RowDefinition Height="50" />
-                <RowDefinition Height="50" />
-                <RowDefinition Height="50" />
-            </Grid.RowDefinitions>
+    <Grid>
+        <Grid
+            Visibility="{Binding EditAllEventsVisibility}"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Background="AliceBlue">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120" />
-                <ColumnDefinition Width="230" />
-            </Grid.ColumnDefinitions>
-            <Label
-                Grid.Row="0"
-                Margin="10,0,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                FontWeight="Bold"
-                FontFamily="Tahoma"
-                Content="Event Name"/>
-            <TextBox
-                Grid.Row="0"
-                Grid.Column="1"
-                Width="220"
-                Height="30"
-                Margin="10,0,0,0"
-                FontFamily="Tahoma"
-                Text="{Binding Event.EventName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                controls:TextBoxHelper.Watermark="Event Name" 
-                controls:TextBoxHelper.ClearTextButton="True" >
-            </TextBox>
-            <Label 
-                Grid.Row="1"
-                Grid.Column="0"
-                Margin="10,0,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                FontWeight="Bold"
-                FontFamily="Tahoma"
-                Content="Club"/>
-            <ComboBox
-                Grid.Row="1"
-                Grid.Column="1"
-                Width="220"
-                Height="30"
-                Margin="10,0,0,0"
-                x:Name="clubsCombo"
-                ItemsSource="{Binding Clubs}"
-                SelectedItem="{Binding EventClub}"
-                FontFamily="Tahoma"
-                BorderThickness="1">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding CallSign}" FontWeight="Bold"/>
-                            <TextBlock Text=" - " />
-                            <TextBlock Text="{Binding FullName}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-            <Label 
-                Grid.Row="2"
-                Grid.Column="0"
-                Margin="10,0,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                FontWeight="Bold"
-                FontFamily="Tahoma"
-                Content="Active"/>
-            <Grid
-                Grid.Row="2"
-                Grid.Column="1"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="70" />
-                    <ColumnDefinition Width="70" />
+                    <ColumnDefinition Width="850"/>
+                    <ColumnDefinition Width="150"/>
                 </Grid.ColumnDefinitions>
-                <RadioButton 
-                    Grid.Column="0"
-                    GroupName="Group1" 
-                    IsChecked="{Binding Event.IsActive}" 
-                    Content="Yes" />
-                <RadioButton
-                    Grid.Column="1"
-                    GroupName="Group1"  
-                    Content="No" 
-                    IsChecked="{Binding Event.IsActive, Converter={StaticResource BoolInverterConverter}}" />
-            </Grid>
-            <Label 
-                Grid.Row="3"
+                <dgControls:DataGrid 
                 Grid.Column="0"
-                Margin="10,0,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                FontWeight="Bold"
-                FontFamily="Tahoma"
-                Content="ARRL Section"/>
-            <ComboBox
-                Grid.Row="3"
-                Grid.Column="1"
-                Width="220"
-                Height="30"
-                Margin="10,0,0,0"
+                x:Name="operatorsDataGrid" 
+                Height="400"
+                Width="850"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                x:Name="arrlSectionsCombo"
-                SelectedItem="{Binding Event.ARRL_Sect, Mode=TwoWay}"
-                FontFamily="Tahoma"
-                BorderThickness="1"
-                ItemsSource="{Binding Source={StaticResource ArrlSectionEnumValues}}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Converter={StaticResource EnumDescriptionConverter}}"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-            <Label 
-                Grid.Row="4"
-                Grid.Column="0"
-                Margin="10,0,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                FontWeight="Bold"
-                FontFamily="Tahoma"
-                Content="DXCC"/>
-            <ComboBox
-                Grid.Row="4"
-                Grid.Column="1"
-                Width="220"
-                Height="30"
-                Margin="10,0,0,0"
-                x:Name="dxccCombo"
-                ItemsSource="{Binding DxccEntities}"
-                SelectedItem="{Binding EventDxcc}"
-                FontFamily="Tahoma"
-                BorderThickness="1">
+                BorderThickness=".5"
+                BorderBrush="Navy"
+                AutoGenerateColumns="False"
+                ItemsSource="{Binding ExistingEvents}"
+                SelectedItem="{Binding Event, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="CellEditEnding">
+                            <i:InvokeCommandAction Command="{Binding Path=EditAllEventsCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <dgControls:DataGrid.Columns>
+                    <dgControls:DataGridCheckBoxColumn 
+                        Width="100"
+                        Header="Is Active"
+                        Binding="{Binding IsActive, UpdateSourceTrigger=PropertyChanged}">
+                    </dgControls:DataGridCheckBoxColumn>
+                    <dgControls:DataGridTextColumn 
+                        Header="Event Name" 
+                        Width="200"
+                        Binding="{Binding EventName, UpdateSourceTrigger=PropertyChanged}" 
+                        FontSize="12" 
+                        FontWeight="Bold">
+                    </dgControls:DataGridTextColumn>
+                    <dgControls:DataGridTextColumn 
+                        Header="DXCC"
+                        Width="50"
+                        Binding="{Binding DXCC.Prefix, UpdateSourceTrigger=PropertyChanged}" 
+                        FontSize="12" />
+                    <dgControls:DataGridTextColumn
+                        Header="CQ Zone" 
+                        Width="95"
+                        Binding="{Binding CqZone, UpdateSourceTrigger=PropertyChanged}"
+                        FontSize="12" />
+                    <dgControls:DataGridTextColumn
+                        Header="Class" 
+                        Width="75"
+                        Binding="{Binding Class, UpdateSourceTrigger=PropertyChanged}"
+                        FontSize="12" />
+                    <dgControls:DataGridTextColumn
+                        Header="ITU Zone" 
+                        Width="75"
+                        Binding="{Binding ItuZone, UpdateSourceTrigger=PropertyChanged}"
+                        FontSize="12" />
+                    <dgControls:DataGridTextColumn
+                        Header="State" 
+                        Width="80"
+                        Binding="{Binding State, UpdateSourceTrigger=PropertyChanged}"
+                        FontSize="12" />
+                    <dgControls:DataGridTextColumn
+                        Header="ARL Section" 
+                        Width="80"
+                        Binding="{Binding ARRL_Sect, UpdateSourceTrigger=PropertyChanged}"
+                        FontSize="12" />
+                    <dgControls:DataGridTextColumn
+                        Header="Transmitter Count" 
+                        Width="80"
+                        Binding="{Binding TransmitterCount, UpdateSourceTrigger=PropertyChanged}"
+                        FontSize="12" />
+                    <dgControls:DataGridTextColumn
+                        Header="Operator Count" 
+                        Width="80"
+                        Binding="{Binding OperatorCount, UpdateSourceTrigger=PropertyChanged}"
+                        FontSize="12" />
+                </dgControls:DataGrid.Columns>
+            </dgControls:DataGrid>
+        </Grid>
+        <Grid
+            Visibility="{Binding EditEventsVisibility}"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Background="AliceBlue"
+            Height="500"
+            Width="700">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="400" />
+                <RowDefinition Height="100" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="350" />
+                <ColumnDefinition Width="350" />
+            </Grid.ColumnDefinitions>
+            <Grid 
+                Grid.Row="0"
+                Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="230" />
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Row="0"
+                    Margin="10,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontWeight="Bold"
+                    FontFamily="Tahoma"
+                    Content="Event Name"/>
+                <TextBox
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Width="220"
+                    Height="30"
+                    Margin="10,0,0,0"
+                    FontFamily="Tahoma"
+                    Text="{Binding Event.EventName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    controls:TextBoxHelper.Watermark="Event Name" 
+                    controls:TextBoxHelper.ClearTextButton="True" >
+                </TextBox>
+                <Label 
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="10,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontWeight="Bold"
+                    FontFamily="Tahoma"
+                    Content="Club"/>
+                <ComboBox
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Width="220"
+                    Height="30"
+                    Margin="10,0,0,0"
+                    x:Name="clubsCombo"
+                    ItemsSource="{Binding Clubs}"
+                    SelectedItem="{Binding EventClub}"
+                    FontFamily="Tahoma"
+                    BorderThickness="1">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Prefix}" />
+                                <TextBlock Text="{Binding CallSign}" FontWeight="Bold"/>
                                 <TextBlock Text=" - " />
-                                <TextBlock Text="{Binding Entity}" />
+                                <TextBlock Text="{Binding FullName}" />
                             </StackPanel>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-            <Label 
-                Grid.Row="5"
-                Grid.Column="0"
-                Margin="10,0,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                FontWeight="Bold"
-                FontFamily="Tahoma"
-                Content="CQ Zone"/>
-            <ComboBox
-                Grid.Row="5"
-                Grid.Column="1"
-                Width="220"
-                Height="30"
-                Margin="10,0,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                x:Name="cqZoneCombo"
-                SelectedItem="{Binding Event.CqZone, Mode=TwoWay}"
-                FontFamily="Tahoma"
-                BorderThickness="1"
-                ItemsSource="{Binding Source={StaticResource CqZoneEnumValues}}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Converter={StaticResource EnumDescriptionConverter}}"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-            <Label 
-                Grid.Row="6"
-                Grid.Column="0"
-                Margin="10,0,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                FontWeight="Bold"
-                FontFamily="Tahoma"
-                Content="ITU Zone (0-90)"/>
-            <TextBox
-                Grid.Row="6"
-                Grid.Column="1"
-                Width="220"
-                Height="30"
-                Margin="10,0,0,0"
-                FontFamily="Tahoma"
-                Text="{Binding Event.ItuZone}"
-                controls:TextBoxHelper.Watermark="ITU Zone" 
-                controls:TextBoxHelper.ClearTextButton="True" >
-            </TextBox>
-            <Label 
-                Grid.Row="7"
-                Grid.Column="0"
-                Margin="10,0,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                FontWeight="Bold"
-                FontFamily="Tahoma"
-                Content="Class"/>
-            <TextBox
-                Grid.Row="7"
-                Grid.Column="1"
-                Width="220"
-                Height="30"
-                Margin="10,0,0,0"
-                FontFamily="Tahoma"
-                Text="{Binding Event.Class}"
-                controls:TextBoxHelper.Watermark="Class" 
-                controls:TextBoxHelper.ClearTextButton="True" >
-            </TextBox>
-        </Grid>
-        <Grid 
-            Grid.Row="0"
-            Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
-                <RowDefinition Height="200" />
-                <RowDefinition Height="50" />
-                <RowDefinition Height="50" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="250" />
-            </Grid.ColumnDefinitions>
-            <Label 
+                <Label 
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Margin="10,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontWeight="Bold"
+                    FontFamily="Tahoma"
+                    Content="Active"/>
+                <Grid
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="70" />
+                        <ColumnDefinition Width="70" />
+                    </Grid.ColumnDefinitions>
+                    <RadioButton 
+                        Grid.Column="0"
+                        GroupName="Group1" 
+                        IsChecked="{Binding Event.IsActive}" 
+                        Content="Yes" />
+                    <RadioButton
+                        Grid.Column="1"
+                        GroupName="Group1"  
+                        Content="No" 
+                        IsChecked="{Binding Event.IsActive, Converter={StaticResource BoolInverterConverter}}" />
+                </Grid>
+                <Label 
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Margin="10,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontWeight="Bold"
+                    FontFamily="Tahoma"
+                    Content="ARRL Section"/>
+                <ComboBox
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Width="220"
+                    Height="30"
+                    Margin="10,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    x:Name="arrlSectionsCombo"
+                    SelectedItem="{Binding Event.ARRL_Sect, Mode=TwoWay}"
+                    FontFamily="Tahoma"
+                    BorderThickness="1"
+                    ItemsSource="{Binding Source={StaticResource ArrlSectionEnumValues}}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Converter={StaticResource EnumDescriptionConverter}}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Label 
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Margin="10,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontWeight="Bold"
+                    FontFamily="Tahoma"
+                    Content="DXCC"/>
+                <ComboBox
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Width="220"
+                    Height="30"
+                    Margin="10,0,0,0"
+                    x:Name="dxccCombo"
+                    ItemsSource="{Binding DxccEntities}"
+                    SelectedItem="{Binding EventDxcc}"
+                    FontFamily="Tahoma"
+                    BorderThickness="1">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Prefix}" />
+                                    <TextBlock Text=" - " />
+                                    <TextBlock Text="{Binding Entity}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                <Label 
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    Margin="10,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontWeight="Bold"
+                    FontFamily="Tahoma"
+                    Content="CQ Zone"/>
+                <ComboBox
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    Width="220"
+                    Height="30"
+                    Margin="10,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    x:Name="cqZoneCombo"
+                    SelectedItem="{Binding Event.CqZone, Mode=TwoWay}"
+                    FontFamily="Tahoma"
+                    BorderThickness="1"
+                    ItemsSource="{Binding Source={StaticResource CqZoneEnumValues}}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Converter={StaticResource EnumDescriptionConverter}}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Label 
+                    Grid.Row="6"
+                    Grid.Column="0"
+                    Margin="10,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontWeight="Bold"
+                    FontFamily="Tahoma"
+                    Content="ITU Zone (0-90)"/>
+                <TextBox
+                    Grid.Row="6"
+                    Grid.Column="1"
+                    Width="220"
+                    Height="30"
+                    Margin="10,0,0,0"
+                    FontFamily="Tahoma"
+                    Text="{Binding Event.ItuZone}"
+                    controls:TextBoxHelper.Watermark="ITU Zone" 
+                    controls:TextBoxHelper.ClearTextButton="True" >
+                </TextBox>
+                <Label 
+                    Grid.Row="7"
+                    Grid.Column="0"
+                    Margin="10,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontWeight="Bold"
+                    FontFamily="Tahoma"
+                    Content="Class"/>
+                <TextBox
+                    Grid.Row="7"
+                    Grid.Column="1"
+                    Width="220"
+                    Height="30"
+                    Margin="10,0,0,0"
+                    FontFamily="Tahoma"
+                    Text="{Binding Event.Class}"
+                    controls:TextBoxHelper.Watermark="Class" 
+                    controls:TextBoxHelper.ClearTextButton="True" >
+                </TextBox>
+            </Grid>
+            <Grid 
                 Grid.Row="0"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                Margin="15,0,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                FontWeight="Bold"
-                FontFamily="Tahoma"
-                Content="Operators"/>
-            <ListBox 
-                SelectionMode="Multiple"
+                Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="200" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="250" />
+                </Grid.ColumnDefinitions>
+                <Label 
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Margin="15,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontWeight="Bold"
+                    FontFamily="Tahoma"
+                    Content="Operators"/>
+                <ListBox 
+                    SelectionMode="Multiple"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    HorizontalAlignment="Right"
+                    Height="200"
+                    Width="300" 
+                    Margin="10,0,20,0"
+                    x:Name="operatorsSelect"
+                    ItemsSource="{Binding Operators}"
+                    FontFamily="Tahoma"
+                    BorderThickness="1"
+                    controls:TextBoxHelper.Watermark="Operators" 
+                    controls:TextBoxHelper.ClearTextButton="True">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding CallSign}" />
+                                <TextBlock Text=" - " />
+                                <TextBlock Text="{Binding FullName}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListBoxItem}">
+                            <Setter Property="IsSelected" Value="{Binding Mode=TwoWay, Path=Selected}"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+                <Label 
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    Grid.Column="0"
+                    Margin="10,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"
+                    FontWeight="Bold"
+                    FontFamily="Tahoma"
+                    Content="Log File Name"/>
+                <TextBox
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    HorizontalAlignment="Right"
+                    Width="300"
+                    Height="30"
+                    Margin="10,0,20,0"
+                    FontFamily="Tahoma"
+                    Text="{Binding Event.LogFileName, Mode=OneWay}"
+                    controls:TextBoxHelper.Watermark="Log File Name" 
+                    controls:TextBoxHelper.ClearTextButton="True" >
+                </TextBox>
+            </Grid>
+            <Button 
                 Grid.Row="1"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
-                HorizontalAlignment="Right"
-                Height="200"
-                Width="300" 
-                Margin="10,0,20,0"
-                x:Name="operatorsSelect"
-                ItemsSource="{Binding Operators}"
-                FontFamily="Tahoma"
-                BorderThickness="1"
-                controls:TextBoxHelper.Watermark="Operators" 
-                controls:TextBoxHelper.ClearTextButton="True">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding CallSign}" />
-                            <TextBlock Text=" - " />
-                            <TextBlock Text="{Binding FullName}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="{x:Type ListBoxItem}">
-                        <Setter Property="IsSelected" Value="{Binding Mode=TwoWay, Path=Selected}"/>
-                    </Style>
-                </ListBox.ItemContainerStyle>
-            </ListBox>
-            <Label 
-                Grid.Row="2"
-                Grid.ColumnSpan="2"
-                Grid.Column="0"
-                Margin="10,0,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Bottom"
-                FontWeight="Bold"
-                FontFamily="Tahoma"
-                Content="Log File Name"/>
-            <TextBox
-                Grid.Row="3"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                HorizontalAlignment="Right"
-                Width="300"
+                Margin="0,0,20,0"
+                Content="Save"
+                Width="100"
                 Height="30"
-                Margin="10,0,20,0"
+                Foreground="Navy"
+                FontWeight="Bold"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
                 FontFamily="Tahoma"
-                Text="{Binding Event.LogFileName, Mode=OneWay}"
-                controls:TextBoxHelper.Watermark="Log File Name" 
-                controls:TextBoxHelper.ClearTextButton="True" >
-            </TextBox>
+                IsDefault="True"
+                Command="{Binding UpdateEventCommand}"/>
         </Grid>
-        <Button 
-            Grid.Row="1"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            Margin="0,0,20,0"
-            Content="Save"
-            Width="100"
-            Height="30"
-            Foreground="Navy"
-            FontWeight="Bold"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            FontFamily="Tahoma"
-            IsDefault="True"
-            Command="{Binding UpdateEventCommand}"/>
     </Grid>
 </simpleChildWindow:ChildWindow>

@@ -18,6 +18,7 @@
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
             <Button x:Name ="DefaultsButton" Command="{Binding EditDefaultsCommand}" Content="Defaults" />
+            <Button x:Name ="EventsButton" Command="{Binding EditEventsCommand}" Content="Events" />
             <Button x:Name ="OperatorsButton" Command="{Binding EditOperatorsCommand}" Content="Operators" />
             <Button x:Name ="ExportLogButton" Command="{Binding SelectExportLogCommand}" Content="Export Log" />
             <Button x:Name ="ViewFileStoreButton" Command="{Binding ViewFileStoreCommand}" Content="Open Log Directory" />

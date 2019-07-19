@@ -5,6 +5,7 @@ using PropertyChanged;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 
 namespace K5BZI_Models.ViewModelModels
@@ -14,11 +15,37 @@ namespace K5BZI_Models.ViewModelModels
     {
         #region Properties
 
+        public bool EditAllEvents { get; set; }
+
+        [AlsoNotifyFor("EditAllEvents")]
+        public Visibility EditEventsVisibility
+        {
+            get
+            {
+                return !EditAllEvents ?
+                    Visibility.Visible :
+                    Visibility.Collapsed;
+            }
+        }
+
+        [AlsoNotifyFor("EditAllEvents")]
+        public Visibility EditAllEventsVisibility
+        {
+            get
+            {
+                return EditAllEvents ?
+                    Visibility.Visible :
+                    Visibility.Collapsed;
+            }
+        }
+
         public Event Event { get; set; }
 
         public Operator EventClub { get; set; }
 
         public DXCC EventDxcc { get; set; }
+
+        public ObservableCollection<Event> ExistingEvents { get; private set; }
 
         public ObservableCollection<Operator> Operators { get; set; }
 
@@ -34,11 +61,34 @@ namespace K5BZI_Models.ViewModelModels
         {
             Operators = new ObservableCollection<Operator>();
             Clubs = new ObservableCollection<Operator>();
+            ExistingEvents = new ObservableCollection<Event>();
         }
 
         #endregion
 
         #region Commands
+
+        private ICommand _editEventsCommand;
+        public ICommand EditEventsCommand
+        {
+            get
+            {
+                return _editEventsCommand ??
+                    (_editEventsCommand = new DelegateCommand(EditEventsAction, _ => { return true; }));
+            }
+        }
+        public Action<object> EditEventsAction { get; set; }
+
+        private ICommand _editAllEventsCommand;
+        public ICommand EditAllEventsCommand
+        {
+            get
+            {
+                return _editAllEventsCommand ??
+                    (_editAllEventsCommand = new DelegateCommand(EditAllEventsAction, _ => { return true; }));
+            }
+        }
+        public Action<object> EditAllEventsAction { get; set; }
 
         private ICommand _editEventCommand;
         public ICommand EditEventCommand

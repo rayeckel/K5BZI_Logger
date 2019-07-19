@@ -28,7 +28,8 @@ namespace K5BZI_Models
             {
                 var callString = String.Empty;
 
-                Operators.ToList().ForEach(_ => callString += String.Format("{0}, ", _.FullName));
+                Operators.ToList()
+                    .ForEach(_ => callString += String.Format("{0}, ", _.FullName));
 
                 return callString;
             }
@@ -43,13 +44,17 @@ namespace K5BZI_Models
         {
             get
             {
-                return Club != null ? Club.FullName : String.Empty;
+                return Club != null ?
+                    Club.FullName :
+                    String.Empty;
             }
         }
 
         public Operator Club { get; set; }
 
         public bool IsActive { get; set; }
+
+        public bool IsDeleted { get; set; }
 
         public string LogFileName { get; set; }
 
