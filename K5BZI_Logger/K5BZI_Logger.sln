@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "K5BZI_Services", "K5BZI_Ser
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "K5BZI_Services.Test", "K5BZI_Services.Test\K5BZI_Services.Test.csproj", "{1805D899-3192-4A7D-942D-C46F25F93D93}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "K5BZI_Installer", "K5BZI_Setup\K5BZI_Setup.vdproj", "{1C71EEAB-865C-43E5-8BB3-9FF793FEBF83}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		All|Any CPU = All|Any CPU
@@ -118,15 +116,6 @@ Global
 		{1805D899-3192-4A7D-942D-C46F25F93D93}.Release|x64.Build.0 = Release|Any CPU
 		{1805D899-3192-4A7D-942D-C46F25F93D93}.Release|x86.ActiveCfg = Release|Any CPU
 		{1805D899-3192-4A7D-942D-C46F25F93D93}.Release|x86.Build.0 = Release|Any CPU
-		{1C71EEAB-865C-43E5-8BB3-9FF793FEBF83}.All|Any CPU.ActiveCfg = Release
-		{1C71EEAB-865C-43E5-8BB3-9FF793FEBF83}.All|x64.ActiveCfg = Release
-		{1C71EEAB-865C-43E5-8BB3-9FF793FEBF83}.All|x86.ActiveCfg = Release
-		{1C71EEAB-865C-43E5-8BB3-9FF793FEBF83}.Debug|Any CPU.ActiveCfg = Debug
-		{1C71EEAB-865C-43E5-8BB3-9FF793FEBF83}.Debug|x64.ActiveCfg = Debug
-		{1C71EEAB-865C-43E5-8BB3-9FF793FEBF83}.Debug|x86.ActiveCfg = Debug
-		{1C71EEAB-865C-43E5-8BB3-9FF793FEBF83}.Release|Any CPU.ActiveCfg = Release
-		{1C71EEAB-865C-43E5-8BB3-9FF793FEBF83}.Release|x64.ActiveCfg = Release
-		{1C71EEAB-865C-43E5-8BB3-9FF793FEBF83}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -60,10 +60,17 @@ namespace K5BZI_Services
             var fileName = CreateFilePath(logFileName, isLogFile);
             var serializer = new JsonSerializer();
 
-            using (var sr = new StreamReader(File.Open(fileName, FileMode.OpenOrCreate)))
-            using (var jsonTextReader = new JsonTextReader(sr))
+            try
             {
-                return serializer.Deserialize<List<T>>(jsonTextReader);
+                using (var sr = new StreamReader(File.Open(fileName, FileMode.OpenOrCreate)))
+                using (var jsonTextReader = new JsonTextReader(sr))
+                {
+                    return serializer.Deserialize<List<T>>(jsonTextReader);
+                }
+            }
+            catch
+            {
+                return new List<T>();
             }
         }
 

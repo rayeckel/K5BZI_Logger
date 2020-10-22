@@ -5,7 +5,9 @@ using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels.Interfaces;
 using System;
 using System.Linq;
+using System.Windows;
 using System.Windows.Forms;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace K5BZI_ViewModels
 {
@@ -89,6 +91,8 @@ namespace K5BZI_ViewModels
                 CreateNewEntryAction = (_) => Model.LogEntry.ClearProperties(),
                 ViewFileStoreAction = (_) => _logListingService.OpenLogListing(),
                 LogItAction = (_) => SaveLogEntry(),
+                ManualTimeAction = (_) => SetManualTime(),
+                AutoTimeAction = (_) => SetAutoTime(),
                 EditLogEntryAction = (_) => EditLogEntry(),
                 DeleteLogEntryAction = (_) => DeleteLogEntry()
             };
@@ -112,6 +116,25 @@ namespace K5BZI_ViewModels
 
             Model.LogEntries.Add(Model.LogEntry.Clone());
             Model.LogEntry.ClearProperties();
+        }
+
+        private void SetManualTime()
+        {
+            Model.ContactTimeEnabled = true;
+            Model.ManualTimeButtonVisibility = Visibility.Collapsed;
+            Model.AutoTimeButtonVisibility = Visibility.Visible;
+
+            Model.Timer.Stop();
+            Model.LogEntry.ContactTime = null;
+        }
+
+        private void SetAutoTime()
+        {
+            Model.ContactTimeEnabled = false;
+            Model.AutoTimeButtonVisibility = Visibility.Collapsed;
+            Model.ManualTimeButtonVisibility = Visibility.Visible;
+
+            Model.Timer.Start();
         }
 
         private void CreateNewLogEntry()

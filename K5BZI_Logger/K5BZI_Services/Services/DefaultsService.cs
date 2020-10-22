@@ -39,7 +39,7 @@ namespace K5BZI_Services
             }
             else
             {
-                _storedDefaults = defaults.First();
+                _storedDefaults = defaults.FirstOrDefault();
             }
 
             return _storedDefaults;

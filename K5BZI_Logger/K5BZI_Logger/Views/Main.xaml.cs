@@ -5,9 +5,6 @@ using System.Windows.Threading;
 
 namespace K5BZI_Logger.Views
 {
-    /// <summary>
-    /// Interaction logic for Main.xaml
-    /// </summary>
     public partial class Main : MetroWindow
     {
         public Main(
@@ -23,7 +20,7 @@ namespace K5BZI_Logger.Views
             EventsButton.DataContext = eventViewModel.EditModel;
             OperatorsButton.DataContext = operatorsViewModel.Model;
 
-            var timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
+            viewModel.Model.Timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
                 viewModel.Model.LogEntry.ContactTime = DateTime.Now;
             }, Dispatcher);

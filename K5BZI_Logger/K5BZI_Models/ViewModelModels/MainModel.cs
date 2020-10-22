@@ -3,7 +3,9 @@ using Microsoft.VisualStudio.PlatformUI;
 using PropertyChanged;
 using System;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace K5BZI_Models.Main
 {
@@ -17,17 +19,23 @@ namespace K5BZI_Models.Main
             LogEntry = new LogEntry();
             LogEntries = new ObservableCollection<LogEntry>();
             DuplicateEntries = new ObservableCollection<LogEntry>();
+
+            AutoTimeButtonVisibility = Visibility.Collapsed;
         }
 
         #endregion
 
         #region Properties
 
+        public DispatcherTimer Timer { get; set; }
         public Event Event { get; set; }
         public LogEntry LogEntry { get; private set; }
         public LogEntry SelectedEntry { get; set; }
         public ObservableCollection<LogEntry> LogEntries { get; private set; }
         public ObservableCollection<LogEntry> DuplicateEntries { get; private set; }
+        public Visibility ManualTimeButtonVisibility { get; set; }
+        public Visibility AutoTimeButtonVisibility { get; set; }
+        public bool ContactTimeEnabled { get; set; }
 
         #endregion
 
@@ -44,6 +52,27 @@ namespace K5BZI_Models.Main
         }
         public Action<object> LogItAction { get; set; }
 
+        private ICommand _manualTimeCommand;
+        public ICommand ManualTimeCommand
+        {
+            get
+            {
+                return _manualTimeCommand ?? (_manualTimeCommand =
+                    new DelegateCommand(ManualTimeAction, _ => { return true; }));
+            }
+        }
+        public Action<object> ManualTimeAction { get; set; }
+
+        private ICommand _autoTimeCommand;
+        public ICommand AutoTimeCommand
+        {
+            get
+            {
+                return _autoTimeCommand ?? (_autoTimeCommand =
+                    new DelegateCommand(AutoTimeAction, _ => { return true; }));
+            }
+        }
+        public Action<object> AutoTimeAction { get; set; }
 
         private ICommand _createNewEntryCommand;
         public ICommand CreateNewEntryCommand

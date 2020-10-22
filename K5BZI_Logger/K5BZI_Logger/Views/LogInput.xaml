@@ -51,7 +51,7 @@
                     FontFamily="Tahoma"
                     Foreground="DarkSlateBlue"
                     Content="Time"/>
-                <Label
+                <TextBox
                     Grid.Row="1" 
                     Grid.Column="0"
                     Height="27"
@@ -59,9 +59,9 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     FontFamily="Tahoma"
-                    Foreground="DarkGray"
-                    Width="130"
-                    Content="{Binding LogEntry.ContactTime, Mode=TwoWay}"/>
+                    Width="140"
+                    IsEnabled="{Binding ContactTimeEnabled}"
+                    Text="{Binding LogEntry.ContactTime, Mode=TwoWay}"/>
                 <Label 
                     Grid.Row="0"
                     Grid.Column="1"
@@ -254,6 +254,34 @@
                     VerticalAlignment="Center"
                     IsDefault="True"
                     Command="{Binding LogItCommand}"/>
+                <Button 
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="1"
+                    Content="Manual Time"
+                    Width="130"
+                    FontSize="12"
+                    Foreground="Navy"
+                    FontFamily="Tahoma"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    IsDefault="True"
+                    Visibility="{Binding ManualTimeButtonVisibility}"
+                    Command="{Binding ManualTimeCommand}"/>
+                <Button 
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="1"
+                    Content="Auto Time"
+                    Width="130"
+                    FontSize="12"
+                    Foreground="Navy"
+                    FontFamily="Tahoma"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    IsDefault="True"
+                    Visibility="{Binding AutoTimeButtonVisibility}"
+                    Command="{Binding AutoTimeCommand}"/>
             </Grid>
         </Grid>
     </Border>
