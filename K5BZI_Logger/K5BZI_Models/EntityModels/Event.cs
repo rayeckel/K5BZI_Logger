@@ -35,7 +35,7 @@ namespace K5BZI_Models
             }
         }
 
-        [Adif("Contest_ID")]
+        [Adif("CONTEST_ID")]
         [Cabrillo("CONTEST")]
         public string EventName { get; set; }
 
@@ -63,20 +63,20 @@ namespace K5BZI_Models
         [Adif("DXCC")]
         public DXCC DXCC { get; set; }
 
-        [Adif("CQz")]
+        [Adif("CQZ")]
         public CqZone CqZone { get; set; }
 
-        [Adif("Class")]
+        [Adif("CLASS")]
         public string Class { get; set; }
 
-        [Adif("ITUz")]
+        [Adif("ITUZ")]
         public int ItuZone { get; set; }
 
-        [Adif("ARRL_Sect")]
+        [Adif("ARRL_SECT")]
         [Cabrillo("LOCATION")]
         public ArrlSection ARRL_Sect { get; set; }
 
-        [Adif("State")]
+        [Adif("STATE")]
         public string State { get; set; }
 
         [Cabrillo("SOAPBOX")]

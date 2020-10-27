@@ -18,7 +18,7 @@ namespace K5BZI_Models
 
         public DateTime? ContactTime { get; set; }
 
-        [Adif("QSO_Date")]
+        [Adif("QSO_DATE")]
         public string QsoDate
         {
             get
@@ -27,7 +27,7 @@ namespace K5BZI_Models
             }
         }
 
-        [Adif("time_on")]
+        [Adif("TIME_ON")]
         public string QsoTime
         {
             get
@@ -36,22 +36,22 @@ namespace K5BZI_Models
             }
         }
 
-        [Adif("Call")]
+        [Adif("CALL")]
         public string CallSign { get; set; }
 
-        [Adif("Pfx")]
+        [Adif("PFX")]
         public string Prefix { get; set; }
 
-        [Adif("Cont")]
+        [Adif("ONT")]
         public string Continent { get; set; }
 
-        [Adif("Country")]
+        [Adif("COUNTRY")]
         public string Country { get; set; }
 
-        [Adif("QSL_Sent")]
+        [Adif("QSL_SENT")]
         public string QslSent { get; set; }
 
-        [Adif("QSL_Rcvd")]
+        [Adif("QSL_RCVD")]
         public string QslReceived { get; set; }
 
         [Cabrillo("CATEGORY-ASSISTED")]

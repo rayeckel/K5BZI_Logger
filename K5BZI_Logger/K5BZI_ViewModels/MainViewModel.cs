@@ -58,7 +58,7 @@ namespace K5BZI_ViewModels
         {
             Model.Event = newEvent;
             Model.LogEntries.Clear();
-            Model.LogEntry.ClearProperties();
+            Model.LogEntry.ClearProperties(Model.ContactTimeEnabled);
             Model.LogEntry.EventId = newEvent.Id;
         }
 
@@ -88,7 +88,7 @@ namespace K5BZI_ViewModels
         {
             Model = new MainModel
             {
-                CreateNewEntryAction = (_) => Model.LogEntry.ClearProperties(),
+                CreateNewEntryAction = (_) => Model.LogEntry.ClearProperties(Model.ContactTimeEnabled),
                 ViewFileStoreAction = (_) => _logListingService.OpenLogListing(),
                 LogItAction = (_) => SaveLogEntry(),
                 ManualTimeAction = (_) => SetManualTime(),
@@ -115,7 +115,7 @@ namespace K5BZI_ViewModels
             _logListingService.SaveLogEntry(Model.LogEntry, Model.Event);
 
             Model.LogEntries.Add(Model.LogEntry.Clone());
-            Model.LogEntry.ClearProperties();
+            Model.LogEntry.ClearProperties(Model.ContactTimeEnabled);
         }
 
         private void SetManualTime()

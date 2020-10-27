@@ -34,13 +34,20 @@ namespace K5BZI_Services
         private async void ExportToAdif(Event eventLog, ICollection<LogEntry> logEntries)
         {
             var header = String.Format(
-                "ADIF Export from K5BZI Logger version {0} {1}Written by: Ray Eckel{2}Log exported on: {3}{4}<EOH>{5}{6}",
+                "ADIF Export from K5BZI Logger version {0} {1}Copyright (C) 2020 - Ray Eckel K5BZI{2}Log exported on: {3}{4}{5}{6}{7}{8}{9}{10}{11}{12}{13}",
                 "1.0", //Appsettings.Get("Version")
                 Environment.NewLine,
                 Environment.NewLine,
                 DateTime.UtcNow.ToString("g"),
                 Environment.NewLine,
                 Environment.NewLine,
+                "<ADIF_VER:5> 2.2.1",
+                Environment.NewLine,
+                "<PROGRAMID:6> K5BZI Logger",
+                Environment.NewLine,
+                "<PROGRAMVERSION:11>1.0",
+                Environment.NewLine,
+                "<EOH>",
                 Environment.NewLine);
 
             var adifData = new StringBuilder(header);
@@ -52,9 +59,11 @@ namespace K5BZI_Services
 
             foreach (var entry in logEntries)
             {
+                var recordLine = String.Empty;
+
                 foreach (var eventProp in eventProperties)
                 {
-                    var value = eventProp.Property.GetValue(eventLog) as string;
+                    var value = eventProp.Property.GetValue(eventLog)?.ToString();
 
                     if (value == null)
                     {
@@ -63,7 +72,7 @@ namespace K5BZI_Services
 
                     var line = String.Format("<{0}:{1}>{2}", eventProp.Attribute.PropertyName, value.Length, value);
 
-                    adifData.AppendLine(line);
+                    recordLine += line;
                 };
 
                 var entryProperties = from p in entry.GetType().GetProperties()
@@ -73,7 +82,7 @@ namespace K5BZI_Services
 
                 foreach (var entryProp in entryProperties)
                 {
-                    var value = entryProp.Property.GetValue(entry) as string;
+                    var value = entryProp.Property.GetValue(entry)?.ToString();
 
                     if (value == null)
                     {
@@ -82,7 +91,7 @@ namespace K5BZI_Services
 
                     var line = String.Format("<{0}:{1}>{2}", entryProp.Attribute.PropertyName, value.Length, value);
 
-                    adifData.AppendLine(line);
+                    recordLine += line;
                 };
 
                 var signalProperties = from p in entry.Signal.GetType().GetProperties()
@@ -92,7 +101,7 @@ namespace K5BZI_Services
 
                 foreach (var signalProp in signalProperties)
                 {
-                    var value = signalProp.Property.GetValue(entry.Signal) as string;
+                    var value = signalProp.Property.GetValue(entry.Signal)?.ToString();
 
                     if (value == null)
                     {
@@ -101,10 +110,10 @@ namespace K5BZI_Services
 
                     var line = String.Format("<{0}:{1}>{2}", signalProp.Attribute.PropertyName, value.Length, value);
 
-                    adifData.AppendLine(line);
+                    recordLine += line;
                 };
 
-                adifData.AppendLine(String.Format("<eor>{0}", Environment.NewLine));
+                adifData.AppendLine(String.Format("{0}{1}<EOR>", recordLine, Environment.NewLine));
             }
 
             await _fileStoreService.WriteToFile(adifData.ToString(), eventLog.LogFileName, FileExtensions.Adif);

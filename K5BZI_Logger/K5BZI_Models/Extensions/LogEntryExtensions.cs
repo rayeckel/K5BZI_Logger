@@ -4,13 +4,15 @@ namespace K5BZI_Models.Extensions
 {
     public static class LogEntryExtensions
     {
-        public static void ClearProperties(this LogEntry logEntry)
+        public static void ClearProperties(this LogEntry logEntry, bool contactTimeEnabled)
         {
             var entryId = logEntry.Id;
 
             logEntry.Id = entryId + 1;
             logEntry.CallSign = string.Empty;
-            logEntry.ContactTime = DateTime.Now;
+
+            if(!contactTimeEnabled)
+                logEntry.ContactTime = DateTime.Now;
         }
 
         public static LogEntry Clone(this LogEntry logEntry)
