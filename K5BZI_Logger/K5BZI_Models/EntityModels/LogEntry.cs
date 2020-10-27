@@ -23,7 +23,9 @@ namespace K5BZI_Models
         {
             get
             {
-                return ContactTime != null ? ((DateTime)ContactTime).ToString("yyyyMMdd") : String.Empty;
+                return ContactTime != null ? 
+                    ((DateTime)ContactTime).ToUniversalTime().ToString("yyyyMMdd") :
+                    String.Empty;
             }
         }
 
@@ -32,7 +34,9 @@ namespace K5BZI_Models
         {
             get
             {
-                return ContactTime != null ? ((DateTime)ContactTime).TimeOfDay.ToString() : String.Empty;
+                return ContactTime != null ? 
+                    ((DateTime)ContactTime).ToUniversalTime().TimeOfDay.ToString() :
+                    String.Empty;
             }
         }
 

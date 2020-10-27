@@ -65,6 +65,7 @@
     <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -111,6 +112,7 @@
     <Compile Include="Utilities\BoolInverterConverter.cs" />
     <Compile Include="Utilities\EntityUtility.cs" />
     <Compile Include="Utilities\EnumUtility.cs" />
+    <Compile Include="Utilities\TextboxBehavior.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\K5BZI_Models\K5BZI_Models.csproj">

@@ -5,7 +5,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     mc:Ignorable="d" 
-    FocusManager.FocusedElement="{x:Reference lblCall}">
+    FocusManager.FocusedElement="{x:Reference lblCall}"
+    xmlns:behaviors="clr-namespace:K5BZI_Services.Utilities;assembly=K5BZI_Services">
     <Border
         BorderThickness="1"
         BorderBrush="Navy">
@@ -35,7 +36,7 @@
                     <ColumnDefinition Width="150" />
                     <ColumnDefinition Width="20" />
                     <ColumnDefinition Width="60" />
-                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="75" />
                     <ColumnDefinition Width="80" />
                     <ColumnDefinition Width="60" />
                     <ColumnDefinition Width="60" />
@@ -54,6 +55,7 @@
                 <TextBox
                     Grid.Row="1" 
                     Grid.Column="0"
+                    IsTabStop="False"
                     Height="27"
                     x:Name="lblTime"
                     HorizontalAlignment="Left"
@@ -75,6 +77,7 @@
                     Grid.Row="1" 
                     Grid.Column="1"
                     Grid.ColumnSpan="2"
+                    TabIndex="0"
                     Height="27"
                     x:Name="lblCall"
                     HorizontalAlignment="Left"
@@ -85,16 +88,17 @@
                     FocusManager.FocusedElement="{Binding RelativeSource={RelativeSource Self}}"
                     Text="{Binding LogEntry.CallSign, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <Label 
-                    Grid.Row="0"
-                    Grid.Column="3"
+                    Grid.Row="2"
+                    Grid.Column="2"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     FontFamily="Tahoma"
                     Foreground="DarkSlateBlue"
                     Content="Band"/>
                 <TextBox
-                    Grid.Row="1" 
-                    Grid.Column="3"
+                    Grid.Row="3" 
+                    Grid.Column="2"
+                    IsTabStop="False"
                     Height="27"
                     x:Name="lblBand"
                     HorizontalAlignment="Left"
@@ -103,16 +107,17 @@
                     BorderThickness="1"
                     Text="{Binding LogEntry.Signal.Band}"/>
                 <Label 
-                    Grid.Row="0"
-                    Grid.Column="4"
+                    Grid.Row="2"
+                    Grid.Column="3"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     FontFamily="Tahoma"
                     Foreground="DarkSlateBlue"
                     Content="Freq"/>
                 <TextBox
-                    Grid.Row="1" 
-                    Grid.Column="4"
+                    Grid.Row="3" 
+                    Grid.Column="3"
+                    IsTabStop="False"
                     Height="27"
                     x:Name="lblFreq"
                     HorizontalAlignment="Left"
@@ -121,41 +126,45 @@
                     BorderThickness="1"
                     Text="{Binding LogEntry.Signal.Frequency, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <Label 
-                    Grid.Row="2"
-                    Grid.Column="2"
+                    Grid.Row="0"
+                    Grid.Column="3"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     FontFamily="Tahoma"
                     Foreground="DarkSlateBlue"
                     Content="Sent"/>
                 <TextBox
-                    Grid.Row="3"
-                    Grid.Column="2"
+                    Grid.Row="1"
+                    Grid.Column="3"
+                    TabIndex="1"
+                    behaviors:TextboxBehavior.ClearOnFocused="True"
                     Height="27"
                     x:Name="lblSent"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"         
                     Width="50"
                     BorderThickness="1"
-                    Text="{Binding LogEntry.SignalReport.Sent, Mode=TwoWay}"/>
+                    Text="{Binding LogEntry.SignalReport.Sent}"/>
                 <Label 
-                    Grid.Row="2"
-                    Grid.Column="3"
+                    Grid.Row="0"
+                    Grid.Column="4"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     FontFamily="Tahoma"
                     Foreground="DarkSlateBlue"
                     Content="Recvd"/>
                 <TextBox
-                    Grid.Row="3" 
-                    Grid.Column="3"
+                    Grid.Row="1" 
+                    Grid.Column="4"
+                    TabIndex="2"
+                    behaviors:TextboxBehavior.ClearOnFocused="True"
                     Height="27"
                     x:Name="lblRecvd"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"                  
                     Width="50"
                     BorderThickness="1"
-                    Text="{Binding LogEntry.SignalReport.Received, Mode=TwoWay}"/>
+                    Text="{Binding LogEntry.SignalReport.Received}"/>
                 <Label 
                     Grid.Row="2"
                     Grid.Column="4"
@@ -167,6 +176,7 @@
                 <TextBox
                     Grid.Row="3" 
                     Grid.Column="4"
+                    IsTabStop="False"
                     Height="27"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"                  
@@ -184,6 +194,7 @@
                 <TextBox
                     Grid.Row="3" 
                     Grid.Column="5"
+                    IsTabStop="False"
                     Height="27"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"                  
@@ -201,6 +212,7 @@
                 <TextBox
                     Grid.Row="3" 
                     Grid.Column="6"
+                    IsTabStop="False"
                     Height="27"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"                  
@@ -218,6 +230,7 @@
                 <TextBox
                     Grid.Row="3" 
                     Grid.Column="7"
+                    IsTabStop="False"
                     Height="27"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"                  
@@ -235,6 +248,7 @@
                 <TextBox
                     Grid.Row="3" 
                     Grid.Column="8"
+                    IsTabStop="False"
                     Height="27"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"                  
@@ -243,21 +257,24 @@
                     Text="{Binding LogEntry.Continent, Mode=TwoWay}"/>
                 <Button 
                     Grid.Row="1"
-                    Grid.Column="4"
-                    Grid.ColumnSpan="5"
+                    Grid.Column="5"
+                    Grid.ColumnSpan="3"
+                    TabIndex="3"
                     Content="Log It!"
                     Width="130"
                     FontSize="12"
                     Foreground="Navy"
                     FontFamily="Tahoma"
-                    HorizontalAlignment="Center"
+                    HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     IsDefault="True"
+                    Click="SetFocusOnClick"
                     Command="{Binding LogItCommand}"/>
                 <Button 
                     Grid.Row="2"
                     Grid.Column="0"
                     Grid.ColumnSpan="1"
+                    IsTabStop="False"
                     Content="Manual Time"
                     Width="130"
                     FontSize="12"
@@ -272,6 +289,7 @@
                     Grid.Row="2"
                     Grid.Column="0"
                     Grid.ColumnSpan="1"
+                    IsTabStop="False"
                     Content="Auto Time"
                     Width="130"
                     FontSize="12"

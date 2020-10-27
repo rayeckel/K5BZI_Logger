@@ -24,6 +24,7 @@
                 Foreground="DarkGray"/>
             <dgControls:DataGrid 
                 Grid.Row="1"
+                IsTabStop="False"
                 x:Name="dataGrid1" 
                 Height="400"
                 Width="360"

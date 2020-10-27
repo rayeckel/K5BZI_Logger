@@ -32,6 +32,7 @@
                 <ColumnDefinition Width="150"/>
             </Grid.ColumnDefinitions>
             <dgControls:DataGrid 
+                    IsTabStop="False"
                     x:Name="dataGrid1" 
                     Height="360"
                     Width="850"
@@ -150,6 +151,7 @@
                     <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
                 <Button
+                    IsTabStop="False"
                     VerticalAlignment="Center"
                     Grid.Row="5"
                     Margin="10,0,0,0"

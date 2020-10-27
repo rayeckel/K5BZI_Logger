@@ -1,11 +1,9 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace K5BZI_Logger.Views
 {
-    /// <summary>
-    /// Interaction logic for MainInput.xaml
-    /// </summary>
     public partial class LogInput : UserControl
     {
         public LogInput()
@@ -13,6 +11,11 @@ namespace K5BZI_Logger.Views
             InitializeComponent();
 
             Keyboard.Focus(lblCall);
+        }
+
+        public void SetFocusOnClick(object sender, RoutedEventArgs e)
+        {
+            Keyboard.Focus(lblCall); // Or your own logic
         }
     }
 }

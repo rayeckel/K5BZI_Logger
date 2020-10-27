@@ -113,6 +113,26 @@ namespace K5BZI_Services
                     recordLine += line;
                 };
 
+                var signalReport = from p in entry.SignalReport.GetType().GetProperties()
+                                       let attr = p.GetCustomAttributes(typeof(AdifAttribute), true)
+                                       where attr.Length == 1
+                                       select new { Property = p, Attribute = attr.First() as AdifAttribute };
+
+                foreach (var signalRep in signalReport)
+                {
+                    var value = signalRep.Property.GetValue(entry.SignalReport)?.ToString();
+
+                    if (value == null)
+                    {
+                        continue;
+                    }
+
+                    var line = String.Format("<{0}:{1}>{2}", signalRep.Attribute.PropertyName, value.Length, value);
+
+                    recordLine += line;
+                };
+
+
                 adifData.AppendLine(String.Format("{0}{1}<EOR>", recordLine, Environment.NewLine));
             }
 

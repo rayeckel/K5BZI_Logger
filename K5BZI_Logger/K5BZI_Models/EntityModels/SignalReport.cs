@@ -1,4 +1,5 @@
-﻿using PropertyChanged;
+﻿using K5BZI_Models.Attributes;
+using PropertyChanged;
 
 namespace K5BZI_Models
 {
@@ -11,7 +12,10 @@ namespace K5BZI_Models
             Received = 599;
         }
 
+        [Adif("RST_SENT")]
         public int Sent { get; set; }
+
+        [Adif("RST_RCVD")]
         public int Received { get; set; }
     }
 }

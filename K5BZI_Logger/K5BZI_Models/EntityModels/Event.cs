@@ -60,7 +60,6 @@ namespace K5BZI_Models
 
         public DateTime CreatedDate { get; set; }
 
-        [Adif("DXCC")]
         public DXCC DXCC { get; set; }
 
         [Adif("CQZ")]
