@@ -39,7 +39,7 @@
                 BorderBrush="Navy"
                 AutoGenerateColumns="False"
                 ItemsSource="{Binding Operators}"
-                SelectedItem="{Binding SelectedOperator, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                SelectedItem="{Binding SelectedEventOperator, UpdateSourceTrigger=PropertyChanged}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="CellEditEnding">
                     <i:InvokeCommandAction Command="{Binding Path=EditOperatorCommand}"/>
@@ -54,7 +54,7 @@
                 <dgControls:DataGridTextColumn 
                             Header="Name" 
                             Width="175"
-                            Binding="{Binding FullName, UpdateSourceTrigger=PropertyChanged}" 
+                            Binding="{Binding FullName, Mode=OneWay}" 
                             FontSize="12" >
                     <dgControls:DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">

@@ -1,11 +1,11 @@
-﻿using K5BZI_Models;
+﻿using System;
+using System.Linq;
+using System.Windows.Forms;
+using K5BZI_Models;
 using K5BZI_Models.ViewModelModels;
 using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels.Interfaces;
 using Microsoft.Practices.ServiceLocation;
-using System;
-using System.Linq;
-using System.Windows.Forms;
 
 namespace K5BZI_ViewModels
 {
@@ -63,10 +63,10 @@ namespace K5BZI_ViewModels
         {
             Model = new OperatorModel
             {
-                EditOperatorAction = (_) => UpdateOperator(Model.SelectedOperator, false),
+                EditOperatorAction = (_) => UpdateOperator(Model.SelectedEventOperator, false),
                 EditEventOperatorAction = (_) => UpdateOperator(Model.SelectedEventOperator, true),
-                CurrentOperatorAction = (_) => SetCurrentOperator(Model.SelectedOperator),
-                DeleteOperatorAction = (_) => DeleteOperator(Model.SelectedOperator),
+                CurrentOperatorAction = (_) => SetCurrentOperator(Model.SelectedEventOperator),
+                DeleteOperatorAction = (_) => DeleteOperator(Model.SelectedEventOperator),
                 CurrentEventOperatorAction = (_) => SetCurrentOperator(Model.SelectedEventOperator),
                 DeleteEventOperatorAction = (_) => DeleteOperator(Model.SelectedEventOperator),
                 AddOperatorToEventAction = (_) => AddOperatorToEvent(),
@@ -95,7 +95,7 @@ namespace K5BZI_ViewModels
 
         private void SetCurrentOperator(Operator operatorObj)
         {
-            if (operatorObj.IsClub)
+            if (operatorObj != null && operatorObj.IsClub)
             {
                 MessageBox.Show("Only individuals can be set as active operator", "You can't do that", MessageBoxButtons.OK);
 

@@ -22,8 +22,6 @@ namespace K5BZI_Models.ViewModelModels
 
         #region Properties
 
-        public Operator SelectedOperator { get; set; }
-
         public Operator SelectedEventOperator { get; set; }
 
         public Operator CurrentOperator { get; set; }
