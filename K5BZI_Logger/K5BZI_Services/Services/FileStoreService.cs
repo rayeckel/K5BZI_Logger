@@ -28,8 +28,12 @@ namespace K5BZI_Services
 
         public void OpenLogDirectory()
         {
-            Process.Start(
-                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), _loggerDirectoryName));
+            var directoryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), _loggerDirectoryName);
+
+            if (!Directory.Exists(directoryPath))
+                Directory.CreateDirectory(directoryPath);
+
+            Process.Start(directoryPath);  
         }
 
         public IEnumerable<DataRow> ReadResourceFile(string resourceFileName, bool usesHeaderRow = true)

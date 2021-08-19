@@ -8,13 +8,15 @@
         xmlns:local="clr-namespace:K5BZI_Logger.Views"
         mc:Ignorable="d"
         Title="K5BZI Logger"
-        Height="740" 
-        Width="1024"
+        Height="600" 
+        Width="800"
+        MinWidth="920"
         BorderThickness="1"
         GlowBrush="{DynamicResource AccentColorBrush}"
         ResizeMode="CanResizeWithGrip"
         WindowTransitionsEnabled="False"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Background="AliceBlue">
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
             <Button x:Name ="DefaultsButton" Command="{Binding EditDefaultsCommand}" Content="Defaults" />
@@ -24,21 +26,20 @@
             <Button x:Name ="ViewFileStoreButton" Command="{Binding ViewFileStoreCommand}" Content="Open Log Directory" />
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
-    <Grid 
-        HorizontalAlignment="Center"
-        Background="AliceBlue">
+    <ScrollViewer>
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="110" />
-            <RowDefinition Height="165" />
+            <RowDefinition Height="200" />
             <RowDefinition Height="250*" />
             <RowDefinition Height="20" />
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="260" />
-            <ColumnDefinition Width="200" />
-            <ColumnDefinition Width="200" />
-            <ColumnDefinition Width="364" />
-        </Grid.ColumnDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
         <local:Defaults 
             Grid.Row="0" 
             Grid.RowSpan="4"
@@ -76,25 +77,30 @@
             Grid.ColumnSpan="4"
             HorizontalAlignment="Center"/>
         <local:Header
-            Grid.Row="0" 
+            Grid.Row="0"
             Grid.Column="0"
             Grid.ColumnSpan="4"/>
-        <local:LogInput
+        <StackPanel 
             Grid.Row="1" 
             Grid.Column="0"
-            Grid.ColumnSpan="3"
-            Margin="8,0,0,0"
-            Padding="2"/>
-        <local:Duplicates
-            Grid.Row="1" 
-            Grid.Column="3"
-            Margin="0,0,8,0"
-            Padding="2"/>
+            Grid.ColumnSpan="4"
+            Orientation="Horizontal"
+            HorizontalAlignment="Center"
+            Margin="8,0,0,0">
+                <local:LogInput
+                    Grid.Column="0"
+                    HorizontalContentAlignment="Center"/>
+                <local:Duplicates
+                    Grid.Column="1"
+                    Margin="2,0,8,0"
+                    HorizontalContentAlignment="Center"/>
+            </StackPanel>
         <local:Tabs
             Grid.Row="2"
             Grid.Column="0" 
             Grid.ColumnSpan="4"
-            Margin="10,2,0,0"/>
-
-    </Grid>
+            Margin="10,2,0,0"
+            HorizontalContentAlignment="Center"/>
+        </Grid>
+    </ScrollViewer>
 </controls:MetroWindow>

@@ -47,7 +47,11 @@ namespace K5BZI_ViewModels
 
             if (logEntries.Any())
             {
-                logEntries.ForEach(_ => Model.LogEntries.Add(_));
+                logEntries.ForEach(_ =>
+                {
+                    Model.LogEntries.Add(_);
+                    Model.QSOCount++;
+                });
 
                 Model.LogEntry.Signal.Band = logEntries.Last().Signal.Band;
                 Model.LogEntry.Signal.Frequency = logEntries.Last().Signal.Frequency;
@@ -94,12 +98,22 @@ namespace K5BZI_ViewModels
                 ManualTimeAction = (_) => SetManualTime(),
                 AutoTimeAction = (_) => SetAutoTime(),
                 EditLogEntryAction = (_) => EditLogEntry(),
-                DeleteLogEntryAction = (_) => DeleteLogEntry()
+                DeleteLogEntryAction = (_) => DeleteLogEntry(),
+                LostFocusAction = (_) => ExecuteLostFocusCommand(_)
             };
 
             _defaultsService.SetDefaults(Model.LogEntry);
 
             Model.LogEntry.CheckDuplicateEntriesAction = () => CheckForDuplicates();
+        }
+
+        public void ExecuteLostFocusCommand(object argument)
+        {
+            //reset:
+            if (String.IsNullOrEmpty(Model.LogEntry.SignalReport.Sent))
+                Model.LogEntry.SignalReport.Sent = "599";
+            if (String.IsNullOrEmpty(Model.LogEntry.SignalReport.Received))
+                Model.LogEntry.SignalReport.Received = "599";
         }
 
         private void SaveLogEntry()
@@ -115,6 +129,7 @@ namespace K5BZI_ViewModels
             _logListingService.SaveLogEntry(Model.LogEntry, Model.Event);
 
             Model.LogEntries.Add(Model.LogEntry.Clone());
+            Model.QSOCount++;
             Model.LogEntry.ClearProperties(Model.ContactTimeEnabled);
         }
 
@@ -157,6 +172,8 @@ namespace K5BZI_ViewModels
                 _logListingService.DeleteLogEntry(Model.SelectedEntry, Model.Event);
 
                 Model.LogEntries.Remove(Model.SelectedEntry);
+
+                Model.QSOCount--;
             }
         }
 

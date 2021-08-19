@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:dgControls="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
     xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
@@ -12,6 +12,7 @@
     IsOpen="{Binding IsOpen}"
     ShowCloseButton="{Binding ShowCloseButton}"
     Title="All Operators">
+    <!--
     <simpleChildWindow:ChildWindow.OverlayBrush>
         <SolidColorBrush Opacity="0.8" Color="{StaticResource Gray2}" />
     </simpleChildWindow:ChildWindow.OverlayBrush>
@@ -23,6 +24,7 @@
                               Foreground="{DynamicResource IdealForegroundColorBrush}"
                               Kind="Cog" />
     </simpleChildWindow:ChildWindow.Icon>
+    -->
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="850"/>

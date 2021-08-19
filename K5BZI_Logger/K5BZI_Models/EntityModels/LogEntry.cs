@@ -3,12 +3,13 @@ using K5BZI_Models.Enums;
 using PropertyChanged;
 using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 
 namespace K5BZI_Models
 {
     [AddINotifyPropertyChangedInterface]
-    public class LogEntry : INotifyPropertyChanged
+    public class LogEntry
     {
         public LogEntry()
         {
@@ -35,7 +36,7 @@ namespace K5BZI_Models
             get
             {
                 return ContactTime != null ? 
-                    ((DateTime)ContactTime).ToUniversalTime().TimeOfDay.ToString() :
+                    ((DateTime)ContactTime).ToUniversalTime().ToString("t", CultureInfo.CreateSpecificCulture("de-DE")).Replace(@":", "") :
                     String.Empty;
             }
         }
@@ -46,11 +47,18 @@ namespace K5BZI_Models
         [Adif("PFX")]
         public string Prefix { get; set; }
 
-        [Adif("ONT")]
+        [Adif("CONT")]
         public string Continent { get; set; }
 
-        [Adif("COUNTRY")]
-        public string Country { get; set; }
+        [Adif("DXCC")]
+        public string Country
+        {
+            get
+            {
+                return "291";
+            }
+            set { }
+        }
 
         [Adif("QSL_SENT")]
         public string QslSent { get; set; }
@@ -58,10 +66,13 @@ namespace K5BZI_Models
         [Adif("QSL_RCVD")]
         public string QslReceived { get; set; }
 
+        [Adif("SIG_INFO")]
+        public string Notes { get; set; }
+
         [Cabrillo("CATEGORY-ASSISTED")]
         public Assisted Assisted { get; set; }
 
-        [Cabrillo("CATEGORY-POWER")]
+        [Cabrillo("TX_PWR")]
         public Power Power { get; set; }
 
         public Operator Operator { get; set; }
@@ -75,19 +86,5 @@ namespace K5BZI_Models
         public SignalReport SignalReport { get; set; }
 
         public Action CheckDuplicateEntriesAction { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
-        {
-            if (propertyName == "CallSign" && CheckDuplicateEntriesAction != null)
-            {
-                CheckDuplicateEntriesAction.Invoke();
-            }
-
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿<Controls:MetroTabItem  x:Class="K5BZI_Logger.Views.LogTab"
             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-            xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -17,7 +17,7 @@
                     Source="/Images/Quill.png"
                     Height="24"
                     Width="24"/>
-                <TextBlock 
+                <TextBlock
                     Text="Event Log" 
                     Foreground="DarkSlateBlue"
                     FontSize="18"
@@ -26,16 +26,16 @@
             </StackPanel>
         </Controls:MetroTabItem.Header>
         <Controls:MetroTabItem.Content>
-        <Grid>
+        <Grid
+            HorizontalAlignment="Stretch"
+            MinWidth="900">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="850"/>
-                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <dgControls:DataGrid 
                     IsTabStop="False"
                     x:Name="dataGrid1" 
                     Height="360"
-                    Width="850"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     BorderThickness=".5"
@@ -112,7 +112,7 @@
                             Binding="{Binding Power, UpdateSourceTrigger=PropertyChanged}"
                             FontSize="12" />
                     <dgControls:DataGridTextColumn
-                            Header="Assist"
+                            Header="Assisted"
                             Width="75"
                             Binding="{Binding Assisted, UpdateSourceTrigger=PropertyChanged}"
                             FontSize="12" />
@@ -122,8 +122,8 @@
                             Binding="{Binding QslSent, UpdateSourceTrigger=PropertyChanged}"
                             FontSize="12" />
                     <dgControls:DataGridTextColumn
-                            Header="QSL Received"
-                            Width="80"
+                            Header="QSL Recvd"
+                            Width="85"
                             Binding="{Binding QslReceived, UpdateSourceTrigger=PropertyChanged}"
                             FontSize="12" />
                     <dgControls:DataGridTextColumn
@@ -133,36 +133,11 @@
                             FontSize="12" />
                     <dgControls:DataGridTextColumn
                             Header="Continent"
-                            Width="80"
+                            Width="90"
                             Binding="{Binding Continent, UpdateSourceTrigger=PropertyChanged}"
                             FontSize="12" />
                 </dgControls:DataGrid.Columns>
             </dgControls:DataGrid>
-            <Grid 
-                Grid.Column="1"
-                VerticalAlignment="Top">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                </Grid.RowDefinitions>
-                <Button
-                    IsTabStop="False"
-                    VerticalAlignment="Center"
-                    Grid.Row="5"
-                    Margin="10,0,0,0"
-                    Content="Delete Log Entry"
-                    Width="120"
-                    Height="30"
-                    Foreground="Navy"
-                    FontSize="12"
-                    FontFamily="Tahoma"
-                    Command="{Binding DeleteLogEntryCommand}"/>
-            </Grid>
         </Grid>
     </Controls:MetroTabItem.Content>
     </Controls:MetroTabItem>

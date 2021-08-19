@@ -11,7 +11,7 @@
     xmlns:Enums="clr-namespace:K5BZI_Models.Enums;assembly=K5BZI_Models"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:dgControls="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
-    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     Height="750" Width="1024"
     mc:Ignorable="d"
     IsOpen="{Binding IsOpen}"
@@ -31,6 +31,7 @@
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
     </simpleChildWindow:ChildWindow.Resources>
+    <!--
     <simpleChildWindow:ChildWindow.OverlayBrush>
         <SolidColorBrush Opacity="0.8" Color="{StaticResource Gray2}" />
     </simpleChildWindow:ChildWindow.OverlayBrush>
@@ -42,6 +43,7 @@
             Foreground="{DynamicResource IdealForegroundColorBrush}"
             Kind="Cog" />
     </simpleChildWindow:ChildWindow.Icon>
+    -->
     <Grid>
         <Grid
             Visibility="{Binding EditAllEventsVisibility}"

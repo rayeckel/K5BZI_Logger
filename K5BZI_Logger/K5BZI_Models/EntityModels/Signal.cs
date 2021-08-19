@@ -7,10 +7,6 @@ namespace K5BZI_Models
     [AddINotifyPropertyChangedInterface]
     public class Signal
     {
-        public Signal()
-        {
-        }
-
         [Adif("BAND")]
         [Cabrillo("CATEGORY-BAND")]
         public string Band { get; set; }

@@ -27,7 +27,7 @@
                 IsTabStop="False"
                 x:Name="dataGrid1" 
                 Height="400"
-                Width="360"
+                Width="249"
                 AutoGenerateColumns="False"
                 ItemsSource="{Binding DuplicateEntries}">
                 <dgControls:DataGrid.Columns>
@@ -51,11 +51,6 @@
                                 Header="Band"
                                 Width="100"
                                 Binding="{Binding Signal.Band}" 
-                                FontSize="12" />
-                    <dgControls:DataGridTextColumn
-                                Header="Frequency" 
-                                Width="100"
-                                Binding="{Binding Signal.Frequency}"
                                 FontSize="12" />
                 </dgControls:DataGrid.Columns>
             </dgControls:DataGrid>

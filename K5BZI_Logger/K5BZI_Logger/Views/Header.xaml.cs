@@ -1,5 +1,5 @@
 ﻿using K5BZI_ViewModels.Interfaces;
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 using System.Windows.Controls;
 
 namespace K5BZI_Logger.Views

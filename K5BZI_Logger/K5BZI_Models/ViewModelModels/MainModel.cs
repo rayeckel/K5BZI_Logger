@@ -1,4 +1,5 @@
 ﻿using K5BZI_Models.Base;
+using K5BZI_Models.Enums;
 using Microsoft.VisualStudio.PlatformUI;
 using PropertyChanged;
 using System;
@@ -17,6 +18,7 @@ namespace K5BZI_Models.Main
         public MainModel()
         {
             LogEntry = new LogEntry();
+            LogEntry.Assisted = Assisted.NONAssisted;
             LogEntries = new ObservableCollection<LogEntry>();
             DuplicateEntries = new ObservableCollection<LogEntry>();
 
@@ -36,10 +38,23 @@ namespace K5BZI_Models.Main
         public Visibility ManualTimeButtonVisibility { get; set; }
         public Visibility AutoTimeButtonVisibility { get; set; }
         public bool ContactTimeEnabled { get; set; }
-
+        public int QSOCount { get; set; }
         #endregion
 
         #region Commands
+
+        private ICommand _lostFocusCommand;
+        public ICommand LostFocusCommand
+        {
+
+            get
+            {
+                return _lostFocusCommand ?? (_lostFocusCommand =
+                    new DelegateCommand(LostFocusAction, _ => { return true; }));
+            }
+        }
+
+        public Action<object> LostFocusAction { get; set; }
 
         private ICommand _logItCommand;
         public ICommand LogItCommand

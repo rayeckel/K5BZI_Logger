@@ -7,7 +7,7 @@ namespace K5BZI_Models.Enums
         [Description("Assisted")]
         Assisted,
 
-        [Description("Non-Assisted")]
+        [Description("NonAssisted")]
         NONAssisted
     }
 }

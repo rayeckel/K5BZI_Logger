@@ -4,16 +4,21 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:local="clr-namespace:K5BZI_Models.Extensions;assembly=K5BZI_Models"
+    xmlns:enums="clr-namespace:K5BZI_Models.Enums;assembly=K5BZI_Models"
+    xmlns:behaviors="clr-namespace:K5BZI_Services.Utilities;assembly=K5BZI_Services"
+    xmlns:controls="clr-namespace:K5BZI_Logger.Controls"
     mc:Ignorable="d" 
-    FocusManager.FocusedElement="{x:Reference lblCall}"
-    xmlns:behaviors="clr-namespace:K5BZI_Services.Utilities;assembly=K5BZI_Services">
+    FocusManager.FocusedElement="{x:Reference lblCall}">
     <Border
         BorderThickness="1"
-        BorderBrush="Navy">
+        BorderBrush="Navy"
+        MinWidth="600">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30" />
-                <RowDefinition Height="135" />
+                <RowDefinition Height="260" />
             </Grid.RowDefinitions>
             <TextBlock 
                 Grid.Row="0"
@@ -27,264 +32,317 @@
                 Grid.Row="1"
                 Margin="10,0,0,0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="25" />
-                    <RowDefinition Height="30" />
-                    <RowDefinition Height="25" />
-                    <RowDefinition Height="30" />
+                    <RowDefinition Height="51" />
+                    <RowDefinition Height="51" />
+                    <RowDefinition Height="51" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150" />
-                    <ColumnDefinition Width="20" />
-                    <ColumnDefinition Width="60" />
-                    <ColumnDefinition Width="75" />
-                    <ColumnDefinition Width="80" />
-                    <ColumnDefinition Width="60" />
-                    <ColumnDefinition Width="60" />
-                    <ColumnDefinition Width="60" />
-                    <ColumnDefinition Width="60" />
-                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
-                <Label 
+                <StackPanel
                     Grid.Row="0"
-                    Grid.Column="0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    FontFamily="Tahoma"
-                    Foreground="DarkSlateBlue"
-                    Content="Time"/>
-                <TextBox
-                    Grid.Row="1" 
-                    Grid.Column="0"
-                    IsTabStop="False"
-                    Height="27"
-                    x:Name="lblTime"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    FontFamily="Tahoma"
-                    Width="140"
-                    IsEnabled="{Binding ContactTimeEnabled}"
-                    Text="{Binding LogEntry.ContactTime, Mode=TwoWay}"/>
-                <Label 
+                    Grid.RowSpan="3"
+                    Grid.Column="0">
+                    <Label
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontFamily="Tahoma"
+                        Foreground="DarkSlateBlue"
+                        Content="Time"/>
+                    <TextBox
+                        Width="140"
+                        IsTabStop="False"
+                        Height="27"
+                        x:Name="lblTime"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontFamily="Tahoma"
+                        IsEnabled="{Binding ContactTimeEnabled}"
+                        Text="{Binding LogEntry.ContactTime, Mode=TwoWay}"/>
+                    <Button 
+                        IsTabStop="False"
+                        Content="Manual Time"
+                        Width="130"
+                        FontSize="12"
+                        Foreground="Navy"
+                        FontFamily="Tahoma"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        IsDefault="True"
+                        Visibility="{Binding ManualTimeButtonVisibility}"
+                        Command="{Binding ManualTimeCommand}"/>
+                </StackPanel>
+                <StackPanel
                     Grid.Row="0"
                     Grid.Column="1"
                     Grid.ColumnSpan="2"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    FontFamily="Tahoma"
-                    Foreground="DarkSlateBlue"
-                    Content="Call"/>
-                <TextBox
-                    Grid.Row="1" 
+                    Orientation="Horizontal">
+                    <StackPanel>
+                        <Label
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            FontFamily="Tahoma"
+                            Foreground="DarkSlateBlue"
+                            Content="Call"/>
+                        <TextBox
+                            TabIndex="0"
+                            Height="27"
+                            x:Name="lblCall"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Width="70"
+                            BorderThickness="1"
+                            CharacterCasing="Upper" 
+                            FocusManager.FocusedElement="{Binding RelativeSource={RelativeSource Self}}"
+                            Text="{Binding LogEntry.CallSign, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+                    <StackPanel
+                        Margin="5,0,0,0">
+                        <Label 
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            FontFamily="Tahoma"
+                            Foreground="DarkSlateBlue"
+                            Content="Sent"/>
+                        <TextBox
+                            TabIndex="1"
+                            behaviors:TextboxBehavior.ClearOnFocused="True"
+                            Height="27"
+                            x:Name="lblSent"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"         
+                            Width="35"
+                            BorderThickness="1"
+                            Text="{Binding LogEntry.SignalReport.Sent, Mode=TwoWay}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="LostFocus" >
+                                        <i:InvokeCommandAction Command="{Binding LostFocusCommand}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                        </TextBox>
+                    </StackPanel>
+                    <StackPanel
+                        Margin="5,0,0,0">
+                        <Label
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            FontFamily="Tahoma"
+                            Foreground="DarkSlateBlue"
+                            Content="Recvd"/>
+                        <TextBox
+                            TabIndex="2"
+                            behaviors:TextboxBehavior.ClearOnFocused="True"
+                            Height="27"
+                            x:Name="lblRecvd"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"                  
+                            Width="35"
+                            BorderThickness="1"
+                            Text="{Binding LogEntry.SignalReport.Received, Mode=TwoWay}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus" >
+                                    <i:InvokeCommandAction Command="{Binding LostFocusCommand}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
+                    </StackPanel>
+                    <Button 
+                        TabIndex="3"
+                        Margin="152,0,0,0"
+                        Content="Log It!"
+                        Width="100"
+                        Height="25"
+                        FontSize="12"
+                        Foreground="Navy"
+                        FontFamily="Tahoma"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        IsDefault="True"
+                        Click="SetFocusOnClick"
+                        Command="{Binding LogItCommand}"/>
+                </StackPanel>
+                <StackPanel
+                    Grid.Row="1"
                     Grid.Column="1"
                     Grid.ColumnSpan="2"
-                    TabIndex="0"
-                    Height="27"
-                    x:Name="lblCall"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Width="70"
-                    BorderThickness="1"
-                    CharacterCasing="Upper" 
-                    FocusManager.FocusedElement="{Binding RelativeSource={RelativeSource Self}}"
-                    Text="{Binding LogEntry.CallSign, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <Label 
+                    Orientation="Horizontal">
+                    <StackPanel>
+                        <Label 
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            FontFamily="Tahoma"
+                            Foreground="DarkSlateBlue"
+                            Content="Freq"/>
+                        <TextBox
+                            IsTabStop="False"
+                            Height="27"
+                            x:Name="lblFreq"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Width="70"
+                            BorderThickness="1"
+                            Text="{Binding LogEntry.Signal.Frequency, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+                    <StackPanel
+                        Margin="5,0,0,0">
+                        <Label 
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            FontFamily="Tahoma"
+                            Foreground="DarkSlateBlue"
+                            Content="Band"/>
+                        <ComboBox 
+                            x:Name="BandSelector"
+                            Width="80"
+                            IsTabStop="False"
+                            Height="27"
+                            FontSize="12" 
+                            Background="White"
+                            HorizontalAlignment="Left"
+                            HorizontalContentAlignment="Left"
+                            BorderThickness="1"
+                            ItemsSource= "{local:EnumBindingSourceExtension EnumType={x:Type enums:Band}}"
+                            SelectedItem="{Binding LogEntry.Signal.Band}">
+                            <i:Interaction.Behaviors>
+                                <controls:WatermarkBehavior Text="Select" />
+                            </i:Interaction.Behaviors>
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel
+                        Margin="5,0,0,0">
+                        <Label 
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            FontFamily="Tahoma"
+                            Foreground="DarkSlateBlue"
+                            Content="Mode"/>
+                        <ComboBox 
+                            x:Name="ModeSelector"
+                            Width="65"
+                            FontSize="12" 
+                            Background="White"
+                            HorizontalAlignment="Left"
+                            HorizontalContentAlignment="Left"
+                            Margin="0,0,5,0"
+                            ItemsSource= "{local:EnumBindingSourceExtension EnumType={x:Type enums:Mode}}"
+                            SelectedItem="{Binding LogEntry.Signal.Mode}">
+                            <i:Interaction.Behaviors>
+                                <controls:WatermarkBehavior Text="Select" />
+                            </i:Interaction.Behaviors>
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel
+                        Margin="5,0,0,0">
+                        <Label 
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            FontFamily="Tahoma"
+                            Foreground="DarkSlateBlue"
+                            Content="Notes"/>
+                            <TextBox
+                            TabIndex="4"
+                            Height="27"
+                            x:Name="notes"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"                  
+                            Width="175"
+                            BorderThickness="1"
+                            Text="{Binding LogEntry.Notes, Mode=TwoWay}"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel
                     Grid.Row="2"
-                    Grid.Column="2"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    FontFamily="Tahoma"
-                    Foreground="DarkSlateBlue"
-                    Content="Band"/>
-                <TextBox
-                    Grid.Row="3" 
-                    Grid.Column="2"
-                    IsTabStop="False"
-                    Height="27"
-                    x:Name="lblBand"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Width="50"
-                    BorderThickness="1"
-                    Text="{Binding LogEntry.Signal.Band}"/>
-                <Label 
-                    Grid.Row="2"
-                    Grid.Column="3"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    FontFamily="Tahoma"
-                    Foreground="DarkSlateBlue"
-                    Content="Freq"/>
-                <TextBox
-                    Grid.Row="3" 
-                    Grid.Column="3"
-                    IsTabStop="False"
-                    Height="27"
-                    x:Name="lblFreq"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Width="70"
-                    BorderThickness="1"
-                    Text="{Binding LogEntry.Signal.Frequency, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <Label 
-                    Grid.Row="0"
-                    Grid.Column="3"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    FontFamily="Tahoma"
-                    Foreground="DarkSlateBlue"
-                    Content="Sent"/>
-                <TextBox
-                    Grid.Row="1"
-                    Grid.Column="3"
-                    TabIndex="1"
-                    behaviors:TextboxBehavior.ClearOnFocused="True"
-                    Height="27"
-                    x:Name="lblSent"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"         
-                    Width="50"
-                    BorderThickness="1"
-                    Text="{Binding LogEntry.SignalReport.Sent}"/>
-                <Label 
-                    Grid.Row="0"
-                    Grid.Column="4"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    FontFamily="Tahoma"
-                    Foreground="DarkSlateBlue"
-                    Content="Recvd"/>
-                <TextBox
-                    Grid.Row="1" 
-                    Grid.Column="4"
-                    TabIndex="2"
-                    behaviors:TextboxBehavior.ClearOnFocused="True"
-                    Height="27"
-                    x:Name="lblRecvd"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"                  
-                    Width="50"
-                    BorderThickness="1"
-                    Text="{Binding LogEntry.SignalReport.Received}"/>
-                <Label 
-                    Grid.Row="2"
-                    Grid.Column="4"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    FontFamily="Tahoma"
-                    Foreground="DarkSlateBlue"
-                    Content="Mode"/>
-                <TextBox
-                    Grid.Row="3" 
-                    Grid.Column="4"
-                    IsTabStop="False"
-                    Height="27"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"                  
-                    Width="70"
-                    BorderThickness="1"
-                    Text="{Binding LogEntry.Signal.Mode, Mode=TwoWay}"/>
-                <Label 
-                    Grid.Row="2"
-                    Grid.Column="5"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    FontFamily="Tahoma"
-                    Foreground="DarkSlateBlue"
-                    Content="Power"/>
-                <TextBox
-                    Grid.Row="3" 
-                    Grid.Column="5"
-                    IsTabStop="False"
-                    Height="27"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"                  
-                    Width="50"
-                    BorderThickness="1"
-                    Text="{Binding LogEntry.Power, Mode=TwoWay}"/>
-                <Label 
-                    Grid.Row="2"
-                    Grid.Column="6"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    FontFamily="Tahoma"
-                    Foreground="DarkSlateBlue"
-                    Content="Assist"/>
-                <TextBox
-                    Grid.Row="3" 
-                    Grid.Column="6"
-                    IsTabStop="False"
-                    Height="27"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"                  
-                    Width="50"
-                    BorderThickness="1"
-                    Text="{Binding LogEntry.Assisted, Mode=TwoWay}"/>
-                <Label 
-                    Grid.Row="2"
-                    Grid.Column="7"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    FontFamily="Tahoma"
-                    Foreground="DarkSlateBlue"
-                    Content="Country"/>
-                <TextBox
-                    Grid.Row="3" 
-                    Grid.Column="7"
-                    IsTabStop="False"
-                    Height="27"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"                  
-                    Width="50"
-                    BorderThickness="1"
-                    Text="{Binding LogEntry.Country, Mode=TwoWay}"/>
-                <Label 
-                    Grid.Row="2"
-                    Grid.Column="8"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    FontFamily="Tahoma"
-                    Foreground="DarkSlateBlue"
-                    Content="Continent"/>
-                <TextBox
-                    Grid.Row="3" 
-                    Grid.Column="8"
-                    IsTabStop="False"
-                    Height="27"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"                  
-                    Width="50"
-                    BorderThickness="1"
-                    Text="{Binding LogEntry.Continent, Mode=TwoWay}"/>
-                <Button 
-                    Grid.Row="1"
-                    Grid.Column="5"
-                    Grid.ColumnSpan="3"
-                    TabIndex="3"
-                    Content="Log It!"
-                    Width="130"
-                    FontSize="12"
-                    Foreground="Navy"
-                    FontFamily="Tahoma"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    IsDefault="True"
-                    Click="SetFocusOnClick"
-                    Command="{Binding LogItCommand}"/>
-                <Button 
-                    Grid.Row="2"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="1"
-                    IsTabStop="False"
-                    Content="Manual Time"
-                    Width="130"
-                    FontSize="12"
-                    Foreground="Navy"
-                    FontFamily="Tahoma"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    IsDefault="True"
-                    Visibility="{Binding ManualTimeButtonVisibility}"
-                    Command="{Binding ManualTimeCommand}"/>
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Orientation="Horizontal">
+                    <StackPanel>
+                        <Label 
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            FontFamily="Tahoma"
+                            Foreground="DarkSlateBlue"
+                            Content="Power"/>
+                        <TextBox
+                            IsTabStop="False"
+                            Height="27"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"                  
+                            Width="50"
+                            BorderThickness="1"
+                            Text="{Binding LogEntry.Power, Mode=TwoWay}"/>
+                    </StackPanel>
+                    <StackPanel
+                        Margin="5,0,0,0">
+                        <Label 
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            FontFamily="Tahoma"
+                            Foreground="DarkSlateBlue"
+                            Content="Assist"/>
+                        <ComboBox 
+                            x:Name="AssistSelector"
+                            Width="90"
+                            Height="27"
+                            FontSize="12" 
+                            Background="White"
+                            IsTabStop="False"
+                            HorizontalAlignment="Left"
+                            HorizontalContentAlignment="Left"
+                            Margin="0,0,5,0"
+                            ItemsSource= "{local:EnumBindingSourceExtension EnumType={x:Type enums:Assisted}}"
+                            SelectedItem="{Binding LogEntry.Assisted, Mode=TwoWay}">
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel
+                        Margin="5,0,0,0">
+                        <Label 
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            FontFamily="Tahoma"
+                            Foreground="DarkSlateBlue"
+                            Content="Country"/>
+                        <TextBox
+                            IsTabStop="False"
+                            Height="27"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"                  
+                            Width="50"
+                            BorderThickness="1"
+                            Text="{Binding LogEntry.Country, Mode=TwoWay}"/>
+                    </StackPanel>
+                    <StackPanel
+                        Margin="5,0,0,0">
+                        <Label 
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            FontFamily="Tahoma"
+                            Foreground="DarkSlateBlue"
+                            Content="Continent"/>
+                        <TextBox
+                            IsTabStop="False"
+                            Height="27"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"                  
+                            Width="50"
+                            BorderThickness="1"
+                            Text="{Binding LogEntry.Continent, Mode=TwoWay}"/>
+                    </StackPanel>
+                    <StackPanel 
+                        Margin="50,0,0,0"
+                        VerticalAlignment="Bottom"
+                        Orientation="Horizontal">
+                        <Label 
+                        FontFamily="Tahoma"
+                        Foreground="DarkSlateBlue"
+                        Content="QSO Count:"/>
+                        <Label 
+                        FontFamily="Tahoma"
+                        Foreground="DarkSlateBlue"
+                        Content="{Binding QSOCount}"/>
+                    </StackPanel>
+                </StackPanel>
                 <Button 
                     Grid.Row="2"
                     Grid.Column="0"
@@ -298,6 +356,7 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     IsDefault="True"
+                    Margin="5,0,0,0"
                     Visibility="{Binding AutoTimeButtonVisibility}"
                     Command="{Binding AutoTimeCommand}"/>
             </Grid>

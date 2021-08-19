@@ -1,6 +1,6 @@
 ﻿using K5BZI_ViewModels.Interfaces;
 using MahApps.Metro.SimpleChildWindow;
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 
 namespace K5BZI_Logger.Views
 {

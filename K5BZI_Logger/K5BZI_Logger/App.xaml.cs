@@ -1,9 +1,11 @@
-﻿using CommonServiceLocator.NinjectAdapter.Unofficial;
+﻿using CommonServiceLocator;
+using CommonServiceLocator.NinjectAdapter.Unofficial;
+using Microsoft.Practices.ServiceLocation;
 using K5BZI_Logger.Views;
 using K5BZI_Services;
 using K5BZI_ViewModels;
-using Microsoft.Practices.ServiceLocation;
 using Ninject;
+using System;
 using System.Windows;
 
 namespace K5BZI_Logger
@@ -21,7 +23,7 @@ namespace K5BZI_Logger
 
             Kernel = new StandardKernel();
 
-            ServiceLocator.SetLocatorProvider(() => new NinjectServiceLocator(Kernel));
+            Microsoft.Practices.ServiceLocation.ServiceLocator.SetLocatorProvider(() => new NinjectServiceLocator(Kernel));
 
             Kernel.Load(new K5BZIServiceModelBindings(), new K5BZIViewModelBindings());
 

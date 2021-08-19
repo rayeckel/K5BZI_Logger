@@ -10,8 +10,8 @@ namespace K5BZI_Models.Extensions
 
             logEntry.Id = entryId + 1;
             logEntry.CallSign = string.Empty;
-            logEntry.SignalReport.Sent = 599;
-            logEntry.SignalReport.Received = 599;
+            logEntry.SignalReport.Sent = "599";
+            logEntry.SignalReport.Received = "599";
 
             if(!contactTimeEnabled)
                 logEntry.ContactTime = DateTime.Now;

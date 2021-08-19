@@ -12,6 +12,7 @@
     IsOpen="{Binding IsOpen}"
     ShowCloseButton="{Binding ShowCloseButton}"
     Title="{Binding Model.EditOperatorTitle}">
+    <!--
     <simpleChildWindow:ChildWindow.OverlayBrush>
         <SolidColorBrush Opacity="0.8" Color="{StaticResource Gray2}" />
     </simpleChildWindow:ChildWindow.OverlayBrush>
@@ -23,6 +24,7 @@
                               Foreground="{DynamicResource IdealForegroundColorBrush}"
                               Kind="Cog" />
     </simpleChildWindow:ChildWindow.Icon>
+    -->
     <Grid 
         HorizontalAlignment="Center" 
         VerticalAlignment="Center" 

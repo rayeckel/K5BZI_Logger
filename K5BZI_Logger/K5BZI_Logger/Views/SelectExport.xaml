@@ -14,6 +14,7 @@
     IsOpen="{Binding IsOpen}"
     ShowCloseButton="{Binding ShowCloseButton}"
     Title="Select Log">
+    <!--
     <simpleChildWindow:ChildWindow.OverlayBrush>
         <SolidColorBrush Opacity="0.8" Color="{StaticResource Gray2}" />
     </simpleChildWindow:ChildWindow.OverlayBrush>
@@ -25,6 +26,7 @@
                               Foreground="{DynamicResource IdealForegroundColorBrush}"
                               Kind="Cog" />
     </simpleChildWindow:ChildWindow.Icon>
+    -->
     <simpleChildWindow:ChildWindow.Resources>
         <Converters:EnumUtility x:Key="EnumDescriptionConverter" />
         <ObjectDataProvider MethodName="GetValues" ObjectType="{x:Type sys:Enum}" x:Key="LogTypeEnumValues">

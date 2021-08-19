@@ -4,15 +4,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d">
-    <Grid>
+    <Grid
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch"
+        Background="AliceBlue"
+        MaxWidth="1000">
         <Grid.RowDefinitions>
             <RowDefinition Height="100" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300" />
-            <ColumnDefinition Width="200" />
-            <ColumnDefinition Width="300" />
-            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
         <!--
                     <controls1:DateRangePicker
@@ -25,7 +28,7 @@
                         DateTo="{Binding MaxDateTime, Mode=TwoWay}"/>
                     -->
         <Grid x:Name="EventGrid"
-                Grid.Row="0"
+                  Grid.Row="0"
                 Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="70" />
@@ -81,7 +84,10 @@
         <Grid
             x:Name="OperatorGrid"
             Grid.Row="0"
-            Grid.Column="2">
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Center"
+            Margin="100,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30" />
                 <RowDefinition Height="30" />
@@ -90,11 +96,10 @@
             <Label
                 Grid.Row="1"
                 x:Name="lblOperatorName"
-                Margin="0,0,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 Height="30"
-                Width="300"
+                Width="230"
                 FontSize="15"
                 FontFamily="Tahoma"
                 BorderThickness="0"
@@ -103,11 +108,10 @@
             <Label
                 Grid.Row="2"
                 x:Name="lblOperatorCall"
-                Margin="0,0,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 Height="70"
-                Width="300"
+                Width="200"
                 FontSize="25"
                 FontFamily="Tahoma"
                 BorderThickness="0"
@@ -117,7 +121,7 @@
         <Canvas
             Grid.Column="3"
             Height="100px"
-            Width="120px"
+            Width="120"
             HorizontalAlignment="Right"
             Margin="0,0,0,0">
             <Canvas.Background>
