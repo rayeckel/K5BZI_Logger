@@ -7,7 +7,7 @@
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" 
         xmlns:local="clr-namespace:K5BZI_Logger.Views"
         mc:Ignorable="d"
-        Title="K5BZI Logger"
+        Title="{Binding AppTitle}"
         Height="600" 
         Width="800"
         MinWidth="920"

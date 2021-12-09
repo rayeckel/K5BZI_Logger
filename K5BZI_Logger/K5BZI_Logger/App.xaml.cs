@@ -1,35 +1,50 @@
-﻿using CommonServiceLocator;
-using CommonServiceLocator.NinjectAdapter.Unofficial;
-using Microsoft.Practices.ServiceLocation;
-using K5BZI_Logger.Views;
+﻿using K5BZI_Logger.Views;
 using K5BZI_Services;
+using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels;
-using Ninject;
+using K5BZI_ViewModels.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Windows;
 
 namespace K5BZI_Logger
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
-        public static StandardKernel Kernel { get; private set; }
+        public static IServiceProvider ServiceProvider { get; internal set; }
 
-        protected override void OnStartup(StartupEventArgs e)
+        private void Application_Startup(object sender, StartupEventArgs e)
         {
-            base.OnStartup(e);
+            ServiceProvider = ConfigureServices()
+                .BuildServiceProvider();
 
-            Kernel = new StandardKernel();
+            ServiceProvider.GetService<Main>()
+                .Show();
+        }
 
-            Microsoft.Practices.ServiceLocation.ServiceLocator.SetLocatorProvider(() => new NinjectServiceLocator(Kernel));
+        private IServiceCollection ConfigureServices()
+        {
+            var services = new ServiceCollection();
 
-            Kernel.Load(new K5BZIServiceModelBindings(), new K5BZIViewModelBindings());
+            services
+                .AddSingleton<IMainViewModel, MainViewModel>()
+                .AddSingleton<IEventViewModel, EventViewModel>()
+                .AddSingleton<IOperatorsViewModel, OperatorsViewModel>()
+                .AddSingleton<IDefaultsViewModel, DefaultsViewModel>()
+                .AddSingleton<IExportViewModel, ExportViewModel>();
 
-            Current.MainWindow = Kernel.Get<Main>();
+            services
+                .AddSingleton<IEventService, EventService>()
+                .AddSingleton<IFileStoreService, FileStoreService>()
+                .AddSingleton<ILogListingService, LogListingService>()
+                .AddSingleton<IOperatorService, OperatorService>()
+                .AddSingleton<IExportService, ExportService>()
+                .AddSingleton<IDefaultsService, DefaultsService>()
+                .AddSingleton<IExcelFileService, ExcelFileService>();
 
-            Current.MainWindow.Show();
+            services.AddSingleton<Main>();
+
+            return services;
         }
     }
 }

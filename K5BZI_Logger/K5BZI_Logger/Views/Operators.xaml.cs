@@ -1,6 +1,5 @@
 ﻿using K5BZI_ViewModels.Interfaces;
 using MahApps.Metro.SimpleChildWindow;
-using CommonServiceLocator;
 
 namespace K5BZI_Logger.Views
 {
@@ -10,8 +9,8 @@ namespace K5BZI_Logger.Views
         {
             InitializeComponent();
 
-            DataContext = ServiceLocator.Current
-                .GetInstance<IOperatorsViewModel>()
+            DataContext = ((IOperatorsViewModel)App.ServiceProvider
+                .GetService(typeof(IOperatorsViewModel)))
                 .Model;
         }
     }

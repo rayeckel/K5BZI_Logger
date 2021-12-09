@@ -1,0 +1,13 @@
+E:\Work\K5BZI_Logger\K5BZI_Services\bin\Release\netcoreapp3.1\K5BZI_Services.dll.config
+E:\Work\K5BZI_Logger\K5BZI_Services\bin\Release\netcoreapp3.1\K5BZI_Services.deps.json
+E:\Work\K5BZI_Logger\K5BZI_Services\bin\Release\netcoreapp3.1\K5BZI_Services.dll
+E:\Work\K5BZI_Logger\K5BZI_Services\bin\Release\netcoreapp3.1\K5BZI_Services.pdb
+E:\Work\K5BZI_Logger\K5BZI_Services\bin\Release\netcoreapp3.1\K5BZI_Models.dll
+E:\Work\K5BZI_Logger\K5BZI_Services\bin\Release\netcoreapp3.1\K5BZI_Models.pdb
+E:\Work\K5BZI_Logger\K5BZI_Services\bin\Release\netcoreapp3.1\K5BZI_Models.dll.config
+E:\Work\K5BZI_Logger\K5BZI_Services\obj\Release\netcoreapp3.1\K5BZI_Services.csproj.AssemblyReference.cache
+E:\Work\K5BZI_Logger\K5BZI_Services\obj\Release\netcoreapp3.1\K5BZI_Services.GeneratedMSBuildEditorConfig.editorconfig
+E:\Work\K5BZI_Logger\K5BZI_Services\obj\Release\netcoreapp3.1\K5BZI_Services.csproj.CoreCompileInputs.cache
+E:\Work\K5BZI_Logger\K5BZI_Services\obj\Release\netcoreapp3.1\K5BZI_Services.dll
+E:\Work\K5BZI_Logger\K5BZI_Services\obj\Release\netcoreapp3.1\K5BZI_Services.pdb
+E:\Work\K5BZI_Logger\K5BZI_Services\obj\Release\netcoreapp3.1\K5BZI_Services.csproj.CopyComplete

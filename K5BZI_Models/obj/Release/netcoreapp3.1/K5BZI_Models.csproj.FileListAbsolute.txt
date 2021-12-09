@@ -1,0 +1,9 @@
+E:\Work\K5BZI_Logger\K5BZI_Models\bin\Release\netcoreapp3.1\K5BZI_Models.dll.config
+E:\Work\K5BZI_Logger\K5BZI_Models\bin\Release\netcoreapp3.1\K5BZI_Models.deps.json
+E:\Work\K5BZI_Logger\K5BZI_Models\bin\Release\netcoreapp3.1\K5BZI_Models.dll
+E:\Work\K5BZI_Logger\K5BZI_Models\bin\Release\netcoreapp3.1\K5BZI_Models.pdb
+E:\Work\K5BZI_Logger\K5BZI_Models\obj\Release\netcoreapp3.1\K5BZI_Models.GeneratedMSBuildEditorConfig.editorconfig
+E:\Work\K5BZI_Logger\K5BZI_Models\obj\Release\netcoreapp3.1\K5BZI_Models.csproj.CoreCompileInputs.cache
+E:\Work\K5BZI_Logger\K5BZI_Models\obj\Release\netcoreapp3.1\K5BZI_Models.csproj.Fody.CopyLocal.cache
+E:\Work\K5BZI_Logger\K5BZI_Models\obj\Release\netcoreapp3.1\K5BZI_Models.dll
+E:\Work\K5BZI_Logger\K5BZI_Models\obj\Release\netcoreapp3.1\K5BZI_Models.pdb
