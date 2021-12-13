@@ -33,7 +33,7 @@ namespace K5BZI_Services
 
         public LogListing CreateNewLogListing(FileInfo fileInfo)
         {
-            var fileName = System.IO.Path.ChangeExtension(fileInfo.Name, null);
+            var fileName = Path.ChangeExtension(fileInfo.Name, null);
 
             return new LogListing
             {

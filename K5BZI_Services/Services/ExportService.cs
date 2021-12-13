@@ -41,11 +41,11 @@ namespace K5BZI_Services
                 DateTime.UtcNow.ToString("g"),
                 Environment.NewLine,
                 Environment.NewLine,
-                "<ADIF_VER:5>2.2.1",
+                "<ADIF_VER:5>3.1.2",
                 Environment.NewLine,
                 "<PROGRAMID:6>K5BZI Logger",
                 Environment.NewLine,
-                "<PROGRAMVERSION:11>1.0",
+                $"<PROGRAMVERSION:11>{Globals.AppVersion}",
                 Environment.NewLine,
                 "<EOH>",
                 Environment.NewLine);
@@ -114,9 +114,9 @@ namespace K5BZI_Services
                 };
 
                 var signalReport = from p in entry.SignalReport.GetType().GetProperties()
-                                       let attr = p.GetCustomAttributes(typeof(AdifAttribute), true)
-                                       where attr.Length == 1
-                                       select new { Property = p, Attribute = attr.First() as AdifAttribute };
+                                   let attr = p.GetCustomAttributes(typeof(AdifAttribute), true)
+                                   where attr.Length == 1
+                                   select new { Property = p, Attribute = attr.First() as AdifAttribute };
 
                 foreach (var signalRep in signalReport)
                 {

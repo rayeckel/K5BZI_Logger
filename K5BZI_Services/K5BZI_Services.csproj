@@ -7,12 +7,38 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\DXCC.xlsx" />
+  </ItemGroup>
+
+  <ItemGroup>
 	<PackageReference Include="ExcelDataReader" Version="3.6.0" />
 	<PackageReference Include="ExcelDataReader.DataSet" Version="3.6.0" />
+	<PackageReference Include="System.Text.Encoding.CodePages" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
 	<ProjectReference Include="..\K5BZI_Models\K5BZI_Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\DXCC.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

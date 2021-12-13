@@ -1,11 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Windows.Forms;
-using CommonServiceLocator;
+﻿using CommonServiceLocator;
 using K5BZI_Models;
 using K5BZI_Models.ViewModelModels;
 using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels.Interfaces;
+using System;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace K5BZI_ViewModels
 {
@@ -159,7 +159,7 @@ namespace K5BZI_ViewModels
         private void EditOperators()
         {
             Model.ShowCloseButton = true;
-            Model.IsOpen = true;
+            Model.IsOperatorsOpen = true;
         }
 
         private void AddOperator()
@@ -167,7 +167,7 @@ namespace K5BZI_ViewModels
             EditOperator.Model.Clear();
 
             EditOperator.ShowCloseButton = true;
-            EditOperator.IsOpen = true;
+            EditOperator.IsOperatorsOpen = true;
 
             EditOperator.Model.IsClub = false;
         }
@@ -177,7 +177,7 @@ namespace K5BZI_ViewModels
             EditOperator.Model.Clear();
 
             EditOperator.ShowCloseButton = true;
-            EditOperator.IsOpen = true;
+            EditOperator.IsOperatorsOpen = true;
 
             EditOperator.Model.IsClub = true;
         }

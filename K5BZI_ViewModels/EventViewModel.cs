@@ -54,7 +54,7 @@ namespace K5BZI_ViewModels
 
             EditModel = new EditEventModel
             {
-                //DxccEntities = _excelFileService.ReadDxccExcelData(),
+                DxccEntities = _excelFileService.ReadDxccExcelData(),
                 EditEventsAction = (_) => EditEvents(),
                 EditAllEventsAction = (_) => EditAllEvents(),
                 EditEventAction = (_) => EditEvent(),
@@ -85,7 +85,7 @@ namespace K5BZI_ViewModels
 
             Model.SelectedEvent = newEvent;
             Model.ExistingEvents.Add(newEvent);
-            Model.IsOpen = false;
+            Model.IsEditOpen = false;
 
             EditEvent();
         }
@@ -96,13 +96,13 @@ namespace K5BZI_ViewModels
 
             _operatorsViewModel.PopulateOperators(Model.SelectedEvent);
 
-            Model.IsOpen = false;
+            Model.IsSelectOpen = false;
         }
 
         private void ChangeEvent()
         {
             Model.ShowCloseButton = true;
-            Model.IsOpen = true;
+            Model.IsEditOpen = true;
         }
 
         private void UpdateEvent()
@@ -113,7 +113,7 @@ namespace K5BZI_ViewModels
                 return;
             }
 
-            EditModel.IsOpen = false;
+            EditModel.IsEditOpen = false;
 
             var updatedOperators = EditModel.Operators
                 .Where(_ => _.Selected)
@@ -141,7 +141,7 @@ namespace K5BZI_ViewModels
             };
 
             EditModel.ShowCloseButton = true;
-            EditModel.IsOpen = true;
+            EditModel.IsEditOpen = true;
         }
 
         private void EditAllEvents()
@@ -152,7 +152,7 @@ namespace K5BZI_ViewModels
                 return;
             }
 
-            EditModel.IsOpen = false;
+            EditModel.IsEditOpen = false;
 
             _eventService.UpdateEvent(EditModel.Event, EditModel.Event.Operators.ToList());
         }
@@ -186,7 +186,7 @@ namespace K5BZI_ViewModels
                 .FirstOrDefault(_ => _.Prefix == EditModel.Event.DXCC?.Prefix);
 
             EditModel.ShowCloseButton = true;
-            EditModel.IsOpen = true;
+            EditModel.IsEditOpen = true;
         }
 
         private void UpdateOperators(List<Operator> operators)

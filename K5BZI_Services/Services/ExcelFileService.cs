@@ -3,6 +3,7 @@ using K5BZI_Services.Interfaces;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Text;
 
 namespace K5BZI_Services
 {
@@ -19,6 +20,8 @@ namespace K5BZI_Services
         public ExcelFileService(IFileStoreService fileStoreService)
         {
             _fileStoreService = fileStoreService;
+
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
         }
 
         #endregion

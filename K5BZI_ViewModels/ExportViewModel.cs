@@ -43,12 +43,12 @@ namespace K5BZI_ViewModels
         public void SelectLog()
         {
             Model.ShowCloseButton = true;
-            Model.IsOpen = true;
+            Model.IsExportOpen = true;
         }
 
         private void ChangeExport()
         {
-            Model.IsOpen = false;
+            Model.IsExportOpen = false;
 
             _exportService.ExportLog(
                 _mainLoggerViewModel.Model.Event,

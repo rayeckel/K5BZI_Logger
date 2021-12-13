@@ -18,7 +18,7 @@ namespace K5BZI_Models.ViewModelModels
         {
             ExistingEvents = new ObservableCollection<Event>();
 
-            IsOpen = true;
+            IsSelectOpen = true;
         }
 
         #endregion

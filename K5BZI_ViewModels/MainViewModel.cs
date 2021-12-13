@@ -5,7 +5,6 @@ using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels.Interfaces;
 using System;
 using System.Linq;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Forms;
 using MessageBox = System.Windows.Forms.MessageBox;
@@ -103,7 +102,14 @@ namespace K5BZI_ViewModels
                 LostFocusAction = (_) => ExecuteLostFocusCommand(_)
             };
 
-            Model.AppTitle = $"K5BZI Logger - Ver. {Assembly.GetExecutingAssembly().GetName().Version}";
+            Globals.AppVersion = AppDomain.CurrentDomain
+                .GetAssemblies()
+                .SingleOrDefault(assembly => assembly.GetName().Name == "K5BZI_Logger")
+                .GetName()
+                .Version
+                .ToString();
+
+            Model.AppTitle = $"K5BZI Logger - Ver. {Globals.AppVersion}";
 
             _defaultsService.SetDefaults(Model.LogEntry);
 

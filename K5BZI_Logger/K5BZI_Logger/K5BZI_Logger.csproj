@@ -32,6 +32,7 @@
 	<PackageReference Include="MaterialDesignThemes.MahApps" Version="0.2.0" />
 	<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
 	<PackageReference Include="System.IO.FileSystem.Primitives" Version="4.3.0" />
+	<PackageReference Include="System.Text.Encoding.CodePages" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>

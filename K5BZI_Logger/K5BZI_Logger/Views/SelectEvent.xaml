@@ -10,7 +10,7 @@
     Height="750" 
     Width="1024"
     mc:Ignorable="d"
-    IsOpen="{Binding IsOpen}"
+    IsOpen="{Binding IsSelectOpen}"
     ShowCloseButton="{Binding ShowCloseButton}"
     Title="Select Log">
     <!--

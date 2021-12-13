@@ -39,12 +39,12 @@ namespace K5BZI_ViewModels
         private void EditDefaults()
         {
             Model.ShowCloseButton = true;
-            Model.IsOpen = true;
+            Model.IsDefaultsOpen = true;
         }
 
         private void UpdateDefaults()
         {
-            Model.IsOpen = false;
+            Model.IsDefaultsOpen = false;
             _defaultsService.UpdateDefaults(Model.Defaults);
         }
 

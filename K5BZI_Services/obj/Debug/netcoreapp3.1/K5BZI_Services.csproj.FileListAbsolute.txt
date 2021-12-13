@@ -8,6 +8,9 @@ E:\Work\K5BZI_Logger\K5BZI_Services\bin\Debug\netcoreapp3.1\K5BZI_Models.dll.con
 E:\Work\K5BZI_Logger\K5BZI_Services\obj\Debug\netcoreapp3.1\K5BZI_Services.csproj.AssemblyReference.cache
 E:\Work\K5BZI_Logger\K5BZI_Services\obj\Debug\netcoreapp3.1\K5BZI_Services.GeneratedMSBuildEditorConfig.editorconfig
 E:\Work\K5BZI_Logger\K5BZI_Services\obj\Debug\netcoreapp3.1\K5BZI_Services.csproj.CoreCompileInputs.cache
-E:\Work\K5BZI_Logger\K5BZI_Services\obj\Debug\netcoreapp3.1\K5BZI_Services.csproj.CopyComplete
 E:\Work\K5BZI_Logger\K5BZI_Services\obj\Debug\netcoreapp3.1\K5BZI_Services.dll
 E:\Work\K5BZI_Logger\K5BZI_Services\obj\Debug\netcoreapp3.1\K5BZI_Services.pdb
+E:\Work\K5BZI_Logger\K5BZI_Services\obj\Debug\netcoreapp3.1\K5BZI_Services.Resources.resources
+E:\Work\K5BZI_Logger\K5BZI_Services\obj\Debug\netcoreapp3.1\K5BZI_Services.csproj.GenerateResource.cache
+E:\Work\K5BZI_Logger\K5BZI_Services\bin\Debug\netcoreapp3.1\Resources\DXCC.xlsx
+E:\Work\K5BZI_Logger\K5BZI_Services\obj\Debug\netcoreapp3.1\K5BZI_Services.csproj.CopyComplete

@@ -9,7 +9,7 @@
     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
     Height="750" Width="1024"
     mc:Ignorable="d"
-    IsOpen="{Binding IsOpen}"
+    IsOpen="{Binding IsOperatorsOpen}"
     ShowCloseButton="{Binding ShowCloseButton}"
     Title="All Operators">
     <!--

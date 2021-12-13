@@ -33,7 +33,9 @@ namespace K5BZI_Services
             if (!Directory.Exists(directoryPath))
                 Directory.CreateDirectory(directoryPath);
 
-            Process.Start(directoryPath);
+            var psi = new ProcessStartInfo { FileName = directoryPath, UseShellExecute = true };
+
+            Process.Start(psi);
         }
 
         public IEnumerable<DataRow> ReadResourceFile(string resourceFileName, bool usesHeaderRow = true)
@@ -42,20 +44,19 @@ namespace K5BZI_Services
             var assemblyName = assembly.GetName().Name;
             var resourceName = String.Format("{0}.Resources.{1}", assemblyName, resourceFileName);
 
-            using (var stream = assembly.GetManifestResourceStream(resourceName))
-            using (var excelReader = ExcelReaderFactory.CreateReader(stream))
-            {
-                var dataSet = excelReader.AsDataSet(
-                    new ExcelDataSetConfiguration
-                    {
-                        ConfigureDataTable =
-                            _ => new ExcelDataTableConfiguration { UseHeaderRow = usesHeaderRow }
-                    });
+            using var stream = assembly.GetManifestResourceStream(resourceName);
+            using var excelReader = ExcelReaderFactory.CreateReader(stream);
 
-                var dataTable = dataSet.Tables[0];
+            var dataSet = excelReader.AsDataSet(
+                new ExcelDataSetConfiguration
+                {
+                    ConfigureDataTable =
+                        _ => new ExcelDataTableConfiguration { UseHeaderRow = usesHeaderRow }
+                });
 
-                return (from DataRow row in dataTable.Rows select row);
-            }
+            var dataTable = dataSet.Tables[0];
+
+            return (from DataRow row in dataTable.Rows select row);
         }
 
         public List<T> ReadLog<T>(string logFileName, bool isLogFile = true)
@@ -66,11 +67,10 @@ namespace K5BZI_Services
 
             try
             {
-                using (var sr = new StreamReader(File.Open(fileName, FileMode.OpenOrCreate)))
-                using (var jsonTextReader = new JsonTextReader(sr))
-                {
-                    return serializer.Deserialize<List<T>>(jsonTextReader);
-                }
+                using var sr = new StreamReader(File.Open(fileName, FileMode.OpenOrCreate));
+                using var jsonTextReader = new JsonTextReader(sr);
+
+                return serializer.Deserialize<List<T>>(jsonTextReader);
             }
             catch
             {
@@ -84,11 +84,10 @@ namespace K5BZI_Services
             var fileName = CreateFilePath(logFileName, isLogFile);
             var serializer = new JsonSerializer();
 
-            using (var sw = new StreamWriter(File.Open(fileName, FileMode.OpenOrCreate)))
-            using (var writer = new JsonTextWriter(sw))
-            {
-                await Task.Run(() => serializer.Serialize(writer, LogEntries));
-            }
+            using var sw = new StreamWriter(File.Open(fileName, FileMode.OpenOrCreate));
+            using var writer = new JsonTextWriter(sw);
+
+            await Task.Run(() => serializer.Serialize(writer, LogEntries));
 
             return true;
         }
@@ -99,11 +98,10 @@ namespace K5BZI_Services
 
             var fileName = CreateFilePath(logFileName, true, extension);
 
-            using (var sw = new StreamWriter(File.Open(fileName, FileMode.Create)))
-            using (var writer = new JsonTextWriter(sw))
-            {
-                await sw.WriteAsync(fileData);
-            }
+            using var sw = new StreamWriter(File.Open(fileName, FileMode.Create));
+            using var writer = new JsonTextWriter(sw);
+
+            await sw.WriteAsync(fileData);
 
             return true;
         }
