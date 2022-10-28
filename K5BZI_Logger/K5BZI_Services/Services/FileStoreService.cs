@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace K5BZI_Services
 {
-    internal class FileStoreService : IFileStoreService
+    public class FileStoreService : IFileStoreService
     {
         private string _loggerDirectoryName = "K5BZI_Logger";
 
@@ -33,7 +33,7 @@ namespace K5BZI_Services
             if (!Directory.Exists(directoryPath))
                 Directory.CreateDirectory(directoryPath);
 
-            Process.Start(directoryPath);  
+            Process.Start(directoryPath);
         }
 
         public IEnumerable<DataRow> ReadResourceFile(string resourceFileName, bool usesHeaderRow = true)

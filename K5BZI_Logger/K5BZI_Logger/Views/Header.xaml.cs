@@ -1,5 +1,4 @@
 ﻿using K5BZI_ViewModels.Interfaces;
-using CommonServiceLocator;
 using System.Windows.Controls;
 
 namespace K5BZI_Logger.Views
@@ -9,16 +8,13 @@ namespace K5BZI_Logger.Views
     /// </summary>
     public partial class Header : UserControl
     {
-        public Header()
+        public Header(IOperatorsViewModel operatorsViewModel, IEventViewModel eventViewModel)
         {
             InitializeComponent();
 
-            OperatorGrid.DataContext = ServiceLocator.Current
-                .GetInstance<IOperatorsViewModel>()
-                .Model;
+            OperatorGrid.DataContext = operatorsViewModel.Model;
 
-            EventGrid.DataContext = ServiceLocator.Current
-                .GetInstance<IEventViewModel>();
+            EventGrid.DataContext = eventViewModel;
         }
     }
 }

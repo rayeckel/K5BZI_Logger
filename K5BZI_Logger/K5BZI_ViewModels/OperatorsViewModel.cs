@@ -1,11 +1,10 @@
-﻿using System;
-using System.Linq;
-using System.Windows.Forms;
-using CommonServiceLocator;
-using K5BZI_Models;
+﻿using K5BZI_Models;
 using K5BZI_Models.ViewModelModels;
 using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels.Interfaces;
+using System;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace K5BZI_ViewModels
 {
@@ -17,6 +16,7 @@ namespace K5BZI_ViewModels
         public EditOperatorModel EditOperator { get; private set; }
         private readonly IOperatorService _operatorService;
         private readonly IEventService _eventService;
+        private readonly IMainViewModel _mainViewModel;
         private Event currentEvent;
         private bool _addToEvent;
 
@@ -26,10 +26,12 @@ namespace K5BZI_ViewModels
 
         public OperatorsViewModel(
             IOperatorService operatorService,
-            IEventService eventService)
+            IEventService eventService,
+            IMainViewModel mainViewModel)
         {
             _operatorService = operatorService;
             _eventService = eventService;
+            _mainViewModel = mainViewModel;
 
             Initialize();
         }
@@ -104,7 +106,7 @@ namespace K5BZI_ViewModels
 
             Model.CurrentOperator = operatorObj;
 
-            ServiceLocator.Current.GetInstance<IMainViewModel>().UpdateCurrentOperator(operatorObj);
+            _mainViewModel.UpdateCurrentOperator(operatorObj);
         }
 
         private void DeleteOperator(Operator operatorObj)

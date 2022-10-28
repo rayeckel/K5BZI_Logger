@@ -1,6 +1,5 @@
 ﻿using K5BZI_ViewModels.Interfaces;
 using MahApps.Metro.SimpleChildWindow;
-using CommonServiceLocator;
 
 namespace K5BZI_Logger.Views
 {
@@ -9,13 +8,11 @@ namespace K5BZI_Logger.Views
     /// </summary>
     public partial class EditEvent : ChildWindow
     {
-        public EditEvent()
+        public EditEvent(IEventViewModel eventViewModel)
         {
             InitializeComponent();
 
-            DataContext = ServiceLocator.Current
-                .GetInstance<IEventViewModel>()
-                .EditModel;
+            DataContext = eventViewModel.EditModel;
         }
     }
 }

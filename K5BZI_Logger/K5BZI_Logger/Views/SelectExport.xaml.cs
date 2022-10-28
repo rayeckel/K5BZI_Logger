@@ -1,6 +1,5 @@
 ﻿using K5BZI_ViewModels.Interfaces;
 using MahApps.Metro.SimpleChildWindow;
-using CommonServiceLocator;
 
 namespace K5BZI_Logger.Views
 {
@@ -9,13 +8,11 @@ namespace K5BZI_Logger.Views
     /// </summary>
     public partial class SelectExport : ChildWindow
     {
-        public SelectExport()
+        public SelectExport(IExportViewModel exportViewModel)
         {
             InitializeComponent();
 
-            DataContext = ServiceLocator.Current
-                .GetInstance<IExportViewModel>()
-                .Model;
+            DataContext = exportViewModel.Model;
         }
     }
 }
