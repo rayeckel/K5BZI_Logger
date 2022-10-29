@@ -2,9 +2,7 @@
 using K5BZI_Models.Enums;
 using PropertyChanged;
 using System;
-using System.ComponentModel;
 using System.Globalization;
-using System.Runtime.CompilerServices;
 
 namespace K5BZI_Models
 {
@@ -24,7 +22,7 @@ namespace K5BZI_Models
         {
             get
             {
-                return ContactTime != null ? 
+                return ContactTime != null ?
                     ((DateTime)ContactTime).ToUniversalTime().ToString("yyyyMMdd") :
                     String.Empty;
             }
@@ -35,7 +33,7 @@ namespace K5BZI_Models
         {
             get
             {
-                return ContactTime != null ? 
+                return ContactTime != null ?
                     ((DateTime)ContactTime).ToUniversalTime().ToString("t", CultureInfo.CreateSpecificCulture("de-DE")).Replace(@":", "") :
                     String.Empty;
             }
@@ -60,6 +58,9 @@ namespace K5BZI_Models
             set { }
         }
 
+        [Adif("CQZone")]
+        public string CQZone { get; set; }
+
         [Adif("QSL_SENT")]
         public string QslSent { get; set; }
 
@@ -72,7 +73,7 @@ namespace K5BZI_Models
         [Cabrillo("CATEGORY-ASSISTED")]
         public Assisted Assisted { get; set; }
 
-        [Cabrillo("TX_PWR")]
+        [Cabrillo("CATEGORY-POWER")]
         public Power Power { get; set; }
 
         public Operator Operator { get; set; }

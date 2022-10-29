@@ -12,8 +12,9 @@ namespace K5BZI_Models.Extensions
             logEntry.CallSign = string.Empty;
             logEntry.SignalReport.Sent = "599";
             logEntry.SignalReport.Received = "599";
+            logEntry.CQZone = String.Empty;
 
-            if(!contactTimeEnabled)
+            if (!contactTimeEnabled)
                 logEntry.ContactTime = DateTime.Now;
         }
 

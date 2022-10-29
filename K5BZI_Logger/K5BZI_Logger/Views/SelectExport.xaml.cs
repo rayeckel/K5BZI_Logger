@@ -1,16 +1,16 @@
 ﻿using K5BZI_ViewModels.Interfaces;
 using MahApps.Metro.SimpleChildWindow;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace K5BZI_Logger.Views
 {
-    /// <summary>
-    /// Interaction logic for SelectEvent.xaml
-    /// </summary>
     public partial class SelectExport : ChildWindow
     {
-        public SelectExport(IExportViewModel exportViewModel)
+        public SelectExport()
         {
             InitializeComponent();
+
+            var exportViewModel = App.ServiceProvider.GetRequiredService<IExportViewModel>();
 
             DataContext = exportViewModel.Model;
         }

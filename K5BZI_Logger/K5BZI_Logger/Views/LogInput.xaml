@@ -148,6 +148,31 @@
                             </i:Interaction.Triggers>
                         </TextBox>
                     </StackPanel>
+                    <StackPanel
+                        Margin="5,0,0,0">
+                        <Label
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            FontFamily="Tahoma"
+                            Foreground="DarkSlateBlue"
+                            Content="CQ Zone"/>
+                        <TextBox
+                            TabIndex="2"
+                            behaviors:TextboxBehavior.ClearOnFocused="True"
+                            Height="27"
+                            x:Name="lblCQZone"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"                  
+                            Width="35"
+                            BorderThickness="1"
+                            Text="{Binding LogEntry.CQZone, Mode=OneWayToSource}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus" >
+                                    <i:InvokeCommandAction Command="{Binding LostFocusCommand}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
+                    </StackPanel>
                     <Button 
                         TabIndex="3"
                         Margin="152,0,0,0"
