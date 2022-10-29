@@ -82,7 +82,7 @@ namespace K5BZI_ViewModels
             Model.LogEntries.Clear();
             Model.LogEntry.ClearProperties(Model.ContactTimeEnabled);
             Model.LogEntry.EventId = newEvent.Id;
-            Model.LogEntry.Operator = _currentOperator = newEvent.Operators.First();
+            Model.LogEntry.Operator = _currentOperator = newEvent.Operators?.FirstOrDefault();
         }
 
         #endregion
