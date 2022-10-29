@@ -182,6 +182,8 @@
     <Compile Include="Enums\Mode.cs" />
     <Compile Include="Enums\Power.cs" />
     <Compile Include="EntityModels\Event.cs" />
+    <Compile Include="Extensions\BindingProxy.cs" />
+    <Compile Include="Extensions\DataGridExtensions.cs" />
     <Compile Include="Extensions\EnumBindingSourceExtension.cs" />
     <Compile Include="Extensions\LogEntryExtensions.cs" />
     <Compile Include="EntityModels\FileExtensions.cs" />

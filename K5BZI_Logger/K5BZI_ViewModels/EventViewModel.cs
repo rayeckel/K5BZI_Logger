@@ -67,14 +67,14 @@ namespace K5BZI_ViewModels
         {
             var events = _eventService.GetAllEvents();
 
-            events.OrderBy(_ => _.CreatedDate);
-
             Model.SelectedEvent = events.FirstOrDefault();
 
             events.ForEach(item =>
             {
                 Model.ExistingEvents.Add(item);
             });
+
+            Model.ExistingEvents.OrderBy(_ => _.CreatedDate);
         }
 
         private void CreateNewEvent(string eventName)
