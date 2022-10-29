@@ -18,6 +18,6 @@ namespace K5BZI_Models
         public Mode Mode { get; set; }
 
         [Adif("FREQ")]
-        public double Frequency { get; set; }
+        public string Frequency { get; set; }
     }
 }

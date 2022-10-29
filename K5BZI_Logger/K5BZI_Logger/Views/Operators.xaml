@@ -133,7 +133,7 @@
                     VerticalAlignment="Center"
                     Grid.Row="1"
                     Margin="10,0,0,0"
-                    Content="Active Operator"
+                    Content="Set Active Operator"
                     Width="120"
                     Height="30"
                     Foreground="Navy"

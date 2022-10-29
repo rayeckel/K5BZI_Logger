@@ -10,5 +10,7 @@ namespace K5BZI_ViewModels.Interfaces
         EditOperatorModel EditOperator { get; }
 
         void PopulateOperators(Event eventModel);
+
+        void UpdateOperator(Operator operatorObj, bool isEvent);
     }
 }

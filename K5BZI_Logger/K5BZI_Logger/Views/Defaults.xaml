@@ -85,7 +85,7 @@
                 Height="30"
                 Margin="20,10,0,0"
                 FontFamily="Tahoma"
-                Text="{Binding Defaults.Country, Mode=OneWay}"
+                Text="{Binding Defaults.Country, Mode=TwoWay}"
                 controls:TextBoxHelper.Watermark="Country" 
                 controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>

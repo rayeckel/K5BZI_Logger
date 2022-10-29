@@ -96,7 +96,13 @@
                             BorderThickness="1"
                             CharacterCasing="Upper" 
                             FocusManager.FocusedElement="{Binding RelativeSource={RelativeSource Self}}"
-                            Text="{Binding LogEntry.CallSign, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            Text="{Binding LogEntry.CallSign, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="TextChanged">
+                                    <i:InvokeCommandAction Command="{Binding CheckDuplicateEntriesCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
                     </StackPanel>
                     <StackPanel
                         Margin="5,0,0,0">
@@ -165,7 +171,7 @@
                             VerticalAlignment="Center"                  
                             Width="35"
                             BorderThickness="1"
-                            Text="{Binding LogEntry.CQZone, Mode=OneWayToSource}">
+                            Text="{Binding LogEntry.CQZone, Mode=TwoWay}">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="LostFocus" >
                                     <i:InvokeCommandAction Command="{Binding LostFocusCommand}" />

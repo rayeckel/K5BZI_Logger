@@ -67,7 +67,7 @@ namespace K5BZI_ViewModels
         {
             var events = _eventService.GetAllEvents();
 
-            events.OrderByDescending(_ => _.CreatedDate);
+            events.OrderBy(_ => _.CreatedDate);
 
             Model.SelectedEvent = events.FirstOrDefault();
 
@@ -95,6 +95,8 @@ namespace K5BZI_ViewModels
             _mainLoggerViewModel.SelectEvent(Model.SelectedEvent);
 
             _operatorsViewModel.PopulateOperators(Model.SelectedEvent);
+
+            _operatorsViewModel.UpdateOperator(_mainLoggerViewModel.Model.LogEntry.Operator, true);
 
             Model.IsOpen = false;
         }

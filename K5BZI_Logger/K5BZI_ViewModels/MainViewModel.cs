@@ -19,6 +19,7 @@ namespace K5BZI_ViewModels
         private Operator _currentOperator;
         private readonly ILogListingService _logListingService;
         private readonly IDefaultsService _defaultsService;
+        private readonly IOperatorsViewModel _operatorsViewModel;
 
         #endregion
 
@@ -26,10 +27,12 @@ namespace K5BZI_ViewModels
 
         public MainViewModel(
             ILogListingService logListingService,
-            IDefaultsService defaultsService)
+            IDefaultsService defaultsService,
+            IOperatorsViewModel operatorsViewModel)
         {
             _logListingService = logListingService;
             _defaultsService = defaultsService;
+            _operatorsViewModel = operatorsViewModel;
 
             Initialize();
         }
@@ -49,13 +52,28 @@ namespace K5BZI_ViewModels
             {
                 logEntries.ForEach(_ =>
                 {
+                    if (_.Operator == null) _.Operator = new Operator();
+
                     Model.LogEntries.Add(_);
                     Model.QSOCount++;
                 });
 
-                Model.LogEntry.Signal.Band = logEntries.Last().Signal.Band;
-                Model.LogEntry.Signal.Frequency = logEntries.Last().Signal.Frequency;
+                var lastLogEntry = logEntries.Last();
+
+                Model.LogEntry.Signal.Band = lastLogEntry.Signal.Band;
+                Model.LogEntry.Signal.Frequency = lastLogEntry.Signal.Frequency;
+                Model.LogEntry.Signal.Mode = lastLogEntry.Signal.Mode;
+                Model.LogEntry.Power = lastLogEntry.Power;
+                Model.LogEntry.Operator = _currentOperator = lastLogEntry.Operator;
+                Model.LogEntry.Country = lastLogEntry.Country;
+                Model.LogEntry.Continent = lastLogEntry.Continent;
             }
+            else
+            {
+                Model.LogEntry.Operator = _currentOperator = selectedEvent.Operators.FirstOrDefault();
+            }
+
+            UpdateDataGridVisibilities();
         }
 
         public void CreateNewLog(Event newEvent)
@@ -64,16 +82,19 @@ namespace K5BZI_ViewModels
             Model.LogEntries.Clear();
             Model.LogEntry.ClearProperties(Model.ContactTimeEnabled);
             Model.LogEntry.EventId = newEvent.Id;
-        }
-
-        public void UpdateCurrentOperator(Operator currentOperator)
-        {
-            _currentOperator = currentOperator;
+            Model.LogEntry.Operator = _currentOperator = newEvent.Operators.First();
         }
 
         #endregion
 
         #region Private Methods
+
+        private void UpdateDataGridVisibilities()
+        {
+            Model.CountryVisibility = Model.LogEntries.Any(_ => !String.IsNullOrEmpty(_.Country)) ? Visibility.Visible : Visibility.Collapsed;
+            Model.ContinentVisibility = Model.LogEntries.Any(_ => !String.IsNullOrEmpty(_.Continent)) ? Visibility.Visible : Visibility.Collapsed;
+            Model.CQZoneVisibility = Model.LogEntries.Any(_ => !String.IsNullOrEmpty(_.CQZone)) ? Visibility.Visible : Visibility.Collapsed;
+        }
 
         private void CheckForDuplicates()
         {
@@ -99,15 +120,16 @@ namespace K5BZI_ViewModels
                 AutoTimeAction = (_) => SetAutoTime(),
                 EditLogEntryAction = (_) => EditLogEntry(),
                 DeleteLogEntryAction = (_) => DeleteLogEntry(),
-                LostFocusAction = (_) => ExecuteLostFocusCommand(_)
+                LostFocusAction = (_) => ExecuteLostFocusCommand(_),
+                CheckDuplicateEntriesAction = (_) => CheckForDuplicates()
             };
 
             _defaultsService.SetDefaults(Model.LogEntry);
 
-            Model.LogEntry.CheckDuplicateEntriesAction = () => CheckForDuplicates();
+            UpdateDataGridVisibilities();
         }
 
-        public void ExecuteLostFocusCommand(object argument)
+        private void ExecuteLostFocusCommand(object argument)
         {
             //reset:
             if (String.IsNullOrEmpty(Model.LogEntry.SignalReport.Sent))
@@ -131,6 +153,8 @@ namespace K5BZI_ViewModels
             Model.LogEntries.Add(Model.LogEntry.Clone());
             Model.QSOCount++;
             Model.LogEntry.ClearProperties(Model.ContactTimeEnabled);
+
+            UpdateDataGridVisibilities();
         }
 
         private void SetManualTime()
@@ -160,6 +184,8 @@ namespace K5BZI_ViewModels
         private void EditLogEntry()
         {
             _logListingService.UpdateLogEntry(Model.SelectedEntry, Model.Event);
+
+            UpdateDataGridVisibilities();
         }
 
         private void DeleteLogEntry()

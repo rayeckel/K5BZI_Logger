@@ -14,8 +14,14 @@
                 <RowDefinition Height="30" />
                 <RowDefinition Height="135" />
             </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="10*" />
+                <ColumnDefinition Width="10" />
+            </Grid.ColumnDefinitions>
             <TextBlock 
                 Grid.Row="0"
+                Grid.Column="1"
                 Text="Possible Duplicates"
                 TextAlignment="Center"
                 VerticalAlignment="Top"
@@ -24,6 +30,7 @@
                 Foreground="DarkGray"/>
             <dgControls:DataGrid 
                 Grid.Row="1"
+                Grid.Column="1"
                 IsTabStop="False"
                 x:Name="dataGrid1" 
                 Height="400"
@@ -31,11 +38,13 @@
                 AutoGenerateColumns="False"
                 ItemsSource="{Binding DuplicateEntries}">
                 <dgControls:DataGrid.Columns>
-                    <dgControls:DataGridTextColumn 
-                                Header="Call" 
-                                Width="150"
-                                Binding="{Binding CallSign}" 
-                                FontSize="12" >
+                    <dgControls:DataGridTextColumn
+                        Header="Call" 
+                        Width="150"
+                        Binding="{Binding CallSign}" 
+                        FontSize="12"
+                        FontWeight="Bold"
+                        Foreground="Red">
                         <dgControls:DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="TextWrapping" Value="Wrap"/>
@@ -48,10 +57,12 @@
                         </dgControls:DataGridTextColumn.EditingElementStyle>
                     </dgControls:DataGridTextColumn>
                     <dgControls:DataGridTextColumn 
-                                Header="Band"
-                                Width="100"
-                                Binding="{Binding Signal.Band}" 
-                                FontSize="12" />
+                        Header="Band"
+                        Width="100"
+                        Binding="{Binding Signal.Band}" 
+                        FontSize="12"
+                        FontWeight="Bold"
+                        Foreground="Red"/>
                 </dgControls:DataGrid.Columns>
             </dgControls:DataGrid>
         </Grid>

@@ -16,9 +16,7 @@ namespace K5BZI_ViewModels
         public EditOperatorModel EditOperator { get; private set; }
         private readonly IOperatorService _operatorService;
         private readonly IEventService _eventService;
-        private readonly IMainViewModel _mainViewModel;
         private Event currentEvent;
-        private bool _addToEvent;
 
         #endregion
 
@@ -26,12 +24,10 @@ namespace K5BZI_ViewModels
 
         public OperatorsViewModel(
             IOperatorService operatorService,
-            IEventService eventService,
-            IMainViewModel mainViewModel)
+            IEventService eventService)
         {
             _operatorService = operatorService;
             _eventService = eventService;
-            _mainViewModel = mainViewModel;
 
             Initialize();
         }
@@ -55,6 +51,30 @@ namespace K5BZI_ViewModels
             {
                 eventOperators.ForEach(_ => Model.EventOperators.Add(_));
             }
+        }
+
+        public void UpdateOperator(Operator operatorObj, bool isEvent)
+        {
+            var newOperator = _operatorService.UpdateOperator(operatorObj);
+
+            if (!Model.EventOperators.Any(_ => _.CallSign.ToUpper() == newOperator.CallSign.ToUpper()))
+            {
+                Model.EventOperators.Add(newOperator);
+            }
+
+            if (!Model.Operators.Any(_ => _.CallSign.ToUpper() == newOperator.CallSign.ToUpper()))
+            {
+                Model.Operators.Add(newOperator);
+            }
+
+            if (!currentEvent.Operators.Any(_ => _.CallSign?.ToUpper() == newOperator.CallSign.ToUpper()))
+            {
+                currentEvent.Operators.Add(operatorObj);
+            }
+
+            Model.CurrentOperator = operatorObj;
+
+            _eventService.UpdateEvent(currentEvent, currentEvent.Operators.ToList());
         }
 
         #endregion
@@ -91,7 +111,7 @@ namespace K5BZI_ViewModels
             {
                 operators.ForEach(_ => Model.Operators.Add(_));
 
-                Model.CurrentOperator = operators.First();
+                if (Model.CurrentOperator == null) Model.CurrentOperator = operators.First();
             }
         }
 
@@ -104,9 +124,9 @@ namespace K5BZI_ViewModels
                 return;
             }
 
-            Model.CurrentOperator = operatorObj;
+            UpdateOperator(operatorObj, true);
 
-            _mainViewModel.UpdateCurrentOperator(operatorObj);
+            EditOperator.IsOpen = false;
         }
 
         private void DeleteOperator(Operator operatorObj)
@@ -122,39 +142,13 @@ namespace K5BZI_ViewModels
             }
         }
 
-        private void UpdateOperator(Operator operatorObj, bool isEvent)
-        {
-            var newOperator = _operatorService.UpdateOperator(operatorObj);
-
-            if (isEvent && !Model.EventOperators.Any(_ => _.CallSign == newOperator.CallSign))
-            {
-                Model.EventOperators.Add(newOperator);
-            }
-
-            if (!isEvent && !Model.Operators.Any(_ => _.CallSign == newOperator.CallSign))
-            {
-                Model.Operators.Add(newOperator);
-            }
-
-            if (_addToEvent)
-            {
-                currentEvent.Operators.Add(EditOperator.Model);
-
-                _eventService.UpdateEvent(currentEvent, currentEvent.Operators.ToList());
-
-                _addToEvent = false;
-            }
-        }
-
         private void AddOperatorToEvent()
         {
-            _addToEvent = true;
             AddOperator();
         }
 
         private void AddClubToEvent()
         {
-            _addToEvent = true;
             AddClub();
         }
 

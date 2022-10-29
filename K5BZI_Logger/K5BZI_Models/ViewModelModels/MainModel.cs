@@ -37,6 +37,10 @@ namespace K5BZI_Models.Main
         public ObservableCollection<LogEntry> DuplicateEntries { get; private set; }
         public Visibility ManualTimeButtonVisibility { get; set; }
         public Visibility AutoTimeButtonVisibility { get; set; }
+        public Visibility CountryVisibility { get; set; }
+        public Visibility ContinentVisibility { get; set; }
+        public Visibility CQZoneVisibility { get; set; }
+
         public bool ContactTimeEnabled { get; set; }
         public int QSOCount { get; set; }
         #endregion
@@ -147,6 +151,19 @@ namespace K5BZI_Models.Main
             }
         }
         public Action<object> DeleteLogEntryAction { get; set; }
+
+        private ICommand _checkDuplicateEntriesCommand;
+        public ICommand CheckDuplicateEntriesCommand
+        {
+            get
+            {
+                return _checkDuplicateEntriesCommand ??
+                    (_checkDuplicateEntriesCommand =
+                    new DelegateCommand(CheckDuplicateEntriesAction));
+            }
+        }
+        public Action<object> CheckDuplicateEntriesAction { get; set; }
+
         #endregion
     }
 }

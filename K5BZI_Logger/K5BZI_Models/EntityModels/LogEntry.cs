@@ -13,6 +13,7 @@ namespace K5BZI_Models
         {
             Signal = new Signal();
             SignalReport = new SignalReport();
+            Operator = new Operator();
         }
 
         public DateTime? ContactTime { get; set; }
@@ -39,8 +40,19 @@ namespace K5BZI_Models
             }
         }
 
+        private string _callSign;
         [Adif("CALL")]
-        public string CallSign { get; set; }
+        public string CallSign
+        {
+            get
+            {
+                return _callSign;
+            }
+            set
+            {
+                _callSign = value.ToUpper();
+            }
+        }
 
         [Adif("PFX")]
         public string Prefix { get; set; }
@@ -49,14 +61,7 @@ namespace K5BZI_Models
         public string Continent { get; set; }
 
         [Adif("DXCC")]
-        public string Country
-        {
-            get
-            {
-                return "291";
-            }
-            set { }
-        }
+        public string Country { get; set; }
 
         [Adif("CQZone")]
         public string CQZone { get; set; }
@@ -85,7 +90,5 @@ namespace K5BZI_Models
         public Signal Signal { get; set; }
 
         public SignalReport SignalReport { get; set; }
-
-        public Action CheckDuplicateEntriesAction { get; set; }
     }
 }

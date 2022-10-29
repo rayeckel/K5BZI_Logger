@@ -33,7 +33,7 @@ namespace K5BZI_Services
 
         public LogListing CreateNewLogListing(FileInfo fileInfo)
         {
-            var fileName = System.IO.Path.ChangeExtension(fileInfo.Name, null);
+            var fileName = Path.ChangeExtension(fileInfo.Name, null);
 
             return new LogListing
             {
@@ -77,6 +77,11 @@ namespace K5BZI_Services
             updatedLogEntry.Signal.Band = logEntry.Signal.Band;
             updatedLogEntry.SignalReport.Sent = logEntry.SignalReport.Sent;
             updatedLogEntry.SignalReport.Received = logEntry.SignalReport.Received;
+            updatedLogEntry.Country = logEntry.Country;
+            updatedLogEntry.CQZone = logEntry.CQZone;
+
+            updatedLogEntry.Operator = eventEntry.Operators
+                .FirstOrDefault(_ => _.CallSign?.ToLowerInvariant() == logEntry.Operator.CallSign.ToLowerInvariant());
 
             _fileStoreService.WriteToFile(_logEntries, eventEntry.LogFileName);
         }
