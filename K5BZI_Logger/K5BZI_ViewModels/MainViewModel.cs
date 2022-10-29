@@ -16,7 +16,6 @@ namespace K5BZI_ViewModels
         #region Properties
 
         public MainModel Model { get; private set; }
-        private Operator _currentOperator;
         private readonly ILogListingService _logListingService;
         private readonly IDefaultsService _defaultsService;
         private readonly IOperatorsViewModel _operatorsViewModel;
@@ -64,13 +63,8 @@ namespace K5BZI_ViewModels
                 Model.LogEntry.Signal.Frequency = lastLogEntry.Signal.Frequency;
                 Model.LogEntry.Signal.Mode = lastLogEntry.Signal.Mode;
                 Model.LogEntry.Power = lastLogEntry.Power;
-                Model.LogEntry.Operator = _currentOperator = lastLogEntry.Operator;
                 Model.LogEntry.Country = lastLogEntry.Country;
                 Model.LogEntry.Continent = lastLogEntry.Continent;
-            }
-            else
-            {
-                Model.LogEntry.Operator = _currentOperator = selectedEvent.Operators.FirstOrDefault();
             }
 
             UpdateDataGridVisibilities();
@@ -82,7 +76,6 @@ namespace K5BZI_ViewModels
             Model.LogEntries.Clear();
             Model.LogEntry.ClearProperties(Model.ContactTimeEnabled);
             Model.LogEntry.EventId = newEvent.Id;
-            Model.LogEntry.Operator = _currentOperator = newEvent.Operators?.FirstOrDefault();
         }
 
         #endregion
@@ -146,7 +139,7 @@ namespace K5BZI_ViewModels
                 return;
             }
 
-            Model.LogEntry.Operator = _currentOperator;
+            Model.LogEntry.Operator = _operatorsViewModel.Model.CurrentOperator;
 
             _logListingService.SaveLogEntry(Model.LogEntry, Model.Event);
 

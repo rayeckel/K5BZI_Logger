@@ -57,17 +57,17 @@ namespace K5BZI_ViewModels
         {
             var newOperator = _operatorService.UpdateOperator(operatorObj);
 
-            if (!Model.EventOperators.Any(_ => _.CallSign.ToUpper() == newOperator.CallSign.ToUpper()))
+            if (!Model.EventOperators.Any(_ => _.CallSign.ToUpper() == newOperator.CallSign?.ToUpper()))
             {
                 Model.EventOperators.Add(newOperator);
             }
 
-            if (!Model.Operators.Any(_ => _.CallSign.ToUpper() == newOperator.CallSign.ToUpper()))
+            if (!Model.Operators.Any(_ => _.CallSign.ToUpper() == newOperator.CallSign?.ToUpper()))
             {
                 Model.Operators.Add(newOperator);
             }
 
-            if (!currentEvent.Operators.Any(_ => _.CallSign?.ToUpper() == newOperator.CallSign.ToUpper()))
+            if (!currentEvent.Operators.Any(_ => _.CallSign?.ToUpper() == newOperator.CallSign?.ToUpper()))
             {
                 currentEvent.Operators.Add(operatorObj);
             }
