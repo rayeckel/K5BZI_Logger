@@ -33,7 +33,9 @@ namespace K5BZI_Models.Extensions
                 Power = logEntry.Power,
                 Operator = logEntry.Operator,
                 ContactTime = logEntry.ContactTime,
-                EventId = logEntry.EventId
+                EventId = logEntry.EventId,
+                CQZone = logEntry.CQZone,
+                Notes = logEntry.Notes,
             };
 
             clone.Signal.Band = logEntry.Signal.Band;
