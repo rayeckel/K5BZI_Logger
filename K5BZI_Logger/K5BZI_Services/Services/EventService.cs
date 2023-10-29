@@ -84,6 +84,7 @@ namespace K5BZI_Services
                 existing.Score = editEvent.Score;
                 existing.State = editEvent.State;
                 existing.TransmitterCount = editEvent.TransmitterCount;
+                existing.ActiveOperator = editEvent.ActiveOperator;
 
                 existing.Operators.Clear();
                 operators.ForEach(_ => editEvent.Operators.Add(_));

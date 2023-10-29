@@ -40,7 +40,7 @@
                 <dgControls:DataGrid.Columns>
                     <dgControls:DataGridTextColumn
                         Header="Call" 
-                        Width="150"
+                        Width="90"
                         Binding="{Binding CallSign}" 
                         FontSize="12"
                         FontWeight="Bold"
@@ -56,6 +56,13 @@
                             </Style>
                         </dgControls:DataGridTextColumn.EditingElementStyle>
                     </dgControls:DataGridTextColumn>
+                    <dgControls:DataGridTextColumn 
+                        Header="Operator"
+                        Width="90"
+                        Binding="{Binding Operator.CallSign}" 
+                        FontSize="12"
+                        FontWeight="Bold"
+                        Foreground="Red"/>
                     <dgControls:DataGridTextColumn 
                         Header="Band"
                         Width="100"

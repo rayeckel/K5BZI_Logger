@@ -96,7 +96,7 @@ namespace K5BZI_ViewModels
 
             _operatorsViewModel.PopulateOperators(Model.SelectedEvent);
 
-            _operatorsViewModel.UpdateOperator(_mainLoggerViewModel.Model.LogEntry.Operator, true);
+            _operatorsViewModel.UpdateOperator(Model.SelectedEvent.ActiveOperator, true);
 
             Model.IsOpen = false;
         }

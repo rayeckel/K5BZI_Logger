@@ -55,14 +55,16 @@ namespace K5BZI_ViewModels
 
         public void UpdateOperator(Operator operatorObj, bool isEvent)
         {
+            if (operatorObj == null) return;
+
             var newOperator = _operatorService.UpdateOperator(operatorObj);
 
-            if (!Model.EventOperators.Any(_ => _.CallSign.ToUpper() == newOperator.CallSign?.ToUpper()))
+            if (!Model.EventOperators.Any(_ => _.CallSign?.ToUpper() == newOperator.CallSign?.ToUpper()))
             {
                 Model.EventOperators.Add(newOperator);
             }
 
-            if (!Model.Operators.Any(_ => _.CallSign.ToUpper() == newOperator.CallSign?.ToUpper()))
+            if (!Model.Operators.Any(_ => _.CallSign?.ToUpper() == newOperator.CallSign?.ToUpper()))
             {
                 Model.Operators.Add(newOperator);
             }
@@ -72,7 +74,7 @@ namespace K5BZI_ViewModels
                 currentEvent.Operators.Add(operatorObj);
             }
 
-            Model.CurrentOperator = operatorObj;
+            Model.CurrentOperator = currentEvent.ActiveOperator = operatorObj;
 
             _eventService.UpdateEvent(currentEvent, currentEvent.Operators.ToList());
         }

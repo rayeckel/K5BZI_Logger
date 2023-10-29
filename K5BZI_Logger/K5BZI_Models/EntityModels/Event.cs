@@ -21,6 +21,8 @@ namespace K5BZI_Models
 
         public ObservableCollection<Operator> Operators { get; set; }
 
+        public Operator ActiveOperator { get; set; }
+
         [Cabrillo("OPERATORS")]
         public string OperatorNameList
         {

@@ -69,11 +69,16 @@ namespace K5BZI_Services
 
         public Operator UpdateOperator(Operator editOperator)
         {
+            if (editOperator == null) return default(Operator);
+
             var existingOperator = _operators.FirstOrDefault(_ => _.CallSign == editOperator.CallSign);
 
             if (existingOperator == null)
             {
                 _operators.Add(editOperator);
+
+                _fileStoreService.WriteToFile(_operators, _operatorsFileName, false);
+
                 existingOperator = editOperator;
             }
             else
@@ -89,8 +94,6 @@ namespace K5BZI_Services
                 existingOperator.ClubCall = editOperator.ClubCall;
                 existingOperator.ClubName = editOperator.ClubName;
             }
-
-            _fileStoreService.WriteToFile(_operators, _operatorsFileName, false);
 
             return existingOperator;
         }

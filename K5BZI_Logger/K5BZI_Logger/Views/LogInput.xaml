@@ -382,6 +382,7 @@
                     Content="Auto Time"
                     Width="130"
                     FontSize="12"
+                    Background="Aquamarine"
                     Foreground="Navy"
                     FontFamily="Tahoma"
                     HorizontalAlignment="Left"
