@@ -13,10 +13,10 @@ namespace K5BZI_Models.Extensions
         private Type _enumType;
         public Type EnumType
         {
-            get { return this._enumType; }
+            get { return _enumType; }
             set
             {
-                if (value != this._enumType)
+                if (value != _enumType)
                 {
                     if (null != value)
                     {
@@ -25,7 +25,7 @@ namespace K5BZI_Models.Extensions
                             throw new ArgumentException("Type must be for an Enum.");
                     }
 
-                    this._enumType = value;
+                    _enumType = value;
                 }
             }
         }
@@ -54,7 +54,7 @@ namespace K5BZI_Models.Extensions
             return enumValues;
         }
 
-        private string GetEnumDescription(Enum enumObj)
+        public string GetEnumDescription(Enum enumObj)
         {
             FieldInfo fieldInfo = enumObj.GetType().GetField(enumObj.ToString());
 

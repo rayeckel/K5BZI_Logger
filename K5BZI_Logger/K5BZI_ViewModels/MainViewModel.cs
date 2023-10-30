@@ -1,10 +1,12 @@
 ﻿using K5BZI_Models;
+using K5BZI_Models.Enums;
 using K5BZI_Models.Extensions;
 using K5BZI_Models.Main;
 using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels.Interfaces;
 using System;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Forms;
 using MessageBox = System.Windows.Forms.MessageBox;
@@ -113,8 +115,10 @@ namespace K5BZI_ViewModels
                 AutoTimeAction = (_) => SetAutoTime(),
                 EditLogEntryAction = (_) => EditLogEntry(),
                 DeleteLogEntryAction = (_) => DeleteLogEntry(),
-                LostFocusAction = (_) => ExecuteLostFocusCommand(_),
-                CheckDuplicateEntriesAction = (_) => CheckForDuplicates()
+                LostFocusAction = (_) => ExecuteLostFocusCommand(),
+                CheckDuplicateEntriesAction = (_) => CheckForDuplicates(),
+                BandChangeAction = (_) => OnBandChanged(),
+                FrequencyChangeAction = (_) => OnFrequencyChanged(),
             };
 
             _defaultsService.SetDefaults(Model.LogEntry);
@@ -122,13 +126,96 @@ namespace K5BZI_ViewModels
             UpdateDataGridVisibilities();
         }
 
-        private void ExecuteLostFocusCommand(object argument)
+        private void ExecuteLostFocusCommand()
         {
             //reset:
             if (String.IsNullOrEmpty(Model.LogEntry.SignalReport.Sent))
                 Model.LogEntry.SignalReport.Sent = "599";
             if (String.IsNullOrEmpty(Model.LogEntry.SignalReport.Received))
                 Model.LogEntry.SignalReport.Received = "599";
+        }
+
+        private void OnBandChanged()
+        {
+            Model.LogEntry.Signal.Frequency = String.Empty;
+        }
+
+        private void OnFrequencyChanged()
+        {
+            //Parse out the decimals
+            if (Model.LogEntry.Signal.Frequency.Count(_ => _ == '.') >= 2)
+            {
+                var parsedFrequencyStringBuilder = new StringBuilder();
+
+                for (var x = 0; x < Model.LogEntry.Signal.Frequency.Length; x++)
+                {
+                    if (Model.LogEntry.Signal.Frequency[x] == '.' && (x < 5 || x > 7))
+                        continue;
+
+                    parsedFrequencyStringBuilder.Append(Model.LogEntry.Signal.Frequency[x]);
+                }
+
+                Model.LogEntry.Signal.Frequency = parsedFrequencyStringBuilder.ToString();
+            }
+
+            //Figure out which band
+            switch (BandFrequency.GetBand(Model.LogEntry.Signal.Frequency))
+            {
+                case IsSixThirtyMeters _:
+                    Model.LogEntry.Signal.Band = Band.SIXTHIRTYMETERS;
+                    break;
+                case IsOneSixtyMeters _:
+                    Model.LogEntry.Signal.Band = Band.ONESIXTYMETERS;
+                    break;
+                case IsEightyMeters _:
+                    Model.LogEntry.Signal.Band = Band.EIGHTYMETERS;
+                    break;
+                case IsSixtyMeters _:
+                    Model.LogEntry.Signal.Band = Band.SIXTYMETERS;
+                    break;
+                case IsFortyMeters _:
+                    Model.LogEntry.Signal.Band = Band.FORTYMETERS;
+                    break;
+                case IsThirtyMeters _:
+                    Model.LogEntry.Signal.Band = Band.THIRTYMETERS;
+                    break;
+                case IsTwentyMeters _:
+                    Model.LogEntry.Signal.Band = Band.TWENTYMETERS;
+                    break;
+                case IsSeventeenMeters _:
+                    Model.LogEntry.Signal.Band = Band.SEVENTEENMETERS;
+                    break;
+                case IsFifteenMeters _:
+                    Model.LogEntry.Signal.Band = Band.FIFTEENMETERS;
+                    break;
+                case IsTwelveMeters _:
+                    Model.LogEntry.Signal.Band = Band.TWELVEMETERS;
+                    break;
+                case IsElevenMeters _:
+                    Model.LogEntry.Signal.Band = Band.ELEVENMETERS;
+                    break;
+                case IsTenMeters _:
+                    Model.LogEntry.Signal.Band = Band.TENMETERS;
+                    break;
+                case IsSixMeters _:
+                    Model.LogEntry.Signal.Band = Band.SIXMETERS;
+                    break;
+                case IsTwoMeters _:
+                    Model.LogEntry.Signal.Band = Band.TWOMETERS;
+                    break;
+                case IsTwoTwenty _:
+                    Model.LogEntry.Signal.Band = Band.TWOTWENTY;
+                    break;
+                case IsFourForty _:
+                    Model.LogEntry.Signal.Band = Band.SEVENTYCENTEMETERS;
+                    break;
+                case IsNineHundred _:
+                    Model.LogEntry.Signal.Band = Band.THIRTYTHREECENTEMETERS;
+                    break;
+                default:
+                    Model.LogEntry.Signal.Band = Band.TWENTYTHREECENTEMETERS;
+                    break;
+            }
         }
 
         private void SaveLogEntry()

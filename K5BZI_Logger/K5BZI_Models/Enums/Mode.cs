@@ -7,7 +7,7 @@ namespace K5BZI_Models.Enums
         [Description("CW")]
         CW,
 
-        [Description("DIGI")]
+        [Description("DG")]
         DG,
 
         [Description("FM")]

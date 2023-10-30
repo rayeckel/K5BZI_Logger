@@ -4,47 +4,56 @@ namespace K5BZI_Models.Enums
 {
     public enum Band
     {
+        [Description("630m")]
+        SIXTHIRTYMETERS,
+
         [Description("160m")]
-        ONESIXTY,
+        ONESIXTYMETERS,
 
         [Description("80m")]
-        EIGHTY,
+        EIGHTYMETERS,
+
+        [Description("60m")]
+        SIXTYMETERS,
 
         [Description("40m")]
-        FOURTY,
+        FORTYMETERS,
 
         [Description("30m")]
-        THIRTY,
+        THIRTYMETERS,
 
         [Description("20m")]
-        TWENTY,
+        TWENTYMETERS,
 
         [Description("17m")]
-        SEVENTEEN,
+        SEVENTEENMETERS,
 
         [Description("15m")]
-        FIFTEEN,
+        FIFTEENMETERS,
 
         [Description("12m")]
-        TWELVE,
+        TWELVEMETERS,
+
+        [Description("11m")]
+        ELEVENMETERS,
 
         [Description("10m")]
-        TEN,
+        TENMETERS,
 
         [Description("6m")]
-        SIX,
+        SIXMETERS,
 
         [Description("2m")]
-        TWO,
+        TWOMETERS,
 
         [Description("1.25m")]
-        ONEPOINTTWOFIVE,
+        TWOTWENTY,
 
         [Description("70cm")]
         SEVENTYCENTEMETERS,
 
-        [Description("35cm")]
-        THIRTYFIVECENTEMETERS,
+        [Description("33cm")]
+        THIRTYTHREECENTEMETERS,
 
         [Description("23cm")]
         TWENTYTHREECENTEMETERS,

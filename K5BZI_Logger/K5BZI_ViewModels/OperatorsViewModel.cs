@@ -36,7 +36,7 @@ namespace K5BZI_ViewModels
 
         #region Public Methods
 
-        public void PopulateOperators(Event eventModel)
+        public void PopulateEventOperators(Event eventModel)
         {
             currentEvent = eventModel;
             Model.EventOperators.Clear();
@@ -97,7 +97,8 @@ namespace K5BZI_ViewModels
                 AddClubToEventAction = (_) => AddClubToEvent(),
                 AddOperatorAction = (_) => AddOperator(),
                 AddClubAction = (_) => AddClub(),
-                EditOperatorsAction = (_) => EditOperators()
+                EditOperatorsAction = (_) => EditOperators(),
+                ChangeOperatorAction = (_) => ChangeOperator()
             };
 
             EditOperator = new EditOperatorModel
@@ -117,6 +118,11 @@ namespace K5BZI_ViewModels
             }
         }
 
+        private void ChangeOperator()
+        {
+            EditOperators(true);
+        }
+
         private void SetCurrentOperator(Operator operatorObj)
         {
             if (operatorObj != null && operatorObj.IsClub)
@@ -129,6 +135,7 @@ namespace K5BZI_ViewModels
             UpdateOperator(operatorObj, true);
 
             EditOperator.IsOpen = false;
+            Model.IsOpen = false;
         }
 
         private void DeleteOperator(Operator operatorObj)
@@ -154,8 +161,9 @@ namespace K5BZI_ViewModels
             AddClub();
         }
 
-        private void EditOperators()
+        private void EditOperators(bool eventOnly = false)
         {
+            Model.ShowEventOperators = eventOnly;
             Model.ShowCloseButton = true;
             Model.IsOpen = true;
         }

@@ -22,6 +22,8 @@ namespace K5BZI_Models.ViewModelModels
 
         #region Properties
 
+        public bool ShowEventOperators { get; set; }
+
         public Operator SelectedEventOperator { get; set; }
 
         public Operator CurrentOperator { get; set; }
@@ -29,6 +31,14 @@ namespace K5BZI_Models.ViewModelModels
         public ObservableCollection<Operator> Operators { get; private set; }
 
         public ObservableCollection<Operator> EventOperators { get; private set; }
+
+        public ObservableCollection<Operator> ViewSelectedOperators
+        {
+            get
+            {
+                return ShowEventOperators ? EventOperators : Operators;
+            }
+        }
 
         #endregion
 
@@ -158,6 +168,17 @@ namespace K5BZI_Models.ViewModelModels
             }
         }
         public Action<object> EditOperatorsAction { get; set; }
+
+        private ICommand _changeOperatorCommand;
+        public ICommand ChangeOperatorCommand
+        {
+            get
+            {
+                return _changeOperatorCommand ??
+                    (_changeOperatorCommand = new DelegateCommand(ChangeOperatorAction, _ => { return true; }));
+            }
+        }
+        public Action<object> ChangeOperatorAction { get; set; }
 
         #endregion
     }

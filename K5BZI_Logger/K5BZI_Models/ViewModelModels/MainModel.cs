@@ -164,6 +164,28 @@ namespace K5BZI_Models.Main
         }
         public Action<object> CheckDuplicateEntriesAction { get; set; }
 
+        private ICommand _bandChangeCommand;
+        public ICommand BandChangeCommand
+        {
+            get
+            {
+                return _bandChangeCommand ?? (_bandChangeCommand =
+                    new DelegateCommand(BandChangeAction, _ => { return true; }));
+            }
+        }
+        public Action<object> BandChangeAction { get; set; }
+
+        private ICommand _frequencyChangeCommand;
+        public ICommand FrequencyChangeCommand
+        {
+            get
+            {
+                return _frequencyChangeCommand ?? (_frequencyChangeCommand =
+                    new DelegateCommand(FrequencyChangeAction, _ => { return true; }));
+            }
+        }
+        public Action<object> FrequencyChangeAction { get; set; }
+
         #endregion
     }
 }

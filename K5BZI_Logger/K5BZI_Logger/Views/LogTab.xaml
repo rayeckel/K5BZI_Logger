@@ -34,7 +34,7 @@
     <Controls:MetroTabItem.Content>
         <Grid
             HorizontalAlignment="Stretch"
-            MinWidth="900">
+            MinWidth="1050">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
@@ -58,18 +58,18 @@
                 <dgControls:DataGrid.Columns>
                     <dgControls:DataGridTextColumn 
                             Header="Id" 
-                            Width="175"
+                            Width="140"
                             Binding="{Binding Id}" 
                             FontSize="12" 
                             Visibility="Collapsed"/>
                     <dgControls:DataGridTextColumn 
                             Header="Time" 
-                            Width="175"
+                            Width="155"
                             Binding="{Binding ContactTime, UpdateSourceTrigger=PropertyChanged}" 
                             FontSize="12" />
                     <dgControls:DataGridTextColumn 
                             Header="Call" 
-                            Width="115"
+                            Width="100"
                             Binding="{Binding CallSign, UpdateSourceTrigger=PropertyChanged}" 
                             FontSize="12" >
                         <dgControls:DataGridTextColumn.ElementStyle>
@@ -127,7 +127,7 @@
                             FontSize="12" />
                     <dgControls:DataGridTextColumn
                             Header="Mode"
-                            Width="75"
+                            Width="65"
                             Binding="{Binding Signal.Mode, UpdateSourceTrigger=PropertyChanged}"
                             FontSize="12" />
                     <dgControls:DataGridTextColumn
@@ -152,15 +152,20 @@
                             FontSize="12" />-->
                     <dgControls:DataGridTextColumn
                             Visibility="{Binding Data.Model.CountryVisibility, Source={StaticResource DataContextProxy}, UpdateSourceTrigger=PropertyChanged}"
-                            Header="Country"
-                            Width="80"
+                            Header="Cntry"
+                            Width="60"
                             Binding="{Binding Country, UpdateSourceTrigger=PropertyChanged}"
                             FontSize="12" />
                     <dgControls:DataGridTextColumn
                             Visibility="{Binding Data.Model.ContinentVisibility, Source={StaticResource DataContextProxy}, UpdateSourceTrigger=PropertyChanged}"
-                            Header="Continent"
-                            Width="90"
+                            Header="Cont"
+                            Width="55"
                             Binding="{Binding Continent, UpdateSourceTrigger=PropertyChanged}"
+                            FontSize="12" />
+                    <dgControls:DataGridTextColumn
+                            Header="Notes"
+                            Width="150"
+                            Binding="{Binding Notes, UpdateSourceTrigger=PropertyChanged}"
                             FontSize="12" />
                     <dgControls:DataGridTemplateColumn Width="100">
                         <dgControls:DataGridTemplateColumn.CellTemplate>

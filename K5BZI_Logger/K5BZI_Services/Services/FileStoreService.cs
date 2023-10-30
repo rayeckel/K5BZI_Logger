@@ -72,8 +72,10 @@ namespace K5BZI_Services
                     return serializer.Deserialize<List<T>>(jsonTextReader);
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                ex.GetType();
+
                 return new List<T>();
             }
         }

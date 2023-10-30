@@ -5,7 +5,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-    xmlns:local="clr-namespace:K5BZI_Models.Extensions;assembly=K5BZI_Models"
+    xmlns:extensions="clr-namespace:K5BZI_Models.Extensions;assembly=K5BZI_Models"
     xmlns:enums="clr-namespace:K5BZI_Models.Enums;assembly=K5BZI_Models"
     xmlns:behaviors="clr-namespace:K5BZI_Services.Utilities;assembly=K5BZI_Services"
     xmlns:controls="clr-namespace:K5BZI_Logger.Controls"
@@ -62,6 +62,7 @@
                         IsEnabled="{Binding ContactTimeEnabled}"
                         Text="{Binding LogEntry.ContactTime, Mode=TwoWay}"/>
                     <Button 
+                        Margin="5,10,0,0"
                         IsTabStop="False"
                         Content="Manual Time"
                         Width="130"
@@ -156,37 +157,31 @@
                     </StackPanel>
                     <StackPanel
                         Margin="5,0,0,0">
-                        <Label
+                        <Label 
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
                             FontFamily="Tahoma"
                             Foreground="DarkSlateBlue"
-                            Content="CQ Zone"/>
+                            Content="Notes"/>
                         <TextBox
-                            TabIndex="2"
-                            behaviors:TextboxBehavior.ClearOnFocused="True"
+                            TabIndex="3"
                             Height="27"
-                            x:Name="lblCQZone"
+                            x:Name="notes"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"                  
-                            Width="35"
+                            Width="195"
                             BorderThickness="1"
-                            Text="{Binding LogEntry.CQZone, Mode=TwoWay}">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="LostFocus" >
-                                    <i:InvokeCommandAction Command="{Binding LostFocusCommand}" />
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                        </TextBox>
+                            Text="{Binding LogEntry.Notes, Mode=TwoWay}"/>
                     </StackPanel>
                     <Button 
-                        TabIndex="3"
-                        Margin="152,0,0,0"
+                        TabIndex="4"
+                        Margin="145,0,10,0"
                         Content="Log It!"
                         Width="100"
-                        Height="25"
+                        Height="28"
                         FontSize="12"
-                        Foreground="Navy"
+                        Foreground="White"
+                        Background="SteelBlue"
                         FontFamily="Tahoma"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Bottom"
@@ -214,7 +209,13 @@
                             VerticalAlignment="Center"
                             Width="70"
                             BorderThickness="1"
-                            Text="{Binding LogEntry.Signal.Frequency, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            Text="{Binding LogEntry.Signal.Frequency, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus" >
+                                    <i:InvokeCommandAction Command="{Binding FrequencyChangeCommand}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
                     </StackPanel>
                     <StackPanel
                         Margin="5,0,0,0">
@@ -234,11 +235,16 @@
                             HorizontalAlignment="Left"
                             HorizontalContentAlignment="Left"
                             BorderThickness="1"
-                            ItemsSource= "{local:EnumBindingSourceExtension EnumType={x:Type enums:Band}}"
+                            ItemsSource= "{extensions:EnumBindingSourceExtension EnumType={x:Type enums:Band}}"
                             SelectedItem="{Binding LogEntry.Signal.Band}">
                             <i:Interaction.Behaviors>
                                 <controls:WatermarkBehavior Text="Select" />
                             </i:Interaction.Behaviors>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus" >
+                                    <i:InvokeCommandAction Command="{Binding BandChangeCommand}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                         </ComboBox>
                     </StackPanel>
                     <StackPanel
@@ -257,7 +263,7 @@
                             HorizontalAlignment="Left"
                             HorizontalContentAlignment="Left"
                             Margin="0,0,5,0"
-                            ItemsSource= "{local:EnumBindingSourceExtension EnumType={x:Type enums:Mode}}"
+                            ItemsSource= "{extensions:EnumBindingSourceExtension EnumType={x:Type enums:Mode}}"
                             SelectedItem="{Binding LogEntry.Signal.Mode}">
                             <i:Interaction.Behaviors>
                                 <controls:WatermarkBehavior Text="Select" />
@@ -266,21 +272,28 @@
                     </StackPanel>
                     <StackPanel
                         Margin="5,0,0,0">
-                        <Label 
+                        <Label
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
                             FontFamily="Tahoma"
                             Foreground="DarkSlateBlue"
-                            Content="Notes"/>
-                            <TextBox
-                            TabIndex="4"
+                            Content="CQ Zone"/>
+                        <TextBox
+                            TabIndex="7"
+                            behaviors:TextboxBehavior.ClearOnFocused="True"
                             Height="27"
-                            x:Name="notes"
+                            x:Name="lblCQZone"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"                  
-                            Width="175"
+                            Width="35"
                             BorderThickness="1"
-                            Text="{Binding LogEntry.Notes, Mode=TwoWay}"/>
+                            Text="{Binding LogEntry.CQZone, Mode=TwoWay}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus" >
+                                    <i:InvokeCommandAction Command="{Binding LostFocusCommand}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel
@@ -322,7 +335,7 @@
                             HorizontalAlignment="Left"
                             HorizontalContentAlignment="Left"
                             Margin="0,0,5,0"
-                            ItemsSource= "{local:EnumBindingSourceExtension EnumType={x:Type enums:Assisted}}"
+                            ItemsSource= "{extensions:EnumBindingSourceExtension EnumType={x:Type enums:Assisted}}"
                             SelectedItem="{Binding LogEntry.Assisted, Mode=TwoWay}">
                         </ComboBox>
                     </StackPanel>
