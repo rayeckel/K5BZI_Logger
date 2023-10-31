@@ -1,8 +1,6 @@
 ﻿using K5BZI_ViewModels.Interfaces;
 using MahApps.Metro.SimpleChildWindow;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Windows;
 
 namespace K5BZI_Logger.Views
 {

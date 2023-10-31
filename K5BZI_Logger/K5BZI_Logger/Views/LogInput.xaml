@@ -13,12 +13,11 @@
     FocusManager.FocusedElement="{x:Reference lblCall}">
     <Border
         BorderThickness="1"
-        BorderBrush="Navy"
-        MinWidth="600">
+        BorderBrush="Navy">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30" />
-                <RowDefinition Height="260" />
+                <RowDefinition Height="160" />
             </Grid.RowDefinitions>
             <TextBlock 
                 Grid.Row="0"
@@ -175,7 +174,7 @@
                     </StackPanel>
                     <Button 
                         TabIndex="4"
-                        Margin="145,0,10,0"
+                        Margin="50,0,10,0"
                         Content="Log It!"
                         Width="100"
                         Height="28"
@@ -238,7 +237,7 @@
                             ItemsSource= "{extensions:EnumBindingSourceExtension EnumType={x:Type enums:Band}}"
                             SelectedItem="{Binding LogEntry.Signal.Band}">
                             <i:Interaction.Behaviors>
-                                <controls:WatermarkBehavior Text="Select" />
+                                <controls:WatermarkBehavior x:Name="Watermark1" Text="Select" />
                             </i:Interaction.Behaviors>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="LostFocus" >
@@ -266,7 +265,7 @@
                             ItemsSource= "{extensions:EnumBindingSourceExtension EnumType={x:Type enums:Mode}}"
                             SelectedItem="{Binding LogEntry.Signal.Mode}">
                             <i:Interaction.Behaviors>
-                                <controls:WatermarkBehavior Text="Select" />
+                                <controls:WatermarkBehavior x:Name="Watermark2" Text="Select" />
                             </i:Interaction.Behaviors>
                         </ComboBox>
                     </StackPanel>

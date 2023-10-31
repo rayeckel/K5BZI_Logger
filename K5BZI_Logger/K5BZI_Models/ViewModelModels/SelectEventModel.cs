@@ -29,6 +29,14 @@ namespace K5BZI_Models.ViewModelModels
 
         public ObservableCollection<Event> ExistingEvents { get; private set; }
 
+        public string SelectLogTitle
+        {
+            get
+            {
+                return ExistingEvents.Any() ? "Select Log" : "Create Log";
+            }
+        }
+
         public Visibility SelectLogVisibility
         {
             get
