@@ -5,14 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d">
     <Grid
-        MaxWidth="1000">
+        MaxWidth="1200">
         <Grid.RowDefinitions>
             <RowDefinition Height="130" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="410" />
+            <ColumnDefinition Width="490" />
             <ColumnDefinition Width="120" />
-            <ColumnDefinition Width="370" />
+            <ColumnDefinition Width="350" />
             <ColumnDefinition Width="125" />
         </Grid.ColumnDefinitions>
         <Grid x:Name="EventGrid"
