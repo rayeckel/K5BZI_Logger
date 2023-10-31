@@ -141,7 +141,10 @@ namespace K5BZI_ViewModels
 
         private void DeleteOperator(Operator operatorObj)
         {
-            var deleteConfirmName = String.Format("Delete {0}?", operatorObj.CallSign);
+            var deleteConfirmName = Model.ShowEventOperators ?
+                String.Format("Removing {0} from the event.", operatorObj.CallSign) :
+                String.Format("Deleting {0}.", operatorObj.CallSign);
+
             var confirmResult = MessageBox.Show(deleteConfirmName, "Are you sure?", MessageBoxButtons.YesNo);
 
             if (confirmResult == DialogResult.Yes)
