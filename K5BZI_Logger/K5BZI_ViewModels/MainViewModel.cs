@@ -45,6 +45,7 @@ namespace K5BZI_ViewModels
         public void SelectEvent(Event selectedEvent)
         {
             Model.Event = selectedEvent;
+            Model.EventName = selectedEvent.EventName;
             Model.LogEntries.Clear();
 
             var logEntries = _logListingService.ReadLog(Model.Event.LogFileName);

@@ -1,5 +1,6 @@
 ﻿using K5BZI_Models.Attributes;
 using K5BZI_Models.Base;
+using Newtonsoft.Json;
 using PropertyChanged;
 using System.Windows;
 
@@ -10,6 +11,7 @@ namespace K5BZI_Models
     {
         public bool Selected { get; set; }
 
+        [JsonProperty(Required = Required.Always)]
         [Cabrillo("CALLSIGN")]
         public string CallSign { get; set; }
 
@@ -59,6 +61,7 @@ namespace K5BZI_Models
             }
         }
 
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public string ClubCall { get; set; }
 
         [Cabrillo("NAME")]
@@ -70,24 +73,45 @@ namespace K5BZI_Models
             }
         }
 
-        public string FirstName { get; set; }
+        private string _firstName;
+        [JsonProperty(Required = Required.Always)]
+        public string FirstName
+        {
+            get
+            {
+                return IsClub ?
+                    ClubName.Trim() :
+                    _firstName?.Trim();
+            }
+            set
+            {
+                _firstName = value;
+            }
+        }
 
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public string LastName { get; set; }
 
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public string ClubName { get; set; }
 
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         [Cabrillo("ADDRESS")]
         public string Address { get; set; }
 
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         [Cabrillo("ADDRESS-CITY")]
         public string City { get; set; }
 
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         [Cabrillo("ADDRESS-STATE-PROVINCE")]
         public string State { get; set; }
 
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         [Cabrillo("ADDRESS-POSTALCODE")]
         public string ZipCode { get; set; }
 
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         [Cabrillo("ADDRESS-COUNTRY")]
         public string Country { get; set; }
     }

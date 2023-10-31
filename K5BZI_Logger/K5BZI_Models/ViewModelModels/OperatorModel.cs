@@ -22,6 +22,16 @@ namespace K5BZI_Models.ViewModelModels
 
         #region Properties
 
+        public string OperatorsTitle
+        {
+            get
+            {
+                return ShowEventOperators ?
+                    $"EVENT Operators - {EventName}" :
+                    "ALL Operators";
+            }
+        }
+
         public bool ShowEventOperators { get; set; }
 
         public Operator SelectedEventOperator { get; set; }

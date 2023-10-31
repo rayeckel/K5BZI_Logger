@@ -39,6 +39,7 @@ namespace K5BZI_ViewModels
         public void PopulateEventOperators(Event eventModel)
         {
             currentEvent = eventModel;
+            Model.EventName = eventModel.EventName;
             Model.EventOperators.Clear();
 
             var currentEventOperators = currentEvent.Operators
@@ -145,9 +146,15 @@ namespace K5BZI_ViewModels
 
             if (confirmResult == DialogResult.Yes)
             {
-                _operatorService.DeleteOperator(operatorObj);
+                Model.EventOperators.Remove(operatorObj);
 
-                Model.Operators.Remove(operatorObj);
+                if (!Model.ShowEventOperators)
+                {
+                    _operatorService.DeleteOperator(operatorObj);
+                    Model.Operators.Remove(operatorObj);
+                }
+
+                _eventService.UpdateEvent(currentEvent, Model.EventOperators.ToList());
             }
         }
 
