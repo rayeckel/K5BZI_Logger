@@ -85,7 +85,7 @@ namespace K5BZI_Models
 
         public int Id { get; set; }
 
-        public int EventId { get; set; }
+        public Guid EventId { get; set; }
 
         public Signal Signal { get; set; }
 

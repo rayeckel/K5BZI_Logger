@@ -46,7 +46,7 @@ namespace K5BZI_Services
 
             return UpdateEvent(new Event
             {
-                Id = 0,
+                Id = Guid.NewGuid(),
                 EventName = eventName,
                 LogFileName = String.Format("{0}_{1}", newEventName, DateTime.UtcNow.ToString("yyyy'-'MM'-'dd")),
                 CreatedDate = DateTime.Now
@@ -57,12 +57,9 @@ namespace K5BZI_Services
         {
             var existing = _eventList.FirstOrDefault(_ => _.Id == editEvent.Id);
 
-            if (editEvent.Id <= 0 || existing == null)
+            if (editEvent.Id == Guid.Empty || existing == null)
             {
-                editEvent.Id = 1;
-
-                if (_eventList.Any())
-                    editEvent.Id = _eventList.Select(_ => _.Id).Max() + 1;
+                editEvent.Id = Guid.NewGuid();
 
                 operators.ForEach(_ => editEvent.Operators.Add(_));
 
@@ -78,6 +75,7 @@ namespace K5BZI_Services
                 existing.DXCC = editEvent.DXCC;
                 existing.EventName = editEvent.EventName;
                 existing.IsActive = editEvent.IsActive;
+                existing.IsDeleted = editEvent.IsDeleted;
                 existing.ItuZone = editEvent.ItuZone;
                 existing.LogFileName = editEvent.LogFileName;
                 existing.Overlay = editEvent.Overlay;

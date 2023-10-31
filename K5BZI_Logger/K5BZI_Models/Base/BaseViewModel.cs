@@ -8,7 +8,7 @@ namespace K5BZI_Models.Base
         public BaseViewModel()
         {
             IsOpen = false;
-            ShowCloseButton = true;
+            ShowCloseButton = false;
         }
 
         public string EventName { get; set; }

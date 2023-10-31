@@ -42,7 +42,7 @@ namespace K5BZI_Logger
             services.AddSingleton<Main>();
         }
 
-        protected override async void OnStartup(StartupEventArgs e)
+        protected override void OnStartup(StartupEventArgs e)
         {
             var mainWindow = ServiceProvider.GetService<Main>();
 

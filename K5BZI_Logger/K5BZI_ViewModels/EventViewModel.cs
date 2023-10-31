@@ -5,7 +5,8 @@ using K5BZI_ViewModels.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
+using System.Windows.Forms;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace K5BZI_ViewModels
 {
@@ -49,7 +50,8 @@ namespace K5BZI_ViewModels
             {
                 CreateNewLogAction = (_) => CreateNewEvent(Model.EventName),
                 SelectLogAction = (_) => SelectLog(),
-                ChangeEventAction = (_) => ChangeEvent()
+                ChangeEventAction = (_) => ChangeEvent(),
+                DeleteEventAction = (_) => DeleteEvent((Guid)_)
             };
 
             EditModel = new EditEventModel
@@ -65,16 +67,21 @@ namespace K5BZI_ViewModels
 
         private void GetExistingEvents()
         {
-            var events = _eventService.GetAllEvents();
+            Model.ExistingEvents.Clear();
 
-            Model.SelectedEvent = events.FirstOrDefault();
+            _eventService
+                .GetAllEvents()?
+                .OrderByDescending(_ => _.CreatedDate)
+                .ToList()
+                .ForEach(eventObj =>
+                {
+                    if (!eventObj.IsDeleted)
+                    {
+                        Model.ExistingEvents.Add(eventObj);
+                    }
+                });
 
-            events.ForEach(item =>
-            {
-                Model.ExistingEvents.Add(item);
-            });
-
-            Model.ExistingEvents.OrderBy(_ => _.CreatedDate);
+            Model.SelectedEvent = Model.ExistingEvents.FirstOrDefault();
         }
 
         private void CreateNewEvent(string eventName)
@@ -105,6 +112,22 @@ namespace K5BZI_ViewModels
         {
             Model.ShowCloseButton = true;
             Model.IsOpen = true;
+        }
+
+        private void DeleteEvent(Guid Id)
+        {
+            var result = MessageBox.Show("Are you sure you want to delete this event?", "", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
+            {
+                var editEvent = Model.ExistingEvents.First(_ => _.Id == Id);
+                
+                editEvent.IsDeleted = true;
+
+                _eventService.UpdateEvent(editEvent, editEvent.Operators.ToList());
+
+                GetExistingEvents();
+            }
         }
 
         private void UpdateEvent()

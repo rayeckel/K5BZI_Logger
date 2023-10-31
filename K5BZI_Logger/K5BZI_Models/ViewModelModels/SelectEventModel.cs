@@ -83,6 +83,17 @@ namespace K5BZI_Models.ViewModelModels
         }
         public Action<object> ChangeEventAction { get; set; }
 
+        private ICommand _deleteEventCommand;
+        public ICommand DeleteEventCommand
+        {
+            get
+            {
+                return _deleteEventCommand ??
+                    (_deleteEventCommand = new DelegateCommand(DeleteEventAction, _ => { return true; }));
+            }
+        }
+        public Action<object> DeleteEventAction { get; set; }
+
         #endregion
     }
 }

@@ -17,7 +17,7 @@ namespace K5BZI_Models
             IsActive = true;
         }
 
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public ObservableCollection<Operator> Operators { get; set; }
 

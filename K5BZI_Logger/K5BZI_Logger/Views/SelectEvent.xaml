@@ -7,6 +7,7 @@
     xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:local="clr-namespace:K5BZI_Logger.Views"
     Height="750" 
     Width="1200"
     mc:Ignorable="d"
@@ -27,14 +28,15 @@
     </simpleChildWindow:ChildWindow.Icon>
     -->
     <Grid 
+        x:Name="MainGrid"
         HorizontalAlignment="Center" 
         VerticalAlignment="Center" 
         Background="AliceBlue"
         Height="300">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="30" />
-                <RowDefinition Height="50" />
+                <RowDefinition Height="35" />
+                <RowDefinition Height="55" />
                 <RowDefinition Height="40" />
                 <RowDefinition Height="30" />
                 <RowDefinition Height="50" />
@@ -66,7 +68,7 @@
                 Grid.Row="1"
                 Grid.Column="0"
                 Visibility="{Binding SelectLogVisibility}"
-                Height="30"
+                Height="34"
                 Width="300" 
                 Margin="20,20,0,0"
                 HorizontalAlignment="Left"
@@ -78,9 +80,20 @@
                 BorderThickness="1">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding EventName}" />
-                        </StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="230"/>
+                                <ColumnDefinition Width="60"/>
+                            </Grid.ColumnDefinitions>
+                            <Label 
+                                Grid.Column="0"
+                                Content="{Binding EventName}" />
+                            <Button
+                                Grid.Column="1"
+                                Content="Delete" 
+                                CommandParameter="{Binding Id}"
+                                Command="{Binding ElementName=MainGrid, Path=DataContext.DeleteEventCommand}"/>
+                        </Grid>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>

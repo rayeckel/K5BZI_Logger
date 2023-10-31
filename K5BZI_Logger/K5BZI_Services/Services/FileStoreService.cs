@@ -84,12 +84,11 @@ namespace K5BZI_Services
             where T : class
         {
             var fileName = CreateFilePath(logFileName, isLogFile);
-            var serializer = new JsonSerializer();
 
             using (var sw = new StreamWriter(File.Open(fileName, FileMode.OpenOrCreate)))
             using (var writer = new JsonTextWriter(sw))
             {
-                await Task.Run(() => serializer.Serialize(writer, LogEntries));
+                new JsonSerializer().Serialize(writer, LogEntries);
             }
 
             return true;
