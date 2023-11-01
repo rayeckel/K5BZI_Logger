@@ -1,6 +1,9 @@
-﻿namespace K5BZI_Models.Enums
+﻿using System.ComponentModel;
+using K5BZI_Models.Extensions;
+
+namespace K5BZI_Models.Enums
 {
-    /*
+    [TypeConverter(typeof(EnumDescriptionConverter))]
     public enum Band
     {
         [Description("630m")]
@@ -68,5 +71,5 @@
 
         [Description("3cm")]
         THREECENTEMETERS
-    }*/
+    }
 }

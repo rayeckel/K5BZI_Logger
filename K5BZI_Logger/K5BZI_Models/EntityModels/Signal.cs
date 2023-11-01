@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using K5BZI_Models.Attributes;
 using K5BZI_Models.Enums;
 using K5BZI_Models.Extensions;
@@ -9,7 +11,7 @@ namespace K5BZI_Models
     [AddINotifyPropertyChangedInterface]
     public class Signal
     {
-        public Bands Band { get; set; }
+        public Band Band { get; set; }
 
         [Adif("BAND")]
         [Cabrillo("CATEGORY-BAND")]
@@ -17,7 +19,7 @@ namespace K5BZI_Models
         {
             get
             {
-                return new EnumDescriptionConverter()
+                return new EnumDescriptionConverter(typeof(Band))
                     .GetEnumDescription(Band);
             }
         }
@@ -31,73 +33,19 @@ namespace K5BZI_Models
         [Adif("FREQ")]
         public string Frequency { get; set; }
 
-        public enum Bands
+        public IEnumerable<Band> BandValues
         {
-            [Description("630m")]
-            SIXTHIRTYMETERS = 1,
+            get { return Enum.GetValues(typeof(Band)).Cast<Band>(); }
+        }
 
-            [Description("160m")]
-            ONESIXTYMETERS = 2,
+        public IEnumerable<Mode> ModeValues
+        {
+            get { return Enum.GetValues(typeof(Mode)).Cast<Mode>(); }
+        }
 
-            [Description("80m")]
-            EIGHTYMETERS = 3,
-
-            [Description("60m")]
-            SIXTYMETERS,
-
-            [Description("40m")]
-            FORTYMETERS,
-
-            [Description("30m")]
-            THIRTYMETERS,
-
-            [Description("20m")]
-            TWENTYMETERS,
-
-            [Description("17m")]
-            SEVENTEENMETERS,
-
-            [Description("15m")]
-            FIFTEENMETERS,
-
-            [Description("12m")]
-            TWELVEMETERS,
-
-            [Description("11m")]
-            ELEVENMETERS,
-
-            [Description("10m")]
-            TENMETERS,
-
-            [Description("6m")]
-            SIXMETERS,
-
-            [Description("2m")]
-            TWOMETERS,
-
-            [Description("1.25m")]
-            TWOTWENTY,
-
-            [Description("70cm")]
-            SEVENTYCENTEMETERS,
-
-            [Description("33cm")]
-            THIRTYTHREECENTEMETERS,
-
-            [Description("23cm")]
-            TWENTYTHREECENTEMETERS,
-
-            [Description("13cm")]
-            THIRTEENCENTEMETERS,
-
-            [Description("9cm")]
-            NINECENTEMETERS,
-
-            [Description("6cm")]
-            SIXCENTEMETERS,
-
-            [Description("3cm")]
-            THREECENTEMETERS
+        public IEnumerable<Assisted> AssistedValues
+        {
+            get { return Enum.GetValues(typeof(Assisted)).Cast<Assisted>(); }
         }
     }
 }

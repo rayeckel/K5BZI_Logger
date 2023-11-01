@@ -2,57 +2,34 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.Reflection;
-using System.Windows.Data;
 
 namespace K5BZI_Models.Extensions
 {
-    public class EnumDescriptionConverter : IValueConverter
+    public class EnumDescriptionConverter : EnumConverter
     {
-        /*
-        private Type _enumType;
-        public Type EnumType
+        public EnumDescriptionConverter(Type type) : base(type) { }
+
+        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
-            get { return _enumType; }
-            set
+            if (destinationType == typeof(string))
             {
-                if (value != _enumType)
+                if (value != null)
                 {
-                    if (null != value)
+                    FieldInfo fieldInfo = value.GetType().GetField(value.ToString());
+
+                    if (fieldInfo != null)
                     {
-                        Type enumType = Nullable.GetUnderlyingType(value) ?? value;
-                        if (!enumType.IsEnum)
-                            throw new ArgumentException("Type must be for an Enum.");
+                        var attributes = (DescriptionAttribute[])fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+                        return ((attributes.Length > 0) && (!string.IsNullOrEmpty(attributes[0].Description))) ? attributes[0].Description : value.ToString();
                     }
-
-                    _enumType = value;
                 }
-            }
-        }
 
-        public EnumBindingSourceExtension() { }
-
-        public EnumBindingSourceExtension(Type enumType)
-        {
-            this.EnumType = enumType;
-        }
-
-        public override object ProvideValue(IServiceProvider serviceProvider)
-        {
-            if (null == this._enumType)
-                throw new InvalidOperationException("The EnumType must be specified.");
-
-            Type actualEnumType = Nullable.GetUnderlyingType(this._enumType) ?? this._enumType;
-
-            var enumValues = new List<string>();
-
-            foreach (var enumObject in Enum.GetValues(this._enumType))
-            {
-                enumValues.Add(GetEnumDescription((Enum)enumObject));
+                return string.Empty;
             }
 
-            return enumValues;
+            return base.ConvertTo(context, culture, value, destinationType);
         }
-        */
 
         public string GetEnumDescription(Enum enumObj)
         {
@@ -69,18 +46,6 @@ namespace K5BZI_Models.Extensions
                 DescriptionAttribute attrib = attribArray[0] as DescriptionAttribute;
                 return attrib.Description;
             }
-        }
-
-        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            Enum myEnum = (Enum)value;
-            string description = GetEnumDescription(myEnum);
-            return description;
-        }
-
-        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return string.Empty;
         }
     }
 }
