@@ -1,8 +1,4 @@
-﻿using ExcelDataReader;
-using K5BZI_Models;
-using K5BZI_Services.Interfaces;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
@@ -10,8 +6,12 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using ExcelDataReader;
+using K5BZI_Models;
+using K5BZI_Services.Interfaces;
+using Newtonsoft.Json;
 
-namespace K5BZI_Services
+namespace K5BZI_Services.Services
 {
     public class FileStoreService : IFileStoreService
     {

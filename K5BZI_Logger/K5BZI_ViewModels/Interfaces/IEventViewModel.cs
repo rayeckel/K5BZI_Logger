@@ -4,7 +4,7 @@ namespace K5BZI_ViewModels.Interfaces
 {
     public interface IEventViewModel
     {
-        SelectEventModel Model { get; }
+        SelectEventModel EventModel { get; }
 
         EditEventModel EditModel { get; }
     }

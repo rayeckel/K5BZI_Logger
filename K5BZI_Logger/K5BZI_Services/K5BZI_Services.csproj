@@ -101,6 +101,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\ISubmitService.cs" />
     <Compile Include="Services\DefaultsService.cs" />
     <Compile Include="Services\EventService.cs" />
     <Compile Include="Services\ExcelFileService.cs" />
@@ -113,13 +114,14 @@
     <Compile Include="Interfaces\IExcelFileService.cs" />
     <Compile Include="Interfaces\IExportService.cs" />
     <Compile Include="Interfaces\IFileStoreService.cs" />
-    <Compile Include="Interfaces\ILogListingService.cs" />
+    <Compile Include="Interfaces\ILogService.cs" />
     <Compile Include="Interfaces\IOperatorService.cs" />
     <Compile Include="Services\LogListingService.cs" />
     <Compile Include="Interfaces\INetworkService.cs" />
     <Compile Include="Services\NetworkService.cs" />
     <Compile Include="Services\OperatorService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\SubmitService.cs" />
     <Compile Include="Utilities\BaseUtility.cs" />
     <Compile Include="Utilities\BoolInverterConverter.cs" />
     <Compile Include="Utilities\EntityUtility.cs" />

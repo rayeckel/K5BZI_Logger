@@ -13,9 +13,8 @@ namespace K5BZI_Logger.Views
         {
             InitializeComponent();
 
-            var operatorsViewModel = App.ServiceProvider.GetRequiredService<IOperatorsViewModel>();
-
-            DataContext = operatorsViewModel.EditOperator;
+            DataContext =
+                App.ServiceProvider.GetRequiredService<IOperatorsViewModel>().EditOperator;
         }
     }
 }

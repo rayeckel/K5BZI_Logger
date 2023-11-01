@@ -16,7 +16,7 @@ namespace K5BZI_Logger.Views
             var operatorsViewModel = App.ServiceProvider.GetRequiredService<IOperatorsViewModel>();
             var eventViewModel = App.ServiceProvider.GetRequiredService<IEventViewModel>();
 
-            OperatorGrid.DataContext = operatorsViewModel.Model;
+            OperatorGrid.DataContext = operatorsViewModel.OperatorsModel;
 
             EventGrid.DataContext = eventViewModel;
         }

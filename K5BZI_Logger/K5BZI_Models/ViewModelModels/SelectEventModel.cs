@@ -1,11 +1,11 @@
-﻿using K5BZI_Models.Base;
-using Microsoft.VisualStudio.PlatformUI;
-using PropertyChanged;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using K5BZI_Models.Base;
+using Microsoft.VisualStudio.PlatformUI;
+using PropertyChanged;
 
 namespace K5BZI_Models.ViewModelModels
 {
@@ -25,11 +25,11 @@ namespace K5BZI_Models.ViewModelModels
 
         #region Properties
 
-        public Event SelectedEvent { get; set; }
+        public Event Event { get; set; }
 
         public ObservableCollection<Event> ExistingEvents { get; private set; }
 
-        public string SelectLogTitle
+        public string SelectEventTitle
         {
             get
             {
@@ -37,7 +37,7 @@ namespace K5BZI_Models.ViewModelModels
             }
         }
 
-        public Visibility SelectLogVisibility
+        public Visibility SelectEventVisibility
         {
             get
             {
@@ -45,7 +45,7 @@ namespace K5BZI_Models.ViewModelModels
             }
         }
 
-        public Visibility NewLogVisibility
+        public Visibility NewEventVisibility
         {
             get
             {
@@ -57,28 +57,27 @@ namespace K5BZI_Models.ViewModelModels
 
         #region Commands
 
-        private ICommand _selectLogCommand;
-        public ICommand SelectLogCommand
+        private ICommand _viewFileStoreCommand;
+        public ICommand ViewFileStoreCommand
         {
             get
             {
-                return _selectLogCommand ?? (_selectLogCommand =
-                    new DelegateCommand(SelectLogAction, _ => { return SelectedEvent != null; }));
+                return _viewFileStoreCommand ??
+                    (_viewFileStoreCommand = new DelegateCommand(ViewFileStoreAction, _ => { return true; }));
             }
         }
-        public Action<object> SelectLogAction { get; set; }
+        public Action<object> ViewFileStoreAction { get; set; }
 
-        private ICommand _createNewLogCommand;
-        public ICommand CreateNewLogCommand
+        private ICommand _selectEventCommand;
+        public ICommand SelectEventCommand
         {
             get
             {
-                return _createNewLogCommand ??
-                    (_createNewLogCommand =
-                        new DelegateCommand(CreateNewLogAction, _ => { return !String.IsNullOrEmpty(EventName); }));
+                return _selectEventCommand ?? (_selectEventCommand =
+                    new DelegateCommand(SelectEventAction, _ => { return Event != null; }));
             }
         }
-        public Action<object> CreateNewLogAction { get; set; }
+        public Action<object> SelectEventAction { get; set; }
 
         private ICommand _changeEventCommand;
         public ICommand ChangeEventCommand

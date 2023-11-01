@@ -1,7 +1,5 @@
 ﻿using K5BZI_ViewModels.Interfaces;
 using MahApps.Metro.Controls;
-using System;
-using System.Windows.Threading;
 
 namespace K5BZI_Logger.Views
 {
@@ -15,15 +13,9 @@ namespace K5BZI_Logger.Views
         {
             InitializeComponent();
 
-            DataContext = viewModel.Model;
             DefaultsButton.DataContext = defaultsViewModel.Model;
             EventsButton.DataContext = eventViewModel.EditModel;
-            OperatorsButton.DataContext = operatorsViewModel.Model;
-
-            viewModel.Model.Timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
-            {
-                viewModel.Model.LogEntry.ContactTime = DateTime.Now;
-            }, Dispatcher);
+            OperatorsButton.DataContext = operatorsViewModel.OperatorsModel;
         }
     }
 }

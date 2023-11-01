@@ -1,11 +1,11 @@
-﻿using K5BZI_Logger.Views;
-using K5BZI_Services;
+﻿using System;
+using System.Windows;
+using K5BZI_Logger.Views;
 using K5BZI_Services.Interfaces;
+using K5BZI_Services.Services;
 using K5BZI_ViewModels;
 using K5BZI_ViewModels.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Windows;
 
 namespace K5BZI_Logger
 {
@@ -27,18 +27,25 @@ namespace K5BZI_Logger
 
         private void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IFileStoreService, FileStoreService>();
-            services.AddScoped<ILogListingService, LogListingService>();
-            services.AddScoped<IOperatorService, OperatorService>();
-            services.AddScoped<IExportService, ExportService>();
             services.AddScoped<IDefaultsService, DefaultsService>();
             services.AddScoped<IExcelFileService, ExcelFileService>();
+            services.AddScoped<IFileStoreService, FileStoreService>();
+            services.AddScoped<ILogService, LogListingService>();
+            services.AddScoped<IOperatorService, OperatorService>();
+            services.AddScoped<IExportService, ExportService>();
+            services.AddSingleton<ISubmitService, SubmitService>();
+            services.AddSingleton<IEventService, EventService>();
+            services.AddSingleton<INetworkService, NetworkService>();
+
             services.AddScoped<IExportViewModel, ExportViewModel>();
             services.AddSingleton<IMainViewModel, MainViewModel>();
+            services.AddSingleton<ILogViewModel, LogViewModel>();
             services.AddSingleton<IEventViewModel, EventViewModel>();
             services.AddSingleton<IOperatorsViewModel, OperatorsViewModel>();
             services.AddSingleton<IDefaultsViewModel, DefaultsViewModel>();
-            services.AddSingleton<IEventService, EventService>();
+            services.AddSingleton<ISubmitViewModel, SubmitViewModel>();
+            services.AddSingleton<INetworkViewModel, NetworkViewModel>();
+
             services.AddSingleton<Main>();
         }
 

@@ -5,8 +5,8 @@
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" 
         xmlns:local="clr-namespace:K5BZI_Logger.Views"
         Title="K5BZI Logger"
-        Height="835"
-        MinWidth="1200"
+        Height="735"
+        MinWidth="1250"
         BorderThickness="1"
         GlowBrush="{DynamicResource AccentColorBrush}"
         ResizeMode="CanResizeWithGrip"
@@ -14,11 +14,12 @@
         Background="AliceBlue">
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
+            <Button x:Name ="ViewFileStoreButton" Command="{Binding ViewFileStoreCommand}" Content="Open Log Directory" />
             <Button x:Name ="DefaultsButton" Command="{Binding EditDefaultsCommand}" Content="Defaults" />
             <Button x:Name ="EventsButton" Command="{Binding EditEventsCommand}" Content="Events" />
             <Button x:Name ="OperatorsButton" Command="{Binding EditOperatorsCommand}" Content="Operators" />
             <Button x:Name ="ExportLogButton" Command="{Binding SelectExportLogCommand}" Content="Export Log" />
-            <Button x:Name ="ViewFileStoreButton" Command="{Binding ViewFileStoreCommand}" Content="Open Log Directory" />
+            <Button x:Name ="SubmitLogButton" Command="{Binding SubmitLogCommand}" Content="Submit Log" />
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
     <ScrollViewer>
@@ -28,15 +29,15 @@
                 <RowDefinition Height="130" />
                 <RowDefinition Height="200" />
                 <RowDefinition Height="40" />
-                <RowDefinition Height="400" />
+                <RowDefinition Height="300" />
                 <RowDefinition Height="30*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2" />
-                <ColumnDefinition Width="49*" />
-                <ColumnDefinition Width="545" />
-                <ColumnDefinition Width="545" />
-                <ColumnDefinition Width="49*"/>
+                <ColumnDefinition Width="60*" />
+                <ColumnDefinition Width="541" />
+                <ColumnDefinition Width="541" />
+                <ColumnDefinition Width="59*"/>
             </Grid.ColumnDefinitions>
             <Canvas 
                 Grid.Row="0" 
@@ -64,6 +65,15 @@
                 Panel.ZIndex="99">
                 <local:Operators 
                     HorizontalAlignment="Center"/>
+            </Canvas>
+            <Canvas 
+                Grid.Row="0" 
+                Grid.RowSpan="5"
+                Grid.Column="0"
+                Grid.ColumnSpan="5"
+                Panel.ZIndex="99">
+                <local:SubmitLog
+                     HorizontalAlignment="Center"/>
             </Canvas>
             <Canvas 
                 Grid.Row="0" 
@@ -116,13 +126,6 @@
                         Margin="1,0,0,0"/>
                 </StackPanel>
             </Canvas>
-            <Image 
-                Grid.Row="3"
-                Grid.Column="2"
-                Grid.ColumnSpan="2"
-                Source="../Images/SimpleDividingLine.png"
-                Height="40"
-                Width="510"/>
             <Canvas
                 Grid.Row="4"
                 Grid.Column="2"
@@ -131,9 +134,38 @@
                 <local:Tabs
                     HorizontalAlignment="Center"/>
             </Canvas>
+            <Image 
+                Grid.Row="3"
+                Grid.Column="2"
+                Grid.ColumnSpan="2"
+                Source="../Images/SimpleDividingLine.png"
+                Height="40"
+                Width="510"/>
+            <Image 
+                Grid.Row="0"
+                Grid.Column="1"
+                Grid.RowSpan="6"
+                Height="510"
+                Width="40"
+                Margin="0,0,0,0">
+                <Image.Source>
+                    <BitmapImage UriSource="../Images/PinstripeSide.png" Rotation="Rotate90" />
+                </Image.Source>
+            </Image>
+            <Image 
+                Grid.Row="0"
+                Grid.Column="5"
+                Grid.RowSpan="6"
+                Height="510"
+                Width="40"
+                Margin="0,0,0,0">
+                <Image.Source>
+                    <BitmapImage UriSource="../Images/PinstripeSideRight.png" Rotation="Rotate90" />
+                </Image.Source>
+            </Image>
             <Label
                 Grid.Row="5"
-                Grid.Column="5"
+                Grid.Column="3"
                 HorizontalAlignment="Right" 
                 VerticalAlignment="Bottom">Version 1.0.10
             </Label>

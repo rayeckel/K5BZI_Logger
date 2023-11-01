@@ -1,9 +1,9 @@
-﻿using K5BZI_Models.Base;
-using Microsoft.VisualStudio.PlatformUI;
-using PropertyChanged;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using K5BZI_Models.Base;
+using Microsoft.VisualStudio.PlatformUI;
+using PropertyChanged;
 
 namespace K5BZI_Models.ViewModelModels
 {
@@ -27,10 +27,12 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return ShowEventOperators ?
-                    $"EVENT Operators - {EventName}" :
+                    $"EVENT Operators - {CurrentEvent.EventName}" :
                     "ALL Operators";
             }
         }
+
+        public Event CurrentEvent { get; set; }
 
         public bool ShowEventOperators { get; set; }
 

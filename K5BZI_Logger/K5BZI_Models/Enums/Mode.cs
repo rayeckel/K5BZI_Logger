@@ -1,13 +1,15 @@
 ﻿using System.ComponentModel;
+using K5BZI_Models.Extensions;
 
 namespace K5BZI_Models.Enums
 {
+    [TypeConverter(typeof(EnumDescriptionConverter))]
     public enum Mode
     {
         [Description("CW")]
         CW,
 
-        [Description("DG")]
+        [Description("DIGI")]
         DG,
 
         [Description("FM")]

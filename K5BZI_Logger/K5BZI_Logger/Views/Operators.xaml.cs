@@ -12,7 +12,7 @@ namespace K5BZI_Logger.Views
 
             var operatorsViewModel = App.ServiceProvider.GetRequiredService<IOperatorsViewModel>();
 
-            DataContext = operatorsViewModel.Model;
+            DataContext = operatorsViewModel.OperatorsModel;
         }
     }
 }

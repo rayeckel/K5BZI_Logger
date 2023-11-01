@@ -42,7 +42,7 @@
             <dgControls:DataGrid 
                     IsTabStop="False"
                     x:Name="dataGrid1" 
-                    Height="360"
+                    Height="250"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     BorderThickness=".5"

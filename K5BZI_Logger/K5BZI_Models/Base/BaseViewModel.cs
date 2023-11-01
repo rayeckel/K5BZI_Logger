@@ -11,8 +11,6 @@ namespace K5BZI_Models.Base
             ShowCloseButton = false;
         }
 
-        public string EventName { get; set; }
-
         public bool IsOpen { get; set; }
 
         public bool ShowCloseButton { get; set; }

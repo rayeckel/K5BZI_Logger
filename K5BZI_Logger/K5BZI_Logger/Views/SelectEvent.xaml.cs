@@ -12,7 +12,7 @@ namespace K5BZI_Logger.Views
 
             var eventViewModel = App.ServiceProvider.GetRequiredService<IEventViewModel>();
 
-            DataContext = eventViewModel.Model;
+            DataContext = eventViewModel.EventModel;
         }
     }
 }

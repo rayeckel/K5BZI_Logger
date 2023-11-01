@@ -362,6 +362,9 @@
     <Compile Include="Views\EditOperator.xaml.cs">
       <DependentUpon>EditOperator.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SubmitLog.xaml.cs">
+      <DependentUpon>SubmitLog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Tabs.xaml.cs">
       <DependentUpon>Tabs.xaml</DependentUpon>
     </Compile>
@@ -460,6 +463,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\SubmitLog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Tabs.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -520,6 +527,12 @@
   <ItemGroup>
     <Content Include="bzIcon.ico" />
     <Content Include="Images\bzIcon.ico" />
+    <Resource Include="Images\PinstripeSideRight.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\PinstripeSide.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\SimpleDividingLine.png" />
     <Resource Include="Images\Welcome.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -34,7 +34,7 @@
             <dgControls:DataGrid 
                 Grid.Column="0"
                 x:Name="operatorsDataGrid" 
-                Height="360"
+                Height="250"
                 Width="850"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"

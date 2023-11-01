@@ -1,12 +1,12 @@
-﻿using K5BZI_Models.Base;
-using K5BZI_Models.EntityModels;
-using Microsoft.VisualStudio.PlatformUI;
-using PropertyChanged;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
+using K5BZI_Models.Base;
+using K5BZI_Models.EntityModels;
+using Microsoft.VisualStudio.PlatformUI;
+using PropertyChanged;
 
 namespace K5BZI_Models.ViewModelModels
 {
@@ -14,6 +14,8 @@ namespace K5BZI_Models.ViewModelModels
     public class EditEventModel : BaseViewModel
     {
         #region Properties
+
+        public string NewEventName { get; set; }
 
         public bool EditAllEvents { get; set; }
 
@@ -45,9 +47,9 @@ namespace K5BZI_Models.ViewModelModels
 
         public DXCC EventDxcc { get; set; }
 
-        public ObservableCollection<Event> ExistingEvents { get; private set; }
+        public Operator SelectedSubmitOperator { get; set; }
 
-        public ObservableCollection<Operator> Operators { get; set; }
+        public ObservableCollection<Event> ExistingEvents { get; private set; }
 
         public ObservableCollection<Operator> Clubs { get; set; }
 
@@ -59,7 +61,6 @@ namespace K5BZI_Models.ViewModelModels
 
         public EditEventModel()
         {
-            Operators = new ObservableCollection<Operator>();
             Clubs = new ObservableCollection<Operator>();
             ExistingEvents = new ObservableCollection<Event>();
         }
@@ -67,6 +68,18 @@ namespace K5BZI_Models.ViewModelModels
         #endregion
 
         #region Commands
+
+        private ICommand _createNewEventCommand;
+        public ICommand CreateNewEventCommand
+        {
+            get
+            {
+                return _createNewEventCommand ??
+                    (_createNewEventCommand =
+                        new DelegateCommand(CreateNewEventAction, _ => { return !String.IsNullOrEmpty(NewEventName); }));
+            }
+        }
+        public Action<object> CreateNewEventAction { get; set; }
 
         private ICommand _createEventCommand;
         public ICommand CreateEventCommand

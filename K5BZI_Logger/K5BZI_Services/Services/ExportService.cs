@@ -1,13 +1,13 @@
-﻿using K5BZI_Models;
-using K5BZI_Models.Attributes;
-using K5BZI_Models.Enums;
-using K5BZI_Services.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using K5BZI_Models;
+using K5BZI_Models.Attributes;
+using K5BZI_Models.Enums;
+using K5BZI_Services.Interfaces;
 
-namespace K5BZI_Services
+namespace K5BZI_Services.Services
 {
     public class ExportService : IExportService
     {
@@ -114,9 +114,9 @@ namespace K5BZI_Services
                 };
 
                 var signalReport = from p in entry.SignalReport.GetType().GetProperties()
-                                       let attr = p.GetCustomAttributes(typeof(AdifAttribute), true)
-                                       where attr.Length == 1
-                                       select new { Property = p, Attribute = attr.First() as AdifAttribute };
+                                   let attr = p.GetCustomAttributes(typeof(AdifAttribute), true)
+                                   where attr.Length == 1
+                                   select new { Property = p, Attribute = attr.First() as AdifAttribute };
 
                 foreach (var signalRep in signalReport)
                 {

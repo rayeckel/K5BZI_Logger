@@ -1,10 +1,10 @@
-﻿using K5BZI_Models;
+﻿using System.Collections.Generic;
+using System.Linq;
+using K5BZI_Models;
 using K5BZI_Models.EntityModels;
 using K5BZI_Services.Interfaces;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace K5BZI_Services
+namespace K5BZI_Services.Services
 {
     public class DefaultsService : IDefaultsService
     {

@@ -15,12 +15,14 @@ namespace K5BZI_ViewModels
     {
         #region Properties
 
-        public SelectEventModel Model { get; private set; }
+        public SelectEventModel EventModel { get; private set; }
         public EditEventModel EditModel { get; private set; }
+
         private readonly IEventService _eventService;
-        private readonly IMainViewModel _mainLoggerViewModel;
-        private readonly IOperatorsViewModel _operatorsViewModel;
         private readonly IExcelFileService _excelFileService;
+        private readonly ILogViewModel _logViewModel;
+        private readonly IOperatorsViewModel _operatorsViewModel;
+        private readonly ISubmitViewModel _submitViewModel;
 
         #endregion
 
@@ -28,14 +30,16 @@ namespace K5BZI_ViewModels
 
         public EventViewModel(
             IEventService eventService,
-            IMainViewModel mainLoggerViewModel,
+            IExcelFileService excelFileService,
+            ILogViewModel logViewModel,
             IOperatorsViewModel operatorsViewModel,
-            IExcelFileService excelFileService)
+            ISubmitViewModel submitViewModel)
         {
             _eventService = eventService;
-            _mainLoggerViewModel = mainLoggerViewModel;
-            _operatorsViewModel = operatorsViewModel;
             _excelFileService = excelFileService;
+            _logViewModel = logViewModel;
+            _operatorsViewModel = operatorsViewModel;
+            _submitViewModel = submitViewModel;
 
             Initialize();
             GetExistingEvents();
@@ -47,10 +51,10 @@ namespace K5BZI_ViewModels
 
         private void Initialize()
         {
-            Model = new SelectEventModel
+            EventModel = new SelectEventModel
             {
-                CreateNewLogAction = (_) => CreateNewEvent(Model.EventName),
-                SelectLogAction = (_) => SelectLogAsync(),
+                ViewFileStoreAction = (_) => _eventService.OpenEventList(),
+                SelectEventAction = (_) => SelectEvent(),
                 ChangeEventAction = (_) => ChangeEvent(),
                 DeleteEventAction = (_) => DeleteEvent((Guid)_)
             };
@@ -62,13 +66,14 @@ namespace K5BZI_ViewModels
                 EditAllEventsAction = (_) => EditAllEvents(),
                 EditEventAction = (_) => EditEventAsync(),
                 UpdateEventAction = (_) => UpdateEvent(),
-                CreateEventAction = (_) => CreateNewEvent(String.Empty)
+                CreateEventAction = (_) => CreateNewEvent(String.Empty),//DELETE ME??
+                CreateNewEventAction = (_) => CreateNewEvent(EditModel.NewEventName)
             };
         }
 
         private void GetExistingEvents()
         {
-            Model.ExistingEvents.Clear();
+            EventModel.ExistingEvents.Clear();
 
             _eventService
                 .GetAllEvents()?
@@ -78,49 +83,39 @@ namespace K5BZI_ViewModels
                 {
                     if (!eventObj.IsDeleted)
                     {
-                        Model.ExistingEvents.Add(eventObj);
+                        EventModel.ExistingEvents.Add(eventObj);
                     }
                 });
 
-            Model.SelectedEvent = Model.ExistingEvents.FirstOrDefault();
+            EventModel.Event = EventModel.ExistingEvents.FirstOrDefault();
         }
 
         private void CreateNewEvent(string eventName)
         {
             var newEvent = _eventService.CreateNewEvent(eventName);
 
-            _mainLoggerViewModel.CreateNewLog(newEvent);
+            _logViewModel.CreateNewLog(newEvent);
 
-            Model.SelectedEvent = newEvent;
-            Model.ExistingEvents.Add(newEvent);
-            Model.IsOpen = false;
+            EventModel.Event = newEvent;
+            EventModel.ExistingEvents.Add(newEvent);
+            EventModel.IsOpen = false;
 
             EditEventAsync();
         }
 
-        private async void SelectLogAsync()
+        private void SelectEvent()
         {
-            _mainLoggerViewModel.SelectEvent(Model.SelectedEvent);
+            _logViewModel.GetLog(EventModel.Event);
 
-            if (!_operatorsViewModel.Model.Operators.Any())
-            {
-                _operatorsViewModel.Model.IsOpen = true;
-                _operatorsViewModel.AddOperator();
-            }
+            _operatorsViewModel.PopulateEventOperators(EventModel.Event);
 
-            while (_operatorsViewModel.Model.IsOpen) { await Task.Delay(25); }
-
-            _operatorsViewModel.PopulateEventOperators(Model.SelectedEvent);
-
-            _operatorsViewModel.UpdateOperator(Model.SelectedEvent.ActiveOperator, true);
-
-            Model.IsOpen = false;
+            EventModel.IsOpen = false;
         }
 
         private void ChangeEvent()
         {
-            Model.ShowCloseButton = true;
-            Model.IsOpen = true;
+            EventModel.ShowCloseButton = true;
+            EventModel.IsOpen = true;
         }
 
         private void DeleteEvent(Guid Id)
@@ -129,7 +124,7 @@ namespace K5BZI_ViewModels
 
             if (result == DialogResult.Yes)
             {
-                var editEvent = Model.ExistingEvents.First(_ => _.Id == Id);
+                var editEvent = EventModel.ExistingEvents.First(_ => _.Id == Id);
 
                 editEvent.IsDeleted = true;
 
@@ -147,7 +142,7 @@ namespace K5BZI_ViewModels
                 return;
             }
 
-            var updatedOperators = EditModel.Operators
+            var updatedOperators = _submitViewModel.SubmitModel.EventOperators
                 .Where(_ => _.Selected)
                 .ToList();
 
@@ -166,7 +161,7 @@ namespace K5BZI_ViewModels
             EditModel.EditAllEvents = true;
 
             EditModel.ExistingEvents.Clear();
-            foreach (var eventObj in Model.ExistingEvents)
+            foreach (var eventObj in EventModel.ExistingEvents)
             {
                 if (!eventObj.IsDeleted)
                 {
@@ -193,31 +188,31 @@ namespace K5BZI_ViewModels
 
         private async void EditEventAsync()
         {
-            if (!_operatorsViewModel.Model.Operators.Any())
+            if (!_operatorsViewModel.OperatorsModel.Operators.Any())
             {
-                _operatorsViewModel.Model.IsOpen = true;
+                _operatorsViewModel.OperatorsModel.IsOpen = true;
                 _operatorsViewModel.AddOperator();
             }
 
-            while (_operatorsViewModel.Model.IsOpen) { await Task.Delay(25); }
+            while (_operatorsViewModel.OperatorsModel.IsOpen) { await Task.Delay(25); }
 
             EditModel.EditAllEvents = false;
-            EditModel.Event = Model.SelectedEvent;
+            EditModel.Event = EventModel.Event;
 
-            EditModel.Operators.Clear();
+            _submitViewModel.SubmitModel.EventOperators.Clear();
 
-            foreach (var op in _operatorsViewModel.Model.Operators)
+            foreach (var op in _operatorsViewModel.OperatorsModel.Operators)
             {
-                if (_operatorsViewModel.Model.EventOperators.Contains(op))
+                if (_operatorsViewModel.OperatorsModel.EventOperators.Contains(op))
                 {
                     op.Selected = true;
                 }
 
-                EditModel.Operators.Add(op);
+                _submitViewModel.SubmitModel.EventOperators.Add(op);
             };
 
             EditModel.Clubs.Clear();
-            foreach (var club in _operatorsViewModel.Model.Operators.Where(_ => _.IsClub))
+            foreach (var club in _operatorsViewModel.OperatorsModel.Operators.Where(_ => _.IsClub))
             {
                 EditModel.Clubs.Add(club);
             };
@@ -234,11 +229,11 @@ namespace K5BZI_ViewModels
 
         private void UpdateOperators(List<Operator> operators)
         {
-            _operatorsViewModel.Model.EventOperators.Clear();
+            _operatorsViewModel.OperatorsModel.EventOperators.Clear();
 
             foreach (var op in operators)
             {
-                _operatorsViewModel.Model.EventOperators.Add(op);
+                _operatorsViewModel.OperatorsModel.EventOperators.Add(op);
             }
         }
 

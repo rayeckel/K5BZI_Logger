@@ -1,16 +1,22 @@
-﻿using K5BZI_Models;
-using K5BZI_Models.Extensions;
-using K5BZI_Services.Interfaces;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using K5BZI_Models;
+using K5BZI_Models.Extensions;
+using K5BZI_Services.Interfaces;
 
-namespace K5BZI_Services
+namespace K5BZI_Services.Services
 {
-    public class LogListingService : ILogListingService
+    public class LogListingService : ILogService
     {
+        #region Properties
+
         private readonly IFileStoreService _fileStoreService;
         private List<LogEntry> _logEntries;
+
+        #endregion
+
+        #region Constructors
 
         public LogListingService(IFileStoreService fileStoreService)
         {
@@ -18,6 +24,10 @@ namespace K5BZI_Services
 
             _logEntries = new List<LogEntry>();
         }
+
+        #endregion
+
+        #region Public Methods
 
         public List<LogEntry> ReadLog(string logFileName)
         {
@@ -31,17 +41,6 @@ namespace K5BZI_Services
             return _logEntries;
         }
 
-        public LogListing CreateNewLogListing(FileInfo fileInfo)
-        {
-            var fileName = Path.ChangeExtension(fileInfo.Name, null);
-
-            return new LogListing
-            {
-                FileName = fileName,
-                CreatedDate = fileInfo.CreationTimeUtc
-            };
-        }
-
         public List<LogListing> GetLogListing()
         {
             var files = _fileStoreService.GetLogListing();
@@ -49,17 +48,11 @@ namespace K5BZI_Services
 
             foreach (var file in files)
             {
-                listings.Add(CreateNewLogListing(file));
+                listings.Add(CreateNewLogList(file));
             }
 
             return listings;
         }
-
-        public void OpenLogListing()
-        {
-            _fileStoreService.OpenLogDirectory();
-        }
-
 
         public void SaveLogEntry(LogEntry logEntry, Event eventEntry)
         {
@@ -97,5 +90,22 @@ namespace K5BZI_Services
                 _fileStoreService.WriteToFile(_logEntries, eventEntry.LogFileName);
             }
         }
+
+        #endregion
+
+        #region Private Methods
+
+        private LogListing CreateNewLogList(FileInfo fileInfo)
+        {
+            var fileName = Path.ChangeExtension(fileInfo.Name, null);
+
+            return new LogListing
+            {
+                FileName = fileName,
+                CreatedDate = fileInfo.CreationTimeUtc
+            };
+        }
+
+        #endregion
     }
 }

@@ -10,7 +10,8 @@ namespace K5BZI_ViewModels
 
         public SelectExportModel Model { get; private set; }
         private readonly IExportService _exportService;
-        private readonly IMainViewModel _mainLoggerViewModel;
+        private readonly IEventViewModel _eventViewModel;
+        private readonly ILogViewModel _logViewModel;
 
         #endregion
 
@@ -18,10 +19,12 @@ namespace K5BZI_ViewModels
 
         public ExportViewModel(
             IExportService exportService,
-            IMainViewModel mainLoggerViewModel)
+            IEventViewModel eventViewModel,
+            ILogViewModel logViewModel)
         {
             _exportService = exportService;
-            _mainLoggerViewModel = mainLoggerViewModel;
+            _eventViewModel = eventViewModel;
+            _logViewModel = logViewModel;
 
             Initialize();
         }
@@ -37,7 +40,7 @@ namespace K5BZI_ViewModels
                 SelectExportAction = (_) => ChangeExport()
             };
 
-            _mainLoggerViewModel.Model.SelectExportLogAction = (_) => SelectLog();
+            _logViewModel.LogModel.SelectExportLogAction = (_) => SelectLog();
         }
 
         public void SelectLog()
@@ -51,8 +54,8 @@ namespace K5BZI_ViewModels
             Model.IsOpen = false;
 
             _exportService.ExportLog(
-                _mainLoggerViewModel.Model.Event,
-                _mainLoggerViewModel.Model.LogEntries,
+                _eventViewModel.EventModel.Event,
+                _logViewModel.LogModel.LogEntries,
                 Model.SelectedExport);
         }
 

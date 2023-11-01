@@ -1,10 +1,10 @@
-﻿using K5BZI_Models;
-using K5BZI_Services.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using K5BZI_Models;
+using K5BZI_Services.Interfaces;
 
-namespace K5BZI_Services
+namespace K5BZI_Services.Services
 {
     public class EventService : IEventService
     {
@@ -27,6 +27,11 @@ namespace K5BZI_Services
         #endregion
 
         #region Public Methods
+
+        public void OpenEventList()
+        {
+            _fileStoreService.OpenLogDirectory();
+        }
 
         public List<Event> GetAllEvents()
         {

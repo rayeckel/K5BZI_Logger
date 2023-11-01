@@ -1,9 +1,9 @@
-﻿using K5BZI_Models.Attributes;
+﻿using System;
+using System.Globalization;
+using K5BZI_Models.Attributes;
 using K5BZI_Models.Enums;
 using Newtonsoft.Json;
 using PropertyChanged;
-using System;
-using System.Globalization;
 
 namespace K5BZI_Models
 {

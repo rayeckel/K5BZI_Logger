@@ -1,13 +1,13 @@
-﻿using K5BZI_Services.Interfaces;
-using Ninja.WebSockets;
-using System;
+﻿using System;
 using System.Net.Sockets;
 using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using K5BZI_Services.Interfaces;
+using Ninja.WebSockets;
 
-namespace K5BZI_Services
+namespace K5BZI_Services.Services
 {
     public class NetworkService : INetworkService
     {
