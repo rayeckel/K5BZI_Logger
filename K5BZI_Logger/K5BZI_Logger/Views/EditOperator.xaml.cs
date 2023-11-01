@@ -4,9 +4,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace K5BZI_Logger.Views
 {
-    /// <summary>
-    /// Interaction logic for SelectEvent.xaml
-    /// </summary>
     public partial class EditOperator : ChildWindow
     {
         public EditOperator()

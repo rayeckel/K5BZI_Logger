@@ -15,7 +15,7 @@ namespace K5BZI_ViewModels
     {
         #region Properties
 
-        public SelectEventModel EventModel { get; private set; }
+        public EventModel EventModel { get; private set; }
         public EditEventModel EditModel { get; private set; }
 
         private readonly IEventService _eventService;
@@ -51,7 +51,7 @@ namespace K5BZI_ViewModels
 
         private void Initialize()
         {
-            EventModel = new SelectEventModel
+            EventModel = new EventModel
             {
                 ViewFileStoreAction = (_) => _eventService.OpenEventList(),
                 SelectEventAction = (_) => SelectEvent(),
@@ -188,22 +188,22 @@ namespace K5BZI_ViewModels
 
         private async void EditEventAsync()
         {
-            if (!_operatorsViewModel.OperatorsModel.Operators.Any())
+            if (!_operatorsViewModel.OperatorModel.Operators.Any())
             {
-                _operatorsViewModel.OperatorsModel.IsOpen = true;
+                _operatorsViewModel.OperatorModel.IsOpen = true;
                 _operatorsViewModel.AddOperator();
             }
 
-            while (_operatorsViewModel.OperatorsModel.IsOpen) { await Task.Delay(25); }
+            while (_operatorsViewModel.OperatorModel.IsOpen) { await Task.Delay(25); }
 
             EditModel.EditAllEvents = false;
             EditModel.Event = EventModel.Event;
 
             _submitViewModel.SubmitModel.EventOperators.Clear();
 
-            foreach (var op in _operatorsViewModel.OperatorsModel.Operators)
+            foreach (var op in _operatorsViewModel.OperatorModel.Operators)
             {
-                if (_operatorsViewModel.OperatorsModel.EventOperators.Contains(op))
+                if (_operatorsViewModel.OperatorModel.EventOperators.Contains(op))
                 {
                     op.Selected = true;
                 }
@@ -212,7 +212,7 @@ namespace K5BZI_ViewModels
             };
 
             EditModel.Clubs.Clear();
-            foreach (var club in _operatorsViewModel.OperatorsModel.Operators.Where(_ => _.IsClub))
+            foreach (var club in _operatorsViewModel.OperatorModel.Operators.Where(_ => _.IsClub))
             {
                 EditModel.Clubs.Add(club);
             };
@@ -229,11 +229,11 @@ namespace K5BZI_ViewModels
 
         private void UpdateOperators(List<Operator> operators)
         {
-            _operatorsViewModel.OperatorsModel.EventOperators.Clear();
+            _operatorsViewModel.OperatorModel.EventOperators.Clear();
 
             foreach (var op in operators)
             {
-                _operatorsViewModel.OperatorsModel.EventOperators.Add(op);
+                _operatorsViewModel.OperatorModel.EventOperators.Add(op);
             }
         }
 

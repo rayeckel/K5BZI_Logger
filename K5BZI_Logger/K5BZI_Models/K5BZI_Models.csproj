@@ -203,7 +203,7 @@
     <Compile Include="ViewModelModels\NetworkModel.cs" />
     <Compile Include="ViewModelModels\OperatorModel.cs" />
     <Compile Include="ViewModelModels\SelectExportModel.cs" />
-    <Compile Include="ViewModelModels\SelectEventModel.cs" />
+    <Compile Include="ViewModelModels\EventModel.cs" />
     <Compile Include="ViewModelModels\SubmitModel.cs" />
   </ItemGroup>
   <ItemGroup>

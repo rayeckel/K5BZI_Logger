@@ -10,7 +10,7 @@ namespace K5BZI_Logger.Views
         {
             InitializeComponent();
 
-            DataContext = App.ServiceProvider.GetRequiredService<IMainViewModel>();
+            DataContext = App.ServiceProvider.GetRequiredService<ILogViewModel>();
         }
     }
 }

@@ -11,7 +11,7 @@
     mc:Ignorable="d"
     IsOpen="{Binding IsOpen}"
     ShowCloseButton="{Binding ShowCloseButton}"
-    Title="{Binding SelectLogTitle}">
+    Title="{Binding SelectEventTitle}">
     <!--
     <simpleChildWindow:ChildWindow.OverlayBrush>
         <SolidColorBrush Opacity="0.8" Color="{StaticResource Gray2}" />
@@ -49,12 +49,12 @@
                 Grid.RowSpan="4"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
-                Visibility="{Binding NewLogVisibility}"
+                Visibility="{Binding NewEventVisibility}"
                 Margin="0,10,0,0"
                 Source="../Images/Welcome.png"/>
         <Label
                 Grid.Row="0"
-                Visibility="{Binding SelectLogVisibility}"
+                Visibility="{Binding SelectEventVisibility}"
                 Margin="15,0,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
@@ -64,7 +64,7 @@
         <ComboBox
                 Grid.Row="1"
                 Grid.Column="0"
-                Visibility="{Binding SelectLogVisibility}"
+                Visibility="{Binding SelectEventVisibility}"
                 Height="34"
                 Width="300" 
                 Margin="30,20,0,0"
@@ -98,7 +98,7 @@
                 Grid.Row="2"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
-                Visibility="{Binding SelectLogVisibility}"
+                Visibility="{Binding SelectEventVisibility}"
                 Margin="0,0,20,0"
                 Content="Select"
                 Width="100"
@@ -107,7 +107,7 @@
                 FontFamily="Tahoma"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
-                Command="{Binding SelectLogCommand}"/>
+                Command="{Binding SelectEventCommand}"/>
         <Label 
                 Grid.Row="3"
                 Margin="15,0,0,0"
@@ -140,6 +140,6 @@
                 VerticalAlignment="Center"
                 FontFamily="Tahoma"
                 IsDefault="True"
-                Command="{Binding CreateNewLogCommand}"/>
+                Command="{Binding CreateNewEventCommand}"/>
     </Grid>
 </simpleChildWindow:ChildWindow>

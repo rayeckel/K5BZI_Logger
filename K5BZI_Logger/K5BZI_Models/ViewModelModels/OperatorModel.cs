@@ -22,7 +22,7 @@ namespace K5BZI_Models.ViewModelModels
 
         #region Properties
 
-        public string OperatorsTitle
+        public string OperatorTitle
         {
             get
             {

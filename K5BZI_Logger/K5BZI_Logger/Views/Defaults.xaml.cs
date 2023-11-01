@@ -4,18 +4,13 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace K5BZI_Logger.Views
 {
-    /// <summary>
-    /// Interaction logic for SelectEvent.xaml
-    /// </summary>
     public partial class Defaults : ChildWindow
     {
         public Defaults()
         {
             InitializeComponent();
 
-            var defaultsViewModel = App.ServiceProvider.GetRequiredService<IDefaultsViewModel>();
-
-            DataContext = defaultsViewModel.Model;
+            DataContext = App.ServiceProvider.GetRequiredService<IDefaultsViewModel>().Model;
         }
     }
 }

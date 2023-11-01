@@ -10,9 +10,9 @@ namespace K5BZI_Logger.Views
         {
             InitializeComponent();
 
-            var exportViewModel = App.ServiceProvider.GetRequiredService<IExportViewModel>();
-
-            DataContext = exportViewModel.Model;
+            DataContext = App.ServiceProvider
+                .GetRequiredService<IExportViewModel>()
+                .Model;
         }
     }
 }

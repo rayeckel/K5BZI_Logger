@@ -13,7 +13,7 @@ namespace K5BZI_ViewModels
     {
         #region Properties
 
-        public OperatorModel OperatorsModel { get; private set; }
+        public OperatorModel OperatorModel { get; private set; }
         public EditOperatorModel EditOperator { get; private set; }
         private readonly IOperatorService _operatorService;
         private readonly IEventService _eventService;
@@ -38,26 +38,26 @@ namespace K5BZI_ViewModels
 
         public async void PopulateEventOperators(Event eventModel)
         {
-            if (!OperatorsModel.Operators.Any())
+            if (!OperatorModel.Operators.Any())
             {
-                OperatorsModel.IsOpen = true;
+                OperatorModel.IsOpen = true;
                 AddOperator();
             }
 
-            while (OperatorsModel.IsOpen) { await Task.Delay(25); }
+            while (OperatorModel.IsOpen) { await Task.Delay(25); }
 
-            OperatorsModel.CurrentEvent = eventModel;
-            OperatorsModel.EventOperators.Clear();
+            OperatorModel.CurrentEvent = eventModel;
+            OperatorModel.EventOperators.Clear();
 
-            var currentEventOperators = OperatorsModel.CurrentEvent.Operators
+            var currentEventOperators = OperatorModel.CurrentEvent.Operators
                 .Select(x => x.CallSign);
 
-            var eventOperators = OperatorsModel.Operators
+            var eventOperators = OperatorModel.Operators
                 .Where(_ => currentEventOperators.Contains(_.CallSign))
                 .ToList();
 
             if (eventOperators.Any())
-                eventOperators.ForEach(_ => OperatorsModel.EventOperators.Add(_));
+                eventOperators.ForEach(_ => OperatorModel.EventOperators.Add(_));
 
             UpdateOperator(eventModel.ActiveOperator, true);
         }
@@ -68,39 +68,39 @@ namespace K5BZI_ViewModels
 
             var newOperator = _operatorService.UpdateOperator(operatorObj);
 
-            if (!OperatorsModel.EventOperators.Any(_ => _.CallSign?.ToUpper() == newOperator.CallSign?.ToUpper()))
+            if (!OperatorModel.EventOperators.Any(_ => _.CallSign?.ToUpper() == newOperator.CallSign?.ToUpper()))
             {
-                OperatorsModel.EventOperators.Add(newOperator);
+                OperatorModel.EventOperators.Add(newOperator);
             }
 
-            if (!OperatorsModel.Operators.Any(_ => _.CallSign?.ToUpper() == newOperator.CallSign?.ToUpper()))
+            if (!OperatorModel.Operators.Any(_ => _.CallSign?.ToUpper() == newOperator.CallSign?.ToUpper()))
             {
-                OperatorsModel.Operators.Add(newOperator);
+                OperatorModel.Operators.Add(newOperator);
             }
 
             //The first time the app is run 'currentEvent' will still be null
-            if (OperatorsModel.CurrentEvent == null)
-                OperatorsModel.CurrentEvent = _eventService.GetAllEvents().First();
+            if (OperatorModel.CurrentEvent == null)
+                OperatorModel.CurrentEvent = _eventService.GetAllEvents().First();
 
-            if (!OperatorsModel.CurrentEvent.Operators.Any(_ => _.CallSign?.ToUpper() == newOperator.CallSign?.ToUpper()))
-                OperatorsModel.CurrentEvent.Operators.Add(operatorObj);
+            if (!OperatorModel.CurrentEvent.Operators.Any(_ => _.CallSign?.ToUpper() == newOperator.CallSign?.ToUpper()))
+                OperatorModel.CurrentEvent.Operators.Add(operatorObj);
 
-            OperatorsModel.CurrentOperator = OperatorsModel.CurrentEvent.ActiveOperator = operatorObj;
+            OperatorModel.CurrentOperator = OperatorModel.CurrentEvent.ActiveOperator = operatorObj;
 
             EditOperator.IsOpen = false;
-            OperatorsModel.IsOpen = false;
+            OperatorModel.IsOpen = false;
 
-            _eventService.UpdateEvent(OperatorsModel.CurrentEvent, OperatorsModel.CurrentEvent.Operators.ToList());
+            _eventService.UpdateEvent(OperatorModel.CurrentEvent, OperatorModel.CurrentEvent.Operators.ToList());
         }
 
         public void AddOperator()
         {
-            EditOperator.Model.Clear();
+            EditOperator.Operator.Clear();
 
             EditOperator.ShowCloseButton = true;
             EditOperator.IsOpen = true;
 
-            EditOperator.Model.IsClub = false;
+            EditOperator.Operator.IsClub = false;
         }
 
         #endregion
@@ -109,14 +109,14 @@ namespace K5BZI_ViewModels
 
         private void Initialize()
         {
-            OperatorsModel = new OperatorModel
+            OperatorModel = new OperatorModel
             {
-                EditOperatorAction = (_) => UpdateOperator(OperatorsModel.SelectedEventOperator, false),
-                EditEventOperatorAction = (_) => UpdateOperator(OperatorsModel.SelectedEventOperator, true),
-                CurrentOperatorAction = (_) => SetCurrentOperator(OperatorsModel.SelectedEventOperator),
-                DeleteOperatorAction = (_) => DeleteOperator(OperatorsModel.SelectedEventOperator),
-                CurrentEventOperatorAction = (_) => SetCurrentOperator(OperatorsModel.SelectedEventOperator),
-                DeleteEventOperatorAction = (_) => DeleteOperator(OperatorsModel.SelectedEventOperator),
+                EditOperatorAction = (_) => UpdateOperator(OperatorModel.SelectedEventOperator, false),
+                EditEventOperatorAction = (_) => UpdateOperator(OperatorModel.SelectedEventOperator, true),
+                CurrentOperatorAction = (_) => SetCurrentOperator(OperatorModel.SelectedEventOperator),
+                DeleteOperatorAction = (_) => DeleteOperator(OperatorModel.SelectedEventOperator),
+                CurrentEventOperatorAction = (_) => SetCurrentOperator(OperatorModel.SelectedEventOperator),
+                DeleteEventOperatorAction = (_) => DeleteOperator(OperatorModel.SelectedEventOperator),
                 AddOperatorToEventAction = (_) => AddOperatorToEvent(),
                 AddClubToEventAction = (_) => AddClubToEvent(),
                 AddOperatorAction = (_) => AddOperator(),
@@ -127,18 +127,18 @@ namespace K5BZI_ViewModels
 
             EditOperator = new EditOperatorModel
             {
-                Model = new Operator(),
-                UpdateOperatorAction = (_) => UpdateOperator(EditOperator.Model, false),
-                UpdateEventOperatorAction = (_) => UpdateOperator(EditOperator.Model, true)
+                Operator = new Operator(),
+                UpdateOperatorAction = (_) => UpdateOperator(EditOperator.Operator, false),
+                UpdateEventOperatorAction = (_) => UpdateOperator(EditOperator.Operator, true)
             };
 
             var operators = _operatorService.GetFullOperatorListing();
 
             if (operators.Any())
             {
-                operators.ForEach(_ => OperatorsModel.Operators.Add(_));
+                operators.ForEach(_ => OperatorModel.Operators.Add(_));
 
-                if (OperatorsModel.CurrentOperator == null) OperatorsModel.CurrentOperator = operators.First();
+                if (OperatorModel.CurrentOperator == null) OperatorModel.CurrentOperator = operators.First();
             }
         }
 
@@ -159,12 +159,12 @@ namespace K5BZI_ViewModels
             UpdateOperator(operatorObj, true);
 
             EditOperator.IsOpen = false;
-            OperatorsModel.IsOpen = false;
+            OperatorModel.IsOpen = false;
         }
 
         private void DeleteOperator(Operator operatorObj)
         {
-            var deleteConfirmName = OperatorsModel.ShowEventOperators ?
+            var deleteConfirmName = OperatorModel.ShowEventOperators ?
                 String.Format("Removing {0} from the event.", operatorObj.CallSign) :
                 String.Format("Deleting {0}.", operatorObj.CallSign);
 
@@ -172,15 +172,15 @@ namespace K5BZI_ViewModels
 
             if (confirmResult == DialogResult.Yes)
             {
-                OperatorsModel.EventOperators.Remove(operatorObj);
+                OperatorModel.EventOperators.Remove(operatorObj);
 
-                if (!OperatorsModel.ShowEventOperators)
+                if (!OperatorModel.ShowEventOperators)
                 {
                     _operatorService.DeleteOperator(operatorObj);
-                    OperatorsModel.Operators.Remove(operatorObj);
+                    OperatorModel.Operators.Remove(operatorObj);
                 }
 
-                _eventService.UpdateEvent(OperatorsModel.CurrentEvent, OperatorsModel.EventOperators.ToList());
+                _eventService.UpdateEvent(OperatorModel.CurrentEvent, OperatorModel.EventOperators.ToList());
             }
         }
 
@@ -196,19 +196,19 @@ namespace K5BZI_ViewModels
 
         private void EditOperators(bool eventOnly = false)
         {
-            OperatorsModel.ShowEventOperators = eventOnly;
-            OperatorsModel.ShowCloseButton = true;
-            OperatorsModel.IsOpen = true;
+            OperatorModel.ShowEventOperators = eventOnly;
+            OperatorModel.ShowCloseButton = true;
+            OperatorModel.IsOpen = true;
         }
 
         private void AddClub()
         {
-            EditOperator.Model.Clear();
+            EditOperator.Operator.Clear();
 
             EditOperator.ShowCloseButton = true;
             EditOperator.IsOpen = true;
 
-            EditOperator.Model.IsClub = true;
+            EditOperator.Operator.IsClub = true;
         }
 
         #endregion

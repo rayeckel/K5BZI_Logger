@@ -12,7 +12,7 @@
     mc:Ignorable="d"
     IsOpen="{Binding IsOpen}"
     ShowCloseButton="{Binding ShowCloseButton}"
-    Title="{Binding Model.EditOperatorTitle}">
+    Title="{Binding EditOperatorTitle}">
     <!--
     <simpleChildWindow:ChildWindow.OverlayBrush>
         <SolidColorBrush Opacity="0.8" Color="{StaticResource Gray2}" />
@@ -67,12 +67,12 @@
                 Margin="20,0,0,0"
                 FontFamily="Tahoma"
                 CharacterCasing="Upper"
-                Text="{Binding Model.CallSign, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Text="{Binding Operator.CallSign, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 controls:TextBoxHelper.Watermark="Call Sign" 
                 controls:TextBoxHelper.ClearTextButton="True">
             </TextBox>
             <Label 
-                Visibility="{Binding Model.IsClubVisibility}"
+                Visibility="{Binding Operator.IsClubVisibility}"
                 Grid.Row="1"
                 Grid.Column="0"
                 Margin="15,0,0,0"
@@ -82,19 +82,19 @@
                 FontFamily="Tahoma"
                 Content="Club Name"/>
             <TextBox
-                Visibility="{Binding Model.IsClubVisibility}"
+                Visibility="{Binding Operator.IsClubVisibility}"
                 Grid.Row="1"
                 Grid.Column="1"
                 Width="300"
                 Height="30"
                 Margin="20,0,0,0"
                 FontFamily="Tahoma"
-                Text="{Binding Model.ClubName, Mode=TwoWay}"
+                Text="{Binding Operator.ClubName, Mode=TwoWay}"
                 controls:TextBoxHelper.Watermark="First Name" 
                 controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>
             <Label 
-                Visibility="{Binding Model.IsNotClubVisibility}"
+                Visibility="{Binding Operator.IsNotClubVisibility}"
                 Grid.Row="1"
                 Grid.Column="0"
                 Margin="15,0,0,0"
@@ -104,19 +104,19 @@
                 FontFamily="Tahoma"
                 Content="First Name"/>
             <TextBox
-                Visibility="{Binding Model.IsNotClubVisibility}"
+                Visibility="{Binding Operator.IsNotClubVisibility}"
                 Grid.Row="1"
                 Grid.Column="1"
                 Width="300"
                 Height="30"
                 Margin="20,0,0,0"
                 FontFamily="Tahoma"
-                Text="{Binding Model.FirstName, Mode=TwoWay}"
+                Text="{Binding Operator.FirstName, Mode=TwoWay}"
                 controls:TextBoxHelper.Watermark="First Name" 
                 controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>
             <Label 
-                Visibility="{Binding Model.IsNotClubVisibility}"
+                Visibility="{Binding Operator.IsNotClubVisibility}"
                 Grid.Row="2"
                 Grid.Column="0"
                 Margin="15,0,0,0"
@@ -126,14 +126,14 @@
                 FontFamily="Tahoma"
                 Content="Last Name"/>
             <TextBox
-                Visibility="{Binding Model.IsNotClubVisibility}"
+                Visibility="{Binding Operator.IsNotClubVisibility}"
                 Grid.Row="2"
                 Grid.Column="1"
                 Width="300"
                 Height="30"
                 Margin="20,0,0,0"
                 FontFamily="Tahoma"
-                Text="{Binding Model.LastName, Mode=TwoWay}"
+                Text="{Binding Operator.LastName, Mode=TwoWay}"
                 controls:TextBoxHelper.Watermark="Last Name" 
                 controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>
@@ -153,7 +153,7 @@
                 Height="30"
                 Margin="20,0,0,0"
                 FontFamily="Tahoma"
-                Text="{Binding Model.Address, Mode=TwoWay}"
+                Text="{Binding Operator.Address, Mode=TwoWay}"
                 controls:TextBoxHelper.Watermark="Address" 
                 controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>
@@ -173,7 +173,7 @@
                 Height="30"
                 Margin="20,0,0,0"
                 FontFamily="Tahoma"
-                Text="{Binding Model.City, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                Text="{Binding Operator.City, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                 controls:TextBoxHelper.Watermark="City" 
                 controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>
@@ -193,7 +193,7 @@
                 Height="30"
                 Margin="20,0,0,0"
                 FontFamily="Tahoma"
-                Text="{Binding Model.State, Mode=OneWayToSource}"
+                Text="{Binding Operator.State, Mode=OneWayToSource}"
                 controls:TextBoxHelper.Watermark="State" 
                 controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>
@@ -213,7 +213,7 @@
                 Height="30"
                 Margin="20,0,0,0"
                 FontFamily="Tahoma"
-                Text="{Binding Model.ZipCode, Mode=OneWayToSource}"
+                Text="{Binding Operator.ZipCode, Mode=OneWayToSource}"
                 controls:TextBoxHelper.Watermark="Zip Code" 
                 controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>
@@ -233,12 +233,12 @@
                 Height="30"
                 Margin="20,0,0,0"
                 FontFamily="Tahoma"
-                Text="{Binding Model.Country, Mode=OneWayToSource}"
+                Text="{Binding Operator.Country, Mode=OneWayToSource}"
                 controls:TextBoxHelper.Watermark="Country" 
                 controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>
             <Label 
-                Visibility="{Binding Model.IsNotClubVisibility}"
+                Visibility="{Binding Operator.IsNotClubVisibility}"
                 Grid.Row="9"
                 Grid.Column="0"
                 Margin="15,0,0,0"
@@ -248,7 +248,7 @@
                 FontFamily="Tahoma"
                 Content="Club Call"/>
             <TextBox
-                Visibility="{Binding Model.IsNotClubVisibility}"
+                Visibility="{Binding Operator.IsNotClubVisibility}"
                 Grid.Row="9"
                 Grid.Column="1"
                 Width="300"
@@ -256,7 +256,7 @@
                 Margin="20,0,0,0"
                 FontFamily="Tahoma"
                 CharacterCasing="Upper" 
-                Text="{Binding Model.ClubCall, Mode=OneWayToSource}"
+                Text="{Binding Operator.ClubCall, Mode=OneWayToSource}"
                 controls:TextBoxHelper.Watermark="Club Call" 
                 controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>

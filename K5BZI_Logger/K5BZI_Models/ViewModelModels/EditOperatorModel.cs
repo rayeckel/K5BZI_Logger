@@ -1,8 +1,8 @@
-﻿using K5BZI_Models.Base;
+﻿using System;
+using System.Windows.Input;
+using K5BZI_Models.Base;
 using Microsoft.VisualStudio.PlatformUI;
 using PropertyChanged;
-using System;
-using System.Windows.Input;
 
 namespace K5BZI_Models.ViewModelModels
 {
@@ -11,7 +11,15 @@ namespace K5BZI_Models.ViewModelModels
     {
         #region Properties
 
-        public Operator Model { get; set; }
+        public string EditOperatorTitle
+        {
+            get
+            {
+                return $"Edit Operator - {Operator.FullName}";
+            }
+        }
+
+        public Operator Operator { get; set; }
 
         #endregion
 

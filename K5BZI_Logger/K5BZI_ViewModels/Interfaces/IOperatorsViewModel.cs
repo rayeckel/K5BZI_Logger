@@ -5,7 +5,7 @@ namespace K5BZI_ViewModels.Interfaces
 {
     public interface IOperatorsViewModel
     {
-        OperatorModel OperatorsModel { get; }
+        OperatorModel OperatorModel { get; }
 
         EditOperatorModel EditOperator { get; }
 

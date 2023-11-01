@@ -6,16 +6,20 @@ namespace K5BZI_Logger.Views
     public partial class Main : MetroWindow
     {
         public Main(
-            IMainViewModel viewModel,
             IOperatorsViewModel operatorsViewModel,
             IEventViewModel eventViewModel,
-            IDefaultsViewModel defaultsViewModel)
+            IDefaultsViewModel defaultsViewModel,
+            ILogViewModel logViewModel,
+            ISubmitViewModel submitViewModel)
         {
             InitializeComponent();
 
+            ViewFileStoreButton.DataContext = eventViewModel.EventModel;
             DefaultsButton.DataContext = defaultsViewModel.Model;
             EventsButton.DataContext = eventViewModel.EditModel;
-            OperatorsButton.DataContext = operatorsViewModel.OperatorsModel;
+            OperatorsButton.DataContext = operatorsViewModel.OperatorModel;
+            ExportLogButton.DataContext = logViewModel.LogModel;
+            SubmitLogButton.DataContext = submitViewModel.SubmitModel;
         }
     }
 }

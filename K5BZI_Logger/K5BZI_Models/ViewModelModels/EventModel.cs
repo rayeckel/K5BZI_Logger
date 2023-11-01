@@ -10,11 +10,11 @@ using PropertyChanged;
 namespace K5BZI_Models.ViewModelModels
 {
     [AddINotifyPropertyChangedInterface]
-    public class SelectEventModel : BaseViewModel
+    public class EventModel : BaseViewModel
     {
         #region Constructors
 
-        public SelectEventModel()
+        public EventModel()
         {
             ExistingEvents = new ObservableCollection<Event>();
 

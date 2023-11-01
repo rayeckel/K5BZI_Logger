@@ -11,8 +11,8 @@
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     Height="750" 
     Width="1200"
-    IsOpen="{Binding EventModel.IsOpen}"
-    ShowCloseButton="{Binding EventModel.ShowCloseButton}"
+    IsOpen="{Binding EditModel.IsOpen}"
+    ShowCloseButton="{Binding EditModel.ShowCloseButton}"
     Title="Edit Event">
     <simpleChildWindow:ChildWindow.Resources>
         <Converters:EnumUtility x:Key="EnumDescriptionConverter" />
@@ -43,7 +43,7 @@
     -->
     <StackPanel>
         <Grid
-            Visibility="{Binding EventModel.EditAllEventsVisibility}"
+            Visibility="{Binding EditModel.EditAllEventsVisibility}"
             HorizontalAlignment="Center" 
             VerticalAlignment="Center" 
             Background="AliceBlue">
@@ -149,7 +149,7 @@
             </Grid>
         </Grid>
         <Grid
-            Visibility="{Binding EventModel.EditEventsVisibility}"
+            Visibility="{Binding EditModel.EditEventsVisibility}"
             HorizontalAlignment="Center" 
             VerticalAlignment="Center" 
             Background="AliceBlue"
@@ -195,7 +195,7 @@
                     Height="30"
                     Margin="10,0,0,0"
                     FontFamily="Tahoma"
-                    Text="{Binding EventModel.Event.EventName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Text="{Binding EditModel.Event.EventName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     controls:TextBoxHelper.Watermark="Event Name" 
                     controls:TextBoxHelper.ClearTextButton="True" >
                 </TextBox>
@@ -215,16 +215,16 @@
                     Height="30"
                     Margin="10,0,0,0"
                     x:Name="clubsCombo"
-                    ItemsSource="{Binding EventModel.Clubs}"
-                    SelectedItem="{Binding EventModel.EventClub}"
+                    ItemsSource="{Binding EditModel.Clubs}"
+                    SelectedItem="{Binding EditModel.EventClub}"
                     FontFamily="Tahoma"
                     BorderThickness="1">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding EventModel.CallSign}" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding EditModel.CallSign}" FontWeight="Bold"/>
                                 <TextBlock Text=" - " />
-                                <TextBlock Text="{Binding EventModel.FullName}" />
+                                <TextBlock Text="{Binding EditModel.FullName}" />
                             </StackPanel>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
@@ -250,13 +250,13 @@
                     <RadioButton 
                         Grid.Column="0"
                         GroupName="Group1" 
-                        IsChecked="{Binding EventModel.Event.IsActive}" 
+                        IsChecked="{Binding EditModel.Event.IsActive}" 
                         Content="Yes" />
                     <RadioButton
                         Grid.Column="1"
                         GroupName="Group1"  
                         Content="No" 
-                        IsChecked="{Binding EventModel.Event.IsActive, Converter={StaticResource BoolInverterConverter}}" />
+                        IsChecked="{Binding EditModel.Event.IsActive, Converter={StaticResource BoolInverterConverter}}" />
                 </Grid>
                 <Label 
                     Grid.Row="3"
@@ -276,7 +276,7 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     x:Name="arrlSectionsCombo"
-                    SelectedItem="{Binding EventModel.Event.ARRL_Sect, Mode=TwoWay}"
+                    SelectedItem="{Binding EditModel.Event.ARRL_Sect, Mode=TwoWay}"
                     FontFamily="Tahoma"
                     BorderThickness="1"
                     ItemsSource="{Binding Source={StaticResource ArrlSectionEnumValues}}">
@@ -304,16 +304,16 @@
                     Height="30"
                     Margin="10,0,0,0"
                     x:Name="dxccCombo"
-                    ItemsSource="{Binding EventModel.DxccEntities}"
-                    SelectedItem="{Binding EventModel.EventDxcc}"
+                    ItemsSource="{Binding EditModel.DxccEntities}"
+                    SelectedItem="{Binding EditModel.EventDxcc}"
                     FontFamily="Tahoma"
                     BorderThickness="1">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding EventModel.Prefix}" />
+                                <TextBlock Text="{Binding EditModel.Prefix}" />
                                 <TextBlock Text=" - " />
-                                <TextBlock Text="{Binding EventModel.Entity}" />
+                                <TextBlock Text="{Binding EditModel.Entity}" />
                             </StackPanel>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
@@ -336,7 +336,7 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     x:Name="cqZoneCombo"
-                    SelectedItem="{Binding EventModel.Event.CqZone, Mode=TwoWay}"
+                    SelectedItem="{Binding EditModel.Event.CqZone, Mode=TwoWay}"
                     FontFamily="Tahoma"
                     BorderThickness="1"
                     ItemsSource="{Binding Source={StaticResource CqZoneEnumValues}}">
@@ -364,7 +364,7 @@
                     Height="30"
                     Margin="10,0,0,0"
                     FontFamily="Tahoma"
-                    Text="{Binding EventModel.Event.ItuZone}"
+                    Text="{Binding EditModel.Event.ItuZone}"
                     controls:TextBoxHelper.Watermark="ITU Zone" 
                     controls:TextBoxHelper.ClearTextButton="True" >
                 </TextBox>
@@ -384,7 +384,7 @@
                     Height="30"
                     Margin="10,0,0,0"
                     FontFamily="Tahoma"
-                    Text="{Binding EventModel.Event.Class}"
+                    Text="{Binding EditModel.Event.Class}"
                     controls:TextBoxHelper.Watermark="Class" 
                     controls:TextBoxHelper.ClearTextButton="True" >
                 </TextBox>
@@ -436,7 +436,7 @@
                     Height="200"
                     Width="300" 
                     Margin="10,0,20,0"
-                    ItemsSource="{Binding EventModel.Operators}"
+                    ItemsSource="{Binding EditModel.Operators}"
                     FontFamily="Tahoma"
                     BorderThickness="1"
                     controls:TextBoxHelper.Watermark="Operators" 
@@ -475,7 +475,7 @@
                     Height="30"
                     Margin="10,0,20,0"
                     FontFamily="Tahoma"
-                    Text="{Binding EventModel.Event.LogFileName, Mode=OneWay}"
+                    Text="{Binding EditModel.Event.LogFileName, Mode=OneWay}"
                     controls:TextBoxHelper.Watermark="Log File Name" 
                     controls:TextBoxHelper.ClearTextButton="True" >
                 </TextBox>
@@ -494,7 +494,7 @@
                 VerticalAlignment="Center"
                 FontFamily="Tahoma"
                 IsDefault="True"
-                Command="{Binding EventModel.UpdateEventCommand}"/>
+                Command="{Binding EditModel.UpdateEventCommand}"/>
         </Grid>
     </StackPanel>
 </simpleChildWindow:ChildWindow>

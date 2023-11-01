@@ -226,7 +226,7 @@ namespace K5BZI_ViewModels
                 return;
             }
 
-            LogModel.LogEntry.Operator = _operatorsViewModel.OperatorsModel.CurrentOperator;
+            LogModel.LogEntry.Operator = _operatorsViewModel.OperatorModel.CurrentOperator;
 
             _logService.SaveLogEntry(LogModel.LogEntry, LogModel.Event);
 

@@ -48,11 +48,11 @@
                     BorderThickness=".5"
                     BorderBrush="Navy"
                     AutoGenerateColumns="False"
-                    ItemsSource="{Binding Model.LogEntries}"
-                    SelectedItem="{Binding Model.SelectedEntry, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                    ItemsSource="{Binding LogModel.LogEntries}"
+                    SelectedItem="{Binding LogModel.SelectedEntry, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="CellEditEnding">
-                        <i:InvokeCommandAction Command="{Binding Model.UpdateLogEntryCommand}"/>
+                        <i:InvokeCommandAction Command="{Binding LogModel.UpdateLogEntryCommand}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <dgControls:DataGrid.Columns>
@@ -94,7 +94,7 @@
                             Binding="{Binding Signal.Frequency, UpdateSourceTrigger=PropertyChanged}"
                             FontSize="12" />
                     <dgControls:DataGridTextColumn
-                            Visibility="{Binding Data.Model.CQZoneVisibility, Source={StaticResource DataContextProxy}, UpdateSourceTrigger=PropertyChanged}"
+                            Visibility="{Binding Data.LogModel.CQZoneVisibility, Source={StaticResource DataContextProxy}, UpdateSourceTrigger=PropertyChanged}"
                             Header="CQ Zone"
                             Width="85"
                             Binding="{Binding CQZone, UpdateSourceTrigger=PropertyChanged}"
@@ -151,13 +151,13 @@
                             Binding="{Binding QslReceived, UpdateSourceTrigger=PropertyChanged}"
                             FontSize="12" />-->
                     <dgControls:DataGridTextColumn
-                            Visibility="{Binding Data.Model.CountryVisibility, Source={StaticResource DataContextProxy}, UpdateSourceTrigger=PropertyChanged}"
+                            Visibility="{Binding Data.LogModel.CountryVisibility, Source={StaticResource DataContextProxy}, UpdateSourceTrigger=PropertyChanged}"
                             Header="Cntry"
                             Width="60"
                             Binding="{Binding Country, UpdateSourceTrigger=PropertyChanged}"
                             FontSize="12" />
                     <dgControls:DataGridTextColumn
-                            Visibility="{Binding Data.Model.ContinentVisibility, Source={StaticResource DataContextProxy}, UpdateSourceTrigger=PropertyChanged}"
+                            Visibility="{Binding Data.LogModel.ContinentVisibility, Source={StaticResource DataContextProxy}, UpdateSourceTrigger=PropertyChanged}"
                             Header="Cont"
                             Width="55"
                             Binding="{Binding Continent, UpdateSourceTrigger=PropertyChanged}"
@@ -170,7 +170,7 @@
                     <dgControls:DataGridTemplateColumn Width="100">
                         <dgControls:DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Delete" Command="{Binding Data.Model.DeleteLogEntryCommand, Source={StaticResource DataContextProxy}}" />
+                                <Button Content="Delete" Command="{Binding Data.LogModel.DeleteLogEntryCommand, Source={StaticResource DataContextProxy}}" />
                             </DataTemplate>
                         </dgControls:DataGridTemplateColumn.CellTemplate>
                     </dgControls:DataGridTemplateColumn>
