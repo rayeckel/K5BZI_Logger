@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Reflection;
 using System.Windows.Data;
-using System.Windows.Markup;
 
 namespace K5BZI_Models.Extensions
 {
-    public class EnumBindingSourceExtension : MarkupExtension, IValueConverter
+    public class EnumDescriptionConverter : IValueConverter
     {
+        /*
         private Type _enumType;
         public Type EnumType
         {
@@ -53,6 +52,7 @@ namespace K5BZI_Models.Extensions
 
             return enumValues;
         }
+        */
 
         public string GetEnumDescription(Enum enumObj)
         {

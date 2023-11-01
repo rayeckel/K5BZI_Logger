@@ -1,17 +1,16 @@
-﻿using System.ComponentModel;
-
-namespace K5BZI_Models.Enums
+﻿namespace K5BZI_Models.Enums
 {
+    /*
     public enum Band
     {
         [Description("630m")]
-        SIXTHIRTYMETERS,
+        SIXTHIRTYMETERS = 1,
 
         [Description("160m")]
-        ONESIXTYMETERS,
+        ONESIXTYMETERS = 2,
 
         [Description("80m")]
-        EIGHTYMETERS,
+        EIGHTYMETERS = 3,
 
         [Description("60m")]
         SIXTYMETERS,
@@ -69,5 +68,5 @@ namespace K5BZI_Models.Enums
 
         [Description("3cm")]
         THREECENTEMETERS
-    }
+    }*/
 }

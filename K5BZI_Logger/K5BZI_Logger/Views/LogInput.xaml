@@ -5,10 +5,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-    xmlns:extensions="clr-namespace:K5BZI_Models.Extensions;assembly=K5BZI_Models"
     xmlns:enums="clr-namespace:K5BZI_Models.Enums;assembly=K5BZI_Models"
+    xmlns:extensions="clr-namespace:K5BZI_Models.Extensions;assembly=K5BZI_Models"
     xmlns:behaviors="clr-namespace:K5BZI_Services.Utilities;assembly=K5BZI_Services"
-    xmlns:controls="clr-namespace:K5BZI_Logger.Controls"
     mc:Ignorable="d" 
     FocusManager.FocusedElement="{x:Reference lblCall}">
     <Border
@@ -234,8 +233,13 @@
                             HorizontalAlignment="Left"
                             HorizontalContentAlignment="Left"
                             BorderThickness="1"
-                            ItemsSource= "{extensions:EnumBindingSourceExtension EnumType={x:Type enums:Band}}"
+                            ItemsSource= "{Binding LogEntry.Signal.Bands}"
                             SelectedItem="{Binding LogEntry.Signal.Band}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Converter={StaticResource extensions:EnumDescriptionConverter }}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="LostFocus" >
                                     <i:InvokeCommandAction Command="{Binding BandChangeCommand}" />
@@ -259,7 +263,7 @@
                             HorizontalAlignment="Left"
                             HorizontalContentAlignment="Left"
                             Margin="0,0,5,0"
-                            ItemsSource= "{extensions:EnumBindingSourceExtension EnumType={x:Type enums:Mode}}"
+
                             SelectedItem="{Binding LogEntry.Signal.Mode}">
                         </ComboBox>
                     </StackPanel>
@@ -328,7 +332,7 @@
                             HorizontalAlignment="Left"
                             HorizontalContentAlignment="Left"
                             Margin="0,0,5,0"
-                            ItemsSource= "{extensions:EnumBindingSourceExtension EnumType={x:Type enums:Assisted}}"
+
                             SelectedItem="{Binding LogEntry.Assisted, Mode=TwoWay}">
                         </ComboBox>
                     </StackPanel>
