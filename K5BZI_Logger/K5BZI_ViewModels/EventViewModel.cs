@@ -1,11 +1,12 @@
-﻿using K5BZI_Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using K5BZI_Models;
 using K5BZI_Models.ViewModelModels;
 using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
 using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace K5BZI_ViewModels
@@ -49,7 +50,7 @@ namespace K5BZI_ViewModels
             Model = new SelectEventModel
             {
                 CreateNewLogAction = (_) => CreateNewEvent(Model.EventName),
-                SelectLogAction = (_) => SelectLog(),
+                SelectLogAction = (_) => SelectLogAsync(),
                 ChangeEventAction = (_) => ChangeEvent(),
                 DeleteEventAction = (_) => DeleteEvent((Guid)_)
             };
@@ -59,7 +60,7 @@ namespace K5BZI_ViewModels
                 DxccEntities = _excelFileService.ReadDxccExcelData(),
                 EditEventsAction = (_) => EditEvents(),
                 EditAllEventsAction = (_) => EditAllEvents(),
-                EditEventAction = (_) => EditEvent(),
+                EditEventAction = (_) => EditEventAsync(),
                 UpdateEventAction = (_) => UpdateEvent(),
                 CreateEventAction = (_) => CreateNewEvent(String.Empty)
             };
@@ -94,12 +95,20 @@ namespace K5BZI_ViewModels
             Model.ExistingEvents.Add(newEvent);
             Model.IsOpen = false;
 
-            EditEvent();
+            EditEventAsync();
         }
 
-        private void SelectLog()
+        private async void SelectLogAsync()
         {
             _mainLoggerViewModel.SelectEvent(Model.SelectedEvent);
+
+            if (!_operatorsViewModel.Model.Operators.Any())
+            {
+                _operatorsViewModel.Model.IsOpen = true;
+                _operatorsViewModel.AddOperator();
+            }
+
+            while (_operatorsViewModel.Model.IsOpen) { await Task.Delay(25); }
 
             _operatorsViewModel.PopulateEventOperators(Model.SelectedEvent);
 
@@ -121,7 +130,7 @@ namespace K5BZI_ViewModels
             if (result == DialogResult.Yes)
             {
                 var editEvent = Model.ExistingEvents.First(_ => _.Id == Id);
-                
+
                 editEvent.IsDeleted = true;
 
                 _eventService.UpdateEvent(editEvent, editEvent.Operators.ToList());
@@ -138,8 +147,6 @@ namespace K5BZI_ViewModels
                 return;
             }
 
-            EditModel.IsOpen = false;
-
             var updatedOperators = EditModel.Operators
                 .Where(_ => _.Selected)
                 .ToList();
@@ -150,6 +157,8 @@ namespace K5BZI_ViewModels
             EditModel.Event.DXCC = EditModel.EventDxcc;
 
             _eventService.UpdateEvent(EditModel.Event, updatedOperators);
+
+            EditModel.IsOpen = false;
         }
 
         private void EditEvents()
@@ -182,12 +191,21 @@ namespace K5BZI_ViewModels
             _eventService.UpdateEvent(EditModel.Event, EditModel.Event.Operators.ToList());
         }
 
-        private void EditEvent()
+        private async void EditEventAsync()
         {
+            if (!_operatorsViewModel.Model.Operators.Any())
+            {
+                _operatorsViewModel.Model.IsOpen = true;
+                _operatorsViewModel.AddOperator();
+            }
+
+            while (_operatorsViewModel.Model.IsOpen) { await Task.Delay(25); }
+
             EditModel.EditAllEvents = false;
             EditModel.Event = Model.SelectedEvent;
 
             EditModel.Operators.Clear();
+
             foreach (var op in _operatorsViewModel.Model.Operators)
             {
                 if (_operatorsViewModel.Model.EventOperators.Contains(op))

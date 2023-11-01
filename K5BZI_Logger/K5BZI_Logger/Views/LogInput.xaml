@@ -236,9 +236,6 @@
                             BorderThickness="1"
                             ItemsSource= "{extensions:EnumBindingSourceExtension EnumType={x:Type enums:Band}}"
                             SelectedItem="{Binding LogEntry.Signal.Band}">
-                            <i:Interaction.Behaviors>
-                                <controls:WatermarkBehavior x:Name="Watermark1" Text="Select" />
-                            </i:Interaction.Behaviors>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="LostFocus" >
                                     <i:InvokeCommandAction Command="{Binding BandChangeCommand}" />
@@ -264,9 +261,6 @@
                             Margin="0,0,5,0"
                             ItemsSource= "{extensions:EnumBindingSourceExtension EnumType={x:Type enums:Mode}}"
                             SelectedItem="{Binding LogEntry.Signal.Mode}">
-                            <i:Interaction.Behaviors>
-                                <controls:WatermarkBehavior x:Name="Watermark2" Text="Select" />
-                            </i:Interaction.Behaviors>
                         </ComboBox>
                     </StackPanel>
                     <StackPanel

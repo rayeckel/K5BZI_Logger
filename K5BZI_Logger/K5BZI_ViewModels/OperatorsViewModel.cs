@@ -1,10 +1,10 @@
-﻿using K5BZI_Models;
+﻿using System;
+using System.Linq;
+using System.Windows.Forms;
+using K5BZI_Models;
 using K5BZI_Models.ViewModelModels;
 using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels.Interfaces;
-using System;
-using System.Linq;
-using System.Windows.Forms;
 
 namespace K5BZI_ViewModels
 {
@@ -70,14 +70,29 @@ namespace K5BZI_ViewModels
                 Model.Operators.Add(newOperator);
             }
 
+            //The first time the app is run 'currentEvent' will still be null
+            if (currentEvent == null)
+                currentEvent = _eventService.GetAllEvents().First();
+
             if (!currentEvent.Operators.Any(_ => _.CallSign?.ToUpper() == newOperator.CallSign?.ToUpper()))
-            {
                 currentEvent.Operators.Add(operatorObj);
-            }
 
             Model.CurrentOperator = currentEvent.ActiveOperator = operatorObj;
 
+            EditOperator.IsOpen = false;
+            Model.IsOpen = false;
+
             _eventService.UpdateEvent(currentEvent, currentEvent.Operators.ToList());
+        }
+
+        public void AddOperator()
+        {
+            EditOperator.Model.Clear();
+
+            EditOperator.ShowCloseButton = true;
+            EditOperator.IsOpen = true;
+
+            EditOperator.Model.IsClub = false;
         }
 
         #endregion
@@ -176,16 +191,6 @@ namespace K5BZI_ViewModels
             Model.ShowEventOperators = eventOnly;
             Model.ShowCloseButton = true;
             Model.IsOpen = true;
-        }
-
-        private void AddOperator()
-        {
-            EditOperator.Model.Clear();
-
-            EditOperator.ShowCloseButton = true;
-            EditOperator.IsOpen = true;
-
-            EditOperator.Model.IsClub = false;
         }
 
         private void AddClub()

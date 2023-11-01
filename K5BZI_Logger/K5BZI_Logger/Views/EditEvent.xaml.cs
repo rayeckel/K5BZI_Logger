@@ -4,18 +4,18 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace K5BZI_Logger.Views
 {
-    /// <summary>
-    /// Interaction logic for SelectEvent.xaml
-    /// </summary>
     public partial class EditEvent : ChildWindow
     {
         public EditEvent()
         {
             InitializeComponent();
 
-            var eventViewModel = App.ServiceProvider.GetRequiredService<IEventViewModel>();
+            DataContext = new
+            {
+                EventModel = App.ServiceProvider.GetRequiredService<IEventViewModel>().EditModel,
 
-            DataContext = eventViewModel.EditModel;
+                OperatorModel = App.ServiceProvider.GetRequiredService<IOperatorsViewModel>().Model,
+            };
         }
     }
 }
