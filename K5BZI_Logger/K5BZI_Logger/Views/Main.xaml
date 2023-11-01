@@ -5,7 +5,7 @@
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" 
         xmlns:local="clr-namespace:K5BZI_Logger.Views"
         Title="K5BZI Logger"
-        Height="725"
+        Height="835"
         MinWidth="1200"
         BorderThickness="1"
         GlowBrush="{DynamicResource AccentColorBrush}"
@@ -27,15 +27,15 @@
                 <RowDefinition Height="1" />
                 <RowDefinition Height="130" />
                 <RowDefinition Height="200" />
-                <RowDefinition Height="20" />
+                <RowDefinition Height="40" />
                 <RowDefinition Height="400" />
-                <RowDefinition Height="20" />
+                <RowDefinition Height="30*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2" />
                 <ColumnDefinition Width="49*" />
-                <ColumnDefinition Width="550" />
-                <ColumnDefinition Width="550" />
+                <ColumnDefinition Width="545" />
+                <ColumnDefinition Width="545" />
                 <ColumnDefinition Width="49*"/>
             </Grid.ColumnDefinitions>
             <Canvas 
@@ -116,14 +116,27 @@
                         Margin="1,0,0,0"/>
                 </StackPanel>
             </Canvas>
+            <Image 
+                Grid.Row="3"
+                Grid.Column="2"
+                Grid.ColumnSpan="2"
+                Source="../Images/SimpleDividingLine.png"
+                Height="40"
+                Width="510"/>
             <Canvas
                 Grid.Row="4"
                 Grid.Column="2"
                 Grid.ColumnSpan="2"
-                Margin="0,10,0,0">
+                Margin="0,0,0,0">
                 <local:Tabs
                     HorizontalAlignment="Center"/>
             </Canvas>
+            <Label
+                Grid.Row="5"
+                Grid.Column="5"
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Bottom">Version 1.0.10
+            </Label>
         </Grid>
     </ScrollViewer>
 </controls:MetroWindow>

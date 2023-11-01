@@ -520,9 +520,7 @@
   <ItemGroup>
     <Content Include="bzIcon.ico" />
     <Content Include="Images\bzIcon.ico" />
-    <Resource Include="Images\pinstripe_vector.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="Images\SimpleDividingLine.png" />
     <Resource Include="Images\Welcome.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
