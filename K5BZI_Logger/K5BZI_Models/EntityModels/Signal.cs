@@ -13,6 +13,8 @@ namespace K5BZI_Models
     {
         public Band Band { get; set; }
 
+        public Mode Mode { get; set; }
+
         [Adif("BAND")]
         [Cabrillo("CATEGORY-BAND")]
         public string BandString
@@ -27,8 +29,6 @@ namespace K5BZI_Models
         [Adif("MODE")]
         [Cabrillo("CATEGORY-MODE")]
         public string ModeDescription => Mode.GetName(typeof(Mode), Mode);
-
-        public Mode Mode { get; set; }
 
         [Adif("FREQ")]
         public string Frequency { get; set; }
