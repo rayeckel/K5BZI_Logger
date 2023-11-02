@@ -40,7 +40,7 @@ namespace K5BZI_ViewModels
             _submitViewModel = submitViewModel;
 
             Initialize();
-            GetExistingEvents();
+            GetExistingEventsAsync();
         }
 
         #endregion
@@ -55,25 +55,25 @@ namespace K5BZI_ViewModels
                 SelectEventAction = (_) => SelectEvent(),
                 ChangeEventAction = (_) => ChangeEvent(),
                 EditEventAction = (_) => EditEventAsync(),
-                DeleteEventAction = (_) => DeleteEvent((Guid)_)
+                DeleteEventAction = async (_) => await DeleteEventAsync((Guid)_)
             };
 
             EditModel = new EditEventModel
             {
                 DxccEntities = _excelFileService.ReadDxccExcelData(),
-                CreateNewEventAction = (_) => CreateNewEvent(),
+                CreateNewEventAction = async (_) => await CreateNewEventAsync(),
                 EditEventsAction = (_) => EditEvents(),
                 EditAllEventsAction = (_) => EditAllEvents(),
                 UpdateEventAction = (_) => UpdateEvent()
             };
         }
 
-        private void GetExistingEvents()
+        private async Task GetExistingEventsAsync()
         {
             EventModel.ExistingEvents.Clear();
 
-            _eventService
-                .GetAllEvents()?
+            (await _eventService
+                .GetAllEventsAsync())?
                 .OrderByDescending(_ => _.CreatedDate)
                 .ToList()
                 .ForEach(eventObj =>
@@ -87,9 +87,9 @@ namespace K5BZI_ViewModels
             EventModel.Event = EventModel.ExistingEvents.FirstOrDefault();
         }
 
-        private void CreateNewEvent()
+        private async Task CreateNewEventAsync()
         {
-            var newEvent = _eventService.CreateNewEvent(EditModel.NewEventName);
+            var newEvent = await _eventService.CreateNewEventAsync(EditModel.NewEventName);
 
             _operatorsViewModel.OperatorModel.CurrentEvent = EventModel.Event;
 
@@ -117,7 +117,7 @@ namespace K5BZI_ViewModels
             EventModel.IsOpen = true;
         }
 
-        private void DeleteEvent(Guid Id)
+        private async Task DeleteEventAsync(Guid Id)
         {
             var result = MessageBox.Show("Are you sure you want to delete this event?", "", MessageBoxButtons.YesNo);
 
@@ -127,9 +127,9 @@ namespace K5BZI_ViewModels
 
                 editEvent.IsDeleted = true;
 
-                _eventService.UpdateEvent(editEvent, editEvent.Operators.ToList());
+                await _eventService.UpdateEventAsync(editEvent, editEvent.Operators.ToList());
 
-                GetExistingEvents();
+                await GetExistingEventsAsync();
             }
         }
 
@@ -150,7 +150,7 @@ namespace K5BZI_ViewModels
             EditModel.Event.Club = EditModel.EventClub;
             EditModel.Event.DXCC = EditModel.EventDxcc;
 
-            _eventService.UpdateEvent(EditModel.Event, EditModel.Event.Operators.ToList());
+            _eventService.UpdateEventAsync(EditModel.Event, EditModel.Event.Operators.ToList());
 
             EditModel.IsOpen = false;
         }
@@ -182,7 +182,7 @@ namespace K5BZI_ViewModels
 
             EditModel.IsOpen = false;
 
-            _eventService.UpdateEvent(EditModel.Event, EditModel.Event.Operators.ToList());
+            _eventService.UpdateEventAsync(EditModel.Event, EditModel.Event.Operators.ToList());
         }
 
         private async void EditEventAsync()

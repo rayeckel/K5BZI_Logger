@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using K5BZI_Models;
 
 namespace K5BZI_Services.Interfaces
@@ -7,10 +8,10 @@ namespace K5BZI_Services.Interfaces
     {
         void OpenEventList();
 
-        Event CreateNewEvent(string eventName);
+        Task<Event> CreateNewEventAsync(string eventName);
 
-        Event UpdateEvent(Event editEvent, List<Operator> operators);
+        Task<Event> UpdateEventAsync(Event editEvent, List<Operator> operators);
 
-        List<Event> GetAllEvents();
+        Task<List<Event>> GetAllEventsAsync();
     }
 }

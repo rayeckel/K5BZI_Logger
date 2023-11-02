@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using K5BZI_Models;
 using K5BZI_Services.Interfaces;
 
@@ -33,7 +34,7 @@ namespace K5BZI_Services.Services
             _fileStoreService.OpenLogDirectory();
         }
 
-        public List<Event> GetAllEvents()
+        public async Task<List<Event>> GetAllEventsAsync()
         {
             _eventList.Clear();
 
@@ -45,11 +46,11 @@ namespace K5BZI_Services.Services
             return _eventList;
         }
 
-        public Event CreateNewEvent(string eventName)
+        public async Task<Event> CreateNewEventAsync(string eventName)
         {
             var newEventName = eventName.Replace(" ", "_");
 
-            return UpdateEvent(new Event
+            return await UpdateEventAsync(new Event
             {
                 Id = Guid.NewGuid(),
                 EventName = eventName,
@@ -58,7 +59,7 @@ namespace K5BZI_Services.Services
             }, new List<Operator>());
         }
 
-        public Event UpdateEvent(Event editEvent, List<Operator> operators)
+        public async Task<Event> UpdateEventAsync(Event editEvent, List<Operator> operators)
         {
             var existing = _eventList.FirstOrDefault(_ => _.Id == editEvent.Id);
 
@@ -92,7 +93,7 @@ namespace K5BZI_Services.Services
                 operators.ForEach(_ => editEvent.Operators.Add(_));
             }
 
-            _fileStoreService.WriteToFileAsync(_eventList, _eventLogFileName, false);
+            await _fileStoreService.WriteToFileAsync(_eventList, _eventLogFileName, false);
 
             return editEvent;
         }

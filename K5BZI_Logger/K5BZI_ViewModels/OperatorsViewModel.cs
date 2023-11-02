@@ -68,14 +68,15 @@ namespace K5BZI_ViewModels
 
             //The first time the app is run 'currentEvent' will still be null
             if (OperatorModel.CurrentEvent == null)
-                OperatorModel.CurrentEvent = _eventService.GetAllEvents().First();
+                OperatorModel.CurrentEvent = (await _eventService.GetAllEventsAsync()).First();
 
             if (!OperatorModel.CurrentEvent.Operators.Any(_ => _.CallSign?.ToUpper() == operatorObj.CallSign?.ToUpper()))
                 OperatorModel.CurrentEvent.Operators.Add(operatorObj);
 
+            EditOperator.IsOpen = true;
             OperatorModel.IsOpen = false;
 
-            _eventService.UpdateEvent(OperatorModel.CurrentEvent, OperatorModel.CurrentEvent.Operators.ToList());
+            await _eventService.UpdateEventAsync(OperatorModel.CurrentEvent, OperatorModel.CurrentEvent.Operators.ToList());
         }
 
         public void AddOperator()
@@ -162,7 +163,7 @@ namespace K5BZI_ViewModels
                     OperatorModel.Operators.Remove(operatorObj);
                 }
 
-                _eventService.UpdateEvent(OperatorModel.CurrentEvent, OperatorModel.CurrentEvent.Operators.ToList());
+                _eventService.UpdateEventAsync(OperatorModel.CurrentEvent, OperatorModel.CurrentEvent.Operators.ToList());
             }
         }
 
