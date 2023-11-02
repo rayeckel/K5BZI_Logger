@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows;
 using System.Windows.Input;
 using K5BZI_Models.Base;
 using K5BZI_Models.Enums;
@@ -16,29 +14,11 @@ namespace K5BZI_Models.ViewModelModels
     {
         #region Properties
 
-        public ObservableCollection<Operator> EventOperators { get; set; }
-
         public Operator SelectedSubmitOperator { get; set; }
 
         public LogType SelectedLogType { get; set; }
 
         public Services SelectedService { get; set; }
-
-        public Visibility SelectOperatorVisibility
-        {
-            get
-            {
-                return EventOperators.Count > 1 ? Visibility.Visible : Visibility.Collapsed;
-            }
-        }
-
-        public Visibility DisplayOperatorVisibility
-        {
-            get
-            {
-                return EventOperators.Count == 1 ? Visibility.Visible : Visibility.Collapsed;
-            }
-        }
 
         public IEnumerable<LogType> LogTypeValues
         {
@@ -56,7 +36,6 @@ namespace K5BZI_Models.ViewModelModels
 
         public SubmitModel()
         {
-            EventOperators = new ObservableCollection<Operator>();
         }
 
         #endregion

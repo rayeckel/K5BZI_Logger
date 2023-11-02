@@ -102,7 +102,7 @@
     <Compile Include="Interfaces\ILogViewModel.cs" />
     <Compile Include="Interfaces\IMainViewModel.cs" />
     <Compile Include="Interfaces\INetworkViewModel.cs" />
-    <Compile Include="Interfaces\IOperatorsViewModel.cs" />
+    <Compile Include="Interfaces\IOperatorViewModel.cs" />
     <Compile Include="Interfaces\IEventViewModel.cs" />
     <Compile Include="Interfaces\IExportViewModel.cs" />
     <Compile Include="Interfaces\ISubmitViewModel.cs" />

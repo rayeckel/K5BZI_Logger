@@ -9,7 +9,7 @@
     Height="750" 
     Width="1200"
     mc:Ignorable="d"
-    IsOpen="{Binding IsOpen}"
+    IsOpen="{Binding SubmitModel.IsOpen}"
     ShowCloseButton="True"
     Title="Submit Log">
     <!--
@@ -48,7 +48,6 @@
         </Grid.ColumnDefinitions>
         <Label
                 Grid.Row="0"
-                Visibility="{Binding SelectOperatorVisibility}"
                 Margin="15,0,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
@@ -58,15 +57,14 @@
         <ComboBox
                 Grid.Row="1"
                 Grid.Column="0"
-                Visibility="{Binding SelectOperatorVisibility}"
                 Height="34"
                 Width="300" 
                 Margin="30,20,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 x:Name="selectOperatorCombo"
-                ItemsSource="{Binding EventOperators}"
-                SelectedItem="{Binding SelectedSubmitOperator, Mode=TwoWay}"
+                ItemsSource="{Binding OperatorModel.EventOperators}"
+                SelectedItem="{Binding SubmitModel.SelectedSubmitOperator, Mode=TwoWay}"
                 FontFamily="Tahoma"
                 BorderThickness="1">
             <ComboBox.ItemTemplate>
@@ -86,27 +84,27 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-
+        <!--
         <Label 
-            Visibility="{Binding DisplayOperatorVisibility}"
+            Visibility="{Binding OperatorModel.DisplayOperatorVisibility}"
             Grid.Row="0"
             Margin="15,0,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
             FontWeight="Bold"
             FontFamily="Tahoma"
-            Content="{Binding SelectedSubmitOperator.FullName}"/>
+            Content="{Binding SubmitModel.SelectedSubmitOperator.FullName}"/>
 
         <Label 
-            Visibility="{Binding DisplayOperatorVisibility}"
+            Visibility="{Binding OperatorModel.DisplayOperatorVisibility}"
             Grid.Row="1"
             Margin="15,0,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
             FontWeight="Bold"
             FontFamily="Tahoma"
-            Content="{Binding SelectedSubmitOperator.CallSign}"/>
-        
+            Content="{Binding SubmitModel.SelectedSubmitOperator.CallSign}"/>
+        -->
         <Label 
             Grid.Row="2"
             Margin="15,0,0,0"
@@ -123,8 +121,8 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             x:Name="selectServiceCombo"
-            ItemsSource="{Binding ServiceValues}"
-            SelectedItem="{Binding SelectedService, Mode=TwoWay}"
+            ItemsSource="{Binding SubmitModel.ServiceValues}"
+            SelectedItem="{Binding SubmitModel.SelectedService, Mode=TwoWay}"
             FontFamily="Tahoma"
             BorderThickness="1">
         </ComboBox>
@@ -145,8 +143,8 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             x:Name="selectFileTypeCombo"
-            ItemsSource="{Binding LogTypeValues}"
-            SelectedItem="{Binding SelectedLogType, Mode=TwoWay}"
+            ItemsSource="{Binding SubmitModel.LogTypeValues}"
+            SelectedItem="{Binding SubmitModel.SelectedLogType, Mode=TwoWay}"
             FontFamily="Tahoma"
             BorderThickness="1">
         </ComboBox>
@@ -164,6 +162,6 @@
                 VerticalAlignment="Center"
                 FontFamily="Tahoma"
                 IsDefault="True"
-                Command="{Binding SubmitLogCommand}"/>
+                Command="{Binding SubmitModel.SubmitLogCommand}"/>
     </Grid>
 </simpleChildWindow:ChildWindow>

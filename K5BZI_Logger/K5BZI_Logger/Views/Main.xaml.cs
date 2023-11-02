@@ -6,7 +6,7 @@ namespace K5BZI_Logger.Views
     public partial class Main : MetroWindow
     {
         public Main(
-            IOperatorsViewModel operatorsViewModel,
+            IOperatorViewModel operatorsViewModel,
             IEventViewModel eventViewModel,
             IDefaultsViewModel defaultsViewModel,
             ILogViewModel logViewModel,

@@ -10,9 +10,16 @@ namespace K5BZI_Logger.Views
         {
             InitializeComponent();
 
-            DataContext = App.ServiceProvider
+            DataContext = new
+            {
+                OperatorModel = App.ServiceProvider
+                    .GetRequiredService<IOperatorViewModel>()
+                    .OperatorModel,
+
+                SubmitModel = App.ServiceProvider
                     .GetRequiredService<ISubmitViewModel>()
-                    .SubmitModel;
+                    .SubmitModel
+            };
         }
     }
 }

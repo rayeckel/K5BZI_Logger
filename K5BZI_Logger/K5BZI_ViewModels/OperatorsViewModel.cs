@@ -6,10 +6,11 @@ using K5BZI_Models;
 using K5BZI_Models.ViewModelModels;
 using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels.Interfaces;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace K5BZI_ViewModels
 {
-    public class OperatorsViewModel : IOperatorsViewModel
+    public class OperatorsViewModel : IOperatorViewModel
     {
         #region Properties
 
@@ -38,6 +39,7 @@ namespace K5BZI_ViewModels
 
         public async void PopulateEventOperators(Event eventModel)
         {
+            //The first time the app is run 'currentEvent' will still be null
             if (!OperatorModel.Operators.Any())
             {
                 OperatorModel.IsOpen = true;
@@ -60,6 +62,10 @@ namespace K5BZI_ViewModels
                 eventOperators.ForEach(_ => OperatorModel.EventOperators.Add(_));
 
             UpdateOperator(eventModel.ActiveOperator, true);
+
+            //trigger UI updates
+            //OperatorModel.SelectOperatorVisibility = Visibility.Visible;
+            //OperatorModel.DisplayOperatorVisibility = Visibility.Visible;
         }
 
         public void UpdateOperator(Operator operatorObj, bool isEvent)
@@ -85,7 +91,7 @@ namespace K5BZI_ViewModels
             if (!OperatorModel.CurrentEvent.Operators.Any(_ => _.CallSign?.ToUpper() == newOperator.CallSign?.ToUpper()))
                 OperatorModel.CurrentEvent.Operators.Add(operatorObj);
 
-            OperatorModel.CurrentOperator = OperatorModel.CurrentEvent.ActiveOperator = operatorObj;
+            OperatorModel.CurrentEvent.ActiveOperator = operatorObj;
 
             EditOperator.IsOpen = false;
             OperatorModel.IsOpen = false;
@@ -111,12 +117,12 @@ namespace K5BZI_ViewModels
         {
             OperatorModel = new OperatorModel
             {
-                EditOperatorAction = (_) => UpdateOperator(OperatorModel.SelectedEventOperator, false),
-                EditEventOperatorAction = (_) => UpdateOperator(OperatorModel.SelectedEventOperator, true),
-                CurrentOperatorAction = (_) => SetCurrentOperator(OperatorModel.SelectedEventOperator),
-                DeleteOperatorAction = (_) => DeleteOperator(OperatorModel.SelectedEventOperator),
-                CurrentEventOperatorAction = (_) => SetCurrentOperator(OperatorModel.SelectedEventOperator),
-                DeleteEventOperatorAction = (_) => DeleteOperator(OperatorModel.SelectedEventOperator),
+                EditOperatorAction = (_) => UpdateOperator(OperatorModel.CurrentEvent.ActiveOperator, false),
+                EditEventOperatorAction = (_) => UpdateOperator(OperatorModel.CurrentEvent.ActiveOperator, true),
+                CurrentOperatorAction = (_) => SetCurrentOperator(),
+                DeleteOperatorAction = (_) => DeleteOperator(),
+                CurrentEventOperatorAction = (_) => SetCurrentOperator(),
+                DeleteEventOperatorAction = (_) => DeleteOperator(),
                 AddOperatorToEventAction = (_) => AddOperatorToEvent(),
                 AddClubToEventAction = (_) => AddClubToEvent(),
                 AddOperatorAction = (_) => AddOperator(),
@@ -135,11 +141,7 @@ namespace K5BZI_ViewModels
             var operators = _operatorService.GetFullOperatorListing();
 
             if (operators.Any())
-            {
                 operators.ForEach(_ => OperatorModel.Operators.Add(_));
-
-                if (OperatorModel.CurrentOperator == null) OperatorModel.CurrentOperator = operators.First();
-            }
         }
 
         private void ChangeOperator()
@@ -147,8 +149,10 @@ namespace K5BZI_ViewModels
             EditOperators(true);
         }
 
-        private void SetCurrentOperator(Operator operatorObj)
+        private void SetCurrentOperator()
         {
+            var operatorObj = OperatorModel.CurrentEvent.ActiveOperator;
+
             if (operatorObj != null && operatorObj.IsClub)
             {
                 MessageBox.Show("Only individuals can be set as active operator", "You can't do that", MessageBoxButtons.OK);
@@ -162,8 +166,10 @@ namespace K5BZI_ViewModels
             OperatorModel.IsOpen = false;
         }
 
-        private void DeleteOperator(Operator operatorObj)
+        private void DeleteOperator()
         {
+            var operatorObj = OperatorModel.CurrentEvent.ActiveOperator;
+
             var deleteConfirmName = OperatorModel.ShowEventOperators ?
                 String.Format("Removing {0} from the event.", operatorObj.CallSign) :
                 String.Format("Deleting {0}.", operatorObj.CallSign);

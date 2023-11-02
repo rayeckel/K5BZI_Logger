@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Forms;
 using K5BZI_Models;
 using K5BZI_Models.ViewModelModels;
@@ -21,7 +22,7 @@ namespace K5BZI_ViewModels
         private readonly IEventService _eventService;
         private readonly IExcelFileService _excelFileService;
         private readonly ILogViewModel _logViewModel;
-        private readonly IOperatorsViewModel _operatorsViewModel;
+        private readonly IOperatorViewModel _operatorsViewModel;
         private readonly ISubmitViewModel _submitViewModel;
 
         #endregion
@@ -32,7 +33,7 @@ namespace K5BZI_ViewModels
             IEventService eventService,
             IExcelFileService excelFileService,
             ILogViewModel logViewModel,
-            IOperatorsViewModel operatorsViewModel,
+            IOperatorViewModel operatorsViewModel,
             ISubmitViewModel submitViewModel)
         {
             _eventService = eventService;
@@ -141,11 +142,11 @@ namespace K5BZI_ViewModels
                 return;
             }
 
-            var updatedOperators = _submitViewModel.SubmitModel.EventOperators
+            var updatedOperators = _operatorsViewModel.OperatorModel.EventOperators
                 .Where(_ => _.Selected)
                 .ToList();
 
-            UpdateOperators(updatedOperators);
+            UpdateOperators(updatedOperators, true);
 
             EditModel.Event.Club = EditModel.EventClub;
             EditModel.Event.DXCC = EditModel.EventDxcc;
@@ -198,7 +199,7 @@ namespace K5BZI_ViewModels
             EditModel.EditAllEvents = false;
             EditModel.Event = EventModel.Event;
 
-            _submitViewModel.SubmitModel.EventOperators.Clear();
+            _operatorsViewModel.OperatorModel.EventOperators.Clear();
 
             foreach (var op in _operatorsViewModel.OperatorModel.Operators)
             {
@@ -207,7 +208,7 @@ namespace K5BZI_ViewModels
                     op.Selected = true;
                 }
 
-                _submitViewModel.SubmitModel.EventOperators.Add(op);
+                UpdateOperators(new List<Operator> { op });
             };
 
             EditModel.Clubs.Clear();
@@ -226,14 +227,17 @@ namespace K5BZI_ViewModels
             EditModel.IsOpen = true;
         }
 
-        private void UpdateOperators(List<Operator> operators)
+        private void UpdateOperators(List<Operator> operators, bool clear = false)
         {
-            _operatorsViewModel.OperatorModel.EventOperators.Clear();
+            if (clear)
+                _operatorsViewModel.OperatorModel.EventOperators.Clear();
 
             foreach (var op in operators)
             {
                 _operatorsViewModel.OperatorModel.EventOperators.Add(op);
             }
+
+            _operatorsViewModel.OperatorModel.SelectOperatorVisibility = Visibility.Visible;
         }
 
         #endregion

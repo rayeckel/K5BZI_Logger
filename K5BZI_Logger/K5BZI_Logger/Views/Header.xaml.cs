@@ -12,7 +12,7 @@ namespace K5BZI_Logger.Views
 
             OperatorGrid.DataContext =
                 App.ServiceProvider
-                .GetRequiredService<IOperatorsViewModel>()
+                .GetRequiredService<IOperatorViewModel>()
                 .OperatorModel;
 
             EventGrid.DataContext =

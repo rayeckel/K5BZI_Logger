@@ -42,7 +42,7 @@
                 BorderBrush="Navy"
                 AutoGenerateColumns="False"
                 ItemsSource="{Binding EventOperators}"
-                SelectedItem="{Binding SelectedEventOperator, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                SelectedItem="{Binding CurrentEvent.ActiveOperator, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="CellEditEnding">
                         <i:InvokeCommandAction Command="{Binding Path=EditEventOperatorCommand}"/>

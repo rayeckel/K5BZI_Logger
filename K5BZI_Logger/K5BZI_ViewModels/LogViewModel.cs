@@ -21,7 +21,7 @@ namespace K5BZI_ViewModels
 
         private readonly IDefaultsService _defaultsService;
         private readonly ILogService _logService;
-        private readonly IOperatorsViewModel _operatorsViewModel;
+        private readonly IOperatorViewModel _operatorsViewModel;
 
         #endregion
 
@@ -30,7 +30,7 @@ namespace K5BZI_ViewModels
         public LogViewModel(
             IDefaultsService defaultsService,
             ILogService logListingService,
-            IOperatorsViewModel operatorsViewModel)
+            IOperatorViewModel operatorsViewModel)
         {
             _defaultsService = defaultsService;
             _logService = logListingService;
@@ -226,7 +226,7 @@ namespace K5BZI_ViewModels
                 return;
             }
 
-            LogModel.LogEntry.Operator = _operatorsViewModel.OperatorModel.CurrentOperator;
+            LogModel.LogEntry.Operator = _operatorsViewModel.OperatorModel.CurrentEvent.ActiveOperator;
 
             _logService.SaveLogEntry(LogModel.LogEntry, LogModel.LogFileName);
 
