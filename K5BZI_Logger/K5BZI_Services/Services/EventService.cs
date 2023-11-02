@@ -87,13 +87,12 @@ namespace K5BZI_Services.Services
                 existing.Score = editEvent.Score;
                 existing.State = editEvent.State;
                 existing.TransmitterCount = editEvent.TransmitterCount;
-                existing.ActiveOperator = editEvent.ActiveOperator;
 
                 existing.Operators.Clear();
                 operators.ForEach(_ => editEvent.Operators.Add(_));
             }
 
-            _fileStoreService.WriteToFile(_eventList, _eventLogFileName, false);
+            _fileStoreService.WriteToFileAsync(_eventList, _eventLogFileName, false);
 
             return editEvent;
         }

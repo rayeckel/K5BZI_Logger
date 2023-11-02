@@ -1,13 +1,14 @@
-﻿using K5BZI_Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using K5BZI_Models;
 
 namespace K5BZI_Services.Interfaces
 {
     public interface IOperatorService
     {
-        Operator UpdateOperator(Operator newOperator);
+        Task SaveOperators(List<Operator> operators);
 
-        void DeleteOperator(Operator newOperator);
+        Task DeleteOperatorAsync(Operator newOperator);
 
         List<Operator> GetFullOperatorListing();
     }

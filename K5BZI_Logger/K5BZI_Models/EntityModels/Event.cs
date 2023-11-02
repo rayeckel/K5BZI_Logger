@@ -1,11 +1,11 @@
-﻿using K5BZI_Models.Attributes;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Linq;
+using K5BZI_Models.Attributes;
 using K5BZI_Models.EntityModels;
 using K5BZI_Models.Enums;
 using Newtonsoft.Json;
 using PropertyChanged;
-using System;
-using System.Collections.ObjectModel;
-using System.Linq;
 
 namespace K5BZI_Models
 {
@@ -25,7 +25,17 @@ namespace K5BZI_Models
         public ObservableCollection<Operator> Operators { get; set; }
 
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public Operator ActiveOperator { get; set; }
+        public Operator ActiveOperator
+        {
+            get
+            {
+                return Operators.FirstOrDefault(_ => _.IsActive);
+            }
+            set
+            {
+                return;
+            }
+        }
 
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         [Cabrillo("OPERATORS")]

@@ -61,7 +61,7 @@ namespace K5BZI_Services.Services
                 _storedDefaults.QslSent = editDefaults.QslSent;
             }
 
-            _fileStoreService.WriteToFile(new List<Defaults> { _storedDefaults }, _defaultsFileName, false);
+            _fileStoreService.WriteToFileAsync(new List<Defaults> { _storedDefaults }, _defaultsFileName, false);
         }
 
         public void SetDefaults(LogEntry logEntry)

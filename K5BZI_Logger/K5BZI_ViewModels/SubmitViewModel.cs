@@ -10,8 +10,7 @@ namespace K5BZI_ViewModels
         #region Properties
 
         private readonly ISubmitService _submitService;
-        private readonly IOperatorViewModel _operatorViewModel;
-        private readonly ILogViewModel _logViewModel;
+
         public SubmitModel SubmitModel { get; private set; }
 
         #endregion
@@ -19,13 +18,9 @@ namespace K5BZI_ViewModels
         #region Constructors
 
         public SubmitViewModel(
-            ISubmitService submitService,
-            IOperatorViewModel operatorViewModel,
-            ILogViewModel logViewModel)
+            ISubmitService submitService)
         {
             _submitService = submitService;
-            _operatorViewModel = operatorViewModel;
-            _logViewModel = logViewModel;
 
             Initialize();
         }
@@ -38,7 +33,6 @@ namespace K5BZI_ViewModels
         {
             SubmitModel = new SubmitModel
             {
-                SelectedSubmitOperator = _operatorViewModel.OperatorModel.CurrentEvent?.ActiveOperator,
                 SubmitLogAction = async (_) => await SubmitLogAsync()
             };
         }

@@ -16,7 +16,7 @@ namespace K5BZI_Services.Interfaces
         List<T> ReadLog<T>(string logFileName, bool isLogFile = true)
             where T : class;
 
-        Task<bool> WriteToFile<T>(ICollection<T> LogEntries, string logFileName, bool isLogFile = true)
+        Task<bool> WriteToFileAsync<T>(ICollection<T> LogEntries, string logFileName, bool isLogFile = true)
             where T : class;
 
         Task<bool> WriteToFile(string fileData, string logFileName, string extension = "");

@@ -409,8 +409,8 @@
                     Grid.ColumnSpan="2"
                     HorizontalAlignment="Right"
                     Margin="0,0,40,0"
-                    Content="Edit Operators"
-                    Width="150"
+                    Content="Add/Edit Operators"
+                    Width="155"
                     Height="30"
                     Foreground="Navy"
                     FontSize="12"
@@ -436,7 +436,7 @@
                     Height="200"
                     Width="300" 
                     Margin="10,0,20,0"
-                    ItemsSource="{Binding OperatorModel.Operators}"
+                    ItemsSource="{Binding OperatorModel.CurrentEvent.Operators}"
                     FontFamily="Tahoma"
                     BorderThickness="1"
                     controls:TextBoxHelper.Watermark="Operators" 
@@ -445,8 +445,10 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{Binding CallSign}" />
-                                <TextBlock Text=" - " />
+                                <TextBlock Text="    -    " />
                                 <TextBlock Text="{Binding FullName}" />
+                                <TextBlock Text="    -    " />
+                                <CheckBox IsChecked="{Binding IsActive}" />
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>

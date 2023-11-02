@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Forms;
-using K5BZI_Models;
 using K5BZI_Models.ViewModelModels;
 using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels.Interfaces;
@@ -94,6 +91,8 @@ namespace K5BZI_ViewModels
         {
             var newEvent = _eventService.CreateNewEvent(EditModel.NewEventName);
 
+            _operatorsViewModel.OperatorModel.CurrentEvent = EventModel.Event;
+
             _logViewModel.CreateNewLog(newEvent);
 
             EventModel.Event = newEvent;
@@ -107,7 +106,7 @@ namespace K5BZI_ViewModels
         {
             _logViewModel.GetLog(EventModel.Event);
 
-            _operatorsViewModel.PopulateEventOperators(EventModel.Event);
+            _operatorsViewModel.OperatorModel.CurrentEvent = EventModel.Event;
 
             EventModel.IsOpen = false;
         }
@@ -136,22 +135,22 @@ namespace K5BZI_ViewModels
 
         private void UpdateEvent()
         {
+            if (!EditModel.Event.Operators.Any())
+            {
+                MessageBox.Show("Please add at least one operator to the event.", "Invalid input");
+                return;
+            }
+
             if (EditModel.Event.ItuZone < 0 || EditModel.Event.ItuZone > 90)
             {
                 MessageBox.Show("Please enter an ITU one value between 0 and 90", "Invalid input");
                 return;
             }
 
-            var updatedOperators = _operatorsViewModel.OperatorModel.EventOperators
-                .Where(_ => _.Selected)
-                .ToList();
-
-            UpdateOperators(updatedOperators, true);
-
             EditModel.Event.Club = EditModel.EventClub;
             EditModel.Event.DXCC = EditModel.EventDxcc;
 
-            _eventService.UpdateEvent(EditModel.Event, updatedOperators);
+            _eventService.UpdateEvent(EditModel.Event, EditModel.Event.Operators.ToList());
 
             EditModel.IsOpen = false;
         }
@@ -199,18 +198,6 @@ namespace K5BZI_ViewModels
             EditModel.EditAllEvents = false;
             EditModel.Event = EventModel.Event;
 
-            _operatorsViewModel.OperatorModel.EventOperators.Clear();
-
-            foreach (var op in _operatorsViewModel.OperatorModel.Operators)
-            {
-                if (_operatorsViewModel.OperatorModel.EventOperators.Contains(op))
-                {
-                    op.Selected = true;
-                }
-
-                UpdateOperators(new List<Operator> { op });
-            };
-
             EditModel.Clubs.Clear();
             foreach (var club in _operatorsViewModel.OperatorModel.Operators.Where(_ => _.IsClub))
             {
@@ -225,19 +212,6 @@ namespace K5BZI_ViewModels
 
             EditModel.ShowCloseButton = true;
             EditModel.IsOpen = true;
-        }
-
-        private void UpdateOperators(List<Operator> operators, bool clear = false)
-        {
-            if (clear)
-                _operatorsViewModel.OperatorModel.EventOperators.Clear();
-
-            foreach (var op in operators)
-            {
-                _operatorsViewModel.OperatorModel.EventOperators.Add(op);
-            }
-
-            _operatorsViewModel.OperatorModel.SelectOperatorVisibility = Visibility.Visible;
         }
 
         #endregion

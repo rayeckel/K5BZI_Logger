@@ -80,7 +80,7 @@ namespace K5BZI_Services.Services
             }
         }
 
-        public async Task<bool> WriteToFile<T>(ICollection<T> LogEntries, string logFileName, bool isLogFile = true)
+        public async Task<bool> WriteToFileAsync<T>(ICollection<T> LogEntries, string logFileName, bool isLogFile = true)
             where T : class
         {
             var fileName = CreateFilePath(logFileName, isLogFile);

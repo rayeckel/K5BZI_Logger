@@ -1,4 +1,5 @@
-﻿using K5BZI_Models;
+﻿using System.Threading.Tasks;
+using K5BZI_Models;
 using K5BZI_Models.ViewModelModels;
 
 namespace K5BZI_ViewModels.Interfaces
@@ -11,8 +12,6 @@ namespace K5BZI_ViewModels.Interfaces
 
         void AddOperator();
 
-        void PopulateEventOperators(Event eventModel);
-
-        void UpdateOperator(Operator operatorObj, bool isEvent);
+        Task UpdateOperatorAsync(Operator operatorObj, bool isEvent);
     }
 }

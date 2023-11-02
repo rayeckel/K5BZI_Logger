@@ -29,7 +29,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="850"/>
-            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="180"/>
         </Grid.ColumnDefinitions>
         <dgControls:DataGrid 
                 Grid.Column="0"
@@ -54,9 +54,13 @@
                             Binding="{Binding Id}" 
                             FontSize="12" 
                             Visibility="Collapsed"/>
+                <dgControls:DataGridCheckBoxColumn 
+                            Header="Is Active" 
+                            Width="80"
+                            Binding="{Binding IsActive}"/>
                 <dgControls:DataGridTextColumn 
                             Header="Name" 
-                            Width="175"
+                            Width="105"
                             Binding="{Binding FirstName, Mode=TwoWay}" 
                             FontSize="12" >
                     <dgControls:DataGridTextColumn.ElementStyle>
@@ -72,7 +76,7 @@
                 </dgControls:DataGridTextColumn>
                 <dgControls:DataGridTextColumn 
                             Header="Last Name" 
-                            Width="150"
+                            Width="105"
                             Binding="{Binding LastName, Mode=TwoWay}" 
                             FontSize="12" />
                 <dgControls:DataGridTextColumn 
@@ -98,7 +102,7 @@
                 </dgControls:DataGridTextColumn>
                 <dgControls:DataGridTextColumn 
                             Header="Address"
-                            Width="250"
+                            Width="200"
                             Binding="{Binding Address, UpdateSourceTrigger=PropertyChanged}" 
                             FontSize="12" />
                 <dgControls:DataGridTextColumn
@@ -139,7 +143,7 @@
                     VerticalAlignment="Center"
                     Grid.Row="1"
                     Margin="10,0,0,0"
-                    Content="Set Active Operator"
+                    Content="Set Active"
                     Width="120"
                     Height="30"
                     Foreground="Navy"
@@ -173,7 +177,7 @@
                     Grid.Row="5"
                     Margin="10,0,0,0"
                     Content="Delete Operator"
-                    Width="120"
+                    Width="150"
                     Height="30"
                     Foreground="Navy"
                     FontSize="12"

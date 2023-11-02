@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using K5BZI_Models;
 using K5BZI_Services.Interfaces;
 
@@ -28,34 +29,12 @@ namespace K5BZI_Services.Services
 
         #region Public Methods
 
-        public void CreateOperator(
-            string callSign,
-            string firstname,
-            string lastname,
-            string clubname,
-            string city,
-            string state,
-            string zipcode,
-            string country,
-            string clubCall,
-            bool isClub = false)
+        public async Task SaveOperators(List<Operator> operators)
         {
-            UpdateOperator(new Operator
-            {
-                CallSign = callSign,
-                FirstName = firstname,
-                LastName = lastname,
-                ClubName = clubname,
-                City = city,
-                State = state,
-                ZipCode = zipcode,
-                Country = country,
-                ClubCall = clubCall,
-                IsClub = isClub
-            });
+            await _fileStoreService.WriteToFileAsync(operators, _operatorsFileName, false);
         }
 
-        public void DeleteOperator(Operator editOperator)
+        public async Task DeleteOperatorAsync(Operator editOperator)
         {
             var existingOperator = _operators.FirstOrDefault(_ => _.CallSign == editOperator.CallSign);
 
@@ -63,39 +42,8 @@ namespace K5BZI_Services.Services
             {
                 _operators.Remove(editOperator);
 
-                _fileStoreService.WriteToFile(_operators, _operatorsFileName, false);
+                await _fileStoreService.WriteToFileAsync(_operators, _operatorsFileName, false);
             }
-        }
-
-        public Operator UpdateOperator(Operator editOperator)
-        {
-            if (editOperator == null) return default(Operator);
-
-            var existingOperator = _operators.FirstOrDefault(_ => _.CallSign == editOperator.CallSign);
-
-            if (existingOperator == null)
-            {
-                _operators.Add(editOperator);
-
-                _fileStoreService.WriteToFile(_operators, _operatorsFileName, false);
-
-                existingOperator = editOperator;
-            }
-            else
-            {
-                existingOperator.CallSign = editOperator.CallSign;
-                existingOperator.City = editOperator.City;
-                existingOperator.Country = editOperator.Country;
-                existingOperator.FirstName = editOperator.FirstName;
-                existingOperator.LastName = editOperator.LastName;
-                existingOperator.State = existingOperator.State;
-                existingOperator.ZipCode = editOperator.ZipCode;
-                existingOperator.IsClub = editOperator.IsClub;
-                existingOperator.ClubCall = editOperator.ClubCall;
-                existingOperator.ClubName = editOperator.ClubName;
-            }
-
-            return existingOperator;
         }
 
         public List<Operator> GetFullOperatorListing()

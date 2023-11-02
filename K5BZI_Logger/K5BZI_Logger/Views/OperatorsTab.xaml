@@ -35,14 +35,14 @@
                 Grid.Column="0"
                 x:Name="operatorsDataGrid" 
                 Height="250"
-                Width="850"
+                Width="900"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 BorderThickness=".5"
                 BorderBrush="Navy"
                 AutoGenerateColumns="False"
                 ItemsSource="{Binding EventOperators}"
-                SelectedItem="{Binding CurrentEvent.ActiveOperator, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                SelectedItem="{Binding CurrentEvent.ActiveOperator, UpdateSourceTrigger=PropertyChanged}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="CellEditEnding">
                         <i:InvokeCommandAction Command="{Binding Path=EditEventOperatorCommand}"/>
@@ -54,6 +54,10 @@
                             Binding="{Binding Id}" 
                             FontSize="12" 
                             Visibility="Collapsed"/>
+                    <dgControls:DataGridCheckBoxColumn 
+                            Header="Is Active" 
+                            Width="50"
+                            Binding="{Binding IsActive}"/>
                     <dgControls:DataGridTextColumn 
                             Header="Name" 
                             Width="175"

@@ -1,15 +1,15 @@
-﻿using K5BZI_Models.Attributes;
+﻿using System.Windows;
+using K5BZI_Models.Attributes;
 using K5BZI_Models.Base;
 using Newtonsoft.Json;
 using PropertyChanged;
-using System.Windows;
 
 namespace K5BZI_Models
 {
     [AddINotifyPropertyChangedInterface]
     public class Operator : BaseModel
     {
-        public bool Selected { get; set; }
+        public bool IsActive { get; set; }
 
         [JsonProperty(Required = Required.Always)]
         [Cabrillo("CALLSIGN")]

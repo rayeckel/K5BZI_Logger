@@ -131,7 +131,7 @@
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
                 Margin="0,0,20,0"
-                Content="New Log"
+                Content="New Event"
                 Width="100"
                 Height="30"
                 Foreground="Navy"

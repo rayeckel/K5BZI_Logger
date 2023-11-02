@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using K5BZI_Models.Base;
@@ -16,7 +17,6 @@ namespace K5BZI_Models.ViewModelModels
         public OperatorModel()
         {
             Operators = new ObservableCollection<Operator>();
-            EventOperators = new ObservableCollection<Operator>();
         }
 
         #endregion
@@ -39,13 +39,11 @@ namespace K5BZI_Models.ViewModelModels
 
         public ObservableCollection<Operator> Operators { get; private set; }
 
-        public ObservableCollection<Operator> EventOperators { get; private set; }
-
         public ObservableCollection<Operator> ViewSelectedOperators
         {
             get
             {
-                return ShowEventOperators ? EventOperators : Operators;
+                return ShowEventOperators ? CurrentEvent.Operators : Operators;
             }
         }
 
@@ -53,7 +51,7 @@ namespace K5BZI_Models.ViewModelModels
         {
             get
             {
-                return EventOperators.Count > 1 ? Visibility.Visible : Visibility.Collapsed;
+                return CurrentEvent.Operators.Count > 1 ? Visibility.Visible : Visibility.Collapsed;
             }
             set
             {
@@ -65,7 +63,7 @@ namespace K5BZI_Models.ViewModelModels
         {
             get
             {
-                return EventOperators.Count == 1 ? Visibility.Visible : Visibility.Collapsed;
+                return CurrentEvent.Operators.Count == 1 ? Visibility.Visible : Visibility.Collapsed;
             }
             set
             {
@@ -117,7 +115,8 @@ namespace K5BZI_Models.ViewModelModels
             {
                 return _currentEventOperatorCommand ??
                     (_currentEventOperatorCommand =
-                    new DelegateCommand(CurrentEventOperatorAction, _ => { return CurrentEvent?.ActiveOperator != null; }));
+                    new DelegateCommand(CurrentEventOperatorAction, _ =>
+                    { return (CurrentEvent != null && CurrentEvent.Operators.Any()); }));
             }
         }
         public Action<object> CurrentEventOperatorAction { get; set; }
@@ -129,7 +128,8 @@ namespace K5BZI_Models.ViewModelModels
             {
                 return _deleteEventOperatorCommand ??
                     (_deleteEventOperatorCommand =
-                    new DelegateCommand(DeleteEventOperatorAction, _ => { return CurrentEvent?.ActiveOperator != null; }));
+                    new DelegateCommand(DeleteEventOperatorAction, _ =>
+                    { return (CurrentEvent != null && CurrentEvent.Operators.Any()); }));
             }
         }
         public Action<object> DeleteEventOperatorAction { get; set; }
@@ -141,7 +141,7 @@ namespace K5BZI_Models.ViewModelModels
             {
                 return _addClubToEventCommand ??
                     (_addClubToEventCommand =
-                    new DelegateCommand(AddClubToEventAction, _ => { return CurrentEvent?.ActiveOperator != null; }));
+                    new DelegateCommand(AddClubToEventAction, _ => { return CurrentEvent.Operators.Any(); }));
             }
         }
         public Action<object> AddClubToEventAction { get; set; }
@@ -153,7 +153,8 @@ namespace K5BZI_Models.ViewModelModels
             {
                 return _currentOperatorCommand ??
                     (_currentOperatorCommand =
-                    new DelegateCommand(CurrentOperatorAction, _ => { return CurrentEvent?.ActiveOperator != null; }));
+                    new DelegateCommand(CurrentOperatorAction, _ =>
+                    { return (CurrentEvent != null && CurrentEvent.Operators.Any()); }));
             }
         }
         public Action<object> CurrentOperatorAction { get; set; }
@@ -175,7 +176,8 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _deleteOperatorCommand ??
-                    (_deleteOperatorCommand = new DelegateCommand(DeleteOperatorAction, _ => { return CurrentEvent?.ActiveOperator != null; }));
+                    (_deleteOperatorCommand = new DelegateCommand(DeleteOperatorAction, _ =>
+                    { return (CurrentEvent != null && CurrentEvent.Operators.Any()); }));
             }
         }
         public Action<object> DeleteOperatorAction { get; set; }

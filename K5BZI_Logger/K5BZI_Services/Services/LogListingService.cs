@@ -58,7 +58,7 @@ namespace K5BZI_Services.Services
         {
             _logEntries.Add(logEntry.Clone());
 
-            _fileStoreService.WriteToFile(_logEntries, logFileName);
+            _fileStoreService.WriteToFileAsync(_logEntries, logFileName);
         }
 
         public void UpdateLogEntry(LogEntry logEntry, string logFileName)
@@ -74,7 +74,7 @@ namespace K5BZI_Services.Services
             updatedLogEntry.CQZone = logEntry.CQZone;
             updatedLogEntry.Operator = logEntry.Operator;
 
-            _fileStoreService.WriteToFile(_logEntries, logFileName);
+            _fileStoreService.WriteToFileAsync(_logEntries, logFileName);
         }
 
         public void DeleteLogEntry(LogEntry logEntry, string logFileName)
@@ -85,7 +85,7 @@ namespace K5BZI_Services.Services
             {
                 _logEntries.Remove(existingLogEntry);
 
-                _fileStoreService.WriteToFile(_logEntries, logFileName);
+                _fileStoreService.WriteToFileAsync(_logEntries, logFileName);
             }
         }
 

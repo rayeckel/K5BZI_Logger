@@ -16,8 +16,10 @@ namespace K5BZI_ViewModels
 
         public OperatorModel OperatorModel { get; private set; }
         public EditOperatorModel EditOperator { get; private set; }
+
         private readonly IOperatorService _operatorService;
         private readonly IEventService _eventService;
+        private readonly ISubmitViewModel _submitViewModel;
 
         #endregion
 
@@ -25,10 +27,12 @@ namespace K5BZI_ViewModels
 
         public OperatorsViewModel(
             IOperatorService operatorService,
-            IEventService eventService)
+            IEventService eventService,
+            ISubmitViewModel submitViewModel)
         {
             _operatorService = operatorService;
             _eventService = eventService;
+            _submitViewModel = submitViewModel;
 
             Initialize();
         }
@@ -36,64 +40,39 @@ namespace K5BZI_ViewModels
         #endregion
 
         #region Public Methods
-
-        public async void PopulateEventOperators(Event eventModel)
-        {
-            //The first time the app is run 'currentEvent' will still be null
-            if (!OperatorModel.Operators.Any())
-            {
-                OperatorModel.IsOpen = true;
-                AddOperator();
-            }
-
-            while (OperatorModel.IsOpen) { await Task.Delay(25); }
-
-            OperatorModel.CurrentEvent = eventModel;
-            OperatorModel.EventOperators.Clear();
-
-            var currentEventOperators = OperatorModel.CurrentEvent.Operators
-                .Select(x => x.CallSign);
-
-            var eventOperators = OperatorModel.Operators
-                .Where(_ => currentEventOperators.Contains(_.CallSign))
-                .ToList();
-
-            if (eventOperators.Any())
-                eventOperators.ForEach(_ => OperatorModel.EventOperators.Add(_));
-
-            UpdateOperator(eventModel.ActiveOperator, true);
-
-            //trigger UI updates
-            //OperatorModel.SelectOperatorVisibility = Visibility.Visible;
-            //OperatorModel.DisplayOperatorVisibility = Visibility.Visible;
-        }
-
-        public void UpdateOperator(Operator operatorObj, bool isEvent)
+        public async Task UpdateOperatorAsync(Operator operatorObj, bool isEvent)
         {
             if (operatorObj == null) return;
 
-            var newOperator = _operatorService.UpdateOperator(operatorObj);
+            var existingOperator = OperatorModel.Operators
+                .FirstOrDefault(_ => _.CallSign?.ToUpper() == operatorObj.CallSign?.ToUpper());
 
-            if (!OperatorModel.EventOperators.Any(_ => _.CallSign?.ToUpper() == newOperator.CallSign?.ToUpper()))
+            if (existingOperator == null)
+                OperatorModel.Operators.Add(operatorObj);
+            else
             {
-                OperatorModel.EventOperators.Add(newOperator);
+                existingOperator.CallSign = operatorObj.CallSign;
+                existingOperator.City = operatorObj.City;
+                existingOperator.Country = operatorObj.Country;
+                existingOperator.FirstName = operatorObj.FirstName;
+                existingOperator.LastName = operatorObj.LastName;
+                existingOperator.State = operatorObj.State;
+                existingOperator.ZipCode = operatorObj.ZipCode;
+                existingOperator.IsClub = operatorObj.IsClub;
+                existingOperator.ClubCall = operatorObj.ClubCall;
+                existingOperator.ClubName = operatorObj.ClubName;
+                existingOperator.IsActive = operatorObj.IsActive;
             }
 
-            if (!OperatorModel.Operators.Any(_ => _.CallSign?.ToUpper() == newOperator.CallSign?.ToUpper()))
-            {
-                OperatorModel.Operators.Add(newOperator);
-            }
+            await _operatorService.SaveOperators(OperatorModel.Operators.ToList());
 
             //The first time the app is run 'currentEvent' will still be null
             if (OperatorModel.CurrentEvent == null)
                 OperatorModel.CurrentEvent = _eventService.GetAllEvents().First();
 
-            if (!OperatorModel.CurrentEvent.Operators.Any(_ => _.CallSign?.ToUpper() == newOperator.CallSign?.ToUpper()))
+            if (!OperatorModel.CurrentEvent.Operators.Any(_ => _.CallSign?.ToUpper() == operatorObj.CallSign?.ToUpper()))
                 OperatorModel.CurrentEvent.Operators.Add(operatorObj);
 
-            OperatorModel.CurrentEvent.ActiveOperator = operatorObj;
-
-            EditOperator.IsOpen = false;
             OperatorModel.IsOpen = false;
 
             _eventService.UpdateEvent(OperatorModel.CurrentEvent, OperatorModel.CurrentEvent.Operators.ToList());
@@ -117,25 +96,25 @@ namespace K5BZI_ViewModels
         {
             OperatorModel = new OperatorModel
             {
-                EditOperatorAction = (_) => UpdateOperator(OperatorModel.CurrentEvent.ActiveOperator, false),
-                EditEventOperatorAction = (_) => UpdateOperator(OperatorModel.CurrentEvent.ActiveOperator, true),
-                CurrentOperatorAction = (_) => SetCurrentOperator(),
-                DeleteOperatorAction = (_) => DeleteOperator(),
-                CurrentEventOperatorAction = (_) => SetCurrentOperator(),
-                DeleteEventOperatorAction = (_) => DeleteOperator(),
+                EditOperatorsAction = async (_) => await UpdateOperatorAsync(OperatorModel.CurrentEvent.ActiveOperator, false),
+                EditEventOperatorAction = async (_) => await UpdateOperatorAsync(OperatorModel.CurrentEvent.ActiveOperator, true),
+                CurrentOperatorAction = async (_) => await SetCurrentOperatorAsync(),
+                DeleteOperatorAction = async (_) => await DeleteOperatorAsync(),
+                CurrentEventOperatorAction = async (_) => await SetCurrentOperatorAsync(),
+                DeleteEventOperatorAction = async (_) => await DeleteOperatorAsync(),
                 AddOperatorToEventAction = (_) => AddOperatorToEvent(),
                 AddClubToEventAction = (_) => AddClubToEvent(),
                 AddOperatorAction = (_) => AddOperator(),
                 AddClubAction = (_) => AddClub(),
-                EditOperatorsAction = (_) => EditOperators(),
-                ChangeOperatorAction = (_) => ChangeOperator()
+                EditOperatorAction = (_) => EditOperators(),
+                ChangeOperatorAction = (_) => EditOperators(true)
             };
 
             EditOperator = new EditOperatorModel
             {
                 Operator = new Operator(),
-                UpdateOperatorAction = (_) => UpdateOperator(EditOperator.Operator, false),
-                UpdateEventOperatorAction = (_) => UpdateOperator(EditOperator.Operator, true)
+                UpdateOperatorAction = async (_) => await UpdateOperatorAsync(EditOperator.Operator, false),
+                UpdateEventOperatorAction = async (_) => await UpdateOperatorAsync(EditOperator.Operator, true)
             };
 
             var operators = _operatorService.GetFullOperatorListing();
@@ -144,12 +123,7 @@ namespace K5BZI_ViewModels
                 operators.ForEach(_ => OperatorModel.Operators.Add(_));
         }
 
-        private void ChangeOperator()
-        {
-            EditOperators(true);
-        }
-
-        private void SetCurrentOperator()
+        private async Task SetCurrentOperatorAsync()
         {
             var operatorObj = OperatorModel.CurrentEvent.ActiveOperator;
 
@@ -160,13 +134,15 @@ namespace K5BZI_ViewModels
                 return;
             }
 
-            UpdateOperator(operatorObj, true);
+            await UpdateOperatorAsync(operatorObj, true);
+
+            _submitViewModel.SubmitModel.SelectedSubmitOperator = OperatorModel.CurrentEvent.ActiveOperator;
 
             EditOperator.IsOpen = false;
             OperatorModel.IsOpen = false;
         }
 
-        private void DeleteOperator()
+        private async Task DeleteOperatorAsync()
         {
             var operatorObj = OperatorModel.CurrentEvent.ActiveOperator;
 
@@ -178,15 +154,15 @@ namespace K5BZI_ViewModels
 
             if (confirmResult == DialogResult.Yes)
             {
-                OperatorModel.EventOperators.Remove(operatorObj);
+                OperatorModel.CurrentEvent.Operators.Remove(operatorObj);
 
                 if (!OperatorModel.ShowEventOperators)
                 {
-                    _operatorService.DeleteOperator(operatorObj);
+                    await _operatorService.DeleteOperatorAsync(operatorObj);
                     OperatorModel.Operators.Remove(operatorObj);
                 }
 
-                _eventService.UpdateEvent(OperatorModel.CurrentEvent, OperatorModel.EventOperators.ToList());
+                _eventService.UpdateEvent(OperatorModel.CurrentEvent, OperatorModel.CurrentEvent.Operators.ToList());
             }
         }
 
