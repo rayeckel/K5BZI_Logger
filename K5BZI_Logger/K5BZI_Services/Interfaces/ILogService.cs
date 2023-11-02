@@ -7,10 +7,10 @@ namespace K5BZI_Services.Interfaces
     {
         List<LogEntry> ReadLog(string logFileName);
 
-        void SaveLogEntry(LogEntry logEntry, Event eventEntry);
+        void SaveLogEntry(LogEntry logEntry, string logFileName);
 
-        void UpdateLogEntry(LogEntry logEntry, Event eventEntry);
+        void UpdateLogEntry(LogEntry logEntry, string logFileName);
 
-        void DeleteLogEntry(LogEntry logEntry, Event eventEntry);
+        void DeleteLogEntry(LogEntry logEntry, string logFileName);
     }
 }

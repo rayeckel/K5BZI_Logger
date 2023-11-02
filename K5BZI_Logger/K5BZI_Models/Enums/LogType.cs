@@ -1,17 +1,18 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using K5BZI_Models.Extensions;
 
 namespace K5BZI_Models.Enums
 {
+    [TypeConverter(typeof(EnumDescriptionConverter))]
     public enum LogType
     {
         [Description("Adif")]
-        Adif,
+        ADIF,
 
         [Description("Cabrillo")]
-        Cabrillo,
+        CABRILLO,
 
         [Description("Json")]
-        Json
+        JSON
     }
 }

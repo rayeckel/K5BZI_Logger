@@ -61,11 +61,11 @@
                 BorderThickness=".5"
                 BorderBrush="Navy"
                 AutoGenerateColumns="False"
-                ItemsSource="{Binding ExistingEvents}"
-                SelectedItem="{Binding Event, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                ItemsSource="{Binding EditModel.ExistingEvents}"
+                SelectedItem="{Binding EditModel.Event, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="CellEditEnding">
-                            <i:InvokeCommandAction Command="{Binding Path=EditAllEventsCommand}"/>
+                        <i:InvokeCommandAction Command="{Binding Path=EditModel.EditAllEventsCommand}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     <dgControls:DataGrid.Columns>
@@ -145,7 +145,7 @@
                     Foreground="Navy"
                     FontSize="12"
                     FontFamily="Tahoma"
-                    Command="{Binding CreateEventCommand}"/>
+                    Command="{Binding EditModel.CreateNewEventCommand}"/>
             </Grid>
         </Grid>
         <Grid
@@ -436,7 +436,7 @@
                     Height="200"
                     Width="300" 
                     Margin="10,0,20,0"
-                    ItemsSource="{Binding EditModel.Operators}"
+                    ItemsSource="{Binding OperatorModel.Operators}"
                     FontFamily="Tahoma"
                     BorderThickness="1"
                     controls:TextBoxHelper.Watermark="Operators" 

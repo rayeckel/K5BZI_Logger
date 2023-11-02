@@ -31,11 +31,12 @@ namespace K5BZI_ViewModels
 
         #region private Methods
 
-        private void Initialize()
+        private async void Initialize()
         {
-            SubmitModel = new SubmitModel();
-
-            _logViewModel.LogModel.SubmitLogAction = (_) => SubmitLogAsync();
+            SubmitModel = new SubmitModel
+            {
+                SubmitLogAction = async (_) => await SubmitLogAsync()
+            };
         }
 
         private async Task SubmitLogAsync()

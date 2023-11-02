@@ -22,10 +22,10 @@ namespace K5BZI_Services.Services
         {
             switch (logType)
             {
-                case LogType.Adif:
+                case LogType.ADIF:
                     ExportToAdif(evntLog, logEntries);
                     break;
-                case LogType.Cabrillo:
+                case LogType.CABRILLO:
                     ExportToCabrillo(evntLog, logEntries);
                     break;
             }

@@ -179,6 +179,7 @@
     <Compile Include="Enums\Assisted.cs" />
     <Compile Include="Enums\CqZone.cs" />
     <Compile Include="Enums\Band.cs" />
+    <Compile Include="Enums\Services.cs" />
     <Compile Include="Enums\Mode.cs" />
     <Compile Include="Enums\Power.cs" />
     <Compile Include="EntityModels\Event.cs" />

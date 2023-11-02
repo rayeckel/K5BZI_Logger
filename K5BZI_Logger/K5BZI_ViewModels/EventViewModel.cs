@@ -56,18 +56,17 @@ namespace K5BZI_ViewModels
                 ViewFileStoreAction = (_) => _eventService.OpenEventList(),
                 SelectEventAction = (_) => SelectEvent(),
                 ChangeEventAction = (_) => ChangeEvent(),
+                EditEventAction = (_) => EditEventAsync(),
                 DeleteEventAction = (_) => DeleteEvent((Guid)_)
             };
 
             EditModel = new EditEventModel
             {
                 DxccEntities = _excelFileService.ReadDxccExcelData(),
+                CreateNewEventAction = (_) => CreateNewEvent(),
                 EditEventsAction = (_) => EditEvents(),
                 EditAllEventsAction = (_) => EditAllEvents(),
-                EditEventAction = (_) => EditEventAsync(),
-                UpdateEventAction = (_) => UpdateEvent(),
-                CreateEventAction = (_) => CreateNewEvent(String.Empty),//DELETE ME??
-                CreateNewEventAction = (_) => CreateNewEvent(EditModel.NewEventName)
+                UpdateEventAction = (_) => UpdateEvent()
             };
         }
 
@@ -90,9 +89,9 @@ namespace K5BZI_ViewModels
             EventModel.Event = EventModel.ExistingEvents.FirstOrDefault();
         }
 
-        private void CreateNewEvent(string eventName)
+        private void CreateNewEvent()
         {
-            var newEvent = _eventService.CreateNewEvent(eventName);
+            var newEvent = _eventService.CreateNewEvent(EditModel.NewEventName);
 
             _logViewModel.CreateNewLog(newEvent);
 

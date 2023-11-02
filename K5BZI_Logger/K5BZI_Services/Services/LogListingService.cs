@@ -54,14 +54,14 @@ namespace K5BZI_Services.Services
             return listings;
         }
 
-        public void SaveLogEntry(LogEntry logEntry, Event eventEntry)
+        public void SaveLogEntry(LogEntry logEntry, string logFileName)
         {
             _logEntries.Add(logEntry.Clone());
 
-            _fileStoreService.WriteToFile(_logEntries, eventEntry.LogFileName);
+            _fileStoreService.WriteToFile(_logEntries, logFileName);
         }
 
-        public void UpdateLogEntry(LogEntry logEntry, Event eventEntry)
+        public void UpdateLogEntry(LogEntry logEntry, string logFileName)
         {
             var updatedLogEntry = _logEntries.First(_ => _.Id == logEntry.Id);
 
@@ -72,14 +72,12 @@ namespace K5BZI_Services.Services
             updatedLogEntry.SignalReport.Received = logEntry.SignalReport.Received;
             updatedLogEntry.Country = logEntry.Country;
             updatedLogEntry.CQZone = logEntry.CQZone;
+            updatedLogEntry.Operator = logEntry.Operator;
 
-            updatedLogEntry.Operator = eventEntry.Operators
-                .FirstOrDefault(_ => _.CallSign?.ToLowerInvariant() == logEntry.Operator.CallSign.ToLowerInvariant());
-
-            _fileStoreService.WriteToFile(_logEntries, eventEntry.LogFileName);
+            _fileStoreService.WriteToFile(_logEntries, logFileName);
         }
 
-        public void DeleteLogEntry(LogEntry logEntry, Event eventEntry)
+        public void DeleteLogEntry(LogEntry logEntry, string logFileName)
         {
             var existingLogEntry = _logEntries.FirstOrDefault(_ => _.CallSign == logEntry.CallSign);
 
@@ -87,7 +85,7 @@ namespace K5BZI_Services.Services
             {
                 _logEntries.Remove(existingLogEntry);
 
-                _fileStoreService.WriteToFile(_logEntries, eventEntry.LogFileName);
+                _fileStoreService.WriteToFile(_logEntries, logFileName);
             }
         }
 

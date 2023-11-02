@@ -9,9 +9,9 @@
     Height="750" 
     Width="1200"
     mc:Ignorable="d"
-    IsOpen="{Binding IsOpen}"
-    ShowCloseButton="{Binding ShowCloseButton}"
-    Title="{Binding SelectEventTitle}">
+    IsOpen="{Binding EventModel.IsOpen}"
+    ShowCloseButton="{Binding EventModel.ShowCloseButton}"
+    Title="{Binding EventModel.SelectEventTitle}">
     <!--
     <simpleChildWindow:ChildWindow.OverlayBrush>
         <SolidColorBrush Opacity="0.8" Color="{StaticResource Gray2}" />
@@ -49,12 +49,12 @@
                 Grid.RowSpan="4"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
-                Visibility="{Binding NewEventVisibility}"
+                Visibility="{Binding EventModel.NewEventVisibility}"
                 Margin="0,10,0,0"
                 Source="../Images/Welcome.png"/>
         <Label
                 Grid.Row="0"
-                Visibility="{Binding SelectEventVisibility}"
+                Visibility="{Binding EventModel.SelectEventVisibility}"
                 Margin="15,0,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
@@ -64,15 +64,15 @@
         <ComboBox
                 Grid.Row="1"
                 Grid.Column="0"
-                Visibility="{Binding SelectEventVisibility}"
+                Visibility="{Binding EventModel.SelectEventVisibility}"
                 Height="34"
                 Width="300" 
                 Margin="30,20,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 x:Name="existingLogsCombo"
-                ItemsSource="{Binding ExistingEvents}"
-                SelectedItem="{Binding SelectedEvent, Mode=TwoWay}"
+                ItemsSource="{Binding EventModel.ExistingEvents}"
+                SelectedItem="{Binding EventModel.Event, Mode=TwoWay}"
                 FontFamily="Tahoma"
                 BorderThickness="1">
             <ComboBox.ItemTemplate>
@@ -89,7 +89,7 @@
                                 Grid.Column="1"
                                 Content="Delete" 
                                 CommandParameter="{Binding Id}"
-                                Command="{Binding ElementName=MainGrid, Path=DataContext.DeleteEventCommand}"/>
+                                Command="{Binding ElementName=MainGrid, Path=DataContext.EventModel.DeleteEventCommand}"/>
                     </Grid>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
@@ -98,7 +98,7 @@
                 Grid.Row="2"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
-                Visibility="{Binding SelectEventVisibility}"
+                Visibility="{Binding EventModel.SelectEventVisibility}"
                 Margin="0,0,20,0"
                 Content="Select"
                 Width="100"
@@ -107,7 +107,7 @@
                 FontFamily="Tahoma"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
-                Command="{Binding SelectEventCommand}"/>
+                Command="{Binding EventModel.SelectEventCommand}"/>
         <Label 
                 Grid.Row="3"
                 Margin="15,0,0,0"
@@ -122,7 +122,7 @@
                 Height="30"
                 Margin="20,10,0,0"
                 FontFamily="Tahoma"
-                Text="{Binding EventName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Text="{Binding EditModel.NewEventName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 controls:TextBoxHelper.Watermark="New Event Name" 
                 controls:TextBoxHelper.ClearTextButton="True" >
         </TextBox>
@@ -140,6 +140,6 @@
                 VerticalAlignment="Center"
                 FontFamily="Tahoma"
                 IsDefault="True"
-                Command="{Binding CreateNewEventCommand}"/>
+                Command="{Binding EditModel.CreateNewEventCommand}"/>
     </Grid>
 </simpleChildWindow:ChildWindow>

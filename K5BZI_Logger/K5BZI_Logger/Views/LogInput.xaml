@@ -233,7 +233,7 @@
                             HorizontalAlignment="Left"
                             HorizontalContentAlignment="Left"
                             BorderThickness="1"
-                            ItemsSource= "{Binding LogEntry.Signal.BandValues}"
+                            ItemsSource= "{Binding BandValues}"
                             SelectedItem="{Binding LogEntry.Signal.Band}">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="LostFocus" >
@@ -258,7 +258,7 @@
                             HorizontalAlignment="Left"
                             HorizontalContentAlignment="Left"
                             Margin="0,0,5,0"
-                            ItemsSource= "{Binding LogEntry.Signal.ModeValues}"
+                            ItemsSource= "{Binding ModeValues}"
                             SelectedItem="{Binding LogEntry.Signal.Mode}">
                         </ComboBox>
                     </StackPanel>
@@ -327,7 +327,7 @@
                             HorizontalAlignment="Left"
                             HorizontalContentAlignment="Left"
                             Margin="0,0,5,0"
-                            ItemsSource= "{Binding LogEntry.Signal.AssistedValues}"
+                            ItemsSource= "{Binding AssistedValues}"
                             SelectedItem="{Binding LogEntry.Assisted, Mode=TwoWay}">
                         </ComboBox>
                     </StackPanel>

@@ -29,8 +29,8 @@ namespace K5BZI_Models.ViewModelModels
         #region Properties
 
         public DispatcherTimer Timer { get; set; }
-        public Event Event { get; set; }
         public LogEntry LogEntry { get; private set; }
+        public string LogFileName { get; set; }
         public LogEntry SelectedEntry { get; set; }
         public ObservableCollection<LogEntry> LogEntries { get; private set; }
         public ObservableCollection<LogEntry> DuplicateEntries { get; private set; }

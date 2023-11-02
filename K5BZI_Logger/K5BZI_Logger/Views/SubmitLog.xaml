@@ -9,7 +9,7 @@
     Height="750" 
     Width="1200"
     mc:Ignorable="d"
-    IsOpen="{Binding SubmitModel.IsOpen}"
+    IsOpen="{Binding IsOpen}"
     ShowCloseButton="True"
     Title="Submit Log">
     <!--
@@ -48,7 +48,7 @@
         </Grid.ColumnDefinitions>
         <Label
                 Grid.Row="0"
-                Visibility="{Binding EventModel.SelectOperatorVisibility}"
+                Visibility="{Binding SelectOperatorVisibility}"
                 Margin="15,0,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
@@ -58,15 +58,15 @@
         <ComboBox
                 Grid.Row="1"
                 Grid.Column="0"
-                Visibility="{Binding EventModel.SelectOperatorVisibility}"
+                Visibility="{Binding SelectOperatorVisibility}"
                 Height="34"
                 Width="300" 
                 Margin="30,20,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 x:Name="selectOperatorCombo"
-                ItemsSource="{Binding EventModel.Operators}"
-                SelectedItem="{Binding EventModel.SelectedSubmitOperator, Mode=TwoWay}"
+                ItemsSource="{Binding EventOperators}"
+                SelectedItem="{Binding SelectedSubmitOperator, Mode=TwoWay}"
                 FontFamily="Tahoma"
                 BorderThickness="1">
             <ComboBox.ItemTemplate>
@@ -88,24 +88,24 @@
         </ComboBox>
 
         <Label 
-            Visibility="{Binding EventModel.DisplayOperatorVisibility}"
+            Visibility="{Binding DisplayOperatorVisibility}"
             Grid.Row="0"
             Margin="15,0,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
             FontWeight="Bold"
             FontFamily="Tahoma"
-            Content="{Binding EventModel.SelectedSubmitOperator.FullName}"/>
+            Content="{Binding SelectedSubmitOperator.FullName}"/>
 
         <Label 
-            Visibility="{Binding EventModel.DisplayOperatorVisibility}"
+            Visibility="{Binding DisplayOperatorVisibility}"
             Grid.Row="1"
             Margin="15,0,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
             FontWeight="Bold"
             FontFamily="Tahoma"
-            Content="{Binding EventModel.SelectedSubmitOperator.CallSign}"/>
+            Content="{Binding SelectedSubmitOperator.CallSign}"/>
         
         <Label 
             Grid.Row="2"
@@ -123,23 +123,10 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             x:Name="selectServiceCombo"
-            ItemsSource="{Binding SubmitModel.Services}"
-            SelectedItem="{Binding SubmitModel.SelectedSubmitService, Mode=TwoWay}"
+            ItemsSource="{Binding ServiceValues}"
+            SelectedItem="{Binding SelectedService, Mode=TwoWay}"
             FontFamily="Tahoma"
             BorderThickness="1">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="100"/>
-                        </Grid.ColumnDefinitions>
-                        <Label 
-                                Grid.Column="0"
-                                Content="{Binding FullName}" />
-                    </Grid>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
         </ComboBox>
 
         <Label 
@@ -158,23 +145,10 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             x:Name="selectFileTypeCombo"
-            ItemsSource="{Binding SubmitModel.FileTypes}"
-            SelectedItem="{Binding SubmitModel.SelectedFileType, Mode=TwoWay}"
+            ItemsSource="{Binding LogTypeValues}"
+            SelectedItem="{Binding SelectedLogType, Mode=TwoWay}"
             FontFamily="Tahoma"
             BorderThickness="1">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="100"/>
-                        </Grid.ColumnDefinitions>
-                        <Label 
-                                Grid.Column="0"
-                                Content="{Binding FullName}" />
-                    </Grid>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
         </ComboBox>
         <Button 
                 Grid.Row="7"
@@ -190,6 +164,6 @@
                 VerticalAlignment="Center"
                 FontFamily="Tahoma"
                 IsDefault="True"
-                Command="{Binding SubmitModel.SubmitLogCommand}"/>
+                Command="{Binding SubmitLogCommand}"/>
     </Grid>
 </simpleChildWindow:ChildWindow>

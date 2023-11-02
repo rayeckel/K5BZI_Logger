@@ -45,9 +45,10 @@ namespace K5BZI_ViewModels
 
         public void GetLog(Event selectedEvent)
         {
+            LogModel.LogFileName = selectedEvent.LogFileName;
             LogModel.LogEntries.Clear();
 
-            var logEntries = _logService.ReadLog(LogModel.Event.LogFileName);
+            var logEntries = _logService.ReadLog(LogModel.LogFileName);
 
             if (logEntries.Any())
             {
@@ -81,7 +82,6 @@ namespace K5BZI_ViewModels
             LogModel = new LogModel
             {
                 CreateNewEntryAction = (_) => LogModel.LogEntry.ClearProperties(LogModel.ContactTimeEnabled),
-
                 LogItAction = (_) => SaveLogEntry(),
                 ManualTimeAction = (_) => SetManualTime(),
                 AutoTimeAction = (_) => SetAutoTime(),
@@ -107,7 +107,7 @@ namespace K5BZI_ViewModels
 
         public void CreateNewLog(Event newEvent)
         {
-            LogModel.Event = newEvent;
+            LogModel.LogFileName = newEvent.LogFileName;
             LogModel.LogEntries.Clear();
             LogModel.LogEntry.ClearProperties(LogModel.ContactTimeEnabled);
             LogModel.LogEntry.EventId = newEvent.Id;
@@ -228,7 +228,7 @@ namespace K5BZI_ViewModels
 
             LogModel.LogEntry.Operator = _operatorsViewModel.OperatorModel.CurrentOperator;
 
-            _logService.SaveLogEntry(LogModel.LogEntry, LogModel.Event);
+            _logService.SaveLogEntry(LogModel.LogEntry, LogModel.LogFileName);
 
             LogModel.LogEntries.Add(LogModel.LogEntry.Clone());
             LogModel.QSOCount++;
@@ -258,12 +258,12 @@ namespace K5BZI_ViewModels
 
         private void CreateNewLogEntry()
         {
-            _logService.UpdateLogEntry(LogModel.SelectedEntry, LogModel.Event);
+            _logService.UpdateLogEntry(LogModel.SelectedEntry, LogModel.LogFileName);
         }
 
         private void EditLogEntry()
         {
-            _logService.UpdateLogEntry(LogModel.SelectedEntry, LogModel.Event);
+            _logService.UpdateLogEntry(LogModel.SelectedEntry, LogModel.LogFileName);
 
             UpdateDataGridVisibilities();
         }
@@ -275,7 +275,7 @@ namespace K5BZI_ViewModels
 
             if (confirmResult == DialogResult.Yes)
             {
-                _logService.DeleteLogEntry(LogModel.SelectedEntry, LogModel.Event);
+                _logService.DeleteLogEntry(LogModel.SelectedEntry, LogModel.LogFileName);
 
                 LogModel.LogEntries.Remove(LogModel.SelectedEntry);
 

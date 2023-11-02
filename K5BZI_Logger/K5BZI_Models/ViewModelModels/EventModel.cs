@@ -90,6 +90,17 @@ namespace K5BZI_Models.ViewModelModels
         }
         public Action<object> ChangeEventAction { get; set; }
 
+        private ICommand _editEventCommand;
+        public ICommand EditEventCommand
+        {
+            get
+            {
+                return _editEventCommand ??
+                    (_editEventCommand = new DelegateCommand(EditEventAction, _ => { return true; }));
+            }
+        }
+        public Action<object> EditEventAction { get; set; }
+
         private ICommand _deleteEventCommand;
         public ICommand DeleteEventCommand
         {

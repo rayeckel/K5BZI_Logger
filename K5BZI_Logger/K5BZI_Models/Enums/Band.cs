@@ -7,13 +7,13 @@ namespace K5BZI_Models.Enums
     public enum Band
     {
         [Description("630m")]
-        SIXTHIRTYMETERS = 1,
+        SIXTHIRTYMETERS,
 
         [Description("160m")]
-        ONESIXTYMETERS = 2,
+        ONESIXTYMETERS,
 
         [Description("80m")]
-        EIGHTYMETERS = 3,
+        EIGHTYMETERS,
 
         [Description("60m")]
         SIXTYMETERS,
