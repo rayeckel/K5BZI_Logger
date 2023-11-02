@@ -41,7 +41,7 @@
                 BorderThickness=".5"
                 BorderBrush="Navy"
                 AutoGenerateColumns="False"
-                ItemsSource="{Binding EventOperators}"
+                ItemsSource="{Binding CurrentEvent.Operators}"
                 SelectedItem="{Binding CurrentEvent.ActiveOperator, UpdateSourceTrigger=PropertyChanged}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="CellEditEnding">
