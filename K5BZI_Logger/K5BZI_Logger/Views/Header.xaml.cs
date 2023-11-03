@@ -10,14 +10,16 @@ namespace K5BZI_Logger.Views
         {
             InitializeComponent();
 
-            OperatorGrid.DataContext =
-                App.ServiceProvider
-                .GetRequiredService<IOperatorViewModel>()
-                .OperatorModel;
+            DataContext = new
+            {
+                OperatorModel = App.ServiceProvider
+                    .GetRequiredService<IOperatorViewModel>()
+                    .OperatorModel,
 
-            EventGrid.DataContext =
-                App.ServiceProvider
-                .GetRequiredService<IEventViewModel>();
+                EventModel = App.ServiceProvider
+                    .GetRequiredService<IEventViewModel>()
+                    .EventModel
+            };
         }
     }
 }

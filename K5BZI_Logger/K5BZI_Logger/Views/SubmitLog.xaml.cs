@@ -12,9 +12,9 @@ namespace K5BZI_Logger.Views
 
             DataContext = new
             {
-                OperatorModel = App.ServiceProvider
-                    .GetRequiredService<IOperatorViewModel>()
-                    .OperatorModel,
+                EventModel = App.ServiceProvider
+                    .GetRequiredService<IEventViewModel>()
+                    .EventModel,
 
                 SubmitModel = App.ServiceProvider
                     .GetRequiredService<ISubmitViewModel>()

@@ -75,6 +75,8 @@ namespace K5BZI_ViewModels
                         EventModel.Events.Add(eventObj);
                     }
                 });
+
+            _operatorsViewModel.OperatorModel.Events = EventModel.Events.ToList();
         }
 
         private async Task CreateNewEventAsync()

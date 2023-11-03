@@ -55,6 +55,10 @@ namespace K5BZI_Models.ViewModelModels
             {
                 return Events?.FirstOrDefault(_ => _.IsActive);
             }
+            set
+            {
+                FirePropertyChanged();
+            }
         }
 
         public List<Event> Events { get; set; }

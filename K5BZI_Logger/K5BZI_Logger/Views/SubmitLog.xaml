@@ -63,7 +63,7 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 x:Name="selectOperatorCombo"
-                ItemsSource="{Binding OperatorModel.CurrentEvent.Operators}"
+                ItemsSource="{Binding EventModel.ActiveEvent.Operators}"
                 SelectedItem="{Binding SubmitModel.SelectedSubmitOperator, Mode=TwoWay}"
                 FontFamily="Tahoma"
                 BorderThickness="1">

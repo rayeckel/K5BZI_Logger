@@ -71,8 +71,8 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 x:Name="existingLogsCombo"
-                ItemsSource="{Binding ExistingEvents}"
-                SelectedItem="{Binding Event, Mode=TwoWay}"
+                ItemsSource="{Binding Events}"
+                SelectedItem="{Binding ActiveEvent, Mode=TwoWay}"
                 FontFamily="Tahoma"
                 BorderThickness="1">
             <ComboBox.ItemTemplate>

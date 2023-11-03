@@ -61,8 +61,8 @@
                 BorderThickness=".5"
                 BorderBrush="Navy"
                 AutoGenerateColumns="False"
-                ItemsSource="{Binding EventModel.ExistingEvents}"
-                SelectedItem="{Binding EventModel.Event, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                ItemsSource="{Binding EventModel.Events}"
+                SelectedItem="{Binding EventModel.ActiveEvent.IsActive, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="CellEditEnding">
                         <i:InvokeCommandAction Command="{Binding Path=EventModel.EditEventsCommand}"/>
@@ -429,7 +429,7 @@
                     Height="200"
                     Width="300" 
                     Margin="10,0,20,0"
-                    ItemsSource="{Binding OperatorModel.CurrentEvent.Operators}"
+                    ItemsSource="{Binding EventModel.ActiveEvent.Operators}"
                     FontFamily="Tahoma"
                     BorderThickness="1">
                     <ListBox.ItemTemplate>

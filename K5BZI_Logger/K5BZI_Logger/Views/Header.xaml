@@ -97,7 +97,7 @@
             BorderThickness="0"
             Foreground="DarkSlateBlue"
             Margin="0,20,0,0"
-            Content="{Binding ActiveEvent.ActiveOperator.FullName}"/>
+            Content="{Binding EventModel.ActiveEvent.ActiveOperator.FullName}"/>
         <Label
             Grid.Row="1"
             Grid.Column="1"
@@ -110,7 +110,7 @@
             FontFamily="Tahoma"
             BorderThickness="0"
             Foreground="DarkSlateBlue"
-            Content="{Binding ActiveEvent.ActiveOperator.CallSign}"/>
+            Content="{Binding EventModel.ActiveEvent.ActiveOperator.CallSign}"/>
         <Button
             Grid.Row="1"
             Grid.RowSpan="2"
@@ -125,7 +125,7 @@
             Foreground="Navy"
             FontSize="12"
             FontFamily="Tahoma"
-            Command="{Binding ChangeOperatorCommand}"/>
+            Command="{Binding OperatorModel.ChangeOperatorCommand}"/>
     </Grid>
     <Canvas
         Grid.Row="0"

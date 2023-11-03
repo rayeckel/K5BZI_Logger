@@ -98,7 +98,7 @@ namespace K5BZI_Models.ViewModelModels
 
         public List<DXCC> DXCCValues { get; set; }
 
-        public IEnumerable<CqZone> CqValues
+        public IEnumerable<CqZone> CqZoneValues
         {
             get { return Enum.GetValues(typeof(CqZone)).Cast<CqZone>(); }
         }

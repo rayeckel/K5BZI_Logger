@@ -41,8 +41,8 @@
                 BorderThickness=".5"
                 BorderBrush="Navy"
                 AutoGenerateColumns="False"
-                ItemsSource="{Binding CurrentEvent.Operators}"
-                SelectedItem="{Binding CurrentEvent.ActiveOperator, UpdateSourceTrigger=PropertyChanged}">
+                ItemsSource="{Binding ActiveEvent.Operators}">
+                <!-- SelectedItem="{Binding CurrentEvent.ActiveOperator.IsActive, UpdateSourceTrigger=PropertyChanged}"> -->
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="CellEditEnding">
                         <i:InvokeCommandAction Command="{Binding Path=EditEventOperatorCommand}"/>
