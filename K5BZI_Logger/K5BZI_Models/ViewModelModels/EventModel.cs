@@ -27,7 +27,7 @@ namespace K5BZI_Models.ViewModelModels
 
         #endregion
 
-        #region Properties}
+        #region Properties
 
         public bool EditEventIsOpen { get; set; }
 

@@ -4,8 +4,8 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using K5BZI_Models.Base;
-using Microsoft.VisualStudio.PlatformUI;
 using PropertyChanged;
+using DelegateCommand = Microsoft.VisualStudio.PlatformUI.DelegateCommand;
 
 namespace K5BZI_Models.ViewModelModels
 {
@@ -16,7 +16,6 @@ namespace K5BZI_Models.ViewModelModels
 
         public OperatorModel()
         {
-            Operator = new Operator();
             Operators = new ObservableCollection<Operator>();
         }
 
@@ -32,7 +31,9 @@ namespace K5BZI_Models.ViewModelModels
         {
             get
             {
-                return $"Edit Operator - {Operator.FullName}";
+                return ViewSelectedOperator != null ?
+                    $"Edit Operator - {ViewSelectedOperator.FullName}" :
+                    "Add New Operator";
             }
         }
 
@@ -46,13 +47,25 @@ namespace K5BZI_Models.ViewModelModels
             }
         }
 
-        public Operator Operator { get; set; }
+        public Operator ViewSelectedOperator { get; set; }
 
         public Event ActiveEvent
         {
             get
             {
                 return Events?.FirstOrDefault(_ => _.IsActive);
+            }
+            set
+            {
+                FirePropertyChanged();
+            }
+        }
+
+        public Operator ActiveOperator
+        {
+            get
+            {
+                return Operators.FirstOrDefault(_ => _.IsActive);
             }
             set
             {

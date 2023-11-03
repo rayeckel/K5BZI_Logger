@@ -25,19 +25,6 @@ namespace K5BZI_Models
         public ObservableCollection<Operator> Operators { get; set; }
 
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public Operator ActiveOperator
-        {
-            get
-            {
-                return Operators.FirstOrDefault(_ => _.IsActive);
-            }
-            set
-            {
-                FirePropertyChanged();
-            }
-        }
-
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         [Cabrillo("OPERATORS")]
         public string OperatorNameList
         {
