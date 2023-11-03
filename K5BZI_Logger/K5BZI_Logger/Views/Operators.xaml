@@ -141,6 +141,7 @@
             </Grid.RowDefinitions>
             <Button
                     VerticalAlignment="Center"
+                    Visibility="{Binding SetActiveVisibility}"
                     Grid.Row="1"
                     Margin="10,0,0,0"
                     Content="Set Active"
@@ -150,6 +151,18 @@
                     FontSize="12"
                     FontFamily="Tahoma"
                     Command="{Binding CurrentOperatorCommand}"/>
+            <Button
+                    VerticalAlignment="Center"
+                    Visibility="{Binding AddToEventVisibility}"
+                    Grid.Row="1"
+                    Margin="10,0,0,0"
+                    Content="Add to Event"
+                    Width="120"
+                    Height="30"
+                    Foreground="Navy"
+                    FontSize="12"
+                    FontFamily="Tahoma"
+                    Command="{Binding AddToEventCommand}"/>
             <Button
                     VerticalAlignment="Center"
                     Grid.Row="2"

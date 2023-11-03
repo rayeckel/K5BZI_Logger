@@ -84,6 +84,20 @@ namespace K5BZI_Models.ViewModelModels
 
         public ObservableCollection<Operator> ViewSelectedOperators { get; set; }
 
+        public Visibility SetActiveVisibility
+        {
+            get
+            {
+                return ShowEventOperators ? Visibility.Visible : Visibility.Collapsed;
+            }
+            set
+            {
+                return;
+            }
+        }
+
+        public Visibility AddToEventVisibility { get; set; }
+
         public Visibility SelectOperatorVisibility
         {
             get
@@ -111,6 +125,28 @@ namespace K5BZI_Models.ViewModelModels
         #endregion
 
         #region Commands
+
+        private ICommand _addToEventCommand;
+        public ICommand AddToEventCommand
+        {
+            get
+            {
+                return _addToEventCommand ??
+                    (_addToEventCommand = new DelegateCommand(AddToEventAction, _ => { return true; }));
+            }
+        }
+        public Action<object> AddToEventAction { get; set; }
+
+        private ICommand _selectOperatorCommand;
+        public ICommand SelectOperatorCommand
+        {
+            get
+            {
+                return _selectOperatorCommand ??
+                    (_selectOperatorCommand = new DelegateCommand(SelectOperatorAction, _ => { return true; }));
+            }
+        }
+        public Action<object> SelectOperatorAction { get; set; }
 
         private ICommand _editOperatorCommand;
         public ICommand EditOperatorCommand

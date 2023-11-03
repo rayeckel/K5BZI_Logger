@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Forms;
 using K5BZI_Models;
 using K5BZI_Models.ViewModelModels;
@@ -56,7 +57,9 @@ namespace K5BZI_ViewModels
                 EditOperatorAction = (_) => EditOperators(),
                 ChangeOperatorAction = (_) => EditOperators(true),
                 UpdateOperatorAction = async (_) => await UpdateOperatorAsync(),
-                UpdateEventOperatorAction = async (_) => await UpdateOperatorAsync()
+                UpdateEventOperatorAction = async (_) => await UpdateOperatorAsync(),
+                SelectOperatorAction = (_) => EditOperators(),
+                AddToEventAction = async (_) => await UpdateOperatorAsync()
             };
 
             var operators = _operatorService.GetOperators();
@@ -79,27 +82,37 @@ namespace K5BZI_ViewModels
         {
             if (OperatorModel.ActiveEvent == null) return;
 
-            if (!OperatorModel.ActiveEvent.Operators.Any())
-                OperatorModel.ViewSelectedOperator.IsActive = true;
-            else
+            if (OperatorModel.ShowEventOperators)
             {
-                var current = OperatorModel.ActiveEvent.Operators.First(_ => _.IsActive);
+                if (!OperatorModel.ActiveEvent.Operators.Any())
+                    OperatorModel.ViewSelectedOperator.IsActive = true;
+                else
+                {
+                    var current = OperatorModel.ActiveEvent.Operators.First(_ => _.IsActive);
 
-                if (current.CallSign != OperatorModel.ViewSelectedOperator.CallSign)
-                    current.IsActive = false;
+                    if (current.CallSign != OperatorModel.ViewSelectedOperator.CallSign)
+                        current.IsActive = false;
 
-                OperatorModel.ViewSelectedOperator.IsActive = true;
+                    OperatorModel.ViewSelectedOperator.IsActive = true;
+                }
+
+                if (!OperatorModel.Operators.Any(_ => _.CallSign == OperatorModel.ViewSelectedOperator.CallSign))
+                    OperatorModel.Operators.Add(OperatorModel.ViewSelectedOperator);
+
+                if (!OperatorModel.ActiveEvent.Operators.Any(_ => _.CallSign?.ToUpper() == OperatorModel.ViewSelectedOperator.CallSign?.ToUpper()))
+                    OperatorModel.ActiveEvent.Operators.Add(OperatorModel.ViewSelectedOperator);
+
+                OperatorModel.IsOpen = false;
             }
 
-            if (!OperatorModel.Operators.Any(_ => _.CallSign == OperatorModel.ViewSelectedOperator.CallSign))
-                OperatorModel.Operators.Add(OperatorModel.ViewSelectedOperator);
+            if (!OperatorModel.ViewOperators.Any(_ => _.CallSign == OperatorModel.ViewSelectedOperator.CallSign))
+                OperatorModel.ViewOperators.Add(OperatorModel.ViewSelectedOperator);
 
-            if (!OperatorModel.ActiveEvent.Operators.Any(_ => _.CallSign?.ToUpper() == OperatorModel.ViewSelectedOperator.CallSign?.ToUpper()))
-                OperatorModel.ActiveEvent.Operators.Add(OperatorModel.ViewSelectedOperator);
-
-            OperatorModel.ViewOperators.Add(OperatorModel.ViewSelectedOperator);
             OperatorModel.ActiveOperator = new Operator(); //Trigger update
+
+            OperatorModel.ShowEventOperators = false;
             OperatorModel.EditOperatorIsOpen = false;
+            OperatorModel.AddToEventVisibility = Visibility.Hidden;
 
             await _operatorService.SaveOperatorsAsync(OperatorModel.Operators.ToList());
             await _eventService.SaveEventsAsync(OperatorModel.Events.ToList());
@@ -141,8 +154,18 @@ namespace K5BZI_ViewModels
 
         private void EditOperators(bool eventOnly = false)
         {
+            if (OperatorModel.IsOpen) // If the user clicked the "Select Existing" button
+            {
+                OperatorModel.IsOpen = false;
+                OperatorModel.EditOperatorIsOpen = false;
+                OperatorModel.AddToEventVisibility = Visibility.Visible;
+            }
+            else
+            {
+                OperatorModel.ShowEventOperators = eventOnly;
+            }
+
             OperatorModel.ViewOperators.Clear();
-            OperatorModel.ShowEventOperators = eventOnly;
 
             if (eventOnly)
             {
@@ -161,8 +184,8 @@ namespace K5BZI_ViewModels
 
         public void AddOperator(bool isClub = false)
         {
-            OperatorModel.ViewSelectedOperators.Clear();
-            OperatorModel.ViewSelectedOperator.Clear();
+            //There is a strange bug where ViewSelectedOperator is nul here the first time the sapp is run
+            if (OperatorModel.ViewSelectedOperator == null) OperatorModel.ViewSelectedOperator = new Operator();
 
             OperatorModel.ShowCloseButton = true;
             OperatorModel.EditOperatorIsOpen = true;
