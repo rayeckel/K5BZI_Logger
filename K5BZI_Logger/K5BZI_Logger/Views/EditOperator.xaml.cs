@@ -11,7 +11,7 @@ namespace K5BZI_Logger.Views
             InitializeComponent();
 
             DataContext =
-                App.ServiceProvider.GetRequiredService<IOperatorViewModel>().EditOperator;
+                App.ServiceProvider.GetRequiredService<IOperatorViewModel>().OperatorModel;
         }
     }
 }

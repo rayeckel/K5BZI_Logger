@@ -1,4 +1,5 @@
-﻿using K5BZI_Models;
+﻿using System.Threading.Tasks;
+using K5BZI_Models;
 using K5BZI_Models.ViewModelModels;
 
 namespace K5BZI_ViewModels.Interfaces
@@ -9,6 +10,6 @@ namespace K5BZI_ViewModels.Interfaces
 
         void CreateNewLog(Event newEvent);
 
-        void GetLog(Event selectedEvent);
+        Task GetLog(Event selectedEvent);
     }
 }

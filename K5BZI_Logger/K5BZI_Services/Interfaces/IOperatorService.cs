@@ -6,10 +6,8 @@ namespace K5BZI_Services.Interfaces
 {
     public interface IOperatorService
     {
-        Task SaveOperators(List<Operator> operators);
+        Task SaveOperatorsAsync(List<Operator> operators);
 
-        Task DeleteOperatorAsync(Operator newOperator);
-
-        List<Operator> GetFullOperatorListing();
+        Task<List<Operator>> GetOperatorsAsync();
     }
 }

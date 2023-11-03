@@ -10,15 +10,9 @@ namespace K5BZI_Logger.Views
         {
             InitializeComponent();
 
-            DataContext = new
-            {
-                EventModel = App.ServiceProvider
+            DataContext = App.ServiceProvider
                     .GetRequiredService<IEventViewModel>()
-                    .EventModel,
-                EditModel = App.ServiceProvider
-                    .GetRequiredService<IEventViewModel>()
-                    .EditModel
-            };
+                    .EventModel;
         }
     }
 }

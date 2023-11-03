@@ -116,7 +116,7 @@
     <Compile Include="Interfaces\IFileStoreService.cs" />
     <Compile Include="Interfaces\ILogService.cs" />
     <Compile Include="Interfaces\IOperatorService.cs" />
-    <Compile Include="Services\LogListingService.cs" />
+    <Compile Include="Services\LogService.cs" />
     <Compile Include="Interfaces\INetworkService.cs" />
     <Compile Include="Services\NetworkService.cs" />
     <Compile Include="Services\OperatorService.cs" />

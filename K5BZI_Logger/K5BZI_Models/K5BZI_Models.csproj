@@ -189,12 +189,10 @@
     <Compile Include="Extensions\EnumBindingSourceExtension.cs" />
     <Compile Include="Extensions\LogEntryExtensions.cs" />
     <Compile Include="EntityModels\FileExtensions.cs" />
-    <Compile Include="EntityModels\LogListing.cs" />
+    <Compile Include="EntityModels\Log.cs" />
     <Compile Include="Enums\LogType.cs" />
     <Compile Include="EntityModels\Operator.cs" />
     <Compile Include="ViewModelModels\DefaultsModel.cs" />
-    <Compile Include="ViewModelModels\EditEventModel.cs" />
-    <Compile Include="ViewModelModels\EditOperatorModel.cs" />
     <Compile Include="ViewModelModels\LogModel.cs" />
     <Compile Include="ViewModelModels\MainModel.cs" />
     <Compile Include="EntityModels\Signal.cs" />

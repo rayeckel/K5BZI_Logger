@@ -6,12 +6,10 @@ namespace K5BZI_Services.Interfaces
 {
     public interface IEventService
     {
-        void OpenEventList();
+        void OpenEventDirectory();
 
-        Task<Event> CreateNewEventAsync(string eventName);
+        Task SaveEventsAsync(List<Event> eventList);
 
-        Task<Event> UpdateEventAsync(Event editEvent, List<Operator> operators);
-
-        Task<List<Event>> GetAllEventsAsync();
+        Task<List<Event>> GetEventsAsync();
     }
 }

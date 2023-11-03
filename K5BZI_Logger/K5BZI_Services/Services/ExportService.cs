@@ -138,7 +138,7 @@ namespace K5BZI_Services.Services
 
             await _fileStoreService.WriteToFile(adifData.ToString(), eventLog.LogFileName, FileExtensions.Adif);
 
-            _fileStoreService.OpenLogDirectory();
+            _fileStoreService.OpenEventDirectory();
         }
 
         private async void ExportToCabrillo(Event eventLog, ICollection<LogEntry> logEntries)
@@ -192,7 +192,7 @@ namespace K5BZI_Services.Services
 
             await _fileStoreService.WriteToFile(cabrilloData.ToString(), eventLog.LogFileName, FileExtensions.Cabrillo);
 
-            _fileStoreService.OpenLogDirectory();
+            _fileStoreService.OpenEventDirectory();
         }
     }
 }

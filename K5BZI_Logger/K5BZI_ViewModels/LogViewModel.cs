@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using K5BZI_Models;
@@ -43,12 +44,12 @@ namespace K5BZI_ViewModels
 
         #region Public Methods
 
-        public void GetLog(Event selectedEvent)
+        public async Task GetLog(Event selectedEvent)
         {
             LogModel.LogFileName = selectedEvent.LogFileName;
             LogModel.LogEntries.Clear();
 
-            var logEntries = _logService.ReadLog(LogModel.LogFileName);
+            var logEntries = await _logService.ReadLogAsync(LogModel.LogFileName);
 
             if (logEntries.Any())
             {
@@ -81,11 +82,9 @@ namespace K5BZI_ViewModels
         {
             LogModel = new LogModel
             {
-                CreateNewEntryAction = (_) => LogModel.LogEntry.ClearProperties(LogModel.ContactTimeEnabled),
-                LogItAction = (_) => SaveLogEntry(),
+                LogItAction = async (_) => await SaveLogEntryAsync(),
                 ManualTimeAction = (_) => SetManualTime(),
                 AutoTimeAction = (_) => SetAutoTime(),
-                EditLogEntryAction = (_) => EditLogEntry(),
                 DeleteLogEntryAction = (_) => DeleteLogEntry(),
                 LostFocusAction = (_) => ExecuteLostFocusCommand(),
                 CheckDuplicateEntriesAction = (_) => CheckForDuplicates(),
@@ -218,21 +217,20 @@ namespace K5BZI_ViewModels
             }
         }
 
-        private void SaveLogEntry()
+        private async Task SaveLogEntryAsync()
         {
             if (String.IsNullOrEmpty(LogModel.LogEntry.CallSign))
             {
-                System.Windows.Forms.MessageBox.Show("You must provide a valid Call Sign.", "Oops!");
+                MessageBox.Show("You must provide a valid Call Sign.", "Oops!");
                 return;
             }
 
             LogModel.LogEntry.Operator = _operatorsViewModel.OperatorModel.CurrentEvent.ActiveOperator;
-
-            _logService.SaveLogEntry(LogModel.LogEntry, LogModel.LogFileName);
-
             LogModel.LogEntries.Add(LogModel.LogEntry.Clone());
             LogModel.QSOCount++;
             LogModel.LogEntry.ClearProperties(LogModel.ContactTimeEnabled);
+
+            await _logService.SaveLogAsync(LogModel.LogEntries.ToList(), LogModel.LogFileName);
 
             UpdateDataGridVisibilities();
         }
@@ -256,18 +254,6 @@ namespace K5BZI_ViewModels
             LogModel.Timer.Start();
         }
 
-        private void CreateNewLogEntry()
-        {
-            _logService.UpdateLogEntry(LogModel.SelectedEntry, LogModel.LogFileName);
-        }
-
-        private void EditLogEntry()
-        {
-            _logService.UpdateLogEntry(LogModel.SelectedEntry, LogModel.LogFileName);
-
-            UpdateDataGridVisibilities();
-        }
-
         private void DeleteLogEntry()
         {
             var deleteConfirmName = String.Format("Delete {0}?", LogModel.SelectedEntry.CallSign);
@@ -275,11 +261,11 @@ namespace K5BZI_ViewModels
 
             if (confirmResult == DialogResult.Yes)
             {
-                _logService.DeleteLogEntry(LogModel.SelectedEntry, LogModel.LogFileName);
-
                 LogModel.LogEntries.Remove(LogModel.SelectedEntry);
 
                 LogModel.QSOCount--;
+
+                _logService.SaveLogAsync(LogModel.LogEntries.ToList(), LogModel.LogFileName);
             }
         }
         #endregion

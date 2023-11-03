@@ -26,7 +26,7 @@ namespace K5BZI_Services.Services
             return new DirectoryInfo(filePath).GetFiles();
         }
 
-        public void OpenLogDirectory()
+        public void OpenEventDirectory()
         {
             var directoryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), _loggerDirectoryName);
 
@@ -58,7 +58,7 @@ namespace K5BZI_Services.Services
             }
         }
 
-        public List<T> ReadLog<T>(string logFileName, bool isLogFile = true)
+        public async Task<List<T>> ReadLogAsync<T>(string logFileName, bool isLogFile = true)
             where T : class
         {
             var fileName = CreateFilePath(logFileName, isLogFile);

@@ -3,7 +3,7 @@ using System;
 
 namespace K5BZI_Models
 {
-    public class LogListing : BaseViewModel
+    public class Log : BaseViewModel
     {
         public string FileName { get; set; }
 

@@ -30,7 +30,7 @@ namespace K5BZI_Logger
             services.AddScoped<IDefaultsService, DefaultsService>();
             services.AddScoped<IExcelFileService, ExcelFileService>();
             services.AddScoped<IFileStoreService, FileStoreService>();
-            services.AddScoped<ILogService, LogListingService>();
+            services.AddScoped<ILogService, LogService>();
             services.AddScoped<IOperatorService, OperatorService>();
             services.AddScoped<IExportService, ExportService>();
             services.AddSingleton<ISubmitService, SubmitService>();

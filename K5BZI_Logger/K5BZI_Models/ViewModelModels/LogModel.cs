@@ -107,31 +107,6 @@ namespace K5BZI_Models.ViewModelModels
         }
         public Action<object> AutoTimeAction { get; set; }
 
-        private ICommand _createNewEntryCommand;
-        public ICommand CreateNewEntryCommand
-        {
-            get
-            {
-                return _createNewEntryCommand ??
-                    (_createNewEntryCommand =
-                    new DelegateCommand(CreateNewEntryAction, _ => { return true; }));
-            }
-        }
-        public Action<object> CreateNewEntryAction { get; set; }
-
-        private ICommand _updateLogEntryCommand;
-        public ICommand UpdateLogEntryCommand
-        {
-            get
-            {
-                return _updateLogEntryCommand ??
-                    (_updateLogEntryCommand =
-                    new DelegateCommand(EditLogEntryAction, _ => { return SelectedEntry != null; }));
-            }
-        }
-
-        public Action<object> EditLogEntryAction { get; set; }
-
         private ICommand _selectExportLogCommand;
         public ICommand SelectExportLogCommand
         {

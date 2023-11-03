@@ -15,7 +15,6 @@ namespace K5BZI_ViewModels
         #region Properties
 
         public OperatorModel OperatorModel { get; private set; }
-        public EditOperatorModel EditOperator { get; private set; }
 
         private readonly IOperatorService _operatorService;
         private readonly IEventService _eventService;
@@ -39,61 +38,9 @@ namespace K5BZI_ViewModels
 
         #endregion
 
-        #region Public Methods
-        public async Task UpdateOperatorAsync(Operator operatorObj, bool isEvent)
-        {
-            if (operatorObj == null) return;
-
-            var existingOperator = OperatorModel.Operators
-                .FirstOrDefault(_ => _.CallSign?.ToUpper() == operatorObj.CallSign?.ToUpper());
-
-            if (existingOperator == null)
-                OperatorModel.Operators.Add(operatorObj);
-            else
-            {
-                existingOperator.CallSign = operatorObj.CallSign;
-                existingOperator.City = operatorObj.City;
-                existingOperator.Country = operatorObj.Country;
-                existingOperator.FirstName = operatorObj.FirstName;
-                existingOperator.LastName = operatorObj.LastName;
-                existingOperator.State = operatorObj.State;
-                existingOperator.ZipCode = operatorObj.ZipCode;
-                existingOperator.IsClub = operatorObj.IsClub;
-                existingOperator.ClubCall = operatorObj.ClubCall;
-                existingOperator.ClubName = operatorObj.ClubName;
-                existingOperator.IsActive = operatorObj.IsActive;
-            }
-
-            await _operatorService.SaveOperators(OperatorModel.Operators.ToList());
-
-            //The first time the app is run 'currentEvent' will still be null
-            if (OperatorModel.CurrentEvent == null)
-                OperatorModel.CurrentEvent = (await _eventService.GetAllEventsAsync()).First();
-
-            if (!OperatorModel.CurrentEvent.Operators.Any(_ => _.CallSign?.ToUpper() == operatorObj.CallSign?.ToUpper()))
-                OperatorModel.CurrentEvent.Operators.Add(operatorObj);
-
-            EditOperator.IsOpen = true;
-            OperatorModel.IsOpen = false;
-
-            await _eventService.UpdateEventAsync(OperatorModel.CurrentEvent, OperatorModel.CurrentEvent.Operators.ToList());
-        }
-
-        public void AddOperator()
-        {
-            EditOperator.Operator.Clear();
-
-            EditOperator.ShowCloseButton = true;
-            EditOperator.IsOpen = true;
-
-            EditOperator.Operator.IsClub = false;
-        }
-
-        #endregion
-
         #region Private Methods
 
-        private void Initialize()
+        private async Task Initialize()
         {
             OperatorModel = new OperatorModel
             {
@@ -103,25 +50,61 @@ namespace K5BZI_ViewModels
                 DeleteOperatorAction = async (_) => await DeleteOperatorAsync(),
                 CurrentEventOperatorAction = async (_) => await SetCurrentOperatorAsync(),
                 DeleteEventOperatorAction = async (_) => await DeleteOperatorAsync(),
-                AddOperatorToEventAction = (_) => AddOperatorToEvent(),
-                AddClubToEventAction = (_) => AddClubToEvent(),
                 AddOperatorAction = (_) => AddOperator(),
-                AddClubAction = (_) => AddClub(),
+                AddClubAction = (_) => AddOperator(true),
                 EditOperatorAction = (_) => EditOperators(),
-                ChangeOperatorAction = (_) => EditOperators(true)
+                ChangeOperatorAction = (_) => EditOperators(true),
+                UpdateOperatorAction = async (_) => await UpdateOperatorAsync(OperatorModel.Operator, false),
+                UpdateEventOperatorAction = async (_) => await UpdateOperatorAsync(OperatorModel.Operator, true)
             };
 
-            EditOperator = new EditOperatorModel
-            {
-                Operator = new Operator(),
-                UpdateOperatorAction = async (_) => await UpdateOperatorAsync(EditOperator.Operator, false),
-                UpdateEventOperatorAction = async (_) => await UpdateOperatorAsync(EditOperator.Operator, true)
-            };
-
-            var operators = _operatorService.GetFullOperatorListing();
+            var operators = await _operatorService.GetOperatorsAsync();
 
             if (operators.Any())
                 operators.ForEach(_ => OperatorModel.Operators.Add(_));
+        }
+
+        private async Task UpdateOperatorAsync(Operator operatorObj, bool isEvent)
+        {
+            if (OperatorModel.CurrentEvent == null) return;
+
+            OperatorModel.Operators.Add(operatorObj);
+
+            await _operatorService.SaveOperatorsAsync(OperatorModel.Operators.ToList());
+
+            if (!OperatorModel.CurrentEvent.Operators.Any())
+                operatorObj.IsActive = true;
+
+            if (!OperatorModel.CurrentEvent.Operators.Any(_ => _.CallSign?.ToUpper() == operatorObj.CallSign?.ToUpper()))
+                OperatorModel.CurrentEvent.Operators.Add(operatorObj);
+
+            OperatorModel.EditOperatorIsOpen = false;
+            OperatorModel.IsOpen = false;
+
+            await _eventService.SaveEventsAsync(OperatorModel.Events);
+        }
+
+        private async Task DeleteOperatorAsync()
+        {
+            var operatorObj = OperatorModel.CurrentEvent.ActiveOperator;
+
+            var deleteConfirmName = OperatorModel.ShowEventOperators ?
+                String.Format("Removing {0} from the event.", operatorObj.CallSign) :
+                String.Format("Deleting {0}.", operatorObj.CallSign);
+
+            var confirmResult = MessageBox.Show(deleteConfirmName, "Are you sure?", MessageBoxButtons.YesNo);
+
+            if (confirmResult == DialogResult.Yes)
+            {
+                if (!OperatorModel.ShowEventOperators)
+                {
+                    OperatorModel.Operators.Remove(operatorObj);
+                }
+
+                OperatorModel.CurrentEvent.Operators.Remove(operatorObj);
+
+                await _eventService.SaveEventsAsync(OperatorModel.Events);
+            }
         }
 
         private async Task SetCurrentOperatorAsync()
@@ -139,42 +122,8 @@ namespace K5BZI_ViewModels
 
             _submitViewModel.SubmitModel.SelectedSubmitOperator = OperatorModel.CurrentEvent.ActiveOperator;
 
-            EditOperator.IsOpen = false;
+            OperatorModel.EditOperatorIsOpen = false;
             OperatorModel.IsOpen = false;
-        }
-
-        private async Task DeleteOperatorAsync()
-        {
-            var operatorObj = OperatorModel.CurrentEvent.ActiveOperator;
-
-            var deleteConfirmName = OperatorModel.ShowEventOperators ?
-                String.Format("Removing {0} from the event.", operatorObj.CallSign) :
-                String.Format("Deleting {0}.", operatorObj.CallSign);
-
-            var confirmResult = MessageBox.Show(deleteConfirmName, "Are you sure?", MessageBoxButtons.YesNo);
-
-            if (confirmResult == DialogResult.Yes)
-            {
-                OperatorModel.CurrentEvent.Operators.Remove(operatorObj);
-
-                if (!OperatorModel.ShowEventOperators)
-                {
-                    await _operatorService.DeleteOperatorAsync(operatorObj);
-                    OperatorModel.Operators.Remove(operatorObj);
-                }
-
-                _eventService.UpdateEventAsync(OperatorModel.CurrentEvent, OperatorModel.CurrentEvent.Operators.ToList());
-            }
-        }
-
-        private void AddOperatorToEvent()
-        {
-            AddOperator();
-        }
-
-        private void AddClubToEvent()
-        {
-            AddClub();
         }
 
         private void EditOperators(bool eventOnly = false)
@@ -184,14 +133,14 @@ namespace K5BZI_ViewModels
             OperatorModel.IsOpen = true;
         }
 
-        private void AddClub()
+        public void AddOperator(bool isClub = false)
         {
-            EditOperator.Operator.Clear();
+            OperatorModel.Operator.Clear();
 
-            EditOperator.ShowCloseButton = true;
-            EditOperator.IsOpen = true;
+            OperatorModel.ShowCloseButton = true;
+            OperatorModel.EditOperatorIsOpen = true;
 
-            EditOperator.Operator.IsClub = true;
+            OperatorModel.Operator.IsClub = isClub;
         }
 
         #endregion

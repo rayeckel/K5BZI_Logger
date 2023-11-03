@@ -52,7 +52,7 @@
                     SelectedItem="{Binding LogModel.SelectedEntry, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="CellEditEnding">
-                        <i:InvokeCommandAction Command="{Binding LogModel.UpdateLogEntryCommand}"/>
+                        <i:InvokeCommandAction Command="{Binding LogModel.LogItCommand}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <dgControls:DataGrid.Columns>

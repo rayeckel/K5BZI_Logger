@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -16,12 +17,25 @@ namespace K5BZI_Models.ViewModelModels
 
         public OperatorModel()
         {
+            Operator = new Operator();
             Operators = new ObservableCollection<Operator>();
         }
 
         #endregion
 
         #region Properties
+
+        public bool EditOperatorIsOpen { get; set; }
+
+        public bool ShowEventOperators { get; set; }
+
+        public string EditOperatorTitle
+        {
+            get
+            {
+                return $"Edit Operator - {Operator.FullName}";
+            }
+        }
 
         public string OperatorTitle
         {
@@ -33,9 +47,17 @@ namespace K5BZI_Models.ViewModelModels
             }
         }
 
-        public Event CurrentEvent { get; set; }
+        public Operator Operator { get; set; }
 
-        public bool ShowEventOperators { get; set; }
+        public Event CurrentEvent
+        {
+            get
+            {
+                return Events?.FirstOrDefault(_ => _.IsActive);
+            }
+        }
+
+        public List<Event> Events { get; set; }
 
         public ObservableCollection<Operator> Operators { get; private set; }
 
@@ -103,10 +125,9 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _addOperatorToEventCommand ??
-                    (_addOperatorToEventCommand = new DelegateCommand(AddOperatorToEventAction, _ => { return true; }));
+                    (_addOperatorToEventCommand = new DelegateCommand(AddOperatorAction, _ => { return true; }));
             }
         }
-        public Action<object> AddOperatorToEventAction { get; set; }
 
         private ICommand _currentEventOperatorCommand;
         public ICommand CurrentEventOperatorCommand
@@ -141,10 +162,9 @@ namespace K5BZI_Models.ViewModelModels
             {
                 return _addClubToEventCommand ??
                     (_addClubToEventCommand =
-                    new DelegateCommand(AddClubToEventAction, _ => { return CurrentEvent.Operators.Any(); }));
+                    new DelegateCommand(AddClubAction, _ => { return CurrentEvent.Operators.Any(); }));
             }
         }
-        public Action<object> AddClubToEventAction { get; set; }
 
         private ICommand _currentOperatorCommand;
         public ICommand CurrentOperatorCommand
@@ -214,6 +234,28 @@ namespace K5BZI_Models.ViewModelModels
             }
         }
         public Action<object> ChangeOperatorAction { get; set; }
+
+        private ICommand _updateOperatorCommand;
+        public ICommand UpdateOperatorCommand
+        {
+            get
+            {
+                return _updateOperatorCommand ??
+                    (_updateOperatorCommand = new DelegateCommand(UpdateOperatorAction, _ => { return true; }));
+            }
+        }
+        public Action<object> UpdateOperatorAction { get; set; }
+
+        private ICommand _updateEventOperatorCommand;
+        public ICommand UpdateEventOperatorCommand
+        {
+            get
+            {
+                return _updateEventOperatorCommand ??
+                    (_updateEventOperatorCommand = new DelegateCommand(UpdateEventOperatorAction, _ => { return true; }));
+            }
+        }
+        public Action<object> UpdateEventOperatorAction { get; set; }
 
         #endregion
     }

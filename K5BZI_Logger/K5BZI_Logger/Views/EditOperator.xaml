@@ -10,7 +10,7 @@
     Height="750" 
     Width="1200"
     mc:Ignorable="d"
-    IsOpen="{Binding IsOpen}"
+    IsOpen="{Binding EditOperatorIsOpen}"
     ShowCloseButton="{Binding ShowCloseButton}"
     Title="{Binding EditOperatorTitle}">
     <!--

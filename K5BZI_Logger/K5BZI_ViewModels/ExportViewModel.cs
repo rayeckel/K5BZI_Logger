@@ -54,7 +54,7 @@ namespace K5BZI_ViewModels
             Model.IsOpen = false;
 
             _exportService.ExportLog(
-                _eventViewModel.EventModel.Event,
+                _eventViewModel.EventModel.ActiveEvent,
                 _logViewModel.LogModel.LogEntries,
                 Model.SelectedExport);
         }

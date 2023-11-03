@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using K5BZI_Models.Base;
+using K5BZI_Models.EntityModels;
 using Microsoft.VisualStudio.PlatformUI;
 using PropertyChanged;
 
@@ -16,32 +18,40 @@ namespace K5BZI_Models.ViewModelModels
 
         public EventModel()
         {
-            ExistingEvents = new ObservableCollection<Event>();
+            Events = new ObservableCollection<Event>();
 
             IsOpen = true;
         }
 
         #endregion
 
-        #region Properties
+        #region Properties}
 
-        public Event Event { get; set; }
-
-        public ObservableCollection<Event> ExistingEvents { get; private set; }
+        public bool EditAllEvents { get; set; }
 
         public string SelectEventTitle
         {
             get
             {
-                return ExistingEvents.Any() ? "Select Log" : "Create Log";
+                return Events.Any() ? "Select Log" : "Create Log";
             }
         }
+
+        public Event ActiveEvent
+        {
+            get
+            {
+                return Events.FirstOrDefault(_ => _.IsActive);
+            }
+        }
+
+        public ObservableCollection<Event> Events { get; private set; }
 
         public Visibility SelectEventVisibility
         {
             get
             {
-                return ExistingEvents.Any() ? Visibility.Visible : Visibility.Collapsed;
+                return Events.Any() ? Visibility.Visible : Visibility.Collapsed;
             }
         }
 
@@ -49,9 +59,37 @@ namespace K5BZI_Models.ViewModelModels
         {
             get
             {
-                return !ExistingEvents.Any() ? Visibility.Visible : Visibility.Collapsed;
+                return !Events.Any() ? Visibility.Visible : Visibility.Collapsed;
             }
         }
+
+        [AlsoNotifyFor("EditAllEvents")]
+        public Visibility EditEventsVisibility
+        {
+            get
+            {
+                return !EditAllEvents ?
+                    Visibility.Visible :
+                    Visibility.Collapsed;
+            }
+        }
+
+        [AlsoNotifyFor("EditAllEvents")]
+        public Visibility EditAllEventsVisibility
+        {
+            get
+            {
+                return EditAllEvents ?
+                    Visibility.Visible :
+                    Visibility.Collapsed;
+            }
+        }
+
+        public string NewEventName { get; set; }
+
+        public Operator EventClub { get; set; }
+
+        public List<DXCC> DxccEntities { get; set; }
 
         #endregion
 
@@ -74,7 +112,7 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _selectEventCommand ?? (_selectEventCommand =
-                    new DelegateCommand(SelectEventAction, _ => { return Event != null; }));
+                    new DelegateCommand(SelectEventAction, _ => { return ActiveEvent != null; }));
             }
         }
         public Action<object> SelectEventAction { get; set; }
@@ -112,6 +150,39 @@ namespace K5BZI_Models.ViewModelModels
         }
         public Action<object> DeleteEventAction { get; set; }
 
+        private ICommand _editEventsCommand;
+        public ICommand EditEventsCommand
+        {
+            get
+            {
+                return _editEventsCommand ??
+                    (_editEventsCommand = new DelegateCommand(EditEventsAction, _ => { return true; }));
+            }
+        }
+        public Action<object> EditEventsAction { get; set; }
+
+        private ICommand _updateEventCommand;
+        public ICommand UpdateEventCommand
+        {
+            get
+            {
+                return _updateEventCommand ??
+                    (_updateEventCommand = new DelegateCommand(UpdateEventAction, _ => { return true; }));
+            }
+        }
+        public Action<object> UpdateEventAction { get; set; }
+
+        private ICommand _createNewEventCommand;
+        public ICommand CreateNewEventCommand
+        {
+            get
+            {
+                return _createNewEventCommand ??
+                    (_createNewEventCommand =
+                        new DelegateCommand(CreateNewEventAction, _ => { return !String.IsNullOrEmpty(NewEventName); }));
+            }
+        }
+        public Action<object> CreateNewEventAction { get; set; }
         #endregion
     }
 }

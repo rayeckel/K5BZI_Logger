@@ -16,7 +16,7 @@ namespace K5BZI_Logger.Views
 
             ViewFileStoreButton.DataContext = eventViewModel.EventModel;
             DefaultsButton.DataContext = defaultsViewModel.Model;
-            EventsButton.DataContext = eventViewModel.EditModel;
+            EventsButton.DataContext = eventViewModel.EventModel;
             OperatorsButton.DataContext = operatorsViewModel.OperatorModel;
             ExportLogButton.DataContext = logViewModel.LogModel;
             SubmitLogButton.DataContext = submitViewModel.SubmitModel;

@@ -1,4 +1,5 @@
-﻿using K5BZI_Models.ViewModelModels;
+﻿using System.Threading.Tasks;
+using K5BZI_Models.ViewModelModels;
 using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels.Interfaces;
 
@@ -26,13 +27,13 @@ namespace K5BZI_ViewModels
 
         #region Private Methods
 
-        private void Initialize()
+        private async Task Initialize()
         {
             Model = new DefaultsModel
             {
                 EditDefaultsAction = (_) => EditDefaults(),
                 UpdateDefaultsAction = (_) => UpdateDefaults(),
-                Defaults = _defaultsService.GetDefaults()
+                Defaults = await _defaultsService.GetDefaultsAsync()
             };
         }
 
