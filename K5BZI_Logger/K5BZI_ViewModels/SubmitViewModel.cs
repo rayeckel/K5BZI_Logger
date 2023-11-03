@@ -10,6 +10,7 @@ namespace K5BZI_ViewModels
         #region Properties
 
         private readonly ISubmitService _submitService;
+        private readonly IOperatorViewModel _operatorViewModel;
 
         public SubmitModel SubmitModel { get; private set; }
 
@@ -18,9 +19,11 @@ namespace K5BZI_ViewModels
         #region Constructors
 
         public SubmitViewModel(
-            ISubmitService submitService)
+            ISubmitService submitService,
+            IOperatorViewModel operatorViewModel)
         {
             _submitService = submitService;
+            _operatorViewModel = operatorViewModel;
 
             Initialize();
         }
@@ -29,10 +32,11 @@ namespace K5BZI_ViewModels
 
         #region private Methods
 
-        private async void Initialize()
+        private void Initialize()
         {
             SubmitModel = new SubmitModel
             {
+                SelectedSubmitOperator = _operatorViewModel.OperatorModel.ActiveOperator,
                 SubmitLogAction = async (_) => await SubmitLogAsync()
             };
         }

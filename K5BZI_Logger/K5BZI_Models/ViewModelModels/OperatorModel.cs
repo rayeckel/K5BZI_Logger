@@ -17,6 +17,9 @@ namespace K5BZI_Models.ViewModelModels
         public OperatorModel()
         {
             Operators = new ObservableCollection<Operator>();
+            ViewOperators = new ObservableCollection<Operator>();
+            ViewSelectedOperator = new Operator();
+            ViewSelectedOperators = new ObservableCollection<Operator>();
         }
 
         #endregion
@@ -65,7 +68,7 @@ namespace K5BZI_Models.ViewModelModels
         {
             get
             {
-                return Operators.FirstOrDefault(_ => _.IsActive);
+                return ActiveEvent.Operators.FirstOrDefault(_ => _.IsActive);
             }
             set
             {
@@ -77,13 +80,9 @@ namespace K5BZI_Models.ViewModelModels
 
         public ObservableCollection<Operator> Operators { get; private set; }
 
-        public ObservableCollection<Operator> ViewSelectedOperators
-        {
-            get
-            {
-                return ShowEventOperators ? ActiveEvent.Operators : Operators;
-            }
-        }
+        public ObservableCollection<Operator> ViewOperators { get; private set; }
+
+        public ObservableCollection<Operator> ViewSelectedOperators { get; set; }
 
         public Visibility SelectOperatorVisibility
         {

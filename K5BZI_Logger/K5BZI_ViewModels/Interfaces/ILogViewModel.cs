@@ -8,7 +8,5 @@ namespace K5BZI_ViewModels.Interfaces
         LogModel LogModel { get; }
 
         void CreateNewLog(Event newEvent);
-
-        void GetLog(Event selectedEvent);
     }
 }

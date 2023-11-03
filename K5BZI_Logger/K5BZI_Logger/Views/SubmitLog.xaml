@@ -63,8 +63,8 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 x:Name="selectOperatorCombo"
-                ItemsSource="{Binding EventModel.ActiveEvent.Operators}"
-                SelectedItem="{Binding SubmitModel.SelectedSubmitOperator, Mode=TwoWay}"
+                ItemsSource="{Binding OperatorModel.ActiveEvent.Operators}"
+                SelectedItem="{Binding SubmitModel.SelectedSubmitOperator, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 FontFamily="Tahoma"
                 BorderThickness="1">
             <ComboBox.ItemTemplate>

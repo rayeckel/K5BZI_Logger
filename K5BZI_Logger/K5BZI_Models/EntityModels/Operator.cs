@@ -9,6 +9,11 @@ namespace K5BZI_Models
     [AddINotifyPropertyChangedInterface]
     public class Operator : BaseModel
     {
+        public Operator()
+        {
+            IsClub = false;
+        }
+
         public bool IsActive { get; set; }
 
         [JsonProperty(Required = Required.Always)]

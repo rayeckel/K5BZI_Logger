@@ -41,7 +41,7 @@
                 BorderThickness=".5"
                 BorderBrush="Navy"
                 AutoGenerateColumns="False"
-                ItemsSource="{Binding ViewSelectedOperators}"
+                ItemsSource="{Binding ViewOperators}"
                 SelectedItem="{Binding ViewSelectedOperator, UpdateSourceTrigger=PropertyChanged}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="CellEditEnding">
@@ -57,7 +57,7 @@
                 <dgControls:DataGridCheckBoxColumn 
                             Header="Is Active" 
                             Width="80"
-                            Binding="{Binding IsActive}"/>
+                            Binding="{Binding IsActive, Mode=OneWay}"/>
                 <dgControls:DataGridTextColumn 
                             Header="Name" 
                             Width="105"

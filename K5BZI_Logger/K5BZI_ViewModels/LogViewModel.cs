@@ -31,12 +31,12 @@ namespace K5BZI_ViewModels
 
         public LogViewModel(
             IDefaultsService defaultsService,
-            ILogService logListingService,
+            ILogService logService,
             IOperatorViewModel operatorsViewModel,
             IEventViewModel eventViewModel)
         {
             _defaultsService = defaultsService;
-            _logService = logListingService;
+            _logService = logService;
             _operatorsViewModel = operatorsViewModel;
             _eventViewModel = eventViewModel;
 
@@ -45,9 +45,31 @@ namespace K5BZI_ViewModels
 
         #endregion
 
-        #region Public Methods
+        #region private Methods
 
-        public void GetLog(Event selectedEvent)
+        private void Initialize()
+        {
+            LogModel = new LogModel
+            {
+                LogItAction = async (_) => await SaveLogEntryAsync(),
+                ManualTimeAction = (_) => SetManualTime(),
+                AutoTimeAction = (_) => SetAutoTime(),
+                DeleteLogEntryAction = (_) => DeleteLogEntry(),
+                LostFocusAction = (_) => ExecuteLostFocusCommand(),
+                CheckDuplicateEntriesAction = (_) => CheckForDuplicates(),
+                BandChangeAction = (_) => OnBandChanged(),
+                FrequencyChangeAction = (_) => OnFrequencyChanged(),
+            };
+
+            _defaultsService.SetDefaults(LogModel.LogEntry);
+
+            _eventViewModel.EventModel.CreateLogAction = (_) => CreateNewLog(_);
+            _eventViewModel.EventModel.GetLogAction = (_) => GetLog(_);
+
+            UpdateDataGridVisibilities();
+        }
+
+        private void GetLog(Event selectedEvent)
         {
             LogModel.LogFileName = selectedEvent.LogFileName;
             LogModel.LogEntries.Clear();
@@ -74,31 +96,7 @@ namespace K5BZI_ViewModels
                 LogModel.LogEntry.Continent = lastLogEntry.Continent;
             }
 
-            UpdateDataGridVisibilities();
-        }
-
-        #endregion
-
-        #region private Methods
-
-        private void Initialize()
-        {
-            LogModel = new LogModel
-            {
-                LogItAction = async (_) => await SaveLogEntryAsync(),
-                ManualTimeAction = (_) => SetManualTime(),
-                AutoTimeAction = (_) => SetAutoTime(),
-                DeleteLogEntryAction = (_) => DeleteLogEntry(),
-                LostFocusAction = (_) => ExecuteLostFocusCommand(),
-                CheckDuplicateEntriesAction = (_) => CheckForDuplicates(),
-                BandChangeAction = (_) => OnBandChanged(),
-                FrequencyChangeAction = (_) => OnFrequencyChanged(),
-            };
-
-            _defaultsService.SetDefaults(LogModel.LogEntry);
-
-            _eventViewModel.EventModel.CreateLogAction = (_) => CreateNewLog(_);
-            _eventViewModel.EventModel.GetLogAction = (_) => GetLog(_);
+            _operatorsViewModel.OperatorModel.ActiveOperator = new Operator(); //Trigger update
 
             UpdateDataGridVisibilities();
         }
