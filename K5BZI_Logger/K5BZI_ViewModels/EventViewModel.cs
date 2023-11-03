@@ -151,15 +151,15 @@ namespace K5BZI_ViewModels
                 return;
             }
 
-            await _eventService.SaveEventsAsync(EventModel.Events.ToList());
+            EventModel.EditEventIsOpen = false;
 
-            EventModel.IsOpen = false;
+            await _eventService.SaveEventsAsync(EventModel.Events.ToList());
         }
 
         private void EditEvent(bool allEvents = false)
         {
             EventModel.ShowCloseButton = true;
-            EventModel.IsOpen = true;
+            EventModel.EditEventIsOpen = true;
         }
 
         #endregion

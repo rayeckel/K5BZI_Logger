@@ -11,7 +11,7 @@
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     Height="750" 
     Width="1200"
-    IsOpen="{Binding EventModel.IsOpen}"
+    IsOpen="{Binding EventModel.EditEventIsOpen}"
     ShowCloseButton="{Binding EventModel.ShowCloseButton}"
     Title="Edit Event">
     <simpleChildWindow:ChildWindow.Resources>
