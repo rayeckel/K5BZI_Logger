@@ -24,9 +24,9 @@ namespace K5BZI_Services.Services
 
         #region Public Methods
 
-        public async Task<List<LogEntry>> ReadLogAsync(string logFileName)
+        public List<LogEntry> ReadLog(string logFileName)
         {
-            return await _fileStoreService.ReadLogAsync<LogEntry>(logFileName);
+            return _fileStoreService.ReadLog<LogEntry>(logFileName);
         }
 
         public async Task SaveLogAsync(List<LogEntry> logEntries, string logFileName)

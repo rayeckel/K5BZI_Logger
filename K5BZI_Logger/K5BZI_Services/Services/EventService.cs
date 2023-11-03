@@ -30,15 +30,14 @@ namespace K5BZI_Services.Services
             _fileStoreService.OpenEventDirectory();
         }
 
-        public async Task<List<Event>> GetEventsAsync()
+        public List<Event> GetEvents()
         {
-            return await _fileStoreService.ReadLogAsync<Event>(_eventLogFileName, false);
+            return _fileStoreService.ReadLog<Event>(_eventLogFileName, false);
         }
 
         public async Task SaveEventsAsync(List<Event> eventList)
         {
             await _fileStoreService.WriteToFileAsync(eventList, _eventLogFileName, false);
-
         }
 
         #endregion

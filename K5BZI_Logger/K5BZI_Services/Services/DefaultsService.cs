@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using K5BZI_Models;
 using K5BZI_Models.EntityModels;
 using K5BZI_Services.Interfaces;
@@ -23,16 +22,16 @@ namespace K5BZI_Services.Services
         {
             _fileStoreService = fileStoreService;
 
-            GetDefaultsAsync();
+            GetDefaults();
         }
 
         #endregion
 
         #region Public Methods
 
-        public async Task<Defaults> GetDefaultsAsync()
+        public Defaults GetDefaults()
         {
-            var defaults = await _fileStoreService.ReadLogAsync<Defaults>(_defaultsFileName, false);
+            var defaults = _fileStoreService.ReadLog<Defaults>(_defaultsFileName, false);
 
             if (defaults == null)
             {

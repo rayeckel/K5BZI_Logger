@@ -6,7 +6,7 @@ namespace K5BZI_Services.Interfaces
 {
     public interface ILogService
     {
-        Task<List<LogEntry>> ReadLogAsync(string logFileName);
+        List<LogEntry> ReadLog(string logFileName);
 
         Task SaveLogAsync(List<LogEntry> logEntries, string logFileName);
     }

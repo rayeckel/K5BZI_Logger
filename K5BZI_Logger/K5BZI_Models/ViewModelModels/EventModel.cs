@@ -7,8 +7,9 @@ using System.Windows.Input;
 using K5BZI_Models.Base;
 using K5BZI_Models.EntityModels;
 using K5BZI_Models.Enums;
-using Microsoft.VisualStudio.PlatformUI;
+using Prism.Commands;
 using PropertyChanged;
+using DelegateCommand = Microsoft.VisualStudio.PlatformUI.DelegateCommand;
 
 namespace K5BZI_Models.ViewModelModels
 {
@@ -195,6 +196,43 @@ namespace K5BZI_Models.ViewModelModels
             }
         }
         public Action<object> CreateNewEventAction { get; set; }
+
+        private ICommand _checkOperatorsCommand;
+        public ICommand CheckOperatorsCommand
+        {
+            get
+            {
+                return _checkOperatorsCommand ??
+                    (_checkOperatorsCommand =
+                        new DelegateCommand(CheckOperatorsAction, _ => { return true; }));
+            }
+        }
+        public Action<object> CheckOperatorsAction { get; set; }
+
+        private ICommand _createLogCommand;
+        public ICommand CreateLogCommand
+        {
+            get
+            {
+                return _createLogCommand ??
+                    (_createLogCommand =
+                        new DelegateCommand<Event>(CreateLogAction, _ => { return true; }));
+            }
+        }
+        public Action<Event> CreateLogAction { get; set; }
+
+        private ICommand _getLogCommand;
+        public ICommand GetLogCommand
+        {
+            get
+            {
+                return _getLogCommand ??
+                    (_getLogCommand =
+                        new DelegateCommand<Event>(GetLogAction, _ => { return true; }));
+            }
+        }
+        public Action<Event> GetLogAction { get; set; }
+
         #endregion
     }
 }

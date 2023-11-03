@@ -30,9 +30,9 @@ namespace K5BZI_Services.Services
             await _fileStoreService.WriteToFileAsync(operators, _operatorsFileName, false);
         }
 
-        public async Task<List<Operator>> GetOperatorsAsync()
+        public List<Operator> GetOperators()
         {
-            return await _fileStoreService.ReadLogAsync<Operator>(_operatorsFileName, false);
+            return _fileStoreService.ReadLog<Operator>(_operatorsFileName, false);
         }
 
         #endregion

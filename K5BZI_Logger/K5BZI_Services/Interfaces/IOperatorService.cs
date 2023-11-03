@@ -8,6 +8,6 @@ namespace K5BZI_Services.Interfaces
     {
         Task SaveOperatorsAsync(List<Operator> operators);
 
-        Task<List<Operator>> GetOperatorsAsync();
+        List<Operator> GetOperators();
     }
 }

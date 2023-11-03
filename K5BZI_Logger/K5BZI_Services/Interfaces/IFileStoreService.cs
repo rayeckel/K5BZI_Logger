@@ -13,7 +13,7 @@ namespace K5BZI_Services.Interfaces
 
         IEnumerable<DataRow> ReadResourceFile(string resourceFileName, bool usesHearerRow = true);
 
-        Task<List<T>> ReadLogAsync<T>(string logFileName, bool isLogFile = true)
+        List<T> ReadLog<T>(string logFileName, bool isLogFile = true)
             where T : class;
 
         Task<bool> WriteToFileAsync<T>(ICollection<T> LogEntries, string logFileName, bool isLogFile = true)

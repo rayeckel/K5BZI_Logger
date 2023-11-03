@@ -23,6 +23,7 @@ namespace K5BZI_ViewModels
         private readonly IDefaultsService _defaultsService;
         private readonly ILogService _logService;
         private readonly IOperatorViewModel _operatorsViewModel;
+        private readonly IEventViewModel _eventViewModel;
 
         #endregion
 
@@ -31,11 +32,13 @@ namespace K5BZI_ViewModels
         public LogViewModel(
             IDefaultsService defaultsService,
             ILogService logListingService,
-            IOperatorViewModel operatorsViewModel)
+            IOperatorViewModel operatorsViewModel,
+            IEventViewModel eventViewModel)
         {
             _defaultsService = defaultsService;
             _logService = logListingService;
             _operatorsViewModel = operatorsViewModel;
+            _eventViewModel = eventViewModel;
 
             Initialize();
         }
@@ -44,12 +47,12 @@ namespace K5BZI_ViewModels
 
         #region Public Methods
 
-        public async Task GetLog(Event selectedEvent)
+        public void GetLog(Event selectedEvent)
         {
             LogModel.LogFileName = selectedEvent.LogFileName;
             LogModel.LogEntries.Clear();
 
-            var logEntries = await _logService.ReadLogAsync(LogModel.LogFileName);
+            var logEntries = _logService.ReadLog(LogModel.LogFileName);
 
             if (logEntries.Any())
             {
@@ -93,6 +96,9 @@ namespace K5BZI_ViewModels
             };
 
             _defaultsService.SetDefaults(LogModel.LogEntry);
+
+            _eventViewModel.EventModel.CreateLogAction = (_) => CreateNewLog(_);
+            _eventViewModel.EventModel.GetLogAction = (_) => GetLog(_);
 
             UpdateDataGridVisibilities();
         }

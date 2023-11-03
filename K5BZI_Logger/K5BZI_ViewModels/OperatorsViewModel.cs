@@ -19,6 +19,7 @@ namespace K5BZI_ViewModels
         private readonly IOperatorService _operatorService;
         private readonly IEventService _eventService;
         private readonly ISubmitViewModel _submitViewModel;
+        private readonly IEventViewModel _eventViewModel;
 
         #endregion
 
@@ -27,11 +28,13 @@ namespace K5BZI_ViewModels
         public OperatorsViewModel(
             IOperatorService operatorService,
             IEventService eventService,
-            ISubmitViewModel submitViewModel)
+            ISubmitViewModel submitViewModel,
+            IEventViewModel eventViewModel)
         {
             _operatorService = operatorService;
             _eventService = eventService;
             _submitViewModel = submitViewModel;
+            _eventViewModel = eventViewModel;
 
             Initialize();
         }
@@ -40,10 +43,11 @@ namespace K5BZI_ViewModels
 
         #region Private Methods
 
-        private async Task Initialize()
+        private void Initialize()
         {
             OperatorModel = new OperatorModel
             {
+                Events = _eventViewModel.EventModel.Events,
                 EditOperatorsAction = async (_) => await UpdateOperatorAsync(OperatorModel.ActiveEvent.ActiveOperator, false),
                 EditEventOperatorAction = async (_) => await UpdateOperatorAsync(OperatorModel.ActiveEvent.ActiveOperator, true),
                 CurrentOperatorAction = async (_) => await SetCurrentOperatorAsync(),
@@ -58,10 +62,20 @@ namespace K5BZI_ViewModels
                 UpdateEventOperatorAction = async (_) => await UpdateOperatorAsync(OperatorModel.Operator, true)
             };
 
-            var operators = await _operatorService.GetOperatorsAsync();
+            var operators = _operatorService.GetOperators();
 
             if (operators.Any())
                 operators.ForEach(_ => OperatorModel.Operators.Add(_));
+
+            _eventViewModel.EventModel.CheckOperatorsAction = (_) => CheckOperators();
+        }
+
+        private async Task CheckOperators()
+        {
+            if (!OperatorModel.Operators.Any())
+                AddOperator();
+
+            while (OperatorModel.EditOperatorIsOpen) { await Task.Delay(25); }
         }
 
         private async Task UpdateOperatorAsync(Operator operatorObj, bool isEvent)
@@ -83,7 +97,7 @@ namespace K5BZI_ViewModels
             OperatorModel.EditOperatorIsOpen = false;
             OperatorModel.IsOpen = false;
 
-            await _eventService.SaveEventsAsync(OperatorModel.Events);
+            await _eventService.SaveEventsAsync(OperatorModel.Events.ToList());
         }
 
         private async Task DeleteOperatorAsync()
@@ -105,7 +119,7 @@ namespace K5BZI_ViewModels
 
                 OperatorModel.ActiveEvent.Operators.Remove(operatorObj);
 
-                await _eventService.SaveEventsAsync(OperatorModel.Events);
+                await _eventService.SaveEventsAsync(OperatorModel.Events.ToList());
             }
         }
 

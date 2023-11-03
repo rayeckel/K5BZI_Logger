@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -61,7 +60,7 @@ namespace K5BZI_Models.ViewModelModels
             }
         }
 
-        public List<Event> Events { get; set; }
+        public ObservableCollection<Event> Events { get; set; }
 
         public ObservableCollection<Operator> Operators { get; private set; }
 

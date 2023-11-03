@@ -58,7 +58,7 @@ namespace K5BZI_Services.Services
             }
         }
 
-        public async Task<List<T>> ReadLogAsync<T>(string logFileName, bool isLogFile = true)
+        public List<T> ReadLog<T>(string logFileName, bool isLogFile = true)
             where T : class
         {
             var fileName = CreateFilePath(logFileName, isLogFile);

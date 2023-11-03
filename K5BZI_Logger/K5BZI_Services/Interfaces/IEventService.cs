@@ -10,6 +10,6 @@ namespace K5BZI_Services.Interfaces
 
         Task SaveEventsAsync(List<Event> eventList);
 
-        Task<List<Event>> GetEventsAsync();
+        List<Event> GetEvents();
     }
 }

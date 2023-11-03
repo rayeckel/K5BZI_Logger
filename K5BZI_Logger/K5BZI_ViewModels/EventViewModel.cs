@@ -18,8 +18,6 @@ namespace K5BZI_ViewModels
 
         private readonly IEventService _eventService;
         private readonly IExcelFileService _excelFileService;
-        private readonly ILogViewModel _logViewModel;
-        private readonly IOperatorViewModel _operatorsViewModel;
 
         #endregion
 
@@ -27,17 +25,13 @@ namespace K5BZI_ViewModels
 
         public EventViewModel(
             IEventService eventService,
-            IExcelFileService excelFileService,
-            ILogViewModel logViewModel,
-            IOperatorViewModel operatorsViewModel)
+            IExcelFileService excelFileService)
         {
             _eventService = eventService;
             _excelFileService = excelFileService;
-            _logViewModel = logViewModel;
-            _operatorsViewModel = operatorsViewModel;
 
             Initialize();
-            GetExistingEventsAsync();
+            GetExistingEvents();
         }
 
         #endregion
@@ -54,18 +48,18 @@ namespace K5BZI_ViewModels
                 ChangeEventAction = (_) => ChangeEvent(),
                 EditEventAction = (_) => EditEvent(),
                 DeleteEventAction = async (_) => await DeleteEventAsync((Guid)_),
-                CreateNewEventAction = async (_) => await CreateNewEventAsync(),
+                CreateNewEventAction = (_) => CreateNewEvent(),
                 EditEventsAction = (_) => EditEvent(true),
                 UpdateEventAction = async (_) => await UpdateEventAsync()
             };
         }
 
-        private async Task GetExistingEventsAsync()
+        private void GetExistingEvents()
         {
             EventModel.Events.Clear();
 
-            (await _eventService
-                .GetEventsAsync())?
+            _eventService
+                .GetEvents()?
                 .OrderByDescending(_ => _.CreatedDate)
                 .ToList()
                 .ForEach(eventObj =>
@@ -75,11 +69,9 @@ namespace K5BZI_ViewModels
                         EventModel.Events.Add(eventObj);
                     }
                 });
-
-            _operatorsViewModel.OperatorModel.Events = EventModel.Events.ToList();
         }
 
-        private async Task CreateNewEventAsync()
+        private void CreateNewEvent()
         {
             EventModel.IsOpen = false;
 
@@ -100,24 +92,16 @@ namespace K5BZI_ViewModels
             EventModel.Events.Add(newEvent);
             EventModel.ActiveEvent = currentEvent; //Trigger update
 
-            _operatorsViewModel.OperatorModel.Events = EventModel.Events.ToList();
+            EventModel.CheckOperatorsCommand.Execute(null);
 
-            if (!_operatorsViewModel.OperatorModel.Operators.Any())
-            {
-                _operatorsViewModel.OperatorModel.IsOpen = true;
-                _operatorsViewModel.OperatorModel.AddOperatorCommand.Execute(null);
-            }
-
-            while (_operatorsViewModel.OperatorModel.IsOpen) { await Task.Delay(25); }
-
-            _logViewModel.CreateNewLog(EventModel.ActiveEvent);
+            EventModel.CreateLogCommand.Execute(EventModel.ActiveEvent);
 
             EditEvent();
         }
 
         private void SelectEvent()
         {
-            _logViewModel.GetLog(EventModel.ActiveEvent);
+            EventModel.GetLogCommand.Execute(EventModel.ActiveEvent);
 
             EventModel.IsOpen = false;
         }
