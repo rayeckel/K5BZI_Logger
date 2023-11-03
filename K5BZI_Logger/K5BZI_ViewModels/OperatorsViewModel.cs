@@ -44,8 +44,8 @@ namespace K5BZI_ViewModels
         {
             OperatorModel = new OperatorModel
             {
-                EditOperatorsAction = async (_) => await UpdateOperatorAsync(OperatorModel.CurrentEvent.ActiveOperator, false),
-                EditEventOperatorAction = async (_) => await UpdateOperatorAsync(OperatorModel.CurrentEvent.ActiveOperator, true),
+                EditOperatorsAction = async (_) => await UpdateOperatorAsync(OperatorModel.ActiveEvent.ActiveOperator, false),
+                EditEventOperatorAction = async (_) => await UpdateOperatorAsync(OperatorModel.ActiveEvent.ActiveOperator, true),
                 CurrentOperatorAction = async (_) => await SetCurrentOperatorAsync(),
                 DeleteOperatorAction = async (_) => await DeleteOperatorAsync(),
                 CurrentEventOperatorAction = async (_) => await SetCurrentOperatorAsync(),
@@ -66,17 +66,19 @@ namespace K5BZI_ViewModels
 
         private async Task UpdateOperatorAsync(Operator operatorObj, bool isEvent)
         {
-            if (OperatorModel.CurrentEvent == null) return;
+            if (OperatorModel.ActiveEvent == null) return;
 
             OperatorModel.Operators.Add(operatorObj);
 
             await _operatorService.SaveOperatorsAsync(OperatorModel.Operators.ToList());
 
-            if (!OperatorModel.CurrentEvent.Operators.Any())
+            if (!OperatorModel.ActiveEvent.Operators.Any())
                 operatorObj.IsActive = true;
 
-            if (!OperatorModel.CurrentEvent.Operators.Any(_ => _.CallSign?.ToUpper() == operatorObj.CallSign?.ToUpper()))
-                OperatorModel.CurrentEvent.Operators.Add(operatorObj);
+            if (!OperatorModel.ActiveEvent.Operators.Any(_ => _.CallSign?.ToUpper() == operatorObj.CallSign?.ToUpper()))
+                OperatorModel.ActiveEvent.Operators.Add(operatorObj);
+
+            OperatorModel.ActiveEvent.ActiveOperator = operatorObj; //Trigger update
 
             OperatorModel.EditOperatorIsOpen = false;
             OperatorModel.IsOpen = false;
@@ -86,7 +88,7 @@ namespace K5BZI_ViewModels
 
         private async Task DeleteOperatorAsync()
         {
-            var operatorObj = OperatorModel.CurrentEvent.ActiveOperator;
+            var operatorObj = OperatorModel.ActiveEvent.ActiveOperator;
 
             var deleteConfirmName = OperatorModel.ShowEventOperators ?
                 String.Format("Removing {0} from the event.", operatorObj.CallSign) :
@@ -101,7 +103,7 @@ namespace K5BZI_ViewModels
                     OperatorModel.Operators.Remove(operatorObj);
                 }
 
-                OperatorModel.CurrentEvent.Operators.Remove(operatorObj);
+                OperatorModel.ActiveEvent.Operators.Remove(operatorObj);
 
                 await _eventService.SaveEventsAsync(OperatorModel.Events);
             }
@@ -109,7 +111,7 @@ namespace K5BZI_ViewModels
 
         private async Task SetCurrentOperatorAsync()
         {
-            var operatorObj = OperatorModel.CurrentEvent.ActiveOperator;
+            var operatorObj = OperatorModel.ActiveEvent.ActiveOperator;
 
             if (operatorObj != null && operatorObj.IsClub)
             {
@@ -120,7 +122,9 @@ namespace K5BZI_ViewModels
 
             await UpdateOperatorAsync(operatorObj, true);
 
-            _submitViewModel.SubmitModel.SelectedSubmitOperator = OperatorModel.CurrentEvent.ActiveOperator;
+            _submitViewModel.SubmitModel.SelectedSubmitOperator = OperatorModel.ActiveEvent.ActiveOperator;
+
+            OperatorModel.ActiveEvent.ActiveOperator = operatorObj; //Trigger update
 
             OperatorModel.EditOperatorIsOpen = false;
             OperatorModel.IsOpen = false;

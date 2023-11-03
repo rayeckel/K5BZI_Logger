@@ -96,6 +96,7 @@ namespace K5BZI_ViewModels
             };
 
             EventModel.Events.Add(newEvent);
+            EventModel.ActiveEvent = currentEvent; //Trigger update
 
             _operatorsViewModel.OperatorModel.Events = EventModel.Events.ToList();
 

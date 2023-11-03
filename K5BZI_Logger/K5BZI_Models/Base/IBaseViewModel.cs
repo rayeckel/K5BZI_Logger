@@ -1,6 +1,8 @@
-﻿namespace K5BZI_Models.Base
+﻿using System.ComponentModel;
+
+namespace K5BZI_Models.Base
 {
-    public interface IBaseViewModel
+    public interface IBaseViewModel : INotifyPropertyChanged
     {
     }
 }

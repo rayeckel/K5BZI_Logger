@@ -225,7 +225,7 @@ namespace K5BZI_ViewModels
                 return;
             }
 
-            LogModel.LogEntry.Operator = _operatorsViewModel.OperatorModel.CurrentEvent.ActiveOperator;
+            LogModel.LogEntry.Operator = _operatorsViewModel.OperatorModel.ActiveEvent.ActiveOperator;
             LogModel.LogEntries.Add(LogModel.LogEntry.Clone());
             LogModel.QSOCount++;
             LogModel.LogEntry.ClearProperties(LogModel.ContactTimeEnabled);

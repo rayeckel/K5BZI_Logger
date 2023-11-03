@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Text;
 
 namespace K5BZI_Models.Extensions
 {
@@ -8,6 +7,8 @@ namespace K5BZI_Models.Extensions
     {
         public static BandFrequency GetBand(string frequencyString)
         {
+            if (String.IsNullOrEmpty(frequencyString)) return null;
+
             object frequency = null;
             var isInt = false;
 
@@ -87,7 +88,7 @@ namespace K5BZI_Models.Extensions
                 return new IsEightyMeters();
 
             if ((isInt && ((int)frequency > 1799))
-                || !isInt && (double)frequency > 1.799 )
+                || !isInt && (double)frequency > 1.799)
                 return new IsOneSixtyMeters();
 
             return new IsTwentyThreeCentimeters();

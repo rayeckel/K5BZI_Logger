@@ -34,7 +34,7 @@
             FontFamily="Tahoma"
             BorderThickness="0"
             Foreground="DarkSlateBlue"
-            Content="{Binding EventModel.Event.EventName}"/>
+            Content="{Binding EventModel.ActiveEvent.EventName}"/>
         <Button
             Grid.Row="1"
             Grid.Column="0"
@@ -97,7 +97,7 @@
             BorderThickness="0"
             Foreground="DarkSlateBlue"
             Margin="0,20,0,0"
-            Content="{Binding CurrentEvent.ActiveOperator.FullName}"/>
+            Content="{Binding ActiveEvent.ActiveOperator.FullName}"/>
         <Label
             Grid.Row="1"
             Grid.Column="1"
@@ -110,7 +110,7 @@
             FontFamily="Tahoma"
             BorderThickness="0"
             Foreground="DarkSlateBlue"
-            Content="{Binding CurrentEvent.ActiveOperator.CallSign}"/>
+            Content="{Binding ActiveEvent.ActiveOperator.CallSign}"/>
         <Button
             Grid.Row="1"
             Grid.RowSpan="2"

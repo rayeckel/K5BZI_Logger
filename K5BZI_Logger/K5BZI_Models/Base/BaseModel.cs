@@ -1,8 +1,11 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 namespace K5BZI_Models.Base
 {
-    public class BaseModel
+    public class BaseModel : INotifyPropertyChanged
     {
         public void Clear()
         {
@@ -15,10 +18,33 @@ namespace K5BZI_Models.Base
                 {
                     properties[i].SetValue(this, null);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     ex.GetType();
                 }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void FirePropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            if (propertyName == null)
+                throw new ArgumentNullException("propertyName");
+            try
+            {
+                this.OnPropertyChanged(propertyName);
+            }
+            catch (Exception exception)
+            {
+                Trace.TraceError("{0}.OnPropertyChanged threw {1}: {2}", this.GetType().FullName, exception.GetType().FullName, exception);
+            }
+        }
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
     }

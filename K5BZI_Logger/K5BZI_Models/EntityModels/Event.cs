@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using K5BZI_Models.Attributes;
+using K5BZI_Models.Base;
 using K5BZI_Models.EntityModels;
 using K5BZI_Models.Enums;
 using Newtonsoft.Json;
@@ -10,12 +11,11 @@ using PropertyChanged;
 namespace K5BZI_Models
 {
     [AddINotifyPropertyChangedInterface]
-    public class Event
+    public class Event : BaseModel
     {
         public Event()
         {
             Operators = new ObservableCollection<Operator>();
-            IsActive = true;
         }
 
         [JsonProperty(Required = Required.Always)]
@@ -33,7 +33,7 @@ namespace K5BZI_Models
             }
             set
             {
-                return;
+                FirePropertyChanged();
             }
         }
 

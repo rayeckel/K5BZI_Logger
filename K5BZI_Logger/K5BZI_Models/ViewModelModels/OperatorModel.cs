@@ -42,14 +42,14 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return ShowEventOperators ?
-                    $"EVENT Operators - {CurrentEvent.EventName}" :
+                    $"EVENT Operators - {ActiveEvent.EventName}" :
                     "ALL Operators";
             }
         }
 
         public Operator Operator { get; set; }
 
-        public Event CurrentEvent
+        public Event ActiveEvent
         {
             get
             {
@@ -65,7 +65,7 @@ namespace K5BZI_Models.ViewModelModels
         {
             get
             {
-                return ShowEventOperators ? CurrentEvent.Operators : Operators;
+                return ShowEventOperators ? ActiveEvent.Operators : Operators;
             }
         }
 
@@ -73,7 +73,7 @@ namespace K5BZI_Models.ViewModelModels
         {
             get
             {
-                return CurrentEvent.Operators.Count > 1 ? Visibility.Visible : Visibility.Collapsed;
+                return ActiveEvent.Operators.Count > 1 ? Visibility.Visible : Visibility.Collapsed;
             }
             set
             {
@@ -85,7 +85,7 @@ namespace K5BZI_Models.ViewModelModels
         {
             get
             {
-                return CurrentEvent.Operators.Count == 1 ? Visibility.Visible : Visibility.Collapsed;
+                return ActiveEvent.Operators.Count == 1 ? Visibility.Visible : Visibility.Collapsed;
             }
             set
             {
@@ -137,7 +137,7 @@ namespace K5BZI_Models.ViewModelModels
                 return _currentEventOperatorCommand ??
                     (_currentEventOperatorCommand =
                     new DelegateCommand(CurrentEventOperatorAction, _ =>
-                    { return (CurrentEvent != null && CurrentEvent.Operators.Any()); }));
+                    { return (ActiveEvent != null && ActiveEvent.Operators.Any()); }));
             }
         }
         public Action<object> CurrentEventOperatorAction { get; set; }
@@ -150,7 +150,7 @@ namespace K5BZI_Models.ViewModelModels
                 return _deleteEventOperatorCommand ??
                     (_deleteEventOperatorCommand =
                     new DelegateCommand(DeleteEventOperatorAction, _ =>
-                    { return (CurrentEvent != null && CurrentEvent.Operators.Any()); }));
+                    { return (ActiveEvent != null && ActiveEvent.Operators.Any()); }));
             }
         }
         public Action<object> DeleteEventOperatorAction { get; set; }
@@ -162,7 +162,7 @@ namespace K5BZI_Models.ViewModelModels
             {
                 return _addClubToEventCommand ??
                     (_addClubToEventCommand =
-                    new DelegateCommand(AddClubAction, _ => { return CurrentEvent.Operators.Any(); }));
+                    new DelegateCommand(AddClubAction, _ => { return ActiveEvent.Operators.Any(); }));
             }
         }
 
@@ -174,7 +174,7 @@ namespace K5BZI_Models.ViewModelModels
                 return _currentOperatorCommand ??
                     (_currentOperatorCommand =
                     new DelegateCommand(CurrentOperatorAction, _ =>
-                    { return (CurrentEvent != null && CurrentEvent.Operators.Any()); }));
+                    { return (ActiveEvent != null && ActiveEvent.Operators.Any()); }));
             }
         }
         public Action<object> CurrentOperatorAction { get; set; }
@@ -197,7 +197,7 @@ namespace K5BZI_Models.ViewModelModels
             {
                 return _deleteOperatorCommand ??
                     (_deleteOperatorCommand = new DelegateCommand(DeleteOperatorAction, _ =>
-                    { return (CurrentEvent != null && CurrentEvent.Operators.Any()); }));
+                    { return (ActiveEvent != null && ActiveEvent.Operators.Any()); }));
             }
         }
         public Action<object> DeleteOperatorAction { get; set; }
