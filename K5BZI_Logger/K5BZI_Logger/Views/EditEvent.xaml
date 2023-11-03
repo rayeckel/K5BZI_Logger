@@ -195,7 +195,7 @@
                     Height="30"
                     Margin="10,0,0,0"
                     FontFamily="Tahoma"
-                    Text="{Binding EventModel.Event.EventName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Text="{Binding EventModel.ActiveEvent.EventName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     controls:TextBoxHelper.Watermark="Event Name" 
                     controls:TextBoxHelper.ClearTextButton="True" >
                 </TextBox>
@@ -250,13 +250,13 @@
                     <RadioButton 
                         Grid.Column="0"
                         GroupName="Group1" 
-                        IsChecked="{Binding EventModel.Event.IsActive}" 
+                        IsChecked="{Binding EventModel.ActiveEvent.IsActive}" 
                         Content="Yes" />
                     <RadioButton
                         Grid.Column="1"
                         GroupName="Group1"  
                         Content="No" 
-                        IsChecked="{Binding EventModel.Event.IsActive, Converter={StaticResource BoolInverterConverter}}" />
+                        IsChecked="{Binding EventModel.ActiveEvent.IsActive, Converter={StaticResource BoolInverterConverter}}" />
                 </Grid>
                 <Label 
                     Grid.Row="3"
@@ -276,7 +276,7 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     x:Name="arrlSectionsCombo"
-                    SelectedItem="{Binding EventModel.Event.ARRL_Sect, Mode=TwoWay}"
+                    SelectedItem="{Binding EventModel.ActiveEvent.ARRL_Sect, Mode=TwoWay}"
                     FontFamily="Tahoma"
                     BorderThickness="1"
                     ItemsSource="{Binding Source={StaticResource ArrlSectionEnumValues}}">
@@ -304,16 +304,16 @@
                     Height="30"
                     Margin="10,0,0,0"
                     x:Name="dxccCombo"
-                    ItemsSource="{Binding EventModel.DxccEntities}"
-                    SelectedItem="{Binding EventModel.Event.DXCC}"
+                    ItemsSource="{Binding EventModel.DXCCValues}"
+                    SelectedItem="{Binding EventModel.ActiveEvent.DXCC}"
                     FontFamily="Tahoma"
                     BorderThickness="1">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding EditModel.Prefix}" />
+                                <TextBlock Text="{Binding Prefix}" />
                                 <TextBlock Text=" - " />
-                                <TextBlock Text="{Binding EditModel.Entity}" />
+                                <TextBlock Text="{Binding Entity}" />
                             </StackPanel>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
@@ -336,17 +336,10 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     x:Name="cqZoneCombo"
-                    SelectedItem="{Binding EventModel.Event.CqZone, Mode=TwoWay}"
+                    ItemsSource="{Binding EventModel.CqZoneValues}"
+                    SelectedItem="{Binding EventModel.ActiveEvent.CqZone, Mode=TwoWay}"
                     FontFamily="Tahoma"
-                    BorderThickness="1"
-                    ItemsSource="{Binding Source={StaticResource CqZoneEnumValues}}">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Converter={StaticResource EnumDescriptionConverter}}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
+                    BorderThickness="1">
                 </ComboBox>
                 <Label 
                     Grid.Row="6"
@@ -364,7 +357,7 @@
                     Height="30"
                     Margin="10,0,0,0"
                     FontFamily="Tahoma"
-                    Text="{Binding EventModel.Event.ItuZone}"
+                    Text="{Binding EventModel.ActiveEvent.ItuZone}"
                     controls:TextBoxHelper.Watermark="ITU Zone" 
                     controls:TextBoxHelper.ClearTextButton="True" >
                 </TextBox>
@@ -384,7 +377,7 @@
                     Height="30"
                     Margin="10,0,0,0"
                     FontFamily="Tahoma"
-                    Text="{Binding EventModel.Event.Class}"
+                    Text="{Binding EventModel.ActiveEvent.Class}"
                     controls:TextBoxHelper.Watermark="Class" 
                     controls:TextBoxHelper.ClearTextButton="True" >
                 </TextBox>
@@ -475,7 +468,7 @@
                     Height="30"
                     Margin="10,0,20,0"
                     FontFamily="Tahoma"
-                    Text="{Binding EventModel.Event.LogFileName, Mode=OneWay}"
+                    Text="{Binding EventModel.ActiveEvent.LogFileName, Mode=OneWay}"
                     controls:TextBoxHelper.Watermark="Log File Name" 
                     controls:TextBoxHelper.ClearTextButton="True" >
                 </TextBox>

@@ -48,12 +48,12 @@ namespace K5BZI_ViewModels
         {
             EventModel = new EventModel
             {
+                DXCCValues = _excelFileService.ReadDxccExcelData(),
                 ViewFileStoreAction = (_) => _eventService.OpenEventDirectory(),
                 SelectEventAction = (_) => SelectEvent(),
                 ChangeEventAction = (_) => ChangeEvent(),
                 EditEventAction = (_) => EditEvent(),
                 DeleteEventAction = async (_) => await DeleteEventAsync((Guid)_),
-                DxccEntities = _excelFileService.ReadDxccExcelData(),
                 CreateNewEventAction = async (_) => await CreateNewEventAsync(),
                 EditEventsAction = (_) => EditEvent(true),
                 UpdateEventAction = async (_) => await UpdateEventAsync()

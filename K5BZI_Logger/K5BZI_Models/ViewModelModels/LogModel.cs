@@ -41,17 +41,14 @@ namespace K5BZI_Models.ViewModelModels
         public Visibility CQZoneVisibility { get; set; }
         public bool ContactTimeEnabled { get; set; }
         public int QSOCount { get; set; }
-
         public IEnumerable<Band> BandValues
         {
             get { return Enum.GetValues(typeof(Band)).Cast<Band>(); }
         }
-
         public IEnumerable<Mode> ModeValues
         {
             get { return Enum.GetValues(typeof(Mode)).Cast<Mode>(); }
         }
-
         public IEnumerable<Assisted> AssistedValues
         {
             get { return Enum.GetValues(typeof(Assisted)).Cast<Assisted>(); }

@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Input;
 using K5BZI_Models.Base;
 using K5BZI_Models.EntityModels;
+using K5BZI_Models.Enums;
 using Microsoft.VisualStudio.PlatformUI;
 using PropertyChanged;
 
@@ -91,7 +92,12 @@ namespace K5BZI_Models.ViewModelModels
 
         public Operator EventClub { get; set; }
 
-        public List<DXCC> DxccEntities { get; set; }
+        public List<DXCC> DXCCValues { get; set; }
+
+        public IEnumerable<CqZone> CqValues
+        {
+            get { return Enum.GetValues(typeof(CqZone)).Cast<CqZone>(); }
+        }
 
         #endregion
 
