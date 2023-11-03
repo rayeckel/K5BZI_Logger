@@ -68,7 +68,7 @@ namespace K5BZI_Models.ViewModelModels
         {
             get
             {
-                return ActiveEvent.Operators.FirstOrDefault(_ => _.IsActive);
+                return ActiveEvent?.Operators.FirstOrDefault(_ => _.IsActive);
             }
             set
             {

@@ -38,7 +38,7 @@ namespace K5BZI_Logger
             services.AddSingleton<INetworkService, NetworkService>();
 
             services.AddScoped<IExportViewModel, ExportViewModel>();
-            services.AddSingleton<IOperatorViewModel, OperatorsViewModel>();
+            services.AddSingleton<IOperatorViewModel, OperatorViewModel>();
             services.AddSingleton<ISubmitViewModel, SubmitViewModel>();
             services.AddSingleton<IMainViewModel, MainViewModel>();
             services.AddSingleton<ILogViewModel, LogViewModel>();

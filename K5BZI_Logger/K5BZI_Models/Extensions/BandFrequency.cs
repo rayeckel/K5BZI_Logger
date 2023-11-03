@@ -9,6 +9,8 @@ namespace K5BZI_Models.Extensions
         {
             if (String.IsNullOrEmpty(frequencyString)) return null;
 
+            frequencyString.Replace(',', '.');
+
             object frequency = null;
             var isInt = false;
 

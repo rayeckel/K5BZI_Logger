@@ -10,7 +10,7 @@ using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace K5BZI_ViewModels
 {
-    public class OperatorsViewModel : IOperatorViewModel
+    public class OperatorViewModel : IOperatorViewModel
     {
         #region Properties
 
@@ -24,7 +24,7 @@ namespace K5BZI_ViewModels
 
         #region Constructors
 
-        public OperatorsViewModel(
+        public OperatorViewModel(
             IOperatorService operatorService,
             IEventService eventService,
             IEventViewModel eventViewModel)
@@ -55,8 +55,8 @@ namespace K5BZI_ViewModels
                 AddClubAction = (_) => AddOperator(true),
                 EditOperatorAction = (_) => EditOperators(),
                 ChangeOperatorAction = (_) => EditOperators(true),
-                UpdateOperatorAction = async (_) => await UpdateOperatorAsync(false),
-                UpdateEventOperatorAction = async (_) => await UpdateOperatorAsync(true)
+                UpdateOperatorAction = async (_) => await UpdateOperatorAsync(),
+                UpdateEventOperatorAction = async (_) => await UpdateOperatorAsync()
             };
 
             var operators = _operatorService.GetOperators();
@@ -75,7 +75,7 @@ namespace K5BZI_ViewModels
             while (OperatorModel.EditOperatorIsOpen) { await Task.Delay(25); }
         }
 
-        private async Task UpdateOperatorAsync(bool isEvent)
+        private async Task UpdateOperatorAsync()
         {
             if (OperatorModel.ActiveEvent == null) return;
 
@@ -97,6 +97,7 @@ namespace K5BZI_ViewModels
             if (!OperatorModel.ActiveEvent.Operators.Any(_ => _.CallSign?.ToUpper() == OperatorModel.ViewSelectedOperator.CallSign?.ToUpper()))
                 OperatorModel.ActiveEvent.Operators.Add(OperatorModel.ViewSelectedOperator);
 
+            OperatorModel.ViewOperators.Add(OperatorModel.ViewSelectedOperator);
             OperatorModel.ActiveOperator = new Operator(); //Trigger update
             OperatorModel.EditOperatorIsOpen = false;
 
@@ -133,7 +134,7 @@ namespace K5BZI_ViewModels
                 return;
             }
 
-            await UpdateOperatorAsync(true);
+            await UpdateOperatorAsync();
 
             OperatorModel.IsOpen = false;
         }
