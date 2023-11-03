@@ -48,8 +48,8 @@ namespace K5BZI_ViewModels
             OperatorModel = new OperatorModel
             {
                 Events = _eventViewModel.EventModel.Events,
-                EditOperatorsAction = async (_) => await UpdateOperatorAsync(OperatorModel.ActiveEvent.ActiveOperator, false),
-                EditEventOperatorAction = async (_) => await UpdateOperatorAsync(OperatorModel.ActiveEvent.ActiveOperator, true),
+                EditOperatorsAction = (_) => EditOperators(),
+                EditEventOperatorAction = (_) => EditOperators(true),
                 CurrentOperatorAction = async (_) => await SetCurrentOperatorAsync(),
                 DeleteOperatorAction = async (_) => await DeleteOperatorAsync(),
                 CurrentEventOperatorAction = async (_) => await SetCurrentOperatorAsync(),

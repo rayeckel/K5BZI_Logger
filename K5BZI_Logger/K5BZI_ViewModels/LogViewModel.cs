@@ -54,7 +54,7 @@ namespace K5BZI_ViewModels
 
             var logEntries = _logService.ReadLog(LogModel.LogFileName);
 
-            if (logEntries.Any())
+            if (logEntries != null && logEntries.Any())
             {
                 logEntries.ForEach(_ =>
                 {

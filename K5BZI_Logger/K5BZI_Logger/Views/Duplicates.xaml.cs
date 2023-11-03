@@ -1,15 +1,16 @@
 ﻿using System.Windows.Controls;
+using K5BZI_ViewModels.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace K5BZI_Logger.Views
 {
-    /// <summary>
-    /// Interaction logic for MainInput.xaml
-    /// </summary>
     public partial class Duplicates : UserControl
     {
         public Duplicates()
         {
             InitializeComponent();
+
+            DataContext = App.ServiceProvider.GetRequiredService<ILogViewModel>().LogModel;
         }
     }
 }
