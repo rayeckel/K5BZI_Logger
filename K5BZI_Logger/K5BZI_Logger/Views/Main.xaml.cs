@@ -5,6 +5,8 @@ namespace K5BZI_Logger.Views
 {
     public partial class Main : MetroWindow
     {
+        public string AppVersion { get; } = App.Version;
+
         public Main(
             IOperatorViewModel operatorsViewModel,
             IEventViewModel eventViewModel,
@@ -20,6 +22,8 @@ namespace K5BZI_Logger.Views
             OperatorsButton.DataContext = operatorsViewModel.OperatorModel;
             ExportLogButton.DataContext = logViewModel.LogModel;
             SubmitLogButton.DataContext = submitViewModel.SubmitModel;
+
+            DataContext = this;
         }
     }
 }

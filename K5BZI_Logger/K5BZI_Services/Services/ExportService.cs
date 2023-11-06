@@ -31,7 +31,7 @@ namespace K5BZI_Services.Services
             }
         }
 
-        private async void ExportToAdif(Event eventLog, ICollection<LogEntry> logEntries)
+        private async void ExportToAdif(Event currentEvent, ICollection<LogEntry> logEntries)
         {
             var header = String.Format(
                 "ADIF Export from K5BZI Logger version {0} {1}Copyright (C) 2020 - Ray Eckel K5BZI{2}Log exported on: {3}{4}{5}{6}{7}{8}{9}{10}{11}{12}{13}",
@@ -52,7 +52,7 @@ namespace K5BZI_Services.Services
 
             var adifData = new StringBuilder(header);
 
-            var eventProperties = from p in eventLog.GetType().GetProperties()
+            var eventProperties = from p in currentEvent.GetType().GetProperties()
                                   let attr = p.GetCustomAttributes(typeof(AdifAttribute), true)
                                   where attr.Length == 1
                                   select new { Property = p, Attribute = attr.First() as AdifAttribute };
@@ -63,7 +63,7 @@ namespace K5BZI_Services.Services
 
                 foreach (var eventProp in eventProperties)
                 {
-                    var value = eventProp.Property.GetValue(eventLog)?.ToString();
+                    var value = eventProp.Property.GetValue(currentEvent)?.ToString();
 
                     if (value == null)
                     {
@@ -136,7 +136,11 @@ namespace K5BZI_Services.Services
                 adifData.AppendLine(String.Format("{0}{1}<EOR>", recordLine, Environment.NewLine));
             }
 
-            await _fileStoreService.WriteToFile(adifData.ToString(), eventLog.LogFileName, FileExtensions.Adif);
+            var logFileName = currentEvent.EventType != EventType.PARKSONTHEAIR ?
+                currentEvent.LogFileName :
+                $"{currentEvent.Operators.First(_ => _.IsActive)}@{currentEvent.Designator}-{currentEvent.CreatedDate}";
+
+            await _fileStoreService.WriteToFile(adifData.ToString(), logFileName, FileExtensions.Adif);
 
             _fileStoreService.OpenEventDirectory();
         }

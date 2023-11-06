@@ -167,7 +167,8 @@
                 Grid.Row="5"
                 Grid.Column="3"
                 HorizontalAlignment="Right" 
-                VerticalAlignment="Bottom">Version 1.0.10
+                VerticalAlignment="Bottom"
+                Content="{Binding AppVersion}">
             </Label>
         </Grid>
     </ScrollViewer>
