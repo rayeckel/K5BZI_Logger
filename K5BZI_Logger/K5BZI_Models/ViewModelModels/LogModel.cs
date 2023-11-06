@@ -7,9 +7,11 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using K5BZI_Models.Enums;
 using Microsoft.VisualStudio.PlatformUI;
+using PropertyChanged;
 
 namespace K5BZI_Models.ViewModelModels
 {
+    [AddINotifyPropertyChangedInterface]
     public class LogModel
     {
         #region Constructors
@@ -28,9 +30,11 @@ namespace K5BZI_Models.ViewModelModels
 
         #region Properties
 
+        public string LogFileName { get; set; }
+        public bool ContactTimeEnabled { get; set; }
+        public int QSOCount { get; set; }
         public DispatcherTimer Timer { get; set; }
         public LogEntry LogEntry { get; private set; }
-        public string LogFileName { get; set; }
         public LogEntry SelectedEntry { get; set; }
         public ObservableCollection<LogEntry> LogEntries { get; private set; }
         public ObservableCollection<LogEntry> DuplicateEntries { get; private set; }
@@ -39,8 +43,7 @@ namespace K5BZI_Models.ViewModelModels
         public Visibility CountryVisibility { get; set; }
         public Visibility ContinentVisibility { get; set; }
         public Visibility CQZoneVisibility { get; set; }
-        public bool ContactTimeEnabled { get; set; }
-        public int QSOCount { get; set; }
+        public Visibility IsLogitVisibility { get; set; }
         public IEnumerable<Band> BandValues
         {
             get { return Enum.GetValues(typeof(Band)).Cast<Band>(); }

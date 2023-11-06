@@ -98,6 +98,8 @@ namespace K5BZI_ViewModels
 
             _operatorsViewModel.OperatorModel.ActiveOperator = new Operator(); //Trigger update
 
+            LogModel.IsLogitVisibility = selectedEvent.EventType == EventType.PARKSONTHEAIR ? Visibility.Hidden : Visibility.Visible;
+
             UpdateDataGridVisibilities();
         }
 
@@ -114,6 +116,7 @@ namespace K5BZI_ViewModels
             LogModel.LogEntries.Clear();
             LogModel.LogEntry.ClearProperties(LogModel.ContactTimeEnabled);
             LogModel.LogEntry.EventId = newEvent.Id;
+            LogModel.IsLogitVisibility = newEvent.EventType == EventType.PARKSONTHEAIR ? Visibility.Hidden : Visibility.Visible;
         }
 
         private void CheckForDuplicates()
@@ -223,6 +226,12 @@ namespace K5BZI_ViewModels
 
         private async Task SaveLogEntryAsync()
         {
+            if (LogModel.LogEntry.Signal.Band == Band.SELECT)
+            {
+                MessageBox.Show("Please select a band or enter a frequency.");
+                return;
+            }
+
             if (String.IsNullOrEmpty(LogModel.LogEntry.CallSign))
             {
                 MessageBox.Show("You must provide a valid Call Sign.", "Oops!");

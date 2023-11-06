@@ -7,7 +7,7 @@
     xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
     Height="750" 
-    Width="1200"
+    Width="1250"
     mc:Ignorable="d"
     IsOpen="{Binding SubmitModel.IsOpen}"
     ShowCloseButton="True"
@@ -105,27 +105,6 @@
             FontFamily="Tahoma"
             Content="{Binding SubmitModel.SelectedSubmitOperator.CallSign}"/>
         -->
-        <Label 
-            Grid.Row="2"
-            Margin="15,0,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Bottom"
-            FontWeight="Bold"
-            FontFamily="Tahoma"
-            Content="Select Service"/>
-        <ComboBox
-            Grid.Row="3"
-            Height="34"
-            Width="300" 
-            Margin="30,20,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            x:Name="selectServiceCombo"
-            ItemsSource="{Binding SubmitModel.ServiceValues}"
-            SelectedItem="{Binding SubmitModel.SelectedService, Mode=TwoWay}"
-            FontFamily="Tahoma"
-            BorderThickness="1">
-        </ComboBox>
 
         <Label 
             Grid.Row="4"

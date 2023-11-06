@@ -7,7 +7,7 @@
     xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
     Height="750" 
-    Width="1200"
+    Width="1250"
     mc:Ignorable="d"
     IsOpen="{Binding IsOpen}"
     ShowCloseButton="{Binding ShowCloseButton}"
@@ -108,36 +108,18 @@
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
                 Command="{Binding SelectEventCommand}"/>
-        <Label 
-                Grid.Row="3"
-                Margin="15,0,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Bottom"
-                FontWeight="Bold"
-                FontFamily="Tahoma"
-                Content="Create New Event"/>
-        <TextBox
-                Grid.Row="4"
-                Width="300"
-                Height="30"
-                Margin="20,10,0,0"
-                FontFamily="Tahoma"
-                Text="{Binding NewEventName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                controls:TextBoxHelper.Watermark="New Event Name" 
-                controls:TextBoxHelper.ClearTextButton="True" >
-        </TextBox>
         <Button 
-                Grid.Row="5"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                Margin="0,0,20,0"
-                Content="New Event"
-                Width="100"
+                Grid.Row="3"
+                Grid.RowSpan="2"
+            Grid.Column="0"
+                Margin="50,0,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Content="Create New Event"
+                Width="200"
                 Height="30"
                 Foreground="Navy"
                 FontWeight="Bold"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Center"
                 FontFamily="Tahoma"
                 IsDefault="True"
                 Command="{Binding CreateNewEventCommand}"/>

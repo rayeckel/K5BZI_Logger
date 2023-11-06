@@ -10,7 +10,7 @@
     xmlns:dgControls="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     Height="750" 
-    Width="1200"
+    Width="1250"
     IsOpen="{Binding EventModel.EditEventIsOpen}"
     ShowCloseButton="{Binding EventModel.ShowCloseButton}"
     Title="Edit Event">
@@ -43,13 +43,14 @@
     -->
     <StackPanel>
         <Grid
+            x:Name="eventGrid"
             Visibility="{Binding EventModel.EditAllEventsVisibility}"
             HorizontalAlignment="Center" 
             VerticalAlignment="Center" 
             Background="AliceBlue">
             <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="850"/>
-                    <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="850"/>
+                <ColumnDefinition Width="150"/>
             </Grid.ColumnDefinitions>
             <dgControls:DataGrid 
                 Grid.Column="0"
@@ -81,6 +82,12 @@
                         FontSize="12" 
                         FontWeight="Bold">
                     </dgControls:DataGridTextColumn>
+                    <dgControls:DataGridTextColumn 
+                        Visibility="{Binding ElementName=eventGrid, Path=DataContext.EventModel.IsPotaVisibility}"
+                        Header="Park Designator"
+                        Width="55"
+                        Binding="{Binding Pota.Designator, UpdateSourceTrigger=PropertyChanged}" 
+                        FontSize="12" />
                     <dgControls:DataGridTextColumn 
                         Header="DXCC"
                         Width="55"
@@ -180,8 +187,31 @@
                     <ColumnDefinition Width="120" />
                     <ColumnDefinition Width="230" />
                 </Grid.ColumnDefinitions>
-                <Label
+                <Label 
                     Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="10,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontWeight="Bold"
+                    FontFamily="Tahoma"
+                    Content="Event Type"/>
+                <ComboBox
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Width="220"
+                    Height="30"
+                    Margin="10,0,0,0"
+                    HorizontalAlignment="Left"
+                    x:Name="eventTypesCombo"
+                    SelectedItem="{Binding EventModel.ActiveEvent.EventType, Mode=TwoWay}"
+                    FontFamily="Tahoma"
+                    BorderThickness="1"
+                    ItemsSource="{Binding EventModel.EventTypeValues}">
+                </ComboBox>
+                <Label
+                    Visibility="{Binding EventModel.IsCustomVisibility}"
+                    Grid.Row="1"
                     Margin="10,0,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
@@ -189,7 +219,8 @@
                     FontFamily="Tahoma"
                     Content="Event Name"/>
                 <TextBox
-                    Grid.Row="0"
+                    Visibility="{Binding EventModel.IsCustomVisibility}"
+                    Grid.Row="1"
                     Grid.Column="1"
                     Width="220"
                     Height="30"
@@ -230,35 +261,7 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox> -->
                 <Label 
-                    Grid.Row="2"
-                    Grid.Column="0"
-                    Margin="10,0,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    FontWeight="Bold"
-                    FontFamily="Tahoma"
-                    Content="Active"/>
-                <Grid
-                    Grid.Row="2"
-                    Grid.Column="1"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="70" />
-                        <ColumnDefinition Width="70" />
-                    </Grid.ColumnDefinitions>
-                    <RadioButton 
-                        Grid.Column="0"
-                        GroupName="Group1" 
-                        IsChecked="{Binding EventModel.ActiveEvent.IsActive}" 
-                        Content="Yes" />
-                    <RadioButton
-                        Grid.Column="1"
-                        GroupName="Group1"  
-                        Content="No" 
-                        IsChecked="{Binding EventModel.ActiveEvent.IsActive, Converter={StaticResource BoolInverterConverter}}" />
-                </Grid>
-                <Label 
+                    Visibility="{Binding EventModel.IsCustomVisibility}"
                     Grid.Row="3"
                     Grid.Column="0"
                     Margin="10,0,0,0"
@@ -268,6 +271,7 @@
                     FontFamily="Tahoma"
                     Content="ARRL Section"/>
                 <ComboBox
+                    Visibility="{Binding EventModel.IsCustomVisibility}"
                     Grid.Row="3"
                     Grid.Column="1"
                     Width="220"
@@ -289,6 +293,7 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
                 <Label 
+                    Visibility="{Binding EventModel.IsCustomVisibility}"
                     Grid.Row="4"
                     Grid.Column="0"
                     Margin="10,0,0,0"
@@ -298,6 +303,7 @@
                     FontFamily="Tahoma"
                     Content="DXCC"/>
                 <ComboBox
+                    Visibility="{Binding EventModel.IsCustomVisibility}"
                     Grid.Row="4"
                     Grid.Column="1"
                     Width="220"
@@ -319,6 +325,7 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
                 <Label 
+                    Visibility="{Binding EventModel.IsCustomVisibility}"
                     Grid.Row="5"
                     Grid.Column="0"
                     Margin="10,0,0,0"
@@ -328,6 +335,7 @@
                     FontFamily="Tahoma"
                     Content="CQ Zone"/>
                 <ComboBox
+                    Visibility="{Binding EventModel.IsCustomVisibility}"
                     Grid.Row="5"
                     Grid.Column="1"
                     Width="220"
@@ -342,6 +350,7 @@
                     BorderThickness="1">
                 </ComboBox>
                 <Label 
+                    Visibility="{Binding EventModel.IsCustomVisibility}"
                     Grid.Row="6"
                     Grid.Column="0"
                     Margin="10,0,0,0"
@@ -351,6 +360,7 @@
                     FontFamily="Tahoma"
                     Content="ITU Zone (0-90)"/>
                 <TextBox
+                    Visibility="{Binding EventModel.IsCustomVisibility}"
                     Grid.Row="6"
                     Grid.Column="1"
                     Width="220"
@@ -362,6 +372,7 @@
                     controls:TextBoxHelper.ClearTextButton="True" >
                 </TextBox>
                 <Label 
+                    Visibility="{Binding EventModel.IsCustomVisibility}"
                     Grid.Row="7"
                     Grid.Column="0"
                     Margin="10,0,0,0"
@@ -371,6 +382,7 @@
                     FontFamily="Tahoma"
                     Content="Class"/>
                 <TextBox
+                    Visibility="{Binding EventModel.IsCustomVisibility}"
                     Grid.Row="7"
                     Grid.Column="1"
                     Width="220"
@@ -379,6 +391,52 @@
                     FontFamily="Tahoma"
                     Text="{Binding EventModel.ActiveEvent.Class}"
                     controls:TextBoxHelper.Watermark="Class" 
+                    controls:TextBoxHelper.ClearTextButton="True" >
+                </TextBox>
+                <!--    POTA    -->
+                <Label 
+                    Visibility="{Binding EventModel.IsPotaVisibility}"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="10,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontWeight="Bold"
+                    FontFamily="Tahoma"
+                    Content="Park Designator"/>
+                <TextBox
+                    Visibility="{Binding EventModel.IsPotaVisibility}"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Width="220"
+                    Height="30"
+                    Margin="10,0,0,0"
+                    FontFamily="Tahoma"
+                    CharacterCasing="Upper"
+                    Text="{Binding EventModel.ActiveEvent.Designator}"
+                    controls:TextBoxHelper.Watermark="ex: 'K-1234'" 
+                    controls:TextBoxHelper.ClearTextButton="True" >
+                </TextBox>
+                <Label 
+                    Visibility="{Binding EventModel.IsPotaVisibility}"
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Margin="10,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontWeight="Bold"
+                    FontFamily="Tahoma"
+                    Content="Park Name"/>
+                <TextBox
+                    Visibility="{Binding EventModel.IsPotaVisibility}"
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Width="220"
+                    Height="30"
+                    Margin="10,0,0,0"
+                    FontFamily="Tahoma"
+                    Text="{Binding EventModel.ActiveEvent.ParkName}"
+                    controls:TextBoxHelper.Watermark="Name" 
                     controls:TextBoxHelper.ClearTextButton="True" >
                 </TextBox>
             </Grid>
@@ -474,7 +532,7 @@
                 </TextBox>
             </Grid>
             <Button 
-                Grid.Row="1"
+                Grid.Row="2"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
                 Margin="0,0,20,0"

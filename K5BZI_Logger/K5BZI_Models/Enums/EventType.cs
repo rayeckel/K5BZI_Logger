@@ -4,12 +4,13 @@ using K5BZI_Models.Extensions;
 namespace K5BZI_Models.Enums
 {
     [TypeConverter(typeof(EnumDescriptionConverter))]
-    public enum Services
+    public enum EventType
     {
-        [Description("POTA")]
+        [Description("Parks On The Air")]
         PARKSONTHEAIR,
 
-        [Description("SOTA")]
+        /*
+        [Description("Summits On The Air")]
         SUMMITSONTHEAIR,
 
         [Description("Summer Field Day")]
@@ -18,7 +19,11 @@ namespace K5BZI_Models.Enums
         [Description("Winter Field Day")]
         WINTERFIELDDAY,
 
-        [Description("JOTA")]
+        [Description("Jamboree On The Air")]
         JAMBOREEONTHEAIR,
+        */
+
+        [Description("Custom")]
+        CUSTOM
     }
 }

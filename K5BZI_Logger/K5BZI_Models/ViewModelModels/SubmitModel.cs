@@ -18,16 +18,14 @@ namespace K5BZI_Models.ViewModelModels
 
         public LogType SelectedLogType { get; set; }
 
-        public Services SelectedService { get; set; }
-
         public IEnumerable<LogType> LogTypeValues
         {
             get { return Enum.GetValues(typeof(LogType)).Cast<LogType>(); }
         }
 
-        public IEnumerable<Services> ServiceValues
+        public IEnumerable<EventType> ServiceValues
         {
-            get { return Enum.GetValues(typeof(Services)).Cast<Services>(); }
+            get { return Enum.GetValues(typeof(EventType)).Cast<EventType>(); }
         }
 
         #endregion

@@ -233,6 +233,7 @@
                             HorizontalAlignment="Left"
                             HorizontalContentAlignment="Left"
                             BorderThickness="1"
+                            SelectedIndex="0"
                             ItemsSource= "{Binding BandValues}"
                             SelectedItem="{Binding LogEntry.Signal.Band}">
                             <i:Interaction.Triggers>
@@ -263,6 +264,7 @@
                         </ComboBox>
                     </StackPanel>
                     <StackPanel
+                        Visibility="{Binding IsLogitVisibility}"
                         Margin="5,0,0,0">
                         <Label
                             HorizontalAlignment="Left"
@@ -310,6 +312,7 @@
                             Text="{Binding LogEntry.Power, Mode=TwoWay}"/>
                     </StackPanel>
                     <StackPanel
+                        Visibility="{Binding IsLogitVisibility}"
                         Margin="5,0,0,0">
                         <Label 
                             HorizontalAlignment="Left"
@@ -332,6 +335,7 @@
                         </ComboBox>
                     </StackPanel>
                     <StackPanel
+                        Visibility="{Binding IsLogitVisibility}"
                         Margin="5,0,0,0">
                         <Label 
                             HorizontalAlignment="Left"
@@ -349,6 +353,7 @@
                             Text="{Binding LogEntry.Country, Mode=TwoWay}"/>
                     </StackPanel>
                     <StackPanel
+                        Visibility="{Binding IsLogitVisibility}"
                         Margin="5,0,0,0">
                         <Label 
                             HorizontalAlignment="Left"

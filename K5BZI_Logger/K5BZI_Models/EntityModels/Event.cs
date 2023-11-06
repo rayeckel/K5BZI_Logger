@@ -39,10 +39,11 @@ namespace K5BZI_Models
             }
         }
 
-        [JsonProperty(Required = Required.Always)]
         [Adif("CONTEST_ID")]
         [Cabrillo("CONTEST")]
         public string EventName { get; set; }
+
+        public EventType EventType { get; set; }
 
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         [Cabrillo("CLUB")]
@@ -63,7 +64,6 @@ namespace K5BZI_Models
 
         public bool IsDeleted { get; set; }
 
-        [JsonProperty(Required = Required.Always)]
         public string LogFileName { get; set; }
 
         [JsonProperty(Required = Required.Always)]
@@ -116,6 +116,38 @@ namespace K5BZI_Models
             get
             {
                 return Operators.Count;
+            }
+        }
+
+        [JsonIgnore]
+        private string _designator;
+        [JsonIgnore]
+        public string Designator
+        {
+            get
+            {
+                return _designator;
+            }
+            set
+            {
+                _designator = value;
+                LogFileName = $"{_designator.Replace(" ", "_")}_{CreatedDate.ToString("yyyy'-'MM'-'dd")}";
+            }
+        }
+
+        [JsonIgnore]
+        private string _parkName;
+        [JsonIgnore]
+        public string ParkName
+        {
+            get
+            {
+                return _parkName;
+            }
+            set
+            {
+                _parkName = value;
+                EventName = $"{_designator} {_parkName}";
             }
         }
     }

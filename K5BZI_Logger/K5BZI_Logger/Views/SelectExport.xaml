@@ -10,7 +10,7 @@
     xmlns:Converters="clr-namespace:K5BZI_Services.Utilities;assembly=K5BZI_Services"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     Height="750" 
-    Width="1200"
+    Width="1250"
     mc:Ignorable="d"
     IsOpen="{Binding IsOpen}"
     ShowCloseButton="{Binding ShowCloseButton}"

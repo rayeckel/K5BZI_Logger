@@ -98,6 +98,30 @@ namespace K5BZI_Models.ViewModelModels
 
         public Visibility AddToEventVisibility { get; set; }
 
+        public Visibility CreateNewOperatorVisibility
+        {
+            get
+            {
+                return Operators.Any() ? Visibility.Collapsed : Visibility.Visible;
+            }
+            set
+            {
+                return;
+            }
+        }
+
+        public Visibility NotCreateNewOperatorVisibility
+        {
+            get
+            {
+                return !Operators.Any() ? Visibility.Collapsed : Visibility.Visible;
+            }
+            set
+            {
+                return;
+            }
+        }
+
         public Visibility SelectOperatorVisibility
         {
             get
@@ -143,7 +167,7 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _selectOperatorCommand ??
-                    (_selectOperatorCommand = new DelegateCommand(SelectOperatorAction, _ => { return true; }));
+                    (_selectOperatorCommand = new DelegateCommand(SelectOperatorAction, _ => { return Operators.Any(); }));
             }
         }
         public Action<object> SelectOperatorAction { get; set; }

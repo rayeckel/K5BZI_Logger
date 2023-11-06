@@ -82,7 +82,8 @@ namespace K5BZI_ViewModels
         {
             if (OperatorModel.ActiveEvent == null) return;
 
-            if (OperatorModel.ShowEventOperators)
+            //ActiveEvent.EventName will be empty on first run of the app.
+            if (String.IsNullOrEmpty(OperatorModel.ActiveEvent.EventName) || OperatorModel.ShowEventOperators)
             {
                 if (!OperatorModel.ActiveEvent.Operators.Any())
                     OperatorModel.ViewSelectedOperator.IsActive = true;

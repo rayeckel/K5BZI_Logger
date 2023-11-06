@@ -2,13 +2,13 @@
     x:Class="K5BZI_Logger.Views.EditOperator"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
     Height="750" 
-    Width="1200"
+    Width="1250"
     mc:Ignorable="d"
     IsOpen="{Binding EditOperatorIsOpen}"
     ShowCloseButton="{Binding ShowCloseButton}"
@@ -30,11 +30,11 @@
         HorizontalAlignment="Center" 
         VerticalAlignment="Center" 
         Background="AliceBlue"
-        Height="500"
-        Width="600">
-        <Grid
-            Margin="0,20,0,0">
+        Height="520"
+        Width="550">
+        <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="70" />
                 <RowDefinition Height="40" />
                 <RowDefinition Height="40" />
                 <RowDefinition Height="40" />
@@ -44,18 +44,26 @@
                 <RowDefinition Height="40" />
                 <RowDefinition Height="40" />
                 <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
+                <RowDefinition Height="60" />
                 <RowDefinition Height="40" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150" />
-                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="200*" />
             </Grid.ColumnDefinitions>
+            <Image 
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Height="100"
+                Width="200"
+                Visibility="{Binding CreateNewOperatorVisibility}"
+                HorizontalAlignment="Center"
+                Source="../Images/add_operator.png"/>
             <Button 
                 Grid.Row="0"
                 Grid.Column="1"
+                Visibility="{Binding NotCreateNewOperatorVisibility}"
                 Margin="0,0,20,0"
                 Content="Select Existing"
                 Width="130"
@@ -249,8 +257,9 @@
                 Height="30"
                 Margin="20,0,0,0"
                 FontFamily="Tahoma"
+                CharacterCasing="Upper"
                 Text="{Binding ViewSelectedOperator.Country, Mode=OneWayToSource}"
-                controls:TextBoxHelper.Watermark="Country" 
+                controls:TextBoxHelper.Watermark="Country Abbr." 
                 controls:TextBoxHelper.ClearTextButton="True" >
             </TextBox>
             <Label 
@@ -278,8 +287,9 @@
             </TextBox>
             <Button 
                 Grid.Row="10"
-                Grid.Column="1"
-                Margin="0,0,20,0"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Margin="0,20,0,0"
                 Content="Save"
                 Width="100"
                 Height="30"

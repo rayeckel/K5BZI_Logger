@@ -55,6 +55,22 @@ namespace K5BZI_Models.ViewModelModels
 
         public ObservableCollection<Event> Events { get; private set; }
 
+        public Visibility IsPotaVisibility
+        {
+            get
+            {
+                return ActiveEvent?.EventType == EventType.PARKSONTHEAIR ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+
+        public Visibility IsCustomVisibility
+        {
+            get
+            {
+                return ActiveEvent?.EventType == EventType.CUSTOM ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+
         public Visibility SelectEventVisibility
         {
             get
@@ -102,6 +118,11 @@ namespace K5BZI_Models.ViewModelModels
         public IEnumerable<CqZone> CqZoneValues
         {
             get { return Enum.GetValues(typeof(CqZone)).Cast<CqZone>(); }
+        }
+
+        public IEnumerable<EventType> EventTypeValues
+        {
+            get { return Enum.GetValues(typeof(EventType)).Cast<EventType>(); }
         }
 
         #endregion
@@ -192,7 +213,7 @@ namespace K5BZI_Models.ViewModelModels
             {
                 return _createNewEventCommand ??
                     (_createNewEventCommand =
-                        new DelegateCommand(CreateNewEventAction, _ => { return !String.IsNullOrEmpty(NewEventName); }));
+                        new DelegateCommand(CreateNewEventAction, _ => { return true; }));
             }
         }
         public Action<object> CreateNewEventAction { get; set; }

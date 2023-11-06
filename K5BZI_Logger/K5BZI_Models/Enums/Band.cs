@@ -6,6 +6,9 @@ namespace K5BZI_Models.Enums
     [TypeConverter(typeof(EnumDescriptionConverter))]
     public enum Band
     {
+        [Description("SELECT")]
+        SELECT,
+
         [Description("630m")]
         SIXTHIRTYMETERS,
 

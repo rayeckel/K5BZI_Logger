@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using K5BZI_Models;
+using K5BZI_Models.Enums;
 using K5BZI_Models.ViewModelModels;
 using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels.Interfaces;
@@ -85,8 +86,7 @@ namespace K5BZI_ViewModels
                 Id = Guid.NewGuid(),
                 IsActive = true,
                 EventName = EventModel.NewEventName,
-                CreatedDate = DateTime.Now,
-                LogFileName = $"{EventModel.NewEventName.Replace(" ", "_")}_{DateTime.UtcNow.ToString("yyyy'-'MM'-'dd")}",
+                CreatedDate = DateTime.Now
             };
 
             EventModel.Events.Add(newEvent);
@@ -126,6 +126,17 @@ namespace K5BZI_ViewModels
 
         private async Task UpdateEventAsync()
         {
+            if (String.IsNullOrEmpty(EventModel.ActiveEvent.EventName) ||
+                String.IsNullOrEmpty(EventModel.ActiveEvent.LogFileName))
+            {
+                if (EventModel.ActiveEvent.EventType == EventType.PARKSONTHEAIR)
+                    MessageBox.Show("Please provide a Park name AND Designator");
+                else
+                    MessageBox.Show("Please provide an event name.");
+
+                return;
+            }
+
             if (!EventModel.ActiveEvent.Operators.Any())
             {
                 MessageBox.Show("Please add at least one operator to the event.", "Invalid input");
