@@ -23,6 +23,9 @@ namespace K5BZI_Models.Enums
         JAMBOREEONTHEAIR,
         */
 
+        [Description("Eleven Meters")]
+        ELEVENMETERS,
+
         [Description("Custom")]
         CUSTOM
     }

@@ -12,8 +12,8 @@
     Height="750" 
     Width="1250"
     mc:Ignorable="d"
-    IsOpen="{Binding IsOpen}"
-    ShowCloseButton="{Binding ShowCloseButton}"
+    IsOpen="{Binding ExportModel.IsOpen}"
+    ShowCloseButton="{Binding ExportModel.ShowCloseButton}"
     Title="Select Log">
     <!--
     <simpleChildWindow:ChildWindow.OverlayBrush>
@@ -45,14 +45,14 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="30" />
                 <RowDefinition Height="50" />
-                <RowDefinition Height="40" />
+                <RowDefinition Height="30" />
                 <RowDefinition Height="30" />
                 <RowDefinition Height="50" />
-                <RowDefinition Height="50" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="40" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="350" />
             </Grid.ColumnDefinitions>
             <Label
                 Grid.Row="0"
@@ -71,7 +71,7 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 x:Name="existingLogsCombo"
-                SelectedItem="{Binding SelectedExport, Mode=TwoWay}"
+                SelectedItem="{Binding ExportModel.SelectedExport, Mode=TwoWay}"
                 FontFamily="Tahoma"
                 BorderThickness="1"
                 ItemsSource="{Binding Source={StaticResource LogTypeEnumValues}}">
@@ -81,9 +81,41 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
+            <Label
+                Grid.Row="3"
+                Margin="15,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                FontWeight="Bold"
+                FontFamily="Tahoma"
+                Content="Select Operator"/>
+            <ComboBox
+                Grid.Row="4"
+                Grid.Column="0"
+                Height="30"
+                Width="300" 
+                Margin="20,20,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                x:Name="selectOperatorCombo"
+                SelectedItem="{Binding ExportModel.SelectedOperator, Mode=TwoWay}"
+                FontFamily="Tahoma"
+                BorderThickness="1"
+                ItemsSource="{Binding OperatorModel.Operators}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding CallSign}" FontWeight="Bold"/>
+                            <TextBlock Text=" - " />
+                            <TextBlock Text="{Binding FullName}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
             <Button
-                Grid.Row="2"
-                Grid.Column="1"
+                Grid.Row="6"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
                 Margin="0,0,20,0"
                 Content="Select"
                 Width="100"
@@ -92,7 +124,7 @@
                 FontFamily="Tahoma"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Bottom"
-                Command="{Binding SelectExportCommand}"/>
+                Command="{Binding ExportModel.SelectExportCommand}"/>
         </Grid>
     </Grid>
 </simpleChildWindow:ChildWindow>

@@ -17,6 +17,7 @@ namespace K5BZI_Models
         public bool IsActive { get; set; }
 
         [JsonProperty(Required = Required.Always)]
+        [Adif("OPERATOR")]
         [Cabrillo("CALLSIGN")]
         public string CallSign { get; set; }
 

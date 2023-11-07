@@ -18,20 +18,23 @@ namespace K5BZI_Services.Services
             _fileStoreService = fileStoreService;
         }
 
-        public void ExportLog(Event evntLog, ICollection<LogEntry> logEntries, LogType logType)
+        public void ExportLog(
+            Event eventLog,
+            IEnumerable<LogEntry> logEntries,
+            LogType logType)
         {
             switch (logType)
             {
                 case LogType.ADIF:
-                    ExportToAdif(evntLog, logEntries);
+                    ExportToAdif(eventLog, logEntries);
                     break;
                 case LogType.CABRILLO:
-                    ExportToCabrillo(evntLog, logEntries);
+                    ExportToCabrillo(eventLog, logEntries);
                     break;
             }
         }
 
-        private async void ExportToAdif(Event currentEvent, ICollection<LogEntry> logEntries)
+        private async void ExportToAdif(Event currentEvent, IEnumerable<LogEntry> logEntries)
         {
             var header = String.Format(
                 "ADIF Export from K5BZI Logger version {0} {1}Copyright (C) 2020 - Ray Eckel K5BZI{2}Log exported on: {3}{4}{5}{6}{7}{8}{9}{10}{11}{12}{13}",
@@ -94,6 +97,25 @@ namespace K5BZI_Services.Services
                     recordLine += line;
                 };
 
+                var operatorProperties = from p in entry.Operator.GetType().GetProperties()
+                                         let attr = p.GetCustomAttributes(typeof(AdifAttribute), true)
+                                         where attr.Length == 1
+                                         select new { Property = p, Attribute = attr.First() as AdifAttribute };
+
+                foreach (var operatorProp in operatorProperties)
+                {
+                    var value = operatorProp.Property.GetValue(entry.Operator)?.ToString();
+
+                    if (value == null)
+                    {
+                        continue;
+                    }
+
+                    var line = String.Format("<{0}:{1}>{2}", operatorProp.Attribute.PropertyName, value.Length, value);
+
+                    recordLine += line;
+                };
+
                 var signalProperties = from p in entry.Signal.GetType().GetProperties()
                                        let attr = p.GetCustomAttributes(typeof(AdifAttribute), true)
                                        where attr.Length == 1
@@ -138,14 +160,14 @@ namespace K5BZI_Services.Services
 
             var logFileName = currentEvent.EventType != EventType.PARKSONTHEAIR ?
                 currentEvent.LogFileName :
-                $"{currentEvent.Operators.First(_ => _.IsActive)}@{currentEvent.Designator}-{currentEvent.CreatedDate}";
+                $"{logEntries.First().Operator.CallSign}@{currentEvent.Designator}-{currentEvent.CreatedDate.ToString("MMddyyyy")}";
 
             await _fileStoreService.WriteToFile(adifData.ToString(), logFileName, FileExtensions.Adif);
 
             _fileStoreService.OpenEventDirectory();
         }
 
-        private async void ExportToCabrillo(Event eventLog, ICollection<LogEntry> logEntries)
+        private async void ExportToCabrillo(Event currentEvent, IEnumerable<LogEntry> logEntries)
         {
             var headerString = String.Format(
                 "START-OF-LOG: {0}{1}CREATED-BY: K5BZI Logger version {2}{3}{3}{3}",
@@ -156,14 +178,14 @@ namespace K5BZI_Services.Services
 
             var cabrilloData = new StringBuilder(headerString);
 
-            var eventProperties = from p in eventLog.GetType().GetProperties()
+            var eventProperties = from p in currentEvent.GetType().GetProperties()
                                   let attr = p.GetCustomAttributes(typeof(CabrilloAttribute), true)
                                   where attr.Length == 1
                                   select new { Property = p, Attribute = attr.First() as CabrilloAttribute };
 
             foreach (var eventProp in eventProperties)
             {
-                var value = eventProp.Property.GetValue(eventLog) as string;
+                var value = eventProp.Property.GetValue(currentEvent) as string;
 
                 if (value == null)
                 {
@@ -194,7 +216,10 @@ namespace K5BZI_Services.Services
 
             cabrilloData.AppendLine(String.Format("{0}END-OF-LOG:{0}", Environment.NewLine));
 
-            await _fileStoreService.WriteToFile(cabrilloData.ToString(), eventLog.LogFileName, FileExtensions.Cabrillo);
+            var logFileName = $"{logEntries.First().Operator.CallSign}_{currentEvent.EventType}_{currentEvent.CreatedDate.ToString("MMddyyyy")}";
+
+
+            await _fileStoreService.WriteToFile(cabrilloData.ToString(), logFileName, FileExtensions.Cabrillo);
 
             _fileStoreService.OpenEventDirectory();
         }

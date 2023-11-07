@@ -121,7 +121,7 @@ namespace K5BZI_Models
 
         [JsonIgnore]
         private string _designator;
-        [JsonIgnore]
+
         public string Designator
         {
             get
@@ -137,7 +137,7 @@ namespace K5BZI_Models
 
         [JsonIgnore]
         private string _parkName;
-        [JsonIgnore]
+
         public string ParkName
         {
             get

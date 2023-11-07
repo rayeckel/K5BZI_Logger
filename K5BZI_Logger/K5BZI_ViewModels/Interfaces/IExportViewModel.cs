@@ -4,6 +4,6 @@ namespace K5BZI_ViewModels.Interfaces
 {
     public interface IExportViewModel
     {
-        SelectExportModel Model { get; }
+        SelectExportModel ExportModel { get; }
     }
 }

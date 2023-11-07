@@ -1,4 +1,5 @@
-﻿using K5BZI_Models.ViewModelModels;
+﻿using System.Linq;
+using K5BZI_Models.ViewModelModels;
 using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels.Interfaces;
 
@@ -8,7 +9,7 @@ namespace K5BZI_ViewModels
     {
         #region Properties
 
-        public SelectExportModel Model { get; private set; }
+        public SelectExportModel ExportModel { get; private set; }
         private readonly IExportService _exportService;
         private readonly IEventViewModel _eventViewModel;
         private readonly ILogViewModel _logViewModel;
@@ -35,7 +36,7 @@ namespace K5BZI_ViewModels
 
         private void Initialize()
         {
-            Model = new SelectExportModel
+            ExportModel = new SelectExportModel
             {
                 SelectExportAction = (_) => ChangeExport()
             };
@@ -45,18 +46,18 @@ namespace K5BZI_ViewModels
 
         public void SelectLog()
         {
-            Model.ShowCloseButton = true;
-            Model.IsOpen = true;
+            ExportModel.ShowCloseButton = true;
+            ExportModel.IsOpen = true;
         }
 
         private void ChangeExport()
         {
-            Model.IsOpen = false;
+            ExportModel.IsOpen = false;
 
             _exportService.ExportLog(
                 _eventViewModel.EventModel.ActiveEvent,
-                _logViewModel.LogModel.LogEntries,
-                Model.SelectedExport);
+                _logViewModel.LogModel.LogEntries.Where(_ => _.Operator.CallSign == ExportModel.SelectedOperator.CallSign),
+                ExportModel.SelectedExport);
         }
 
         #endregion
