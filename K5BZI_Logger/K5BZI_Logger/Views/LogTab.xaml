@@ -17,35 +17,27 @@
         <extensions:BindingProxy x:Key="DataContextProxy" Data="{Binding}" />
     </Controls:MetroTabItem.Resources>
     <Controls:MetroTabItem.Header>
-            <StackPanel Orientation="Horizontal">
-                <Image 
+        <StackPanel Orientation="Horizontal">
+            <Image 
                     Source="/Images/Quill.png"
                     Height="24"
                     Width="24"/>
-                <TextBlock
+            <TextBlock
                     Text="Event Log" 
                     Foreground="DarkSlateBlue"
                     FontSize="18"
                     FontFamily="Tahoma"
                     VerticalAlignment="Bottom"/>
-            </StackPanel>
-        </Controls:MetroTabItem.Header>
-
+        </StackPanel>
+    </Controls:MetroTabItem.Header>
     <Controls:MetroTabItem.Content>
-        <Grid
-            HorizontalAlignment="Stretch"
-            MinWidth="1050">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-
+        <Grid Width="1080">
             <dgControls:DataGrid 
                     IsTabStop="False"
                     x:Name="dataGrid1" 
                     Height="250"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
-
                     BorderBrush="Navy"
                     AutoGenerateColumns="False"
                     ItemsSource="{Binding LogModel.LogEntries}"

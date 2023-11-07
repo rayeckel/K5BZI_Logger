@@ -45,7 +45,7 @@ namespace K5BZI_ViewModels
 
         #endregion
 
-        #region private Methods
+        #region Private Methods
 
         private void Initialize()
         {

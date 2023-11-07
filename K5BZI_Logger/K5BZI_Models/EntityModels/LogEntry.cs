@@ -12,6 +12,7 @@ namespace K5BZI_Models
     {
         public LogEntry()
         {
+            Id = Guid.NewGuid();
             Signal = new Signal();
             SignalReport = new SignalReport();
             Operator = new Operator();
@@ -98,7 +99,7 @@ namespace K5BZI_Models
         public Operator Operator { get; set; }
 
         [JsonProperty(Required = Required.Always)]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [JsonProperty(Required = Required.Always)]
         public Guid EventId { get; set; }
