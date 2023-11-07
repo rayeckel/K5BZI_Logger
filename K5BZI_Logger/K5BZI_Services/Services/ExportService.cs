@@ -11,12 +11,22 @@ namespace K5BZI_Services.Services
 {
     public class ExportService : IExportService
     {
+        #region Properties
+
         private readonly IFileStoreService _fileStoreService;
+
+        #endregion
+
+        #region Constructors
 
         public ExportService(IFileStoreService fileStoreService)
         {
             _fileStoreService = fileStoreService;
         }
+
+        #endregion
+
+        #region Public Methods
 
         public void ExportLog(
             Event eventLog,
@@ -33,6 +43,10 @@ namespace K5BZI_Services.Services
                     break;
             }
         }
+
+        #endregion
+
+        #region Private Methods
 
         private async void ExportToAdif(Event currentEvent, IEnumerable<LogEntry> logEntries)
         {
@@ -223,5 +237,7 @@ namespace K5BZI_Services.Services
 
             _fileStoreService.OpenEventDirectory();
         }
+
+        #endregion
     }
 }
