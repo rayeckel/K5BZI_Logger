@@ -6,9 +6,6 @@ namespace K5BZI_Models.Extensions
     {
         public static void ClearProperties(this LogEntry logEntry, bool contactTimeEnabled)
         {
-            var entryId = logEntry.Id;
-
-            logEntry.Id = entryId + 1;
             logEntry.CallSign = string.Empty;
             logEntry.SignalReport.Sent = "599";
             logEntry.SignalReport.Received = "599";
