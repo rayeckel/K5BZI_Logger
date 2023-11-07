@@ -9,8 +9,8 @@ namespace K5BZI_Models.Extensions
             logEntry.CallSign = string.Empty;
             logEntry.SignalReport.Sent = "599";
             logEntry.SignalReport.Received = "599";
-            logEntry.CQZone = String.Empty;
-            logEntry.Notes = String.Empty;
+            logEntry.CQZone = null;
+            logEntry.Notes = null;
 
             if (!contactTimeEnabled)
                 logEntry.ContactTime = DateTime.Now;

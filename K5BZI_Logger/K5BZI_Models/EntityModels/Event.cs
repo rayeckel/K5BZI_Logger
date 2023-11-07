@@ -122,6 +122,7 @@ namespace K5BZI_Models
         [JsonIgnore]
         private string _designator;
 
+        [Adif("MY_SIG_INFO")]
         public string Designator
         {
             get
@@ -149,6 +150,13 @@ namespace K5BZI_Models
                 _parkName = value;
                 EventName = $"{_designator} {_parkName}";
             }
+        }
+
+        [Adif("MY_SIG")]
+        [JsonIgnore]
+        public string MySig
+        {
+            get { return EventType == EventType.PARKSONTHEAIR ? "POTA" : null; }
         }
     }
 }

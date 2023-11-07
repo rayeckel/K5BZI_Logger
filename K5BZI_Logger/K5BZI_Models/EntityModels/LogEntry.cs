@@ -84,7 +84,6 @@ namespace K5BZI_Models
         public string QslReceived { get; set; }
 
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        [Adif("SIG_INFO")]
         public string Notes { get; set; }
 
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
@@ -108,5 +107,15 @@ namespace K5BZI_Models
         public Signal Signal { get; set; }
 
         public SignalReport SignalReport { get; set; }
+
+        [Adif("SIG")]
+        [JsonIgnore]
+        public string Sig
+        {
+            get { return !String.IsNullOrEmpty(SigInfo) ? "POTA" : null; }
+        }
+
+        [Adif("SIG_INFO")]
+        public string SigInfo { get; set; }
     }
 }
