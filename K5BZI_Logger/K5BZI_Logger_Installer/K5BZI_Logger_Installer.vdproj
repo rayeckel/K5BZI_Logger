@@ -105,6 +105,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_04B2A32F31EA9836EF5A1F9922687A32"
+        "OwnerKey" = "8:_F4EC89AC7CF243488ED469A4D1E0BDD0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_05A51A1E4DAC7A4BADBF6DCDC61FA21C"
         "OwnerKey" = "8:_F4EC89AC7CF243488ED469A4D1E0BDD0"
         "MsmSig" = "8:_UNDEFINED"
@@ -412,6 +418,18 @@
         "Entry"
         {
         "MsmKey" = "8:_34E2A6D56AC3D6DEC4574CE686D23CFD"
+        "OwnerKey" = "8:_F4EC89AC7CF243488ED469A4D1E0BDD0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_34E2B8376225A509D01E7A4834FCCCC3"
+        "OwnerKey" = "8:_2EE68839A832DF246F04CBA1C2C84350"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_34E2B8376225A509D01E7A4834FCCCC3"
         "OwnerKey" = "8:_F4EC89AC7CF243488ED469A4D1E0BDD0"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1727,6 +1745,18 @@
         {
         "MsmKey" = "8:_93C8853192032754CA7F795E5AF85B23"
         "OwnerKey" = "8:_BA9383C29EF1961714BCD6BF0F077362"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_93CC61B86BC22E0FF9E60469E9A6678D"
+        "OwnerKey" = "8:_04B2A32F31EA9836EF5A1F9922687A32"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_93CC61B86BC22E0FF9E60469E9A6678D"
+        "OwnerKey" = "8:_F4EC89AC7CF243488ED469A4D1E0BDD0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -3220,6 +3250,18 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_04B2A32F31EA9836EF5A1F9922687A32"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_93CC61B86BC22E0FF9E60469E9A6678D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_DFF4D5FDC1EF1E6B784CE57A1CE48132"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -3251,6 +3293,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_2EE68839A832DF246F04CBA1C2C84350"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_34E2B8376225A509D01E7A4834FCCCC3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -4249,6 +4297,37 @@
                     }
                 }
             "SourcePath" = "8:System.IO.IsolatedStorage.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_109023C456F64801B81EFE3F4C1B018D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_04B2A32F31EA9836EF5A1F9922687A32"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:CalcBinding, Version=2.5.2.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_04B2A32F31EA9836EF5A1F9922687A32"
+                    {
+                    "Name" = "8:CalcBinding.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:CalcBinding.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_109023C456F64801B81EFE3F4C1B018D"
@@ -5272,6 +5351,37 @@
                     }
                 }
             "SourcePath" = "8:ExcelDataReader.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_109023C456F64801B81EFE3F4C1B018D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_34E2B8376225A509D01E7A4834FCCCC3"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Prism, Version=8.1.97.5141, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_34E2B8376225A509D01E7A4834FCCCC3"
+                    {
+                    "Name" = "8:Prism.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Prism.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_109023C456F64801B81EFE3F4C1B018D"
@@ -8068,6 +8178,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_93CC61B86BC22E0FF9E60469E9A6678D"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:DynamicExpresso.Core, Version=2.3.1.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_93CC61B86BC22E0FF9E60469E9A6678D"
+                    {
+                    "Name" = "8:DynamicExpresso.Core.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:DynamicExpresso.Core.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_109023C456F64801B81EFE3F4C1B018D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_94126ABBB6244342404A8E581C33F211"
             {
             "AssemblyRegister" = "3:1"
@@ -10387,15 +10528,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:K5BZI Logger"
-        "ProductCode" = "8:{53C6817B-9181-45F9-8A23-41C856A93D39}"
-        "PackageCode" = "8:{6677AF85-0CAC-4B84-97E9-F8164A3BE933}"
+        "ProductCode" = "8:{83689565-051A-470C-8360-1C34B47B288D}"
+        "PackageCode" = "8:{5149A6EF-DD57-45F2-8722-831E3292077B}"
         "UpgradeCode" = "8:{C8E1F4B3-E14B-45AA-9E54-62A9243ED338}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.11"
+        "ProductVersion" = "8:1.0.12"
         "Manufacturer" = "8:K5BZI"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -10937,7 +11078,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_F4EC89AC7CF243488ED469A4D1E0BDD0"
             {
-            "SourcePath" = "8:..\\K5BZI_Logger\\obj\\Debug\\K5BZI_Logger.exe"
+            "SourcePath" = "8:..\\K5BZI_Logger\\obj\\Release\\K5BZI_Logger.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_109023C456F64801B81EFE3F4C1B018D"

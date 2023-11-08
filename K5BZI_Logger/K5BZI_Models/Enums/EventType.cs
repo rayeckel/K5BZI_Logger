@@ -21,11 +21,11 @@ namespace K5BZI_Models.Enums
 
         [Description("Jamboree On The Air")]
         JAMBOREEONTHEAIR,
-        */
+
 
         [Description("Eleven Meters")]
         ELEVENMETERS,
-
+                        */
         [Description("Custom")]
         CUSTOM
     }

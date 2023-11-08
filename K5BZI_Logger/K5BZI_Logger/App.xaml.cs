@@ -14,7 +14,7 @@ namespace K5BZI_Logger
     /// </summary>
     public partial class App : Application
     {
-        public static string Version = "1.0.11";
+        public static string Version = "1.0.12";
 
         public static IServiceProvider ServiceProvider { get; private set; }
 
