@@ -128,6 +128,11 @@
                             Binding="{Binding Power, UpdateSourceTrigger=PropertyChanged}"
                             FontSize="12" />
                     <dgControls:DataGridTextColumn
+                            Header="P2P"
+                            Width="65"
+                            Binding="{Binding SigInfo, UpdateSourceTrigger=PropertyChanged}"
+                            FontSize="12" />
+                    <dgControls:DataGridTextColumn
                             Header="Assisted"
                             Width="75"
                             Binding="{Binding Assisted, UpdateSourceTrigger=PropertyChanged}"
@@ -141,13 +146,13 @@
                             Header="QSL Recvd"
                             Width="85"
                             Binding="{Binding QslReceived, UpdateSourceTrigger=PropertyChanged}"
-                            FontSize="12" />-->
+                            FontSize="12" />
                     <dgControls:DataGridTextColumn
                             Visibility="{Binding Data.LogModel.CountryVisibility, Source={StaticResource DataContextProxy}, UpdateSourceTrigger=PropertyChanged}"
                             Header="Cntry"
                             Width="60"
                             Binding="{Binding Country, UpdateSourceTrigger=PropertyChanged}"
-                            FontSize="12" />
+                            FontSize="12" /> -->
                     <dgControls:DataGridTextColumn
                             Visibility="{Binding Data.LogModel.ContinentVisibility, Source={StaticResource DataContextProxy}, UpdateSourceTrigger=PropertyChanged}"
                             Header="Cont"

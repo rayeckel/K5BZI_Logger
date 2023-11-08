@@ -155,6 +155,9 @@ namespace K5BZI_ViewModels
 
         private void EditOperators(bool eventOnly = false)
         {
+            OperatorModel.SetActiveVisibility = eventOnly ? Visibility.Visible : Visibility.Hidden;
+            OperatorModel.AddToEventVisibility = eventOnly ? Visibility.Hidden : Visibility.Visible;
+
             if (OperatorModel.IsOpen) // If the user clicked the "Select Existing" button
             {
                 OperatorModel.IsOpen = false;

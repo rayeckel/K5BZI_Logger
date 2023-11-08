@@ -390,8 +390,7 @@
                     Margin="10,0,0,0"
                     FontFamily="Tahoma"
                     Text="{Binding EventModel.ActiveEvent.Class}"
-                    controls:TextBoxHelper.Watermark="Class" 
-                    controls:TextBoxHelper.ClearTextButton="True" >
+                    controls:TextBoxHelper.Watermark="Class"  >
                 </TextBox>
                 <!--    POTA    -->
                 <Label 
@@ -414,8 +413,7 @@
                     FontFamily="Tahoma"
                     CharacterCasing="Upper"
                     Text="{Binding EventModel.ActiveEvent.Designator}"
-                    controls:TextBoxHelper.Watermark="ex: 'K-1234'" 
-                    controls:TextBoxHelper.ClearTextButton="True" >
+                    controls:TextBoxHelper.Watermark="ex: K-1234" >
                 </TextBox>
                 <Label 
                     Visibility="{Binding EventModel.IsPotaVisibility}"
@@ -436,8 +434,7 @@
                     Margin="10,0,0,0"
                     FontFamily="Tahoma"
                     Text="{Binding EventModel.ActiveEvent.ParkName}"
-                    controls:TextBoxHelper.Watermark="Name" 
-                    controls:TextBoxHelper.ClearTextButton="True" >
+                    controls:TextBoxHelper.Watermark="Name" >
                 </TextBox>
             </Grid>
             <Grid 

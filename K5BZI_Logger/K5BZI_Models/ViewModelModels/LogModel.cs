@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
+using K5BZI_Models.Base;
 using K5BZI_Models.Enums;
 using Microsoft.VisualStudio.PlatformUI;
 using PropertyChanged;
@@ -12,7 +13,7 @@ using PropertyChanged;
 namespace K5BZI_Models.ViewModelModels
 {
     [AddINotifyPropertyChangedInterface]
-    public class LogModel
+    public class LogModel : BaseViewModel
     {
         #region Constructors
 
@@ -44,6 +45,7 @@ namespace K5BZI_Models.ViewModelModels
         public Visibility ContinentVisibility { get; set; }
         public Visibility CQZoneVisibility { get; set; }
         public Visibility IsLogitVisibility { get; set; }
+        public Visibility IsPotaVisibility { get; set; } = Visibility.Visible;
         public IEnumerable<Band> BandValues
         {
             get { return Enum.GetValues(typeof(Band)).Cast<Band>(); }
@@ -174,6 +176,40 @@ namespace K5BZI_Models.ViewModelModels
             }
         }
         public Action<object> FrequencyChangeAction { get; set; }
+
+        private ICommand _addAnotherP2PCommand;
+        public ICommand AddAnotherP2PCommand
+        {
+            get
+            {
+                return _addAnotherP2PCommand ?? (_addAnotherP2PCommand =
+                    new DelegateCommand(AddAnotherP2PAction, _ => { return true; }));
+            }
+        }
+        public Action<object> AddAnotherP2PAction { get; set; }
+
+
+        private ICommand _park2ParkCommand;
+        public ICommand Park2ParkCommand
+        {
+            get
+            {
+                return _park2ParkCommand ?? (_park2ParkCommand =
+                    new DelegateCommand(Park2ParkAction, _ => { return true; }));
+            }
+        }
+        public Action<object> Park2ParkAction { get; set; }
+
+        private ICommand _createNewPark2ParkCommand;
+        public ICommand CreateNewPark2ParkCommand
+        {
+            get
+            {
+                return _createNewPark2ParkCommand ?? (_createNewPark2ParkCommand =
+                    new DelegateCommand(CreateNewPark2ParkAction, _ => { return true; }));
+            }
+        }
+        public Action<object> CreateNewPark2ParkAction { get; set; }
 
         #endregion
     }

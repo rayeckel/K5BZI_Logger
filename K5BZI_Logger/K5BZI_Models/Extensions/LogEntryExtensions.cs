@@ -11,6 +11,7 @@ namespace K5BZI_Models.Extensions
             logEntry.SignalReport.Received = "599";
             logEntry.CQZone = null;
             logEntry.Notes = null;
+            logEntry.SigInfo = null;
 
             if (!contactTimeEnabled)
                 logEntry.ContactTime = DateTime.Now;
@@ -34,6 +35,7 @@ namespace K5BZI_Models.Extensions
                 EventId = logEntry.EventId,
                 CQZone = logEntry.CQZone,
                 Notes = logEntry.Notes,
+                SigInfo = logEntry.SigInfo
             };
 
             clone.Signal.Band = logEntry.Signal.Band;

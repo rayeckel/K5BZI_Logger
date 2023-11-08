@@ -9,6 +9,9 @@ namespace K5BZI_Models.Enums
         [Description("CW")]
         CW,
 
+        [Description("SSB")]
+        SSB,
+
         [Description("DIGI")]
         DG,
 
@@ -18,8 +21,17 @@ namespace K5BZI_Models.Enums
         [Description("RTTY")]
         RTTY,
 
-        [Description("SSB")]
-        SSB,
+        [Description("FT8")]
+        FT8,
+
+        [Description("FT4")]
+        FT4,
+
+        [Description("PSK31")]
+        PSK31,
+
+        [Description("SSTV")]
+        SSTV,
 
         [Description("Mixed")]
         MIXED

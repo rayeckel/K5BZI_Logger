@@ -59,6 +59,9 @@ namespace K5BZI_ViewModels
                 CheckDuplicateEntriesAction = (_) => CheckForDuplicates(),
                 BandChangeAction = (_) => OnBandChanged(),
                 FrequencyChangeAction = (_) => OnFrequencyChanged(),
+                Park2ParkAction = (_) => OnPark2ParkClicked(),
+                AddAnotherP2PAction = async (_) => await AddAnotherP2P(),
+                CreateNewPark2ParkAction = (_) => CreateNewPark2Park(),
             };
 
             _defaultsService.SetDefaults(LogModel.LogEntry);
@@ -110,7 +113,7 @@ namespace K5BZI_ViewModels
             LogModel.CQZoneVisibility = LogModel.LogEntries.Any(_ => !String.IsNullOrEmpty(_.CQZone)) ? Visibility.Visible : Visibility.Collapsed;
         }
 
-        public void CreateNewLog(Event newEvent)
+        private void CreateNewLog(Event newEvent)
         {
             LogModel.LogFileName = newEvent.LogFileName;
             LogModel.LogEntries.Clear();
@@ -281,6 +284,43 @@ namespace K5BZI_ViewModels
                 _logService.SaveLogAsync(LogModel.LogEntries.ToList(), LogModel.LogFileName);
             }
         }
+
+        private void OnPark2ParkClicked()
+        {
+            LogModel.IsOpen = true;
+        }
+
+        public async Task AddAnotherP2P()
+        {
+            if (!LogModel.LogEntry.SigInfo.Contains('-'))
+            {
+                MessageBox.Show("Please provide park number in this format: 'K-1234' ");
+                return;
+            }
+
+            var tempLogEntry = LogModel.LogEntry.Clone();
+
+            await SaveLogEntryAsync();
+
+            LogModel.LogEntry.CallSign = tempLogEntry.CallSign;
+            LogModel.LogEntry.ContactTime = tempLogEntry.ContactTime;
+            LogModel.LogEntry.SignalReport = tempLogEntry.SignalReport;
+            LogModel.LogEntry.Signal = tempLogEntry.Signal;
+            LogModel.LogEntry.Notes = tempLogEntry.Notes;
+            LogModel.LogEntry.Power = tempLogEntry.Power;
+        }
+
+        public void CreateNewPark2Park()
+        {
+            if (!LogModel.LogEntry.SigInfo.Contains('-'))
+            {
+                MessageBox.Show("Please provide park number in this format: 'K-1234' ");
+                return;
+            }
+
+            LogModel.IsOpen = false;
+        }
+
         #endregion
     }
 }

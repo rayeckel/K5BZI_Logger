@@ -153,24 +153,22 @@
                             </i:Interaction.Triggers>
                         </TextBox>
                     </StackPanel>
-                    <StackPanel
-                        Margin="5,0,0,0">
-                        <Label 
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            FontFamily="Tahoma"
-                            Foreground="DarkSlateBlue"
-                            Content="Notes"/>
-                        <TextBox
-                            TabIndex="3"
-                            Height="27"
-                            x:Name="notes"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"                  
-                            Width="195"
-                            BorderThickness="1"
-                            Text="{Binding LogEntry.Notes, Mode=TwoWay}"/>
-                    </StackPanel>
+                    <Button 
+                        Visibility="{Binding IsPotaVisibility}"
+                        TabIndex="3"
+                        Margin="50,0,10,0"
+                        Content="Park2Park"
+                        Width="100"
+                        Height="28"
+                        FontSize="12"
+                        Foreground="White"
+                        Background="SteelBlue"
+                        FontFamily="Tahoma"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        IsDefault="True"
+                        Click="SetFocusOnClick"
+                        Command="{Binding Park2ParkCommand}"/>
                     <Button 
                         TabIndex="4"
                         Margin="50,0,10,0"
@@ -181,7 +179,7 @@
                         Foreground="White"
                         Background="SteelBlue"
                         FontFamily="Tahoma"
-                        HorizontalAlignment="Center"
+                        HorizontalAlignment="Right"
                         VerticalAlignment="Bottom"
                         IsDefault="True"
                         Click="SetFocusOnClick"
@@ -225,7 +223,7 @@
                             Content="Band"/>
                         <ComboBox 
                             x:Name="BandSelector"
-                            Width="80"
+                            Width="75"
                             IsTabStop="False"
                             Height="27"
                             FontSize="12" 
@@ -253,7 +251,7 @@
                             Content="Mode"/>
                         <ComboBox 
                             x:Name="ModeSelector"
-                            Width="65"
+                            Width="68"
                             FontSize="12" 
                             Background="White"
                             HorizontalAlignment="Left"
@@ -262,6 +260,24 @@
                             ItemsSource= "{Binding ModeValues}"
                             SelectedItem="{Binding LogEntry.Signal.Mode}">
                         </ComboBox>
+                    </StackPanel>
+                    <StackPanel
+                        Margin="5,0,0,0">
+                        <Label 
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            FontFamily="Tahoma"
+                            Foreground="DarkSlateBlue"
+                            Content="Notes"/>
+                        <TextBox
+                            TabIndex="4"
+                            Height="27"
+                            x:Name="notes"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"                  
+                            Width="195"
+                            BorderThickness="1"
+                            Text="{Binding LogEntry.Notes, Mode=TwoWay}"/>
                     </StackPanel>
                     <StackPanel
                         Visibility="{Binding IsLogitVisibility}"
