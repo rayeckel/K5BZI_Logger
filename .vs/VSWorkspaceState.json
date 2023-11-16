@@ -6,10 +6,8 @@
     "\\K5BZI_Logger\\K5BZI_Logger\\Views",
     "\\K5BZI_Logger\\K5BZI_Models",
     "\\K5BZI_Logger\\K5BZI_Models\\EntityModels",
-    "\\K5BZI_Logger\\K5BZI_Services",
-    "\\K5BZI_Logger\\K5BZI_Services\\Services",
     "\\K5BZI_Logger\\K5BZI_ViewModels"
   ],
-  "SelectedNode": "\\K5BZI_Logger\\K5BZI_Logger\\Views\\SelectEvent.xaml.cs",
+  "SelectedNode": "\\K5BZI_Logger\\K5BZI_ViewModels\\LogViewModel.cs",
   "PreviewInSolutionExplorer": false
 }
