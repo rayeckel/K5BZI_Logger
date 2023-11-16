@@ -19,6 +19,7 @@ namespace K5BZI_ViewModels
 
         private readonly IEventService _eventService;
         private readonly IExcelFileService _excelFileService;
+        private readonly INetworkService _networkService;
 
         #endregion
 
@@ -26,10 +27,12 @@ namespace K5BZI_ViewModels
 
         public EventViewModel(
             IEventService eventService,
-            IExcelFileService excelFileService)
+            IExcelFileService excelFileService,
+            INetworkService networkService)
         {
             _eventService = eventService;
             _excelFileService = excelFileService;
+            _networkService = networkService;
 
             Initialize();
             GetExistingEvents();
@@ -104,6 +107,8 @@ namespace K5BZI_ViewModels
             EventModel.GetLogCommand.Execute(EventModel.ActiveEvent);
 
             EventModel.IsOpen = false;
+
+            _networkService.StartNetworkServer();
         }
 
         private void ChangeEvent()

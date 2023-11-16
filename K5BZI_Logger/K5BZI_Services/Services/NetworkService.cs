@@ -11,7 +11,7 @@ namespace K5BZI_Services.Services
 {
     public class NetworkService : INetworkService
     {
-        private const int hostPort = 29131;
+        private const int hostPort = 15249;
 
         public async void StartNetworkServer(string hostName)
         {
