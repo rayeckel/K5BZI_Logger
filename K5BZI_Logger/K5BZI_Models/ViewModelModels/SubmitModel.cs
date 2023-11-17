@@ -4,7 +4,7 @@ using System.Linq;
 using System.Windows.Input;
 using K5BZI_Models.Base;
 using K5BZI_Models.Enums;
-using Microsoft.VisualStudio.PlatformUI;
+using Prism.Commands;
 using PropertyChanged;
 
 namespace K5BZI_Models.ViewModelModels
@@ -46,7 +46,7 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _submitLogCommand ??
-                    (_submitLogCommand = new DelegateCommand(SubmitLogAction, _ => { return true; }));
+                    (_submitLogCommand = new DelegateCommand<object>(SubmitLogAction, _ => { return true; }));
             }
         }
         public Action<object> SubmitLogAction { get; set; }

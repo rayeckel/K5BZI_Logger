@@ -7,7 +7,7 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using K5BZI_Models.Base;
 using K5BZI_Models.Enums;
-using Microsoft.VisualStudio.PlatformUI;
+using Prism.Commands;
 using PropertyChanged;
 
 namespace K5BZI_Models.ViewModelModels
@@ -70,7 +70,7 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _lostFocusCommand ?? (_lostFocusCommand =
-                    new DelegateCommand(LostFocusAction, _ => { return true; }));
+                    new DelegateCommand<object>(LostFocusAction, _ => { return true; }));
             }
         }
 
@@ -82,7 +82,7 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _logItCommand ?? (_logItCommand =
-                    new DelegateCommand(LogItAction, _ => { return true; }));
+                    new DelegateCommand<object>(LogItAction, _ => { return true; }));
             }
         }
         public Action<object> LogItAction { get; set; }
@@ -93,7 +93,7 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _manualTimeCommand ?? (_manualTimeCommand =
-                    new DelegateCommand(ManualTimeAction, _ => { return true; }));
+                    new DelegateCommand<object>(ManualTimeAction, _ => { return true; }));
             }
         }
         public Action<object> ManualTimeAction { get; set; }
@@ -104,7 +104,7 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _autoTimeCommand ?? (_autoTimeCommand =
-                    new DelegateCommand(AutoTimeAction, _ => { return true; }));
+                    new DelegateCommand<object>(AutoTimeAction, _ => { return true; }));
             }
         }
         public Action<object> AutoTimeAction { get; set; }
@@ -115,7 +115,7 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _selectExportLogCommand ??
-                    (_selectExportLogCommand = new DelegateCommand(SelectExportLogAction, _ => { return true; }));
+                    (_selectExportLogCommand = new DelegateCommand<object>(SelectExportLogAction, _ => { return true; }));
             }
         }
         public Action<object> SelectExportLogAction { get; set; }
@@ -126,7 +126,7 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _submitLogCommand ??
-                    (_submitLogCommand = new DelegateCommand(SubmitLogAction, _ => { return true; }));
+                    (_submitLogCommand = new DelegateCommand<object>(SubmitLogAction, _ => { return true; }));
             }
         }
         public Action<object> SubmitLogAction { get; set; }
@@ -138,7 +138,7 @@ namespace K5BZI_Models.ViewModelModels
             {
                 return _deleteLogEntryCommand ??
                     (_deleteLogEntryCommand =
-                    new DelegateCommand(DeleteLogEntryAction, _ => { return SelectedEntry != null; }));
+                    new DelegateCommand<object>(DeleteLogEntryAction, _ => { return SelectedEntry != null; }));
             }
         }
         public Action<object> DeleteLogEntryAction { get; set; }
@@ -150,7 +150,7 @@ namespace K5BZI_Models.ViewModelModels
             {
                 return _checkDuplicateEntriesCommand ??
                     (_checkDuplicateEntriesCommand =
-                    new DelegateCommand(CheckDuplicateEntriesAction));
+                    new DelegateCommand<object>(CheckDuplicateEntriesAction));
             }
         }
         public Action<object> CheckDuplicateEntriesAction { get; set; }
@@ -161,7 +161,7 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _bandChangeCommand ?? (_bandChangeCommand =
-                    new DelegateCommand(BandChangeAction, _ => { return true; }));
+                    new DelegateCommand<object>(BandChangeAction, _ => { return true; }));
             }
         }
         public Action<object> BandChangeAction { get; set; }
@@ -172,7 +172,7 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _frequencyChangeCommand ?? (_frequencyChangeCommand =
-                    new DelegateCommand(FrequencyChangeAction, _ => { return true; }));
+                    new DelegateCommand<object>(FrequencyChangeAction, _ => { return true; }));
             }
         }
         public Action<object> FrequencyChangeAction { get; set; }
@@ -183,7 +183,7 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _addAnotherP2PCommand ?? (_addAnotherP2PCommand =
-                    new DelegateCommand(AddAnotherP2PAction, _ => { return true; }));
+                    new DelegateCommand<object>(AddAnotherP2PAction, _ => { return true; }));
             }
         }
         public Action<object> AddAnotherP2PAction { get; set; }
@@ -195,7 +195,7 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _park2ParkCommand ?? (_park2ParkCommand =
-                    new DelegateCommand(Park2ParkAction, _ => { return true; }));
+                    new DelegateCommand<object>(Park2ParkAction, _ => { return true; }));
             }
         }
         public Action<object> Park2ParkAction { get; set; }
@@ -206,7 +206,7 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _createNewPark2ParkCommand ?? (_createNewPark2ParkCommand =
-                    new DelegateCommand(CreateNewPark2ParkAction, _ => { return true; }));
+                    new DelegateCommand<object>(CreateNewPark2ParkAction, _ => { return true; }));
             }
         }
         public Action<object> CreateNewPark2ParkAction { get; set; }

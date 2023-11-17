@@ -108,7 +108,7 @@ namespace K5BZI_ViewModels
 
             EventModel.IsOpen = false;
 
-            _networkService.StartNetworkServer();
+            _networkService.StartListener();
         }
 
         private void ChangeEvent()

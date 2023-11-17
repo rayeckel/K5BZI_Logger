@@ -9,7 +9,6 @@ using K5BZI_Models.EntityModels;
 using K5BZI_Models.Enums;
 using Prism.Commands;
 using PropertyChanged;
-using DelegateCommand = Microsoft.VisualStudio.PlatformUI.DelegateCommand;
 
 namespace K5BZI_Models.ViewModelModels
 {
@@ -135,7 +134,7 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _viewFileStoreCommand ??
-                    (_viewFileStoreCommand = new DelegateCommand(ViewFileStoreAction, _ => { return true; }));
+                    (_viewFileStoreCommand = new DelegateCommand<object>(ViewFileStoreAction, _ => { return true; }));
             }
         }
         public Action<object> ViewFileStoreAction { get; set; }
@@ -146,7 +145,7 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _selectEventCommand ?? (_selectEventCommand =
-                    new DelegateCommand(SelectEventAction, _ => { return ActiveEvent != null; }));
+                    new DelegateCommand<object>(SelectEventAction, _ => { return ActiveEvent != null; }));
             }
         }
         public Action<object> SelectEventAction { get; set; }
@@ -157,7 +156,7 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _changeEventCommand ??
-                    (_changeEventCommand = new DelegateCommand(ChangeEventAction, _ => { return true; }));
+                    (_changeEventCommand = new DelegateCommand<object>(ChangeEventAction, _ => { return true; }));
             }
         }
         public Action<object> ChangeEventAction { get; set; }
@@ -168,7 +167,7 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _editEventCommand ??
-                    (_editEventCommand = new DelegateCommand(EditEventAction, _ => { return true; }));
+                    (_editEventCommand = new DelegateCommand<object>(EditEventAction, _ => { return true; }));
             }
         }
         public Action<object> EditEventAction { get; set; }
@@ -179,7 +178,7 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _deleteEventCommand ??
-                    (_deleteEventCommand = new DelegateCommand(DeleteEventAction, _ => { return true; }));
+                    (_deleteEventCommand = new DelegateCommand<object>(DeleteEventAction, _ => { return true; }));
             }
         }
         public Action<object> DeleteEventAction { get; set; }
@@ -190,7 +189,7 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _editEventsCommand ??
-                    (_editEventsCommand = new DelegateCommand(EditEventsAction, _ => { return true; }));
+                    (_editEventsCommand = new DelegateCommand<object>(EditEventsAction, _ => { return true; }));
             }
         }
         public Action<object> EditEventsAction { get; set; }
@@ -201,7 +200,7 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _updateEventCommand ??
-                    (_updateEventCommand = new DelegateCommand(UpdateEventAction, _ => { return true; }));
+                    (_updateEventCommand = new DelegateCommand<object>(UpdateEventAction, _ => { return true; }));
             }
         }
         public Action<object> UpdateEventAction { get; set; }
@@ -213,7 +212,7 @@ namespace K5BZI_Models.ViewModelModels
             {
                 return _createNewEventCommand ??
                     (_createNewEventCommand =
-                        new DelegateCommand(CreateNewEventAction, _ => { return true; }));
+                        new DelegateCommand<object>(CreateNewEventAction, _ => { return true; }));
             }
         }
         public Action<object> CreateNewEventAction { get; set; }
@@ -225,7 +224,7 @@ namespace K5BZI_Models.ViewModelModels
             {
                 return _checkOperatorsCommand ??
                     (_checkOperatorsCommand =
-                        new DelegateCommand(CheckOperatorsAction, _ => { return true; }));
+                        new DelegateCommand<object>(CheckOperatorsAction, _ => { return true; }));
             }
         }
         public Action<object> CheckOperatorsAction { get; set; }

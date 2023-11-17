@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 using ExcelDataReader;
 using K5BZI_Models;
@@ -42,20 +43,21 @@ namespace K5BZI_Services.Services
             var assemblyName = assembly.GetName().Name;
             var resourceName = String.Format("{0}.Resources.{1}", assemblyName, resourceFileName);
 
-            using (var stream = assembly.GetManifestResourceStream(resourceName))
-            using (var excelReader = ExcelReaderFactory.CreateReader(stream))
-            {
-                var dataSet = excelReader.AsDataSet(
-                    new ExcelDataSetConfiguration
-                    {
-                        ConfigureDataTable =
-                            _ => new ExcelDataTableConfiguration { UseHeaderRow = usesHeaderRow }
-                    });
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
-                var dataTable = dataSet.Tables[0];
+            using var stream = assembly.GetManifestResourceStream(resourceName);
+            using var excelReader = ExcelReaderFactory.CreateReader(stream);
 
-                return (from DataRow row in dataTable.Rows select row);
-            }
+            var dataSet = excelReader.AsDataSet(
+                new ExcelDataSetConfiguration
+                {
+                    ConfigureDataTable =
+                        _ => new ExcelDataTableConfiguration { UseHeaderRow = usesHeaderRow }
+                });
+
+            var dataTable = dataSet.Tables[0];
+
+            return (from DataRow row in dataTable.Rows select row);
         }
 
         public List<T> ReadLog<T>(string logFileName, bool isLogFile = true)

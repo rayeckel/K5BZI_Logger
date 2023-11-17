@@ -2,7 +2,7 @@
 using System.Windows.Input;
 using K5BZI_Models.Base;
 using K5BZI_Models.Enums;
-using Microsoft.VisualStudio.PlatformUI;
+using Prism.Commands;
 using PropertyChanged;
 
 namespace K5BZI_Models.ViewModelModels
@@ -26,7 +26,7 @@ namespace K5BZI_Models.ViewModelModels
             get
             {
                 return _selectExportCommand ?? (_selectExportCommand =
-                    new DelegateCommand(SelectExportAction, _ => { return SelectedExport >= 0; }));
+                    new DelegateCommand<object>(SelectExportAction, _ => { return SelectedExport >= 0; }));
             }
         }
         public Action<object> SelectExportAction { get; set; }

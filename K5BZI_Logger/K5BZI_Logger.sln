@@ -1,17 +1,17 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "K5BZI_Logger", "K5BZI_Logger\K5BZI_Logger.csproj", "{48EB1061-0F79-4C88-9FD0-E4299F11C75D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "K5BZI_Logger", "K5BZI_Logger\K5BZI_Logger.csproj", "{48EB1061-0F79-4C88-9FD0-E4299F11C75D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "K5BZI_Models", "K5BZI_Models\K5BZI_Models.csproj", "{EA0EF54B-D709-45CF-9F8D-0F81232D1610}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "K5BZI_Models", "K5BZI_Models\K5BZI_Models.csproj", "{EA0EF54B-D709-45CF-9F8D-0F81232D1610}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "K5BZI_ViewModels", "K5BZI_ViewModels\K5BZI_ViewModels.csproj", "{E5AB77FC-FB88-470D-9E3F-A106FD88349A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "K5BZI_ViewModels", "K5BZI_ViewModels\K5BZI_ViewModels.csproj", "{E5AB77FC-FB88-470D-9E3F-A106FD88349A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "K5BZI_Services", "K5BZI_Services\K5BZI_Services.csproj", "{DDF31347-D2E9-4764-ACC5-AFCA5DB6CB56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "K5BZI_Services", "K5BZI_Services\K5BZI_Services.csproj", "{DDF31347-D2E9-4764-ACC5-AFCA5DB6CB56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "K5BZI_Services.Test", "K5BZI_Services.Test\K5BZI_Services.Test.csproj", "{1805D899-3192-4A7D-942D-C46F25F93D93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "K5BZI_Services.Test", "K5BZI_Services.Test\K5BZI_Services.Test.csproj", "{1805D899-3192-4A7D-942D-C46F25F93D93}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "K5BZI_Logger_Installer", "K5BZI_Logger_Installer\K5BZI_Logger_Installer.vdproj", "{7EFBB55F-ECAB-4960-B605-7A11F95A4CB4}"
 EndProject
