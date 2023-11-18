@@ -102,13 +102,13 @@ namespace K5BZI_ViewModels
             EditEvent();
         }
 
-        private void SelectEvent()
+        private async Task SelectEvent()
         {
             EventModel.GetLogCommand.Execute(EventModel.ActiveEvent);
 
             EventModel.IsOpen = false;
 
-            _networkService.StartListener();
+            await _networkService.StartServerAsync();
         }
 
         private void ChangeEvent()

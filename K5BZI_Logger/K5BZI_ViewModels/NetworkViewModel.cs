@@ -1,4 +1,5 @@
-﻿using K5BZI_Models.ViewModelModels;
+﻿using System.Threading.Tasks;
+using K5BZI_Models.ViewModelModels;
 using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels.Interfaces;
 
@@ -19,6 +20,25 @@ namespace K5BZI_ViewModels
         public NetworkViewModel(INetworkService networkService)
         {
             _networkService = networkService;
+
+            Initialize();
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void Initialize()
+        {
+            NetworkModel = new NetworkModel
+            {
+                SendMessageAction = async (_) => await SendMessageAsync(),
+            };
+        }
+
+        private async Task SendMessageAsync()
+        {
+            await _networkService.SendTextMessageAsync("RadioPC", "Hello World");
         }
 
         #endregion

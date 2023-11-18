@@ -1,9 +1,13 @@
-﻿namespace K5BZI_Services.Interfaces
+﻿using System.Threading.Tasks;
+
+namespace K5BZI_Services.Interfaces
 {
     public interface INetworkService
     {
-        void StartListener();
+        Task SendTextMessageAsync(
+            string hostName,
+            string message = "Hi friends 👋!<|EOM|>");
 
-        void StartNetworkServer(string hostName = "RADIO-LAPTOP");
+        Task<string> StartServerAsync();
     }
 }
