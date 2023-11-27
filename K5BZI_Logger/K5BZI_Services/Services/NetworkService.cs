@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using K5BZI_Models.Base;
+using K5BZI_Models.Extensions;
 using K5BZI_Services.Interfaces;
+using NetTools;
 
 namespace K5BZI_Services.Services
 {
@@ -13,6 +17,40 @@ namespace K5BZI_Services.Services
         private const int hostPort = 15249;
         private const string eom = "<|EOM|>";
         private const string ackMessage = "<|ACK|>";
+
+        public async Task FindHostsAsync()
+        {
+            if (NetworkInterface.GetIsNetworkAvailable())
+            {
+                var ipHostInfo = await Dns.GetHostEntryAsync(Environment.MachineName);
+                var availableAddresses = new NetworkAddressCollection();
+
+                using var client = new TcpClient();
+
+                var success = client.ConnectAsync("192.168.1.250", hostPort).Wait(1000);
+
+                foreach (var ipAddress in ipHostInfo.AddressList
+                    .Where(_ => _.AddressFamily != AddressFamily.InterNetworkV6 && _.IsPrivate()))
+                {
+                    var range = new IPAddressRange(ipAddress.GetNetworkAddress(), ipAddress.GetBroadcastAddress());
+
+                    foreach (var ip in range)
+                    {
+                        try
+                        {
+                            if (client.ConnectAsync(ip.ToString(), hostPort).Wait(1000))
+                            {
+                                availableAddresses.Add(ip);
+                            }
+                        }
+                        catch (SocketException ex)
+                        {
+                            continue;
+                        }
+                    }
+                }
+            }
+        }
 
         public async Task SendTextMessageAsync(
             string hostName,
@@ -56,7 +94,12 @@ namespace K5BZI_Services.Services
             if (NetworkInterface.GetIsNetworkAvailable())
             {
                 var ipHostInfo = await Dns.GetHostEntryAsync(Environment.MachineName);
-                var ipAddress = ipHostInfo.AddressList[0];
+                var ipAddress = ipHostInfo.AddressList
+                    .FirstOrDefault(_ => _.AddressFamily != AddressFamily.InterNetworkV6 && _.IsPrivate());
+
+                if (ipAddress == null)
+                    return String.Empty;
+
                 var ipEndPoint = new IPEndPoint(ipAddress, hostPort);
 
                 using Socket listener = new(
