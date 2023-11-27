@@ -88,7 +88,7 @@ namespace K5BZI_Services.Services
             client.Shutdown(SocketShutdown.Both);
         }
 
-        static async Task<string> StartServerAsync()
+        public async Task<string> StartServerAsync()
         {
             if (NetworkInterface.GetIsNetworkAvailable())
             {
@@ -102,20 +102,14 @@ namespace K5BZI_Services.Services
                 var listener = new TcpListener(ipAddress, hostPort);
                 listener.Start();
 
-                TcpClient client;
-
-                while (true) // Add your exit flag here
-                {
-                    client = listener.AcceptTcpClient();
-                    ThreadPool.QueueUserWorkItem(ThreadProc, client);
-                }
+                listener.BeginAcceptTcpClient(ThreadProc, listener);
             }
 
             return String.Empty;
         }
-        private static void ThreadProc(object obj)
+        private void ThreadProc(IAsyncResult ar)
         {
-            var client = (TcpClient)obj;
+            //var client = (TcpClient)obj;
             // Do your work here
         }
 

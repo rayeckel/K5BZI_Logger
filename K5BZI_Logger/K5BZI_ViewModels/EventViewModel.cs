@@ -108,8 +108,8 @@ namespace K5BZI_ViewModels
 
             EventModel.IsOpen = false;
 
-            await _networkService.FindHostsAsync();
-            //await _networkService.StartServerAsync();
+            //await _networkService.FindHostsAsync();
+            await _networkService.StartServerAsync();
         }
 
         private void ChangeEvent()
