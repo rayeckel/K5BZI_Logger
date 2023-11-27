@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
@@ -52,38 +53,42 @@ namespace K5BZI_Services.Services
 
         public async Task<string> StartServerAsync()
         {
-            var ipHostInfo = await Dns.GetHostEntryAsync(Environment.MachineName);
-            var ipAddress = ipHostInfo.AddressList[0];
-            var ipEndPoint = new IPEndPoint(ipAddress, hostPort);
-
-            using Socket listener = new(
-                ipEndPoint.AddressFamily,
-                SocketType.Stream,
-                ProtocolType.Tcp);
-
-            listener.Bind(ipEndPoint);
-            listener.Listen(100);
-
-            var handler = await listener.AcceptAsync();
-
-            while (true)
+            if (NetworkInterface.GetIsNetworkAvailable())
             {
-                var buffer = new byte[1_024];
-                var received = await handler.ReceiveAsync(buffer, SocketFlags.None);
-                var response = Encoding.UTF8.GetString(buffer, 0, received);
+                var ipHostInfo = await Dns.GetHostEntryAsync(Environment.MachineName);
+                var ipAddress = ipHostInfo.AddressList[0];
+                var ipEndPoint = new IPEndPoint(ipAddress, hostPort);
 
-                if (response.IndexOf(eom) > -1 /* is end of message */)
+                using Socket listener = new(
+                    ipEndPoint.AddressFamily,
+                    SocketType.Stream,
+                    ProtocolType.Tcp);
+
+                listener.Bind(ipEndPoint);
+                listener.Listen(100);
+
+                var handler = await listener.AcceptAsync();
+
+                while (true)
                 {
-                    var echoBytes = Encoding.UTF8.GetBytes(ackMessage);
+                    var buffer = new byte[1_024];
+                    var received = await handler.ReceiveAsync(buffer, SocketFlags.None);
+                    var response = Encoding.UTF8.GetString(buffer, 0, received);
 
-                    await handler.SendAsync(echoBytes, 0);
+                    if (response.IndexOf(eom) > -1 /* is end of message */)
+                    {
+                        var echoBytes = Encoding.UTF8.GetBytes(ackMessage);
 
-                    break;
+                        await handler.SendAsync(echoBytes, 0);
+
+                        break;
+                    }
+
+                    return response;
                 }
-
-                return response;
             }
 
+            Console.WriteLine("Network not available");
             return string.Empty;
         }
     }
