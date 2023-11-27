@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using K5BZI_Models.Base;
 using K5BZI_Models.Extensions;
@@ -27,8 +28,6 @@ namespace K5BZI_Services.Services
 
                 using var client = new TcpClient();
 
-                var success = client.ConnectAsync("192.168.1.250", hostPort).Wait(1000);
-
                 foreach (var ipAddress in ipHostInfo.AddressList
                     .Where(_ => _.AddressFamily != AddressFamily.InterNetworkV6 && _.IsPrivate()))
                 {
@@ -38,7 +37,7 @@ namespace K5BZI_Services.Services
                     {
                         try
                         {
-                            if (client.ConnectAsync(ip.ToString(), hostPort).Wait(1000))
+                            if (client.ConnectAsync("192.168.1.226", hostPort).Wait(1000))
                             {
                                 availableAddresses.Add(ip);
                             }
@@ -89,6 +88,38 @@ namespace K5BZI_Services.Services
             client.Shutdown(SocketShutdown.Both);
         }
 
+        static async Task<string> StartServerAsync()
+        {
+            if (NetworkInterface.GetIsNetworkAvailable())
+            {
+                var ipHostInfo = await Dns.GetHostEntryAsync(Environment.MachineName);
+                var ipAddress = ipHostInfo.AddressList
+                    .FirstOrDefault(_ => _.AddressFamily != AddressFamily.InterNetworkV6 && _.IsPrivate());
+
+                if (ipAddress == null)
+                    return String.Empty;
+
+                var listener = new TcpListener(ipAddress, hostPort);
+                listener.Start();
+
+                TcpClient client;
+
+                while (true) // Add your exit flag here
+                {
+                    client = listener.AcceptTcpClient();
+                    ThreadPool.QueueUserWorkItem(ThreadProc, client);
+                }
+            }
+
+            return String.Empty;
+        }
+        private static void ThreadProc(object obj)
+        {
+            var client = (TcpClient)obj;
+            // Do your work here
+        }
+
+        /*
         public async Task<string> StartServerAsync()
         {
             if (NetworkInterface.GetIsNetworkAvailable())
@@ -118,7 +149,7 @@ namespace K5BZI_Services.Services
                     var received = await handler.ReceiveAsync(buffer, SocketFlags.None);
                     var response = Encoding.UTF8.GetString(buffer, 0, received);
 
-                    if (response.IndexOf(eom) > -1 /* is end of message */)
+                    if (response.IndexOf(eom) > -1)
                     {
                         var echoBytes = Encoding.UTF8.GetBytes(ackMessage);
 
@@ -133,6 +164,6 @@ namespace K5BZI_Services.Services
 
             Console.WriteLine("Network not available");
             return string.Empty;
-        }
+        }*/
     }
 }
