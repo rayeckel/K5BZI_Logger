@@ -1,13 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\K5BZI_Logger",
-    "\\K5BZI_Logger\\K5BZI_Logger",
-    "\\K5BZI_Logger\\K5BZI_Logger\\Views",
-    "\\K5BZI_Logger\\K5BZI_Models",
-    "\\K5BZI_Logger\\K5BZI_Models\\EntityModels",
-    "\\K5BZI_Logger\\K5BZI_ViewModels"
+    ""
   ],
-  "SelectedNode": "\\K5BZI_Logger\\K5BZI_ViewModels\\LogViewModel.cs",
+  "SelectedNode": "\\K5BZI_Logger.sln",
   "PreviewInSolutionExplorer": false
 }

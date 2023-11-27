@@ -27,7 +27,7 @@ namespace K5BZI_Models.Extensions
             if (IPAddress.IsLoopback(ip)) return true;
 
             // IPv4
-            if (ip.AddressFamily == AddressFamily.InterNetwork && HasDnsAddresses(ip))
+            if (ip.AddressFamily == AddressFamily.InterNetwork && HasGatewayAddresses(ip))
                 return IsPrivateIPv4(ip.GetAddressBytes());
 
             // IPv6
@@ -40,9 +40,7 @@ namespace K5BZI_Models.Extensions
                        ip.IsIPv6SiteLocal;
             }
 
-            throw new NotSupportedException(
-                    $"IP address family {ip.AddressFamily} is not supported, expected only IPv4 (InterNetwork) or IPv6 (InterNetworkV6).");
-        }
+            return false; }
 
         private static bool IsPrivateIPv4(byte[] ipv4Bytes)
         {
@@ -123,7 +121,7 @@ namespace K5BZI_Models.Extensions
             throw new ArgumentException(string.Format("Can't find subnetmask for IP address '{0}'", address));
         }
 
-        private static bool HasDnsAddresses(IPAddress address)
+        private static bool HasGatewayAddresses(IPAddress address)
         {
             foreach (var adapter in NetworkInterface.GetAllNetworkInterfaces())
             {
@@ -135,7 +133,7 @@ namespace K5BZI_Models.Extensions
                     {
                         if (address.Equals(unicastIPAddressInformation.Address))
                         {
-                            return properties.DnsAddresses.Any();
+                            return properties.GatewayAddresses != null && properties.GatewayAddresses.Any();
                         }
                     }
                 }
