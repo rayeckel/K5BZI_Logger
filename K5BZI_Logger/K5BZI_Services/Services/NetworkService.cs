@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
@@ -114,7 +115,7 @@ namespace K5BZI_Services.Services
                     throw new Exception("AsyncState is null. Pass it as an argument to BeginAcceptSocket method");
 
                 // Get the server. This was passed as an argument to BeginAcceptSocket method
-                TcpListener s = (TcpListener)ar.AsyncState;
+                var s = (TcpListener)ar.AsyncState;
 
                 // listen for more clients. Note its callback is this same method (recusive call)
                 s.BeginAcceptTcpClient(OnClientConnecting, s);
@@ -123,11 +124,13 @@ namespace K5BZI_Services.Services
                 using TcpClient client = s.EndAcceptTcpClient(ar);
 
                 // read data sent to this server by client that just connected
-                byte[] buffer = new byte[1024];
+                var buffer = new byte[1024];
                 var i = client.Client.Receive(buffer);
 
                 // reply back the same data that was received to the client
                 var k = client.Client.Send(buffer, 0, i, SocketFlags.None);
+
+                Debug.WriteLine(Encoding.Default.GetString(buffer));
 
                 // close the tcp connection
                 client.Close();
