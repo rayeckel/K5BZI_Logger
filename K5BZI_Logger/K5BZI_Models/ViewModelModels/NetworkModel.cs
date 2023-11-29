@@ -25,6 +25,8 @@ namespace K5BZI_Models.ViewModelModels
 
         public IPAddress ActiveAddress { get; set; }
 
+        public string Message { get; set; }
+
         #endregion
 
         #region Commands

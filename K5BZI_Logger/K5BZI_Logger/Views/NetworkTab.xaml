@@ -29,12 +29,14 @@
         <Grid
             x:Name="MainGrid">
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="150"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="75"/>
+                <RowDefinition Height="35"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="850"/>
+                <ColumnDefinition Width="350"/>
                 <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="500"/>
             </Grid.ColumnDefinitions>
             <Label
                 Grid.Row="0"
@@ -82,7 +84,7 @@
             <Button
                     VerticalAlignment="Center"
                     Grid.Row="1"
-                    Grid.Column="0"
+                    Grid.Column="1"
                     Margin="10,0,0,0"
                     Content="Send Message"
                     Width="120"
@@ -91,6 +93,14 @@
                     FontSize="12"
                     FontFamily="Tahoma"
                     Command="{Binding SendMessageCommand}"/>
+            <TextBox
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Grid.Column="2"
+                Height="500"
+                Width="500"
+                Text="{Binding Message, Mode=OneWayToSource}">
+            </TextBox>
         </Grid>
     </Controls:MetroTabItem.Content>
 </Controls:MetroTabItem>

@@ -46,7 +46,7 @@ namespace K5BZI_ViewModels
 
         private async Task SendMessageAsync()
         {
-            await _networkService.SendTextMessageAsync(NetworkModel.ActiveAddress, "Hello World");
+            await _networkService.SendTextMessageAsync(NetworkModel.ActiveAddress, NetworkModel.Message);
         }
 
         #endregion
