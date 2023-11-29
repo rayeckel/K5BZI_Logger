@@ -11,8 +11,7 @@
         mc:Ignorable="d"
         Padding="2"
         BorderThickness=".5" 
-        BorderBrush="Navy"
-        Background="White">
+        BorderBrush="Navy">
     <Controls:MetroTabItem.Resources>
         <extensions:BindingProxy x:Key="DataContextProxy" Data="{Binding}" />
     </Controls:MetroTabItem.Resources>
@@ -27,11 +26,15 @@
                     Foreground="DarkSlateBlue"
                     FontSize="18"
                     FontFamily="Tahoma"
-                    VerticalAlignment="Bottom"/>
+                    VerticalAlignment="Bottom"
+                    Width="90"/>
         </StackPanel>
     </Controls:MetroTabItem.Header>
     <Controls:MetroTabItem.Content>
         <Grid Width="1080">
+            <Grid.Background>
+                <SolidColorBrush Color="White" Opacity="0.7" />
+            </Grid.Background>
             <dgControls:DataGrid 
                     IsTabStop="False"
                     x:Name="dataGrid1" 

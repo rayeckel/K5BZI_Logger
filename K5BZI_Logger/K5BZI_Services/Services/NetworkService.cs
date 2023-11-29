@@ -7,6 +7,7 @@ using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using K5BZI_Models.Extensions;
 using K5BZI_Services.Interfaces;
 using Microsoft.VisualStudio.Threading;
@@ -46,7 +47,7 @@ namespace K5BZI_Services.Services
                                 .ContinueWith((_) =>
                                 {
                                     if (_.Status != TaskStatus.Faulted)
-                                        availableAddresses.Add(ip);
+                                        Application.Current.Dispatcher.BeginInvoke(new Action(() => availableAddresses.Add(ip)));
                                 });
                         }
                         catch (Exception ex)

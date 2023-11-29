@@ -9,8 +9,7 @@
             mc:Ignorable="d"
             Padding="2"
             BorderThickness=".5" 
-            BorderBrush="Navy"
-            Background="White">
+            BorderBrush="Navy">
     <Controls:MetroTabItem.Header>
         <StackPanel Orientation="Horizontal">
             <Image 
@@ -22,11 +21,15 @@
                 Foreground="DarkSlateBlue"
                 FontSize="18"
                 FontFamily="Tahoma"
-                VerticalAlignment="Bottom"/>
+                VerticalAlignment="Bottom"
+                Width="140"/>
         </StackPanel>
     </Controls:MetroTabItem.Header>
     <Controls:MetroTabItem.Content>
-        <Grid>
+        <Grid Width="1080">
+            <Grid.Background>
+                <SolidColorBrush Color="White" Opacity="0.7" />
+            </Grid.Background>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="850"/>
                 <ColumnDefinition Width="150"/>

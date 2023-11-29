@@ -9,8 +9,15 @@
     <Controls:MetroAnimatedSingleRowTabControl
         TabStripPlacement="Top"
         BorderBrush="Navy">
-        <local:LogTab/>
-        <local:NetworkTab/>
-        <local:OperatorsTab/>
+        <local:LogTab
+            Controls:ControlsHelper.FocusBorderBrush="Red">
+        </local:LogTab>
+        <local:NetworkTab
+            Controls:ControlsHelper.FocusBorderBrush="White"
+                Controls:ControlsHelper.CornerRadius="60">
+        </local:NetworkTab>
+        <local:OperatorsTab
+            Controls:ControlsHelper.FocusBorderBrush="Blue">
+        </local:OperatorsTab>
     </Controls:MetroAnimatedSingleRowTabControl>
 </UserControl>
