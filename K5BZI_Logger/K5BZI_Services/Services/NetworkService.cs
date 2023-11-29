@@ -36,12 +36,12 @@ namespace K5BZI_Services.Services
 
                     foreach (var ip in range)
                     {
-                        using var connection = new TcpClient();
+                        var connection = new TcpClient();
 
                         try
                         {
                             await connection.ConnectAsync(ip.ToString(), hostPort)
-                                .WithTimeout(TimeSpan.FromMilliseconds(200))
+                                .WithTimeout(TimeSpan.FromMilliseconds(100))
                                 .ContinueWith((_) =>
                                 {
                                     if (_.Status != TaskStatus.Faulted)
@@ -59,40 +59,32 @@ namespace K5BZI_Services.Services
         }
 
         public async Task SendTextMessageAsync(
-            string hostName,
+            //string hostName,
+            IPAddress ipAddress,
             string message)
         {
-            var ipHostInfo = await Dns.GetHostEntryAsync(hostName);
-            var ipAddress = ipHostInfo.AddressList[0];
+            //var ipHostInfo = await Dns.GetHostEntryAsync(hostName);
+            //var ipAddress = ipHostInfo.AddressList[0];
             var ipEndPoint = new IPEndPoint(ipAddress, hostPort);
 
-            using Socket client = new(
-                ipEndPoint.AddressFamily,
-                SocketType.Stream,
-                ProtocolType.Tcp);
+            using var client = new TcpClient();
 
             await client.ConnectAsync(ipEndPoint);
 
-            while (true)
-            {
-                var messageBytes = Encoding.UTF8.GetBytes(message);
+            var stream = client.GetStream();
 
-                await client.SendAsync(messageBytes, SocketFlags.None);
+            var ba = new ASCIIEncoding().GetBytes(message);
 
-                // Receive ack.
-                var buffer = new byte[1_024];
-                var received = await client.ReceiveAsync(buffer, SocketFlags.None);
-                var response = Encoding.UTF8.GetString(buffer, 0, received);
+            stream.Write(ba, 0, ba.Length);
 
-                if (response == "<|ACK|>")
-                {
-                    Console.WriteLine(
-                        $"Socket client received acknowledgment: \"{response}\"");
-                    break;
-                }
-            }
+            var bb = new byte[100];
 
-            client.Shutdown(SocketShutdown.Both);
+            var k = stream.Read(bb, 0, 100);
+
+            for (int i = 0; i < k; i++)
+                Console.Write(Convert.ToChar(bb[i]));
+
+            client.Close();
         }
 
         public async Task<string> StartServerAsync()
@@ -109,15 +101,41 @@ namespace K5BZI_Services.Services
                 var listener = new TcpListener(ipAddress, hostPort);
                 listener.Start();
 
-                listener.BeginAcceptTcpClient(ThreadProc, listener);
+                listener.BeginAcceptTcpClient(OnClientConnecting, listener);
             }
 
             return String.Empty;
         }
-        private void ThreadProc(IAsyncResult ar)
+        private void OnClientConnecting(IAsyncResult ar)
         {
-            //var client = (TcpClient)obj;
-            // Do your work here
+            try
+            {
+                if (ar.AsyncState is null)
+                    throw new Exception("AsyncState is null. Pass it as an argument to BeginAcceptSocket method");
+
+                // Get the server. This was passed as an argument to BeginAcceptSocket method
+                TcpListener s = (TcpListener)ar.AsyncState;
+
+                // listen for more clients. Note its callback is this same method (recusive call)
+                s.BeginAcceptTcpClient(OnClientConnecting, s);
+
+                // Get the client that is connecting to this server
+                using TcpClient client = s.EndAcceptTcpClient(ar);
+
+                // read data sent to this server by client that just connected
+                byte[] buffer = new byte[1024];
+                var i = client.Client.Receive(buffer);
+
+                // reply back the same data that was received to the client
+                var k = client.Client.Send(buffer, 0, i, SocketFlags.None);
+
+                // close the tcp connection
+                client.Close();
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
         }
     }
 }

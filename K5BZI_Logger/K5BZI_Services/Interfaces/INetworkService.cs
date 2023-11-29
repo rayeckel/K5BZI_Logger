@@ -9,7 +9,7 @@ namespace K5BZI_Services.Interfaces
         Task FindHostsAsync(List<IPAddress> availableAddresses);
 
         Task SendTextMessageAsync(
-            string hostName,
+            IPAddress ipAddress,
             string message = "Hi friends 👋!<|EOM|>");
 
         Task<string> StartServerAsync();
