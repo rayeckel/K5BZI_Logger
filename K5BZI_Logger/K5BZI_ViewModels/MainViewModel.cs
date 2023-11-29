@@ -1,9 +1,10 @@
 ﻿using K5BZI_Models.Main;
+using K5BZI_Services.Interfaces;
 using K5BZI_ViewModels.Interfaces;
 
 namespace K5BZI_ViewModels
 {
-    public class MainViewModel : IMainViewModel
+    public class MainViewModel : IMainViewModel // NOT CURRE NTLY USED. (NOT IN DI)
     {
         #region Properties
 
@@ -13,7 +14,7 @@ namespace K5BZI_ViewModels
 
         #region Constructors
 
-        public MainViewModel()
+        public MainViewModel(INetworkService networkService)
         {
             Initialize();
         }
