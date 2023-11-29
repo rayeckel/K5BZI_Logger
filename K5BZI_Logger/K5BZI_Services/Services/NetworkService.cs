@@ -19,6 +19,12 @@ namespace K5BZI_Services.Services
         private const string eom = "<|EOM|>";
         private const string ackMessage = "<|ACK|>";
 
+        public NetworkService()
+        {
+            Task.Run(async () => await StartServerAsync());
+            Task.Run(async () => await FindHostsAsync());
+        }
+
         public async Task FindHostsAsync()
         {
             if (NetworkInterface.GetIsNetworkAvailable())
