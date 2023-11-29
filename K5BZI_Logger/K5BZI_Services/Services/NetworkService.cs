@@ -109,15 +109,47 @@ namespace K5BZI_Services.Services
                 var listener = new TcpListener(ipAddress, hostPort);
                 listener.Start();
 
-                listener.BeginAcceptTcpClient(ThreadProc, listener);
+                listener.BeginAcceptTcpClient(OnClientConnecting, listener);
             }
 
             return String.Empty;
         }
-        private void ThreadProc(IAsyncResult ar)
+        private void OnClientConnecting(IAsyncResult ar)
         {
-            //var client = (TcpClient)obj;
-            // Do your work here
+            try
+            {
+                Console.WriteLine("Client connecting...");
+
+                if (ar.AsyncState is null)
+                    throw new Exception("AsyncState is null. Pass it as an argument to BeginAcceptSocket method");
+
+                // Get the server. This was passed as an argument to BeginAcceptSocket method
+                TcpListener s = (TcpListener)ar.AsyncState;
+
+                // listen for more clients. Note its callback is this same method (recusive call)
+                s.BeginAcceptTcpClient(OnClientConnecting, s);
+
+                // Get the client that is connecting to this server
+                using TcpClient client = s.EndAcceptTcpClient(ar);
+
+                Console.WriteLine("Client connected succesfully");
+
+                // read data sent to this server by client that just connected
+                byte[] buffer = new byte[1024];
+                var i = client.Client.Receive(buffer);
+                Console.WriteLine($"Received {i} bytes from client");
+
+                // reply back the same data that was received to the client
+                var k = client.Client.Send(buffer, 0, i, SocketFlags.None);
+                Console.WriteLine($"Sent {k} bytes to slient as reply");
+
+                // close the tcp connection
+                client.Close();
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
         }
     }
 }
