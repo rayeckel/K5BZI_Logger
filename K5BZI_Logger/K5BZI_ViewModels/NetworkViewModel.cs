@@ -23,25 +23,24 @@ namespace K5BZI_ViewModels
 
             Initialize();
 
+            SetupNetwork();
         }
 
         #endregion
 
         #region Private Methods
 
-        private async Task Initialize()
+        private void Initialize()
         {
             NetworkModel = new NetworkModel
             {
                 SendMessageAction = async (_) => await SendMessageAsync(),
             };
-
-            await SetupNetwork();
         }
 
-        private async Task SetupNetwork()
+        private void SetupNetwork()
         {
-            //Task.Run(async () => await _networkService.StartServerAsync());
+            Task.Run(async () => await _networkService.StartServerAsync());
             Task.Run(async () => await _networkService.FindHostsAsync(NetworkModel.NetworkAddresses));
         }
 
