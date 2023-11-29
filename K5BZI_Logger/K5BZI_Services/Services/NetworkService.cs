@@ -4,11 +4,11 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using K5BZI_Models.Base;
 using K5BZI_Models.Extensions;
 using K5BZI_Services.Interfaces;
+using Microsoft.VisualStudio.Threading;
 using NetTools;
 
 namespace K5BZI_Services.Services
@@ -26,8 +26,6 @@ namespace K5BZI_Services.Services
                 var ipHostInfo = await Dns.GetHostEntryAsync(Environment.MachineName);
                 var availableAddresses = new NetworkAddressCollection();
 
-                using var client = new TcpClient();
-
                 foreach (var ipAddress in ipHostInfo.AddressList
                     .Where(_ => _.AddressFamily != AddressFamily.InterNetworkV6 && _.IsPrivate()))
                 {
@@ -35,16 +33,16 @@ namespace K5BZI_Services.Services
 
                     foreach (var ip in range)
                     {
+                        using var connection = new TcpClient();
+
                         try
                         {
-                            if (client.ConnectAsync("192.168.1.226", hostPort).Wait(1000))
-                            {
-                                availableAddresses.Add(ip);
-                            }
+                            connection.ConnectAsync(ip.ToString(), hostPort).WithTimeout(TimeSpan.FromMilliseconds(200));
+                            availableAddresses.Add(ip);
                         }
-                        catch (SocketException ex)
+                        catch (Exception ex)
                         {
-                            continue;
+                            connection.Dispose();
                         }
                     }
                 }
@@ -112,52 +110,5 @@ namespace K5BZI_Services.Services
             //var client = (TcpClient)obj;
             // Do your work here
         }
-
-        /*
-        public async Task<string> StartServerAsync()
-        {
-            if (NetworkInterface.GetIsNetworkAvailable())
-            {
-                var ipHostInfo = await Dns.GetHostEntryAsync(Environment.MachineName);
-                var ipAddress = ipHostInfo.AddressList
-                    .FirstOrDefault(_ => _.AddressFamily != AddressFamily.InterNetworkV6 && _.IsPrivate());
-
-                if (ipAddress == null)
-                    return String.Empty;
-
-                var ipEndPoint = new IPEndPoint(ipAddress, hostPort);
-
-                using Socket listener = new(
-                    ipEndPoint.AddressFamily,
-                    SocketType.Stream,
-                    ProtocolType.Tcp);
-
-                listener.Bind(ipEndPoint);
-                listener.Listen(100);
-
-                var handler = await listener.AcceptAsync();
-
-                while (true)
-                {
-                    var buffer = new byte[1_024];
-                    var received = await handler.ReceiveAsync(buffer, SocketFlags.None);
-                    var response = Encoding.UTF8.GetString(buffer, 0, received);
-
-                    if (response.IndexOf(eom) > -1)
-                    {
-                        var echoBytes = Encoding.UTF8.GetBytes(ackMessage);
-
-                        await handler.SendAsync(echoBytes, 0);
-
-                        break;
-                    }
-
-                    return response;
-                }
-            }
-
-            Console.WriteLine("Network not available");
-            return string.Empty;
-        }*/
     }
 }
