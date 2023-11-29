@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Net;
 using System.Windows.Input;
 using K5BZI_Models.Base;
@@ -14,18 +14,20 @@ namespace K5BZI_Models.ViewModelModels
     {
         public NetworkModel()
         {
-            NetworkAddresses = new List<IPAddress>();
+            TextMessage = new TextMessage();
+            TextMessages = new ObservableCollection<TextMessage>();
+            NetworkAddresses = new ObservableCollection<IPAddress>();
         }
 
         #region Properties
 
         public TextMessage TextMessage { get; set; }
 
-        public List<IPAddress> NetworkAddresses { get; set; }
+        public ObservableCollection<TextMessage> TextMessages { get; set; }
+
+        public ObservableCollection<IPAddress> NetworkAddresses { get; set; }
 
         public IPAddress ActiveAddress { get; set; }
-
-        public string Message { get; set; }
 
         #endregion
 

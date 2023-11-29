@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -6,7 +6,7 @@ namespace K5BZI_Services.Interfaces
 {
     public interface INetworkService
     {
-        Task FindHostsAsync(List<IPAddress> availableAddresses);
+        Task FindHostsAsync(ObservableCollection<IPAddress> availableAddresses);
 
         Task SendTextMessageAsync(
             IPAddress ipAddress,

@@ -31,7 +31,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="75"/>
-                <RowDefinition Height="35"/>
+                <RowDefinition Height="200"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="350"/>
@@ -95,11 +95,11 @@
                     Command="{Binding SendMessageCommand}"/>
             <TextBox
                 Grid.Row="0"
-                Grid.RowSpan="2"
+                Grid.RowSpan="3"
                 Grid.Column="2"
-                Height="500"
+                Height="200"
                 Width="500"
-                Text="{Binding Message, Mode=OneWayToSource}">
+                Text="{Binding TextMessage.Message, Mode=OneWayToSource}">
             </TextBox>
         </Grid>
     </Controls:MetroTabItem.Content>
