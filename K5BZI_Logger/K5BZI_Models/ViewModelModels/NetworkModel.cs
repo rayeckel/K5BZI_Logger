@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Net;
 using System.Windows.Input;
 using K5BZI_Models.Base;
 using K5BZI_Models.EntityModels;
@@ -10,9 +12,18 @@ namespace K5BZI_Models.ViewModelModels
     [AddINotifyPropertyChangedInterface]
     public class NetworkModel : BaseViewModel
     {
+        public NetworkModel()
+        {
+            NetworkAddresses = new List<IPAddress>();
+        }
+
         #region Properties
 
         public TextMessage TextMessage { get; set; }
+
+        public List<IPAddress> NetworkAddresses { get; set; }
+
+        public IPAddress ActiveAddress { get; set; }
 
         #endregion
 

@@ -1,11 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
-using K5BZI_Models.Base;
 using K5BZI_Models.Extensions;
 using K5BZI_Services.Interfaces;
 using Microsoft.VisualStudio.Threading;
@@ -21,16 +21,13 @@ namespace K5BZI_Services.Services
 
         public NetworkService()
         {
-            Task.Run(async () => await StartServerAsync());
-            Task.Run(async () => await FindHostsAsync());
         }
 
-        public async Task FindHostsAsync()
+        public async Task FindHostsAsync(List<IPAddress> availableAddresses)
         {
             if (NetworkInterface.GetIsNetworkAvailable())
             {
                 var ipHostInfo = await Dns.GetHostEntryAsync(Environment.MachineName);
-                var availableAddresses = new NetworkAddressCollection();
 
                 foreach (var ipAddress in ipHostInfo.AddressList
                     .Where(_ => _.AddressFamily != AddressFamily.InterNetworkV6 && _.IsPrivate()))
@@ -43,13 +40,19 @@ namespace K5BZI_Services.Services
 
                         try
                         {
-                            connection.ConnectAsync(ip.ToString(), hostPort).WithTimeout(TimeSpan.FromMilliseconds(200));
-                            availableAddresses.Add(ip);
+                            await connection.ConnectAsync(ip.ToString(), hostPort)
+                                .WithTimeout(TimeSpan.FromMilliseconds(200))
+                                .ContinueWith((_) =>
+                                {
+                                    if (_.Status != TaskStatus.Faulted)
+                                        availableAddresses.Add(ip);
+                                });
                         }
                         catch (Exception ex)
                         {
-                            connection.Dispose();
                         }
+
+                        connection.Dispose();
                     }
                 }
             }
