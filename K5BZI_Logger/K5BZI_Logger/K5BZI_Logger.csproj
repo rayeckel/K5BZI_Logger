@@ -42,6 +42,9 @@
     <ApplicationIcon>bzIcon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Images\SearchingNetwork.gif" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\K5BZI_Models\K5BZI_Models.csproj" />
     <ProjectReference Include="..\K5BZI_Services\K5BZI_Services.csproj" />
     <ProjectReference Include="..\K5BZI_ViewModels\K5BZI_ViewModels.csproj" />
@@ -63,10 +66,14 @@
     <PackageReference Include="MahApps.Metro.IconPacks.MaterialLight" Version="4.11.0" />
     <PackageReference Include="MahApps.Metro.IconPacks.Modern" Version="4.11.0" />
     <PackageReference Include="MahApps.Metro.SimpleChildWindow" Version="2.2.1" />
+    <PackageReference Include="WpfAnimatedGif" Version="2.0.2" />
     <Resource Include="Images\PinstripeSideRight.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\PinstripeSide.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\SearchingNetwork.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\SimpleDividingLine.png" />

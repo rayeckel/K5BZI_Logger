@@ -6,8 +6,10 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using K5BZI_Models.Base;
 using K5BZI_Models.Extensions;
 using K5BZI_Services.Interfaces;
 using Microsoft.VisualStudio.Threading;
@@ -25,49 +27,53 @@ namespace K5BZI_Services.Services
         {
         }
 
-        public async Task FindHostsAsync(ObservableCollection<IPAddress> availableAddresses)
+        public async Task FindHostsAsync(
+            HostData networkData,
+            ObservableCollection<HostData> availableAddresses,
+            CancellationToken token)
         {
             if (NetworkInterface.GetIsNetworkAvailable())
             {
-                var ipHostInfo = await Dns.GetHostEntryAsync(Environment.MachineName);
+                var range = new IPAddressRange(networkData.GetNetworkAddress(), networkData.GetBroadcastAddress());
 
-                foreach (var ipAddress in ipHostInfo.AddressList
-                    .Where(_ => _.AddressFamily != AddressFamily.InterNetworkV6 && _.IsPrivate()))
+                foreach (var ip in range)
                 {
-                    var range = new IPAddressRange(ipAddress.GetNetworkAddress(), ipAddress.GetBroadcastAddress());
+                    if (token.IsCancellationRequested)
+                        break;
 
-                    foreach (var ip in range)
+                    if (ip.Equals(networkData))
+                        continue;
+
+                    var connection = new TcpClient();
+
+                    try
                     {
-                        var connection = new TcpClient();
-
-                        try
-                        {
-                            await connection.ConnectAsync(ip.ToString(), hostPort)
-                                .WithTimeout(TimeSpan.FromMilliseconds(100))
-                                .ContinueWith((_) =>
-                                {
-                                    if (_.Status != TaskStatus.Faulted)
-                                        Application.Current.Dispatcher.BeginInvoke(new Action(() => availableAddresses.Add(ip)));
-                                });
-                        }
-                        catch (Exception ex)
-                        {
-                        }
-
-                        connection.Dispose();
+                        await connection.ConnectAsync(ip.ToString(), hostPort)
+                            .WithTimeout(TimeSpan.FromMilliseconds(100))
+                            .ContinueWith((_) =>
+                            {
+                                if (_.Status != TaskStatus.Faulted)
+                                    Application.Current.Dispatcher
+                                        .BeginInvoke(new Action(() => availableAddresses.Add(new HostData("", ip.GetAddressBytes()))));
+                            });
                     }
+                    catch (Exception ex)
+                    {
+                    }
+
+                    connection.Dispose();
                 }
             }
         }
 
         public async Task SendTextMessageAsync(
             //string hostName,
-            IPAddress ipAddress,
+            HostData networkData,
             string message)
         {
             //var ipHostInfo = await Dns.GetHostEntryAsync(hostName);
             //var ipAddress = ipHostInfo.AddressList[0];
-            var ipEndPoint = new IPEndPoint(ipAddress, hostPort);
+            var ipEndPoint = new IPEndPoint(networkData, hostPort);
 
             using var client = new TcpClient();
 
@@ -89,25 +95,30 @@ namespace K5BZI_Services.Services
             client.Close();
         }
 
-        public async Task<string> StartServerAsync()
+        public async Task<IPAddress> GetIpAddresAsync()
         {
+            var ipAddress = default(IPAddress);
+
             if (NetworkInterface.GetIsNetworkAvailable())
             {
                 var ipHostInfo = await Dns.GetHostEntryAsync(Environment.MachineName);
-                var ipAddress = ipHostInfo.AddressList
+
+                ipAddress = ipHostInfo.AddressList
                     .FirstOrDefault(_ => _.AddressFamily != AddressFamily.InterNetworkV6 && _.IsPrivate());
-
-                if (ipAddress == null)
-                    return String.Empty;
-
-                var listener = new TcpListener(ipAddress, hostPort);
-                listener.Start();
-
-                listener.BeginAcceptTcpClient(OnClientConnecting, listener);
             }
 
-            return String.Empty;
+            return ipAddress;
         }
+
+        public void StartServer(HostData networkData)
+        {
+            var listener = new TcpListener(networkData, hostPort);
+
+            listener.Start();
+
+            listener.BeginAcceptTcpClient(OnClientConnecting, listener);
+        }
+
         private void OnClientConnecting(IAsyncResult ar)
         {
             try

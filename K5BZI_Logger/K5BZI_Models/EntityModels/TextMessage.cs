@@ -9,9 +9,16 @@ namespace K5BZI_Models.EntityModels
         public TextMessage()
         {
             Id = Guid.NewGuid();
+            MessageDate = DateTime.Now;
         }
 
         public Guid Id { get; set; }
+
+        public string CallSign { get; set; }
+
+        public DateTime MessageDate { get; set; }
+
+        public DateTime ResposeDate { get; set; }
 
         public string Message { get; set; }
 
