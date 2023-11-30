@@ -16,6 +16,10 @@
             Controls:ControlsHelper.FocusBorderBrush="White"
                 Controls:ControlsHelper.CornerRadius="60">
         </local:NetworkTab>
+        <local:ChatTab
+            Controls:ControlsHelper.FocusBorderBrush="White"
+                Controls:ControlsHelper.CornerRadius="60">
+        </local:ChatTab>
         <local:OperatorsTab
             Controls:ControlsHelper.FocusBorderBrush="Blue">
         </local:OperatorsTab>

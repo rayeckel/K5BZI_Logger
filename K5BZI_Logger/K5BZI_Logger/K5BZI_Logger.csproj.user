@@ -18,5 +18,8 @@
     <Page Update="Views\NetworkTab.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\ChatTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 </Project>
